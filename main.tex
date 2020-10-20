@@ -35,7 +35,6 @@
 \newabbreviation{5dof}{5DOF}{five degree-of-freedom}
 \newabbreviation{ebsd}{EBSD}{electron backscatter diffraction}
 \newabbreviation[longplural={grain boundaries}]{gb}{GB}{grain boundary}
-%\newabbreviation{gbs}{GBs}{grain boundaries}
 \newabbreviation{mfc}{MFC}{mass flow controller}
 \newabbreviation{sem}{SEM}{scanning electron microscope}
 \newabbreviation{fea}{FEA}{finite element analysis}
@@ -43,15 +42,31 @@
 \newabbreviation[longplural={triple junctions}]{tj}{TJ}{triple junction}
 \newabbreviation{gpr}{GPR}{Gaussian process regression}
 \newabbreviation{ann}{ANN}{artificial neural network}
-\newabbreviation[longplural={nearest neighbors}]{nn}{NN}{nearest neighbor}
+\newabbreviation{nn}{NN}{nearest neighbor}
 \newabbreviation{rmse}{RMSE}{root mean square error}
 \newabbreviation{mae}{MAE}{mean absolute error}
 \newabbreviation{brk}{BRK}{Bulatov Reed Kumar}
 \newabbreviation{gbed}{GBED}{grain boundary energy distribution}
 \newabbreviation{mfz}{MFZ}{misorientation fundamental zone}
 \newabbreviation{bp}{BP}{boundary plane}
+\newabbreviation{knn}{k-NN}{k-nearest neighbor}
+\newabbreviation{gbe}{GBE}{grain boundary energy}
+\newabbreviation{gbo}{GBO}{grain boundary octonion}
+\newabbreviation{oslerp}{oSLERP}{octonion Spherical Linear Interpolation}
+\newabbreviation{loocv}{LOOCV}{leave-one-out cross validation}
+\newabbreviation{kfcv}{kFCV}{k-fold cross validation}
+\newabbreviation{seo}{SEO}{symmetrically equivalent octonion}
+\newabbreviation{fex}{FEX}{file exchange}
+\newabbreviation{idw}{IDW}{inverse-distance weighting}
+\newabbreviation{fic}{FIC}{fully independent conditional}
+\newabbreviation{svd}{SVD}{singular value decomposition}
+% example abbreviations
+% \newabbreviation{seo}{SEO}{symmetrically equivalent octonions}
+%\newabbreviation[longplural={grain boundaries}]{gb}{GB}{grain boundary}
+
 %example usage: \gls{gpr}
 %example usage: \Gls{gpr} (capitalize first letter, only meaningful for first usage)
+% \glspl{seo} --> symmetrically equivalent octonions OR SEOs
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
@@ -61,56 +76,42 @@
 \author{Oliver K. Johnson}
 \date{August 2020}
 
+% Double Spacing
+\doublespacing
 \begin{document}
 
 \begin{abstract}
-    
+    The closed-octonion interpolation framework offers an advantage over other five-degree-of-freedom based property interpolation methods because it's defined as a closed mesh in a Riemannian manifold. One can triangulate a mesh using standard routines (e.g. quickhull, qhull.org) and interpolate using barycentric coordinates or machine learning methods such as Gaussian Process Regression. Euclidean and arc length distances take on meaning in this framework and are trivial computations compared with other distance metrics, thereby addressing a limitation in previous work. The ability to use significantly more input data lends itself to lower interpolation error and is demonstrated by grain boundary energy interpolation results for a non-smooth validation function (Bulatov, Reed, Kumar) and simulated bi-crystal datasets from the literature for Ni and Fe. Four interpolation methods built on this framework --- barycentric interpolation, Gaussian Process Regression or Kriging, inverse-distance weighting, nearest neighbor interpolation --- are presented and compared against a constant, average model (RMSE = 0.013 $J/m^2$), resulting in RMSE values of 0.065, 0.050, ###, and 0.120 $J/m^2$, respectively, for 50,000 randomly input sampled bicrystals and evaluated for 10,000 randomly sampled output bicrystals. A vectorized, parallelized, MATLAB implementation is made available (github.com/sgbaird-5dof/interp) with similar input/output structure of built-in MATLAB interpolation functions (e.g. interpn) and placeholders for custom interpolation schemes. The closed-octonion framework offers a great advantage in estimating property values for arbitrary grain boundaries based on experimental or simulated data and modeling surrogates of computationally expensive 5DOF functions and simulations.
 \end{abstract}
 
 \maketitle
 
-\section{Introduction}
+\section{Introduction} \label{sec:intro}
 
-\begin{enumerate}
-    \item First mesh-based property interpolation scheme that incorporates all five macroscopic crystallographic degrees of freedom.
-    \item Past work predicting grain boundary energy
-    \begin{enumerate}
-        \item \gls{brk} function \cite{Bulatov2014GrainMetals}
-        \item Rohrer \gls{gbed} based on binning in nickel \cite{Li2009RelativeNickel}, yttria \cite{Dillon2009CharacterizationFIB}, and copper \cite{Randle2008Five-parameterCopper}. Also \cite{Rohrer2010DerivingData}
-        \item other five-parameter articles: titanium \cite{Farabi2018Five-parameterTitanium}, BCC materials \cite{Ratanaphan2015GrainMetals}.
-        \item a non-discretizing approach to determine GB energy \cite{Shen2019DeterminingSpace}
-        \item Neural network predictions \cite{EcheverriRestrepo2014UsingEnergies}
-        \item grain boundary octonion theory \cite{Francis2019ABoundaries,Chesser2020LearningProperties}
-         \begin{enumerate}
-             \item Smooth interpolation between two arbitrary grain boundaries (oSLERP) \cite{Francis2019ABoundaries}
-             \item inverse distance weighting approach \cite{Chesser2020LearningProperties}
-         \end{enumerate}
-    \end{enumerate}
-    \item extension of octonion representation using barycentric coordinates
-    \begin{enumerate}
-        \item barycentric coordinates commonly used for interpolation within a simplex or other convex polygon.
-        \begin{enumerate}
-            \item basic equations (positivity, partition of unity, linear precision) \cite{Langer2006SphericalCoordinates}
-        \end{enumerate}
-        \item spherical barycentric coordinates that preserve linear precision \cite{Langer2006SphericalCoordinates}, which is important for interpolation, or preserve partition of unity \cite{Lei2020ASystems}, which is better for even subdivision of spherical surfaces.
-        \item we incorporate linear precision preserving barycentric coordinates with an octonion representation of GBs to do property interpolation.
-    \end{enumerate}
-    \item application of this octonion framework using Gaussian process regression
-    \begin{enumerate}
-        \item Gaussian process regression is a machine learning technique geared towards predicting data (along with prediction intervals and standard deviations of the predictions) for arbitrary regions using a set of input data consisting of predictors and responses.
-        \item By supplying a closed octonion mesh, we compute covariance matrices efficiently (i.e. arbitrary distance calculations are very quick), which is important for a Gaussian process regression.
-    \end{enumerate}
-\end{enumerate}
+Others have developed tools or generated models to describe a \gls{5dof} property based on experimental or simulated data. The Rohrer group used binning and gradient descent to solve for \gls{5dof} \gls{gbed} in nickel \cite{Li2009RelativeNickel}, yttria \cite{Dillon2009CharacterizationFIB}, and copper \cite{Randle2008Five-parameterCopper} based on experimentally characterized 3D microstructures. A non-discretizing approach was recently introduced by Rohrer's group (2019) that utilizes regularization imposed on triple junction equilibrium equations, the Locally Optimal Block Preconditioned Conjugate Gradient method, and \gls{knn} distances \cite{Shen2019DeterminingSpace}. In this approach, 60,000 \glspl{tj} and a custom, non-smooth validation function are used to obtain \gls{gbe} \gls{rmse} values of approximately 0.01 and 0.03 $mJ/m^2$ for \gls{gbe} values less than 0.9 $J/m^2$ and greater than 0.9 $J/m^2$, respectively. Restrepo et. al. uses an \gls{ann} and approximately 17,000 Kim Fe bicrystal simulations \cite{Kim2011AnDatabase} as training data to achieve \gls{mae} errors of approximately 50 $mJ/m^2$ and 90 $mJ/m^2$ in the best fitted \glspl{ann} for randomly selected and special \glspl{gb}, respectively \cite{EcheverriRestrepo2014UsingEnergies}. Recently (2019), De Graef and Holm's groups at CMU reported and tested a new \gls{gb} representation, which they term \glspl{gbo} \cite{Francis2019ABoundaries,Chesser2020LearningProperties}.
 
-\section{Results and Discussion}
+The \gls{gbo} distance metric offers an advantage over other metrics in that it "correctly determines the angular distances between \glspl{gb} with a common normal or misorientation" and "closely approximates the geodesic metric on $SO(3) \times SO(3)$ \textit{for all grain boundary pairs} while maintaining the ability to be analytically minimized with respect to the $U(1)$ symmetry" \cite{Francis2019ABoundaries}. A derivation and examples of \gls{oslerp} is given which produces smooth, minimum distance paths through \gls{gb} character space between two arbitrary \glspl{gb}. Laplacian kernel regression (a type of inverse distance weighting) involving scaled pairwise distance matrices were later used to obtain a model for describing properties of arbitrary \glspl{gb} \cite{Chesser2020LearningProperties}. Using \gls{kfcv} with $k=10$ for the 388 Olmsted Ni \glspl{gb}, an \gls{rmse} of 0.0977 $J/m^2$ is obtained using an optimized scaling parameter. Due to computation time of pairwise distance matrices, this approach is limited to datasets with several thousand or fewer \glspl{gb} \cite{Chesser2020LearningMaterials}.
+
+The closed-octonion interpolation framework presented in this work offers an advantage over other methods because it's defined as a closed mesh in a Riemannian manifold. This is evidenced by the ability to triangulate a mesh using standard routines (e.g. quickhull \cite{qhull}) and interpolate using barycentric coordinates or machine learning methods such as \gls{gpr}. Extending previous work on \glspl{gbo} \cite{Francis2019ABoundaries,Chesser2020LearningProperties}, we obtain a closed mesh by obtaining a set of octonions minimized with respect to Euclidean distance and an arbitrary reference octonion after considering all \glspl{seo}. Because \glspl{gbo} are guaranteed to reside on the surface of a hypersphere \cite{Francis2019ABoundaries} (a type of Riemannian manifold) a closed mesh is thus formed which locally resembles Euclidean space (\ref{sec:methods}).
+
+Because Euclidean and arc length distances take on meaning in this framework, distance computations are trivial compared with other metrics (even the original octonion distance given in \cite{Francis2019ABoundaries}). For example, a 50,000 x 50,000 pairwise-distance matrix can be computed in minutes -- something that was computationally unrealistic before and a limitation of previous work. Compared to the original octonion metric, this represents an improvement in computational speed by about three to four orders of magnitude. This is due to the fact that symmetrically equivalent \glspl{gb} only need to be considered once per \gls{gb}, $O(N_p^2L)$, rather than once per distance calculation per \glspl{gb} in a \gls{gb}-pair, $O(N_p^4L^2)$, where $N_p$ is the symmetry cardinality ($N_p=24$ for $m\Bar{3}m$ FCC point group) and $L$ is the number of \glspl{gb}. % $O(N^2L)$ (this work) vs. $O(N^4L^2$ (octonion paper)
+
+The ability to use significantly more input data lends itself to lower interpolation error and is demonstrated by \gls{gbe} interpolation results for a non-smooth validation function (\gls{brk} \cite{Bulatov2014GrainMetals}) and simulated bi-crystal datasets from the literature (388 Olmsted Ni \cite{Olmsted2009SurveyEnergy} and 50,000 Kim Fe \cite{Kim2011AnDatabase} bicrystals). Four interpolation methods built on this framework --- barycentric \ref{sec:methods:bary}, \gls{gpr} or Kriging \ref{sec:methods:gpr}, \gls{idw} \ref{sec:methods:idw}, \gls{nn} \ref{sec:methods:nn} --- are presented and compared against a constant, average model \ref{sec:resultsDiscussion}. For the convenience of the reader, a vectorized, parallelized, MATLAB implementation is made available (github.com/sgbaird-5dof/interp) with similar input/output structure of built-in MATLAB interpolation functions (e.g. interpn) and placeholders for custom interpolation schemes. Input and prediction points (misorientation/\gls{bp} normal pairs or octonions) and property values are supplied, and interpolated/predicted values are output.
+
+The closed-octonion framework offers a great advantage in estimating property values for arbitrary \glspl{gb} based on experimental or simulated data such as energy, mobility, and diffusivity. The framework can also enable surrogate modeling of computationally expensive 5DOF functions and simulations such as in evaluation of the \gls{brk} function or anisotropic grain growth simulations.
+
+\section{Results and Discussion} \label{sec:resultsDiscussion}
+
+Parity plots are provided for the four interpolation methods considered in this work --- barycentric interpolation (\ref{sec:methods:bary}), Gaussian Process Regression or Kriging (\ref{sec:methods:gpr}), inverse-distance weighting (\ref{sec:methods:idw}), nearest neighbor interpolation (\ref{sec:methods:nn}) --- for 388, 10,000, and 50,000 randomly sampled (\ref{sec:methods:rand}) input \glspl{gb} (Figures \ref{fig:brk-parity1}, \ref{fig:brk-parity2}, \ref{fig:brk-parity3}, respectively). In each case, 10,000 randomly sampled prediction \ref{sec:methods} \glspl{gb} are used for the parity plots and error calculations.
+
 \begin{enumerate}
     \item parity plots
     \begin{enumerate}
-        \item 388 and 50,000 mesh points
-        \item tile1 - spherical barycentric interpolation
-        \item tile2 - planar barycentric interpolation
+        \item 388, 10,000, and 50,000 mesh points
+        \item tile1 - barycentric
         \item tile2 - \gls{gpr}
-        \item tile3 - pure \gls{nn} interpolation
+        \item tile3 - inverse-distance weighting
+        \item tile4 - pure \gls{nn} interpolation
     \end{enumerate}
     \begin{figure}
         \centering
@@ -200,65 +201,87 @@
     \end{enumerate}
 \end{enumerate}
 
-\section{Methods}
-\begin{enumerate}
-    \item barycentric interpolation
-    \begin{enumerate}
-        \item commonly used for interpolation within a simplex or other convex polygon.
-        \begin{enumerate}
-            \item basic equations (positivity, partition of unity, linear precision) \cite{Langer2006SphericalCoordinates}
-        \end{enumerate}
-        \item spherical barycentric coordinates that preserve linear precision \cite{Langer2006SphericalCoordinates}, which is important for interpolation, or preserve partition of unity \cite{Lei2020ASystems}, which is better for even subdivision of spherical surfaces.
-    \end{enumerate}
-    \item Gaussian process regression
-    \begin{enumerate}
-        \item MATLAB fitrgp
-        \begin{enumerate}
-            \item squared exponential covariance function
-            \item bcd fit method (others are sd, fic etc.)
-            \item constant basis function
-            \item exact or bcd predict methods (also fic)
-            \item quasi-newton optimizer
-            \item optimize KernelScale and Sigma hyperparameters with bayesopt Optimizer
-            \item ActiveSetMethod - entropy (others, log likelihood, sparse greedy approximation)
-        \end{enumerate}
-    \end{enumerate}
-\item combining octonion representation with barycentric interpolation or Gaussian process regression
-    \begin{enumerate}
-        \item choosing a symmetrically equivalent representation based on minimum euclidean norm using a single reference octonion (i.e. kept constant)
-        \begin{enumerate}
-            \item contrast with traditional approach \cite{Francis2019ABoundaries}
-            \begin{enumerate}
-                \item traditional: allows either octonion to vary for efficiency; ours: one octonion held constant
-                \item traditional: use arc length as minimizing metric; ours: use euclidean norm
-                \item traditional: consider a subset of symmetrically equivalent GBOs; ours: consider all symmetrically equivalent GBOs
-                \item traditional: always stay in 8D representation; ours: remove degenerate dimension (to 7D) for interpolation and employ projections (to 6D) for triangulation efficiency (for barycentric interpolation)
-            \end{enumerate}
-        \end{enumerate}
-        \item triangulating a set of octonions using qhull (for barycentric interpolation)
-        \item projections and rotations (projection to hyperplane, singular value decomposition)
-        \item spherical barycentric coordinates \cite{Langer2006SphericalCoordinates}
-        \begin{enumerate}
-            \item equations
-        \end{enumerate}
-        \item barycentric interpolation
-        \begin{enumerate}
-            \item equations
-            \item Determine intersecting facet using facets connected to \gls{nn}s and positivity constraint of planar barycentric coordinates
-            \item intersecting facet vertices projected onto hyperplane tangent to hypersphere at datapoint
-            \item containing facet and barycentric coordinates only need to be computed once for each datapoint, can be easily reused
-        \end{enumerate}
-    \end{enumerate}
-    \item random cubochoric sampling \cite{Singh2016OrientationMethods}
-    \item use of \gls{brk} function \cite{Bulatov2014GrainMetals}
+\section{Methods} \label{sec:methods}
+
+\subsection{Closed-mesh Octonions vs. Original Octonion Metric} \label{sec:methods:closed-mesh}
+
+In the closed-mesh octonion framework, \glspl{seo} are chosen based on minimum Euclidean distance relative to a fixed, arbitrary reference octonion rather than allowing either octonion in a pair to vary in the traditional octonion approach with arc-length distances \cite{Francis2019ABoundaries}. We consider all symmetrically equivalent \glspl{gbo} rather than a subset. We also remove a degenerate dimension to 7D Cartesian for barycentric interpolation and employ a further projection to 6D Cartesian for the triangulation. These differences are summarized in Table \ref{tab:closed-mesh-comparison}. By choosing symmetrically equivalent representations of octonions based on Euclidean distance with respect to a fixed octonion, a "closed-mesh" is obtained in the sense that directly computed Euclidean and arc length distances become meaningful and a unique octonion is found within numerical tolerance as long as the reference \gls{gbo} is low-symmetry (very likely based on random sampling and can be verified). This facilitates the use of standard triangulation and interpolation routines rather than needing to rely on pairwise-distance matrices where each distance calculation requires consideration of \glspl{seo}.
+
+% either octonion is allowed to vary to vary for efficiency, whereas in ours, one octonion is held constant. 
+%                 \item traditional: use arc length as minimizing metric; ours: use euclidean norm
+%                 \item traditional: consider a subset of symmetrically equivalent GBOs; ours: consider all symmetrically equivalent GBOs
+%                 \item traditional: always stay in 8D representation; ours: remove degenerate dimension (to 7D) for interpolation and employ projections (to 6D) for triangulation efficiency (for barycentric interpolation)
+  
+        % \item triangulating a set of octonions using qhull (for barycentric interpolation)
+        % \item projections and rotations (projection to hyperplane, singular value decomposition)
+        % \item spherical barycentric coordinates \cite{Langer2006SphericalCoordinates}
+        % \begin{enumerate}
+        %     \item equations
+        % \end{enumerate}
+        % \item barycentric interpolation
+        % \begin{enumerate}
+        %     \item equations
+        %     \item Determine intersecting facet using facets connected to \gls{nn}s and positivity constraint of planar barycentric coordinates
+        %     \item intersecting facet vertices projected onto hyperplane tangent to hypersphere at datapoint
+        %     \item containing facet and barycentric coordinates only need to be computed once for each datapoint, can be easily reused
+        % \end{enumerate}
+
+    % \item random cubochoric sampling \cite{Singh2016OrientationMethods}
+    % \item use of \gls{brk} function \cite{Bulatov2014GrainMetals}
     
-    \item training, validation, and test partitioning \cite{Wang2020MachinePractices} for Kim data set \cite{Kim2011AnDatabase}
-    \begin{enumerate}
-        \item
-    \end{enumerate}
+    % \item training, validation, and test partitioning \cite{Wang2020MachinePractices} for Kim data set \cite{Kim2011AnDatabase}
+
+
+\subsection{Barycentric Interpolation} \label{sec:methods:bary}
+
+Barycentric interpolation is commonly used for interpolation within a simplex or other convex polygon. Basic equations of positivity, partition of unity, and linear precision are given in \cite{Langer2006SphericalCoordinates}, as well as a treatment of linear-precision preserving spherical barycentric coordinates. Because octonion distances are well-approximated by Euclidean distances in a closed-octonion mesh and both distance metrics result in similar error results, only a treatment of Euclidean distances is presented here. However, spherical barycentric coordinates are still included as an option to the MATLAB implementation of this work, \textit{interp5DOF}. For interested readers, a treatment of spherical barycentric coordinates that preserve partition of unity rather than linear-precision is given in \cite{Lei2020ASystems}, favoring even subdivision of spherical surfaces rather than interpolation accuracy.
+
+In order to reduce the computationally complexity of computing barycentric coordinates in a high-dimensional space \cite{qhull}, a single degenerate dimension (originally introduced by analytically minimizing $U(1)$ symmetry) is removed. This is done via a \gls{svd} projection, analogous to a Cartesian rotation and translation. Thus, a set of octonions originally represented by 8D Cartesian coordinates are collapsed to a 7D Cartesian representation while preserving both distances and angles among the points \cite{}. To further reduce the "curse of dimensionality" in computing the triangulation, a 7D Cartesian representation of the octonions constrained to lie on the surface of the 6-sphere are first projected onto a hyperplane tangent to the mean of the input points and then rotated/translated again via \gls{svd} to produce a 6D Cartesian representation. This 6D representation is used to compute a triangulation via the built-in MATLAB routine \textit{delaunayn} based on the quickhull algorithm \cite{qhull}, giving facet vertices for the 7D Cartesian hypersphere.
+
+Separate from the mesh triangulation, a new projection of the original octonions to 7D Cartesian coordinates takes place simultaneously for input and prediction points to preserve distances and angles \textit{between each set} as well as \textit{within each set}. Despite having different \glspl{svd}, the 6D Cartesian triangulation holds for either 7D Cartesian representation because the two 7D Cartesian representations are homeomorphic to each other (i.e. distance- and angle-preserving).
+
+Due to the vast number of facets per point of a high-dimensional spherical triangulation and for computational speed, a given prediction point intersection within the input mesh is determined by considering facets connected to up to some number of \glspl{nn} in the mesh (in this work, 10 \glspl{nn}) relative to the prediction point. In cases where an intersecting facet is not found due to high-aspect ratio facets or prediction point falling outside the mesh within a given tolerance, \gls{nn} interpolation and extrapolation are used, respectively, with an identical implementation for interpolation and extrapolation given in \ref{sec:methods:nn}.
+
+Once barycentric coordinates are computed for a prediction point within the input mesh, the interpolated value is found by taking the dot product of the barycentric coordinates and the properties of the corresponding vertices of the intersecting facet via $v=\underset{i=1}{\overset{N}{\sum }}\lambda _i v_i$, where $\lambda$, $v$, $v_i$ and $N$, are the barycentric coordinates, interpolated property, property of the $i$th vertex of the intersecting facet, and number of vertices in a given facet ($N = 7$ for the degeneracy-free 6-sphere).
     
-\end{enumerate}
-\section{Conclusion}
+\subsection{Gaussian Process Regression or Kriging} \label{sec:methods:gpr}
+
+The implemented \gls{gpr} scheme uses MATLAB's built-in function, \textit{fitrgp} with default parameters in MATLAB R2020b except for \textit{Predict Method}, which is set to \textit{exact} regardless of the number of input points. For a general treatment of \gls{gpr}, see \cite{}. A number of non-default settings -- \textit{Fit Method}, \textit{Predict Method}, \textit{Hyperparameter Optimization}, \textit{Active Set Method} -- were tested and resulted in marginal improvement relative to results produced by the default parameters both in terms of error. These non-default options usually resulted in a deficit in time performance; however, custom \textit{fitrgp} options can be passed into \textit{interp5DOF}. For faster, less accurate computations consider using \gls{fic} approximation as the \textit{Predict Method} instead. % as summarized in the table below.
+
+% \item MATLAB fitrgp
+%         \begin{enumerate}
+%             \item squared exponential covariance function
+%             \item bcd fit method (others are sd, fic etc.)
+%             \item constant basis function
+%             \item exact or bcd predict methods (also fic)
+%             \item quasi-newton optimizer
+%             \item optimize KernelScale and Sigma hyperparameters with bayesopt Optimizer
+%             \item ActiveSetMethod - entropy (others, log likelihood, sparse greedy approximation)
+%         \end{enumerate}
+
+\subsection{Inverse-Distance Weighting} \label{sec:methods:idw}
+
+A simple \gls{idw} approach is implemented similar to a MATLAB \gls{fex} submission \cite{Tovar2020}. A pairwise distance matrix is computed and distances outside of a specified radius $r$ are ignored, where $r = 5\degree$ ($0.0873$ \textit{rad}) in this work. Euclidean distance is used by default to define the weight matrix via $W_{i,j} = \frac{1}{D_{i,j}^L}$, where $i,j$ gives the $i$th row and $j$th column and $W$, $D$, and $L$ represent the weight matrix, pairwise-distance matrix, and norm-power (i.e. $L = 2$ for Euclidean), respectively.
+
+\subsection{Nearest Neighbor} \label{sec:methods:nn}
+
+\Gls{nn} is one of the simplest interpolation schemes implemented using the built-in MATLAB function \textit{dsearchn}. Euclidean distance will produce the same results as octonion distance for this method. The computations will be faster due to the simpler calculation of Euclidean distance and use of built-in methods.
+
+\subsection{Random Grain Boundary Sampling} \label{sec:methods:rand}
+
+Random sampling of \glspl{gb} occurs in \gls{5dof} space by taking a random, cubochorically sampled quaternion and random unit vector \gls{bp} normal as a pair and then converting from this \gls{5dof} representation to a \gls{gbo}.
+
+% \begin{enumerate}
+    
+    % \item Gaussian process regression
+    % \begin{enumerate}
+        
+    % \end{enumerate}
+    
+% \end{enumerate}
+
+
+\section{Conclusion} \label{sec:conclusion}
 
 \begin{enumerate}
     \item high fidelity interpolation approach is demonstrated

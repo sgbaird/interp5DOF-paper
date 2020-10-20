@@ -1,0 +1,235 @@
+\begin{enumerate}
+    \item First mesh-based property interpolation scheme that incorporates all five macroscopic crystallographic degrees of freedom.
+    \item Past work predicting grain boundary energy
+    \begin{enumerate}
+        \item \gls{brk} function \cite{Bulatov2014GrainMetals}
+        \item Rohrer \gls{gbed} based on binning in nickel \cite{Li2009RelativeNickel}, yttria \cite{Dillon2009CharacterizationFIB}, and copper \cite{Randle2008Five-parameterCopper}. Also \cite{Rohrer2010DerivingData}
+        \item other five-parameter articles: titanium \cite{Farabi2018Five-parameterTitanium}, BCC materials \cite{Ratanaphan2015GrainMetals}.
+        \item a non-discretizing \gls{knn} approach to determine GB energy \cite{Shen2019DeterminingSpace}.
+        \item Neural network predictions \cite{EcheverriRestrepo2014UsingEnergies}
+        \item grain boundary octonion theory \cite{Francis2019ABoundaries,Chesser2020LearningProperties}
+         \begin{enumerate}
+             \item Smooth interpolation between two arbitrary grain boundaries (oSLERP) \cite{Francis2019ABoundaries}
+             \item inverse distance weighting approach \cite{Chesser2020LearningProperties}
+         \end{enumerate}
+    \end{enumerate}
+    
+    \item extension of octonion representation using barycentric coordinates
+    \begin{enumerate}
+        \item barycentric coordinates commonly used for interpolation within a simplex or other convex polygon.
+        \begin{enumerate}
+            \item basic equations (positivity, partition of unity, linear precision) \cite{Langer2006SphericalCoordinates}
+        \end{enumerate}
+        \item spherical barycentric coordinates that preserve linear precision \cite{Langer2006SphericalCoordinates}, which is important for interpolation, or preserve partition of unity \cite{Lei2020ASystems}, which is better for even subdivision of spherical surfaces.
+        \item we incorporate linear precision preserving barycentric coordinates with an octonion representation of GBs to do property interpolation.
+    \end{enumerate}
+    \item application of this octonion framework using Gaussian process regression
+    \begin{enumerate}
+        \item Gaussian process regression is a machine learning technique geared towards predicting data (along with prediction intervals and standard deviations of the predictions) for arbitrary regions using a set of input data consisting of predictors and responses.
+        \item By supplying a closed octonion mesh, we compute covariance matrices efficiently (i.e. arbitrary distance calculations are very quick), which is important for a Gaussian process regression.
+    \end{enumerate}
+\end{enumerate}
+
+\section{Results and Discussion} \label{sec:resultsDiscussion}
+\begin{enumerate}
+    \item parity plots
+    \begin{enumerate}
+        \item 388 and 50,000 mesh points
+        \item tile1 - spherical barycentric interpolation
+        \item tile2 - planar barycentric interpolation
+        \item tile3 - \gls{gpr}
+        \item tile4 - pure \gls{nn} interpolation
+    \end{enumerate}
+    \begin{figure}
+        \centering
+        \includegraphics{}
+        \caption{parity plots for 388 (red) and 50,000 (black) octonions formed via pairs of random cubochorically sampled quaternion and spherically sampled boundary plane normals. Property values sampled via \acrlong{brk} function and interpolation via barycentric (a), pure \acrlong{nn} (b), and \acrlong{gpr} (c).}
+        \label{fig:brk-parity1}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics{}
+        \caption{parity plots for 388 Olmsted \acrfullpl{gb} (red) and 50,000 Kim \acrshortpl{gb} (black) with property values sampled via \acrlong{brk} function and interpolation via barycentric (a), pure \acrlong{nn} (b), and \acrlong{gpr} (c).}
+        \label{fig:brk-parity2}
+    \end{figure}
+    \item \Gls{rmse} vs. number mesh points for barycentric interpolation (black), \gls{gpr}, and pure \gls{nn} interpolation (red). Range from 1e2 to 1e5 mesh points
+    \begin{figure}
+        \centering
+        \includegraphics{}
+        \caption{\acrlong{rmse} vs. number of mesh points for spherical barycentric interpolation (black), planar barycentric interpolation, spherical \acrlong{gpr} (red), planar \gls{gpr}, pure \acrlong{nn} interpolation (orange), and average model with standard deviations from 10 random samples.}
+        \label{fig:brk-rmse}
+    \end{figure}
+    \item histograms of \gls{nn} and next \gls{nn} distances (arc length) for mesh
+    \begin{figure}
+        \centering
+        \includegraphics{}
+        \caption{histograms of \acrfull{nn} (red) and next \acrlong{nn} (black) arc lengths for meshes of 388 (a), 10,000 (b), and 50,000 (c) octonions formed via pairs of random, cubochorically sampled quaternions.}
+        \label{fig:nndist}
+    \end{figure}
+    \item timing and efficiency
+    \begin{enumerate}
+        \item fitrgp produces lower error in less time than barycentric interpolation even when using sparse approximation methods.
+        \item barycentric interpolation is very fast once the triangulation is computed (i.e. still fast even if responses change, but needs to be recomputed if input data, i.e. predictors, change)
+        \item fitrgp is fast and has lower error compared to barycentric interpolation; however, the entire process has to be rerun (in current implementation) if the responses or the predictors change.
+    \end{enumerate}
+    \item comparison with Chesser \cite{Chesser2020LearningProperties} (few points, Ni data, both high- and low-symmetry sets). Use 388 Ni bicrystals instead of \gls{brk} function. Barycentric and \gls{gpr}
+    \begin{enumerate}
+        \item table
+        \begin{table}[]
+            \centering
+            \begin{tabular}{c c c c}
+                \hline
+                 Method & Minimizing Distance & \acrshort{rmse} & \acrshort{mae} \\
+                 \hline
+                 Barycentric & Euclidean Norm & & \\
+                 \acrshort{nn} & Euclidean Norm & & \\
+                 \acrshort{gpr} & Euclidean Norm & & \\
+                 Pairwise-distance & Arc Length & &
+            \end{tabular}
+            \caption{Comparison of \acrfull{rmse} and \acrfull{mae} for closed-mesh barycentric interpolation, closed-mesh \acrfull{nn} interpolation, closed-mesh \acrfull{gpr}, and pairwise-distance inverse weighting for 388 Ni bicrystal simulations with 10-fold cross validation for each method.}
+            \label{tab:chesser-comp}
+        \end{table}
+        \item parity plot
+        \item \gls{5dof} visualizations
+        \begin{figure}
+            \centering
+            \includegraphics{}
+            \caption{\acrfull{gb} energy plotted in the $\Sigma{3}$, $\Sigma{5}$, $\Sigma{7}$, and $\Sigma{11}$ \acrlong{bp} spaces for closed-mesh spherical barycentric (a) and \acrlong{nn} (b) interpolation, closed-mesh \acrlong{gpr} (c), and pairwise-distance inverse weighting using 388 Ni bicrystal simulations.}
+            \label{fig:chesser-5dof}
+        \end{figure}
+        \item 1DOF curves ([100] and [110] symmetric tilt boundaries ?)
+    \end{enumerate}
+    \item comparison with Restrepo \cite{EcheverriRestrepo2014UsingEnergies} (many points, Fe data, both high- and low-symmetry sets). Use simulated Fe data instead of \gls{brk} function. Barycentric and \gls{gpr}
+    \begin{enumerate}
+        \item table
+        \begin{table}[]
+            \centering
+            \begin{tabular}{c c c c}
+                \hline
+                 Method & Minimizing Distance & \acrshort{rmse} & \acrshort{mae} \\
+                 \hline
+                 Barycentric & Euclidean Norm & & \\
+                 \acrshort{nn} & Euclidean Norm & & \\
+                 \acrshort{gpr} & Euclidean Norm & & \\
+                 \acrshort{ann} & N/A & &
+            \end{tabular}
+            \caption{Comparison of \acrfull{rmse} and \acrfull{mae} for closed-mesh barycentric interpolation, closed-mesh \acrlong{gpr}, and a non-symmetry considering \acrfull{ann} using 50,000 Fe bicrystal simulations.}
+            \label{tab:restrepo-comp}
+        \end{table}
+        \item parity plot
+        \item \gls{5dof} visualizations
+        \begin{figure}
+            \centering
+            \includegraphics{}
+            \caption{\acrfull{gb} energy plotted in the $\Sigma{3}$, $\Sigma{5}$, $\Sigma{7}$, and $\Sigma{11}$ \acrlong{bp} spaces for closed-mesh spherical barycentric (a) and \acrlong{nn} (b) interpolation, closed-mesh \acrlong{gpr} (c), and a non-symmetry considering \acrlong{ann} (d) using 50,000 Fe bicrystal simulations.}
+            \label{fig:restrepo-5dof}
+        \end{figure}
+        \item 1DOF curves ([100] and [110] symmetric tilt boundaries ?)
+    \end{enumerate}
+\end{enumerate}
+
+
+\section{Methods} \label{sec:methods}
+
+\begin{enumerate}
+    \item barycentric interpolation
+    \begin{enumerate}
+        \item commonly used for interpolation within a simplex or other convex polygon.
+        \begin{enumerate}
+            \item basic equations (positivity, partition of unity, linear precision) \cite{Langer2006SphericalCoordinates}
+        \end{enumerate}
+        \item spherical barycentric coordinates that preserve linear precision \cite{Langer2006SphericalCoordinates}, which is important for interpolation, or preserve partition of unity \cite{Lei2020ASystems}, which is better for even subdivision of spherical surfaces.
+    \end{enumerate}
+    \item Gaussian process regression
+    \begin{enumerate}
+        \item MATLAB fitrgp
+        \begin{enumerate}
+            \item squared exponential covariance function
+            \item bcd fit method (others are sd, fic etc.)
+            \item constant basis function
+            \item exact or bcd predict methods (also fic)
+            \item quasi-newton optimizer
+            \item optimize KernelScale and Sigma hyperparameters with bayesopt Optimizer
+            \item ActiveSetMethod - entropy (others, log likelihood, sparse greedy approximation)
+        \end{enumerate}
+    \end{enumerate}
+\item combining octonion representation with barycentric interpolation or Gaussian process regression
+    \begin{enumerate}
+        \item choosing a symmetrically equivalent representation based on minimum euclidean norm using a single reference octonion (i.e. kept constant)
+        \begin{enumerate}
+            \item contrast with traditional approach \cite{Francis2019ABoundaries}
+            \begin{enumerate}
+                \item traditional: allows either octonion to vary for efficiency; ours: one octonion held constant
+                \item traditional: use arc length as minimizing metric; ours: use euclidean norm
+                \item traditional: consider a subset of symmetrically equivalent GBOs; ours: consider all symmetrically equivalent GBOs
+                \item traditional: always stay in 8D representation; ours: remove degenerate dimension (to 7D) for interpolation and employ projections (to 6D) for triangulation efficiency (for barycentric interpolation)
+            \end{enumerate}
+        \end{enumerate}
+        \item triangulating a set of octonions using qhull (for barycentric interpolation)
+        \item projections and rotations (projection to hyperplane, singular value decomposition)
+        \item spherical barycentric coordinates \cite{Langer2006SphericalCoordinates}
+        \begin{enumerate}
+            \item equations
+        \end{enumerate}
+        \item barycentric interpolation
+        \begin{enumerate}
+            \item equations
+            \item Determine intersecting facet using facets connected to \gls{nn}s and positivity constraint of planar barycentric coordinates
+            \item intersecting facet vertices projected onto hyperplane tangent to hypersphere at datapoint
+            \item containing facet and barycentric coordinates only need to be computed once for each datapoint, can be easily reused
+        \end{enumerate}
+    \end{enumerate}
+    \item random cubochoric sampling \cite{Singh2016OrientationMethods}
+    \item use of \gls{brk} function \cite{Bulatov2014GrainMetals}
+    
+    \item training, validation, and test partitioning \cite{Wang2020MachinePractices} for Kim data set \cite{Kim2011AnDatabase}
+    \begin{enumerate}
+        \item
+    \end{enumerate}
+    
+\end{enumerate}
+
+
+\section{Conclusion} \label{sec:conclusion}
+
+\begin{enumerate}
+    \item high fidelity interpolation approach is demonstrated
+    \item approach is faster than pairwise distance matrices
+    \item approach produces lower error than machine learning approach without consideration of symmetrically equivalent GBs
+    \item lower error than pure \gls{nn} interpolation
+    \item high intersection rate (~99\%) for barycentric interpolation
+    \item approach is general to any crystal system and can be controlled by a single parameter (pgnum)
+    \item future work
+    \begin{enumerate}
+        \item extension from linear interpolation to hyperspherical spline interpolation \cite{Taijeron1994SplineHyperspheres}
+        \item interpolate within restricted regions of \gls{5dof} space
+        \item define true FZ borders (high-symmetry GBs on perimeter)
+        \item influence of choice of reference point
+        \item influence of regularly spaced points vs. random sampling
+        \item extension to generalized spherical barycentric coordinates (i.e. non-simplicial interpolation) \cite{Langer2006SphericalCoordinates}
+        \item application to interpolating a GBCD (i.e. like fitting a curve to a histogram) and interpolating other GB properties (e.g. diffusivity, mobility)
+        \item use of octonion facet vertices with other distance metrics (i.e. simplex reconstruction using edge lengths \cite{Connor2017High-dimensionalSearch})
+        \item distance-based construction of submanifold \cite{Boissonnat2017OnlySubmanifolds}
+        \item exploration of other parameters within \gls{gpr}
+        \item exploration of machine learning methods other than \gls{gpr}
+        \item linking with non-bicrystal data such as Rohrer 3D \gls{tj} data sets (e.g. Ni \cite{Li2009RelativeNickel})
+    \end{enumerate}
+\end{enumerate}
+
+
+\section{Supplemental}
+\begin{enumerate}
+    \item conversion from octonion to \gls{5dof}
+    \item high-aspect ratio facets
+    \item facet subdivision
+    \item spherical vs. planar barycentric interpolation
+    \item tolerances of interpolation and intersecting facets
+    \item non-intersection percentage vs. number of mesh points
+    \item "excess" arc length in pairwise distance matrices
+    \begin{enumerate}
+        \item gradient optimization and global optimization of U(1) twist symmetry with marginal improvement
+    \end{enumerate}
+    \item identification and subdivision of hull exterior
+    \item distribution of data in \gls{mfz} and \gls{bp} spaces
+    \item comments on \gls{gpr} hyperparameters
+\end{enumerate}
