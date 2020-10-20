@@ -104,6 +104,20 @@ The closed-octonion framework offers a great advantage in estimating property va
 
 A parity plot is provided for the four interpolation methods considered in this work --- barycentric interpolation (\ref{sec:methods:bary}), Gaussian Process Regression or Kriging (\ref{sec:methods:gpr}), inverse-distance weighting (\ref{sec:methods:idw}), nearest neighbor interpolation (\ref{sec:methods:nn}) --- for 50,000 randomly sampled (\ref{sec:methods:rand}) input \glspl{gb} and 10,000 randomly sampled prediction \ref{sec:methods} \glspl{gb} (Figure \ref{fig:brk-parity50000}).
 
+\begin{figure}
+    \centering
+    \includegraphics{brkparity50000.png}
+    \caption{Parity plot for 50000 mesh and 10000 prediction octonions formed via pairs of a random cubochorically sampled quaternion and a spherically sampled random boundary plane normal. Interpolation via \acrlong{gpr} (a), \acrlong{idw} (b), \acrlong{nn} (c), and barycentric coordinates (d). Property values sampled via \acrlong{brk} \acrlong{gbe} function.}
+    \label{fig:brk-parity50000}
+\end{figure}
+
+% \begin{figure}
+%     \centering
+%     \includegraphics{}
+%     \caption{Parity plot for 388 mesh and 10000 prediction octonions formed via pairs of a random cubochorically sampled quaternion and a spherically sampled random boundary plane normal. Interpolation via \acrlong{gpr} (a), \acrlong{idw} (b), \acrlong{nn} (c), and barycentric coordinates (d). Property values sampled via \acrlong{brk} \acrlong{gbe} function.}
+%     \label{fig:brk-parity388}
+% \end{figure}
+
 \begin{enumerate}
     \item parity plots
     \begin{enumerate}
@@ -113,23 +127,12 @@ A parity plot is provided for the four interpolation methods considered in this 
         \item tile3 - inverse-distance weighting
         \item tile4 - pure \gls{nn} interpolation
     \end{enumerate}
-    \begin{figure}
-        \centering
-        \includegraphics{}
-        \caption{Parity plot for 388 mesh and 10000 prediction octonions formed via pairs of a random cubochorically sampled quaternion and a spherically sampled random boundary plane normal. Interpolation via \acrlong{gpr} (a), \acrlong{idw} (b), \acrlong{nn} (c), and barycentric coordinates (d). Property values sampled via \acrlong{brk} \acrlong{gbe} function.}
-        \label{fig:brk-parity388}
-    \end{figure}
-    \begin{figure}
-        \centering
-        \includegraphics{brkparity50000.png}
-        \caption{Parity plot for 50000 mesh and 10000 prediction octonions formed via pairs of a random cubochorically sampled quaternion and a spherically sampled random boundary plane normal. Interpolation via \acrlong{gpr} (a), \acrlong{idw} (b), \acrlong{nn} (c), and barycentric coordinates (d). Property values sampled via \acrlong{brk} \acrlong{gbe} function.}
-        \label{fig:brk-parity50000}
-    \end{figure}
+
     \item \Gls{rmse} vs. number mesh points for barycentric interpolation (black), \gls{gpr}, and pure \gls{nn} interpolation (red). Range from 1e2 to 1e5 mesh points
     \begin{figure}
         \centering
         \includegraphics{}
-        \caption{\acrlong{rmse} vs. number of mesh points for spherical barycentric interpolation (black), planar barycentric interpolation, spherical \acrlong{gpr} (red), planar \gls{gpr}, pure \acrlong{nn} interpolation (orange), and average model with standard deviations from 10 random samples.}
+        \caption{Mean \acrlong{rmse} vs. number of mesh points for barycentric (blue), \acrlong{gpr} (red), \acrlong{idw} (yellow), and \acrlong{nn} (purple), and average interpolation with standard deviations from 10 random runs with different mesh and prediction points.}
         \label{fig:brk-rmse}
     \end{figure}
     \item histograms of \gls{nn} and next \gls{nn} distances (arc length) for mesh
