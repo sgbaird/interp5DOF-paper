@@ -29,7 +29,7 @@
 %alternatively can use `` '' format for double quotes
 \usepackage{booktabs}
 \setlength{\abovetopsep}{1ex}
-\usepackage[shortcuts,abbreviations,headuc]{glossaries-extra}
+\usepackage[shortcuts,abbreviations]{glossaries-extra}
 \newcommand*{\TCac}[1]{\ecapitalisewords{\glsentrylong{#1}}}
 
 \glssetcategoryattribute{abbreviation}{indexonlyfirst}{true}
@@ -182,13 +182,19 @@ In this section we describe our methods for each of the \gls{cmo} framework oper
 
 % Explain the "voronoi" type definition of the pFZ by choosing a reference GB and then taking the symmetric image of each GB that is closest to that reference GB. You will need to convince the reader (probably by reason, or proof, or numerical tests) that the resulting pFZ does in fact contain one and ONLY one SEO for every GB (i.e. that it does satisfy the definition of a FZ). This is probably where you note that for it to work, the reference GB needs to be something that isn't a high-symmetry GB, and why. This discussion will probably benefit from a figure illustrating the procedure in 2D.
 
+\begin{figure}
+    \centering
+    \includegraphics{voronoi.png}
+    \caption{Caption}
+    \label{fig:voronoi}
+\end{figure}
 
 a unique octonion is found within numerical tolerance as long as the reference \gls{gbo} is low-symmetry (very likely based on random sampling and can be verified).
 
 Because a fixed, arbitrary, reference octonion is used to symmetrize the mesh, meshes with different exterior bounds can be obtained based on the reference octonion used. This is a limitation of this work in that the boundaries of the mesh do not correspond with high-symmetry \glspl{gb} in contrast with typical \gls{fz} representations in misorientation or \gls{bp} \cite{patalaSymmetriesRepresentationGrain2013,homerGrainBoundaryPlane2015} spaces. Interpolated values near the exterior of the mesh are likely to have higher error because the local region of influence may be prematurely cut off for \gls{gpr} and \gls{idw}. By definition of the barycentric and \gls{nn} methods, extrapolation is necessary to predict values on or near the "true" boundary of the mesh due to expected curvature in those boundaries. Further, \gls{nn} and barycentric interpolation are the only two non-smooth interpolation methods used; in these two cases, sharp cusps in the model will be smoothed or misrepresented unless there are \glspl{gb} on the cusp. For \gls{gpr} and \gls{idw}, cusps will be smoothed by definition as long as there is a non-zero kernel and non-zero standard deviation employed. This is a feature common to previously published methods \cite{liRelativeGrainBoundary2009,shenDeterminingGrainBoundary2019,chesserLearningGrainBoundary2020} except for those \cite{bulatovGrainBoundaryEnergy2014,shekhawatGeneralizedReadShockley2016} which explicitly implement the Read-Shockley model \cite{readDislocationModelsCrystal1950}. For a discussion of possible ways to address these issues, see Section \cref{sec:conclusions:future}.
 
 
-\subsubsection{Projecting \glsentrypltitlecase{gb}{long} to the \glsentrytitlecase{pfz}{long}}
+\subsubsection{Projecting \glsfmtshortpl{gb} to the \glsentrytitlecase{pfz}{long}}
 \label{sec:methods:projecting}
 
 % With the reference GB chosen, and consequently the pFZ defined, explain that a GB is projected into the pFZ simply by finding among its \glspl{seo} the one that is closest to the reference GB.
@@ -247,7 +253,7 @@ While spherical-arc-length-preserving methods were implemented and tested, only 
 \subsubsection{Defining a Closed-mesh}
 In the \gls{cmo} framework, \glspl{seo} are chosen based on minimum Euclidean distance relative to a fixed, arbitrary reference octonion rather than allowing either octonion in a pair to vary in the traditional octonion approach with arc-length distances \cite{francisGeodesicOctonionMetric2019}. We consider all symmetrically equivalent \glspl{gbo} rather than a subset. For barycentric interpolation (\cref{sec:methods:bary}), we also remove a degenerate dimension via a \gls{svd} projection to 7D Cartesian and employ a further projection to 6D Cartesian only for the triangulation. These differences are summarized in Table \cref{tab:closed-mesh-comparison}. By choosing \glspl{seo} based on Euclidean distance with respect to a fixed octonion, a "closed-mesh" is obtained in the sense that directly computed Euclidean and arc length distances become meaningful and a unique octonion is found within numerical tolerance as long as the reference \gls{gbo} is low-symmetry (very likely based on random sampling and can be verified). This facilitates the use of standard triangulation and interpolation routines rather than needing to rely on pairwise-distance matrices where each distance calculation requires consideration of \glspl{seo}.
 
-\subsection{Fundamental Zone}
+\subsection{\glsentrytitlecase{fz}{long}}
 Because a fixed, arbitrary, reference octonion is used to symmetrize the mesh, meshes with different exterior bounds can be obtained based on the reference octonion used. This is a limitation of this work in that the boundaries of the mesh do not correspond with high-symmetry \glspl{gb} in contrast with typical \gls{fz} representations in misorientation or \gls{bp} \cite{patalaSymmetriesRepresentationGrain2013,homerGrainBoundaryPlane2015} spaces. Interpolated values near the exterior of the mesh are likely to have higher error because the local region of influence may be prematurely cut off for \gls{gpr} and \gls{idw}. By definition of the barycentric and \gls{nn} methods, extrapolation is necessary to predict values on or near the "true" boundary of the mesh due to expected curvature in those boundaries. Further, \gls{nn} and barycentric interpolation are the only two non-smooth interpolation methods used; in these two cases, sharp cusps in the model will be smoothed or misrepresented unless there are \glspl{gb} on the cusp. For \gls{gpr} and \gls{idw}, cusps will be smoothed by definition as long as there is a non-zero kernel and non-zero standard deviation employed. This is a feature common to previously published methods \cite{liRelativeGrainBoundary2009,shenDeterminingGrainBoundary2019,chesserLearningGrainBoundary2020} except for those \cite{bulatovGrainBoundaryEnergy2014,shekhawatGeneralizedReadShockley2016} which explicitly implement the Read-Shockley model \cite{readDislocationModelsCrystal1950}. For a discussion of possible ways to address these issues, see Section \cref{sec:conclusions:future}.
 
 %\cite{reynoldsInterfacesCrystallineMaterials1997}
