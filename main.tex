@@ -399,9 +399,9 @@ To illustrate the utility of the \gls{cmo} framework for one application, namely
 For these tests, we used the 5DOF GB energy function developed by Bulatov, Reed and Kumar \cite{bulatovGrainBoundaryEnergy2014}, as the test function. We first generated a \gls{pfz} triangulation containing \num{50000} GBO vertices, corresponding to an average mesh resolution and standard deviation of about \SI{2.87}{\degree} and \SI{0.7}{\degree}, respectively (\cref{fig:nndist}). We denote this set of GBs by \texttt{gb\_v}. The test function was then evaluated at each of these points and the values were stored in the vector \texttt{f\_v}. We then generated \num{10000} GBO query points, denoted by \texttt{gb\_q}. Finally, we used \texttt{interp5DOF()} to predict the function value at the query points, which were stored in the vector \texttt{f\_q}. We also evaluated the test function at the query points to obtain the true function values, \texttt{f\_true}. We repeated this process for each of the interpolation methods, and compared the predictions, \texttt{f\_q}, to the true values, \texttt{f\_true}.
 \begin{figure}
 \centering
-\includegraphics[width=0.5\linewidth]{disthist50000.png}
+\includegraphics[width=0.5\linewidth]{nnhist-knn-50000.png}
 \caption{Histogram of \gls{nn} octonion distances ($\omega$) in a \gls{pfz} mesh of \num{50000} random octonions. The mean and standard deviation are \SI{2.87}{\degree} and \SI{0.7}{\degree}, respectively.} %Histogram of \acrlong{nn} octonion distances ($\omega$) for the vertices of the pFZ triangulation used for testing. The mean and standard deviation are \SI{2.87}{\degree} and \SI{0.7}{\degree}, respectively.
-\label{fig:nndist}
+\label{fig:nnhist-knn-50000}
 \end{figure}
 
 \subsection{Interpolation Accuracy}
