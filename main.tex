@@ -195,7 +195,7 @@ This approach can also be described in the context of a Voronoi tessellation. In
 
 \begin{figure}
     \centering
-    \includegraphics{voronoi.png}
+    \includegraphics[scale=1]{voronoi.png}
     \caption{3D Cartesian analogue to a 7D Cartesian representation of \glspl{gbo} demonstrating starting points (red) that are symmetrized (blue) relative to a fixed, reference point (white). The symmetrized points fall within the bounds of a Voronoi cell (cyan) border (white), where the Voronoi tessellation is defined by the symmetric images of the reference point.}
     \label{fig:voronoi}
 \end{figure}
@@ -230,13 +230,13 @@ This is a limitation of the \gls{cmo} framework which generates a \gls{pfz} with
 
 Overestimation imposes an arbitrary "sparseness" of data within a local region of influence common to the interpolation methods in this work, whereas underestimation would give erroneous high correlations between uncorrelated \glspl{gb}. Because only overestimation relative to traditional octonion distances exist in this work (\cref{fig:dist-ensemble-k1}), it is expected that large errors will occur infrequently, as shown in \cref{fig:brkparity50000} and that overall errors will remain low as shown in \cref{fig:brkerror}, \cref{tab:rmse-error-comparison}, and \cref{tab:mae-error-comparison}.
 
-Certain simplex-based approaches \cite{connorHighdimensionalSimplexesSupermetric2017,boissonnatOnlyDistancesAre2017} may allow for other \gls{gb} distance metrics \cite{morawiecDistancesGrainInterfaces2019} to be paired with the triangulation facets computed in the barycentric interpolation approach (\cref{sec:methods:bary:int}) and is a topic of interest for future study.
+Certain simplex-based approaches \cite{connorHighdimensionalSimplexesSupermetric2017,boissonnatOnlyDistancesAre2017} may allow for other \gls{gb} distance metrics \cite{morawiecDistancesGrainInterfaces2019} to be paired with the triangulation facets computed in the barycentric interpolation approach (\cref{sec:methods:interp:bary}) and is a topic of interest for future study.
 %supplying new distances to the octonion triangulation,
 %reconstructing simplices using only edge lengths \cite{connorHighdimensionalSimplexesSupermetric2017}, or computing a manifold from only a pairwise distance matrix \cite{boissonnatOnlyDistancesAre2017} and verifying against the \gls{pfz} triangulation.
 
 \begin{figure}
     \centering
-    \includegraphics{dist-ensemble-k1.png}
+    \includegraphics[scale=1]{dist-ensemble-k1.png}
     \caption{Caption}
     \label{fig:dist-ensemble-k1}
 \end{figure}
@@ -255,9 +255,9 @@ While spherical-arc-length-preserving methods were implemented and tested, only 
 
 \begin{figure}
 \centering
-\includegraphics[width=0.5\linewidth]{dist-parity.png}
+\includegraphics[scale=1]{distance-parity.png}
 \caption{Parity plot of hyperspherical arc length vs. Euclidean distance for pairwise distances in a symmetrized, closed-mesh of \num{10000} randomly sampled \acrlongpl{gbo}. The max arc length is approximately \SI{0.58}{\radian}, indicating a max octonion distance of approximately \SI{1.16}{\radian} or \SI{66.5}{\degree} between any two points in the \acrlong{fz}. The close correlation between arc length and Euclidean distance supports the validity of using Euclidean distance in the interpolation methods.}
-\label{fig:dist-parity}
+\label{fig:distance-parity}
 \end{figure}
 
 \subsubsection{\glsentrytitlecase{gpr}{long}}
@@ -328,14 +328,14 @@ a \gls{nn} approach is used (\cref{sec:methods:interp:nn}).
 
 \begin{figure}
     \centering
-    \includegraphics{bary-remove-deg.png}
+    \includegraphics[scale=1]{bary-remove-deg.png}
     \caption{3D Cartesian to 2D Cartesian analogue of 8D Cartesian to 7D Cartesian degeneracy removal used in barycentric interpolation approach. Starting spherical arc points on surface of 2-sphere (a) and degenerate dimension removed via \acrlong{svd} projection to 2D Cartesian (b) with either the origin (black plus) preserved (black asterisks, \texttt{zeroQ=T}) or ignored (red asterisks, \texttt{zeroQ=F}). The sphere (a) and circle (b) each have a radius of 0.8 and are used as a visualization aid only.}
     \label{fig:bary-remove-deg}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics{bary-delaunay.png}
+    \includegraphics[scale=1]{bary-delaunay.png}
     \caption{3D Cartesian to 2D Cartesian analogue of 7D Cartesian to 6D Cartesian mesh triangulation used in barycentric interpolation approach. Normalized starting points on surface of 2-sphere (a), points projected onto hyperplane tangent to mean of starting points (b), degenerate dimension removed via \acrlong{svd} projection to 2D Cartesian (c), and Delaunay triangulation in 2D Cartesian (d). The sphere in (a) and (b) has a radius of 0.8 and is used as a visualization aid only.}
     \label{fig:bary-delaunay}
 \end{figure}
@@ -396,10 +396,10 @@ where $\lambda$, $v$, $v_i$ and $N$, are the barycentric coordinates, interpolat
 
 To illustrate the utility of the \gls{cmo} framework for one application, namely interpolation, we compare the (i) accuracy, and (ii) efficiency of the four previously described interpolation methods implemented over the \gls{pfz} with each other and with existing methods from the literature (see \cref{sec:intro}).
 
-For these tests, we used the 5DOF GB energy function developed by Bulatov, Reed and Kumar \cite{bulatovGrainBoundaryEnergy2014}, as the test function. We first generated a \gls{pfz} triangulation containing \num{50000} GBO vertices, corresponding to an average mesh resolution and standard deviation of about \SI{2.87}{\degree} and \SI{0.7}{\degree}, respectively (\cref{fig:nndist}). We denote this set of GBs by \texttt{gb\_v}. The test function was then evaluated at each of these points and the values were stored in the vector \texttt{f\_v}. We then generated \num{10000} GBO query points, denoted by \texttt{gb\_q}. Finally, we used \texttt{interp5DOF()} to predict the function value at the query points, which were stored in the vector \texttt{f\_q}. We also evaluated the test function at the query points to obtain the true function values, \texttt{f\_true}. We repeated this process for each of the interpolation methods, and compared the predictions, \texttt{f\_q}, to the true values, \texttt{f\_true}.
+For these tests, we used the 5DOF GB energy function developed by Bulatov, Reed and Kumar \cite{bulatovGrainBoundaryEnergy2014}, as the test function. We first generated a \gls{pfz} triangulation containing \num{50000} GBO vertices, corresponding to an average mesh resolution and standard deviation of about \SI{2.87}{\degree} and \SI{0.7}{\degree}, respectively (\cref{fig:nnhist-knn-50000}). We denote this set of GBs by \texttt{gb\_v}. The test function was then evaluated at each of these points and the values were stored in the vector \texttt{f\_v}. We then generated \num{10000} GBO query points, denoted by \texttt{gb\_q}. Finally, we used \texttt{interp5DOF()} to predict the function value at the query points, which were stored in the vector \texttt{f\_q}. We also evaluated the test function at the query points to obtain the true function values, \texttt{f\_true}. We repeated this process for each of the interpolation methods, and compared the predictions, \texttt{f\_q}, to the true values, \texttt{f\_true}.
 \begin{figure}
 \centering
-\includegraphics[width=0.5\linewidth]{nnhist-knn-50000.png}
+\includegraphics[scale=1]{nnhist-knn-50000.png}
 \caption{Histogram of \gls{nn} octonion distances ($\omega$) in a \gls{pfz} mesh of \num{50000} random octonions. The mean and standard deviation are \SI{2.87}{\degree} and \SI{0.7}{\degree}, respectively.} %Histogram of \acrlong{nn} octonion distances ($\omega$) for the vertices of the pFZ triangulation used for testing. The mean and standard deviation are \SI{2.87}{\degree} and \SI{0.7}{\degree}, respectively.
 \label{fig:nnhist-knn-50000}
 \end{figure}
@@ -410,7 +410,7 @@ For these tests, we used the 5DOF GB energy function developed by Bulatov, Reed 
 \Cref{fig:brkparity50000} provides hexagonally binned parity plots \cite{beanHexscatter2020} for each of the four interpolation methods.
 \begin{figure}
     \centering
-    \includegraphics[width=0.75\linewidth]{brkparity50000.png}
+    \includegraphics[scale=1]{brkparity50000.png}
     \caption{Hexagonally binned parity plots for \num{50000} mesh and \num{10000} prediction octonions formed via pairs of a random cubochorically sampled quaternion and a spherically sampled random boundary plane normal. Interpolation via (a) \acrlong{gpr}, (b) \acrlong{idw}, (c) \acrlong{nn}, (d) and barycentric coordinates.  \acrlong{brk} \acrlong{gbe} function for \gls{fcc} Ni was used as the test function.}
     \label{fig:brkparity50000}
 \end{figure}
@@ -506,13 +506,13 @@ The accuracy of the predictions made using the \gls{pfz} methods depends on the 
 
 \Gls{gpr} consistently gives lower error than the other three interpolation methods. It is interesting to see that despite qualitative differences in the parity plots for barycentric and \gls{idw} interpolation, these two methods produce similar \gls{rmse} and \gls{mae} values. \Gls{nn} interpolation produces the worst error of the four methods, but is better than the constant valued control model above several hundred mesh points. 
 
-Both \gls{gpr} and \gls{idw} seem to reach a plateau near 20,000 mesh points. It is worthwhile to note that both of these methods are kernel-based in that a model parameter controls the size of the region that can influence the interpolation results. In the \gls{gpr} case, this is automatically calculated via an internal fitting routine of \texttt{fitrgp()}. \gls{nn} mesh distance distributions (\cref{fig:nndist}) can lead to insight about correlation lengths in a given mesh. In the \gls{idw} case, the radius of influence is set to $r=\sqrt{2} \mu$, where $\mu$ is the mean \gls{nn} mesh distance. It is likely that better tuning of the kernel parameters in these two methods could further decrease the obtained errors. By contrast, barycentric interpolation automatically adjusts its effective region of influence because the size of the simplices in the mesh decreases as the number of vertices increases. More uniformly distributed meshes (such as obtained via constrained optimization \cite{dolanBenchmarkingOptimizationSoftware2004,ConstrainedElectrostaticNonlinear2020}) will likely result in more uniform, decreased interpolation error, especially for a simplex-based approach which is prone to high-aspect ratio facets. % However, this may be computationally infeasible for large mesh sizes.
+Both \gls{gpr} and \gls{idw} seem to reach a plateau near 20,000 mesh points. It is worthwhile to note that both of these methods are kernel-based in that a model parameter controls the size of the region that can influence the interpolation results. In the \gls{gpr} case, this is automatically calculated via an internal fitting routine of \texttt{fitrgp()}. \gls{nn} mesh distance distributions (\cref{fig:nnhist-knn-50000}) can lead to insight about correlation lengths in a given mesh. In the \gls{idw} case, the radius of influence is set to $r=\sqrt{2} \mu$, where $\mu$ is the mean \gls{nn} mesh distance. It is likely that better tuning of the kernel parameters in these two methods could further decrease the obtained errors. By contrast, barycentric interpolation automatically adjusts its effective region of influence because the size of the simplices in the mesh decreases as the number of vertices increases. More uniformly distributed meshes (such as obtained via constrained optimization \cite{dolanBenchmarkingOptimizationSoftware2004,ConstrainedElectrostaticNonlinear2020}) will likely result in more uniform, decreased interpolation error, especially for a simplex-based approach which is prone to high-aspect ratio facets. % However, this may be computationally infeasible for large mesh sizes.
 
 % While not implemented in this work, it is expected that an \gls{ann} such as in \cite{echeverrirestrepoUsingArtificialNeural2014} could lead to even lower interpolation error than \gls{gpr} for large mesh sizes. % (e.g. https://www.mathworks.com/help/deeplearning/ref/narxnet.html, https://www.mathworks.com/help/deeplearning/function-approximation-and-nonlinear-regression.html)
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{brkerror.png}
+    \includegraphics[scale=1]{brkerror.png}
     \caption{Average \gls{rmse} and average \gls{mae} vs. number of mesh points for planar barycentric (\texttt{pbary}, blue), \gls{gpr} (\texttt{gpr}, orange), \gls{idw} (\texttt{idw}, yellow), and \texttt{nn} (\texttt{nn}, purple) interpolation for approximately 10 random runs with different mesh and prediction points. Standard deviations of approximately 10 runs are also included. Compare with approximately \SI{0.13}{\J\per\square\meter} and \SI{0.95}{\J\per\square\meter} \gls{rmse} and \gls{mae}, respectively, for a constant model using the average of the mesh properties (approximately \SI{1.16}{\J\per\square\meter}).}
     %Average \acrlong{rmse} and average \acrlong{mae} vs. number of mesh points for planar barycentric (\texttt{pbary}, blue), \acrlong{gpr} (\texttt{gpr}, orange), \acrlong{idw} (\texttt{idw}, yellow), and \texttt{nn} (\texttt{nn}, purple) interpolation for approximately 10 random runs with different mesh and prediction points. Standard deviations of approximately 10 runs are also included. Compare with approximately \SI{0.13}{\J\per\square\meter} and \SI{0.95}{\J\per\square\meter} \acrshort{rmse} and \acrshort{mae}, respectively, for a constant model using the average of the mesh properties (approximately \SI{1.16}{\J\per\square\meter}).
     \label{fig:brkerror}
@@ -531,7 +531,7 @@ Computational runtimes of the various interpolation methods are also shown (\cre
 
 \begin{figure}
     \centering
-    \includegraphics{runtime.png}
+    \includegraphics[scale=1]{runtime.png}
     \caption{
     Average runtime (s) and standard deviation (approximately 10 runs) vs. number of mesh points for barycentric (a, blue) and \acrlong{gpr} (\acrshort{gpr}) (a, orange), \acrlong{idw} (\acrshort{idw}) (b, blue), \acrlong{nn} (\acrshort{nn}) (b, orange) interpolation using 12 cores compared against runtime (s) for an average model (b, yellow). Because \acrshort{gpr}, \acrshort{idw}, and \acrshort{nn} method defaults do not use parfor loops but may have internal multi-core vectorization, it is unclear to what extent the number of cores affects the runtime of methods other than barycentric interpolation. \Acrlong{gb} symmetrization runtime was not included; however, symmetrization takes approximately one minute on 6 cores (Intel i7-10750H, 2.6 GHz) and is a common step in every interpolation method (i.e. it is fundamental to the \acrlong{cmo} framework).
     %Runtime (s) vs. number of mesh points for barycentric (blue), \acrlong{gpr} (\acrshort{gpr}) (orange), \acrlong{idw} (\acrshort{idw}) (yellow), and \acrlong{nn} (\acrshort{nn}) (purple) interpolation using 12 cores. Because \acrshort{gpr}, \acrshort{idw}, and \acrshort{nn} method defaults do not use parfor loops but may have internal multi-core vectorization, it is unclear to what extent the number of cores affects the runtime of methods other than barycentric interpolation. \Acrlong{gb} symmetrization runtime was not included; however, symmetrization takes approximately one minute on 6 cores (Intel i7-10750H, 2.6 GHz) and is a common step in every interpolation method (i.e. it is fundamental to the \acrlong{cmo} framework).
