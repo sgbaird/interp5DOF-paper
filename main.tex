@@ -224,11 +224,22 @@ Random octonions are formed by converting a random, cubochorically sampled quate
 \label{sec:methods:distancepFZ}
 
 % Explain how to compute distances in the pFZ, and why you can now just use euclidean distances.
-Because the \gls{pfz} is a closed-mesh, directly computed Euclidean and arc length distances are meaningful. Euclidean distances are an accurate approximation of arc length distances in a \gls{pfz} because the difference between the two metrics for the maximum pairwise distance ($pd_{max} = \SI{60}{\degree})$) in a \gls{pfz} is small as shown in \cref{fig:dist-parity}. However, due to the presence of low-symmetry \glspl{gb} near the exterior of a \gls{pfz}, some \glspl{gb} pairs will exhibit larger distances than is truly representative (\cref{fig:dist-ensemble-k1}). In other words, moving "past" the low-symmetry border of a \gls{pfz} will result in an instantaneous relocation to a possibly distant point in the \gls{pfz} that in reality is highly correlated. This is a limitation of the \gls{cmo} framework which depends on a \gls{pfz} with low-symmetry \glspl{gb} at the borders of a closed-mesh. While defining a \gls{fz} with high-symmetry \glspl{gb} at the borders will certainly increase interpolation accuracy, the favorable interpolation results presented in this work are obtained because overestimation is infrequent within a correlation length of \SI{10}{\degree} which is either 
+Because the \gls{pfz} is a closed-mesh, directly computed Euclidean and arc length distances are meaningful. Euclidean distances are an accurate approximation of arc length distances in a \gls{pfz} because the difference between the two metrics for the maximum pairwise distance ($pd_{max} = \SI{60}{\degree})$) in a \gls{pfz} is small as shown in \cref{fig:dist-parity}. However, due to the presence of low-symmetry \glspl{gb} near the exterior of a \gls{pfz}, some \glspl{gb} pairs will exhibit larger distances than is truly representative (\cref{fig:dist-ensemble-k1}). In other words, moving "past" the low-symmetry border of a \gls{pfz} will result in an instantaneous relocation to a possibly distant point in the \gls{pfz} that in reality is highly correlated.
 
-Certain simplex-based approaches \cite{connorHighdimensionalSimplexesSupermetric2017,boissonnatOnlyDistancesAre2017} may allow for other \gls{gb} distance metrics \cite{morawiecDistancesGrainInterfaces2019} to be incorporated within the \gls{cmo} framework.
+This is a limitation of the \gls{cmo} framework which generates a \gls{pfz} with low-symmetry \glspl{gb} at the borders of a closed-mesh. While defining a \gls{fz} with high-symmetry \glspl{gb} at the borders will certainly increase interpolation accuracy, the favorable interpolation results presented in this work are obtained because overestimation is infrequent within a small correlation length (e.g. \SI{10}{\degree}).
+
+Overestimation imposes an arbitrary "sparseness" of data within a local region of influence common to the interpolation methods in this work, whereas underestimation would give erroneous high correlations between uncorrelated \glspl{gb}. Because only overestimation relative to traditional octonion distances exist in this work (\cref{fig:dist-ensemble-k1}), it is expected that large errors will occur infrequently, as shown in \cref{fig:brkparity50000} and that overall errors will remain low as shown in \cref{fig:brkerror}, \cref{tab:rmse-error-comparison}, and \cref{tab:mae-error-comparison}.
+
+Certain simplex-based approaches \cite{connorHighdimensionalSimplexesSupermetric2017,boissonnatOnlyDistancesAre2017} may allow for other \gls{gb} distance metrics \cite{morawiecDistancesGrainInterfaces2019} to be paired with the triangulation facets computed in the barycentric interpolation approach (\cref{sec:methods:bary:int}) and is a topic of interest for future study.
 %supplying new distances to the octonion triangulation,
 %reconstructing simplices using only edge lengths \cite{connorHighdimensionalSimplexesSupermetric2017}, or computing a manifold from only a pairwise distance matrix \cite{boissonnatOnlyDistancesAre2017} and verifying against the \gls{pfz} triangulation.
+
+\begin{figure}
+    \centering
+    \includegraphics{dist-ensemble-k1.png}
+    \caption{Caption}
+    \label{fig:dist-ensemble-k1}
+\end{figure}
 
 \subsection{Interpolation in the \glsentrytitlecase{cmo}{long} Framework}
 \label{sec:methods:interp}
