@@ -1,5 +1,5 @@
-\appendix \label{sec:app}
-\renewcommand\thefigure{\thesection.\arabic{figure}}
+\appendix
+\label{sec:app}
 \section{Detailed Barycentric Interpolation Methods}
 \setcounter{figure}{0}
 \subsection{Triangulating a \glsentrytitlecase{vfz}{long} Mesh}
@@ -27,7 +27,7 @@ Using a separate rigid \gls{svd} transformation from the triangulation, the orig
 \begin{figure}
     \centering
     \includegraphics[scale=1]{bary-delaunay.png}
-    \caption{3D Cartesian to 2D Cartesian analogue of 7D Cartesian to 6D Cartesian mesh triangulation used in barycentric interpolation approach. Normalized starting points on surface of 2-sphere (a), points projected onto hyperplane tangent to mean of starting points (b), degenerate dimension removed via rigid \gls{svd} transformation to 2D Cartesian (c), and Delaunay triangulation in 2D Cartesian (d). The sphere in (a) and (b) has a radius of 0.8 and is used as a visualization aid only.}
+    \caption{3D Cartesian to 2D Cartesian analogue of 7D Cartesian to 6D Cartesian mesh triangulation used in barycentric interpolation approach. Input points linearly projected projected onto hyperplane tangent to mean of starting points (a), degenerate dimension removed via rigid \gls{svd} transformation to 2D Cartesian and Delaunay triangulation calculated (b), and Delaunay triangulation superimposed onto normalized input points. The spheres in (a) and (c) have a radius of 0.8 and is used for visualization only.}
     \label{fig:bary-delaunay}
 \end{figure}
 
@@ -35,7 +35,7 @@ Using a separate rigid \gls{svd} transformation from the triangulation, the orig
 
 \subsection{Intersections in a \glsentrytitlecase{vfz}{long} Mesh}
 \label{app:bary-int}
-An intersection is calculated by linearly projecting a prediction point onto the hyperplane defined by a mesh facet's vertices, computing barycentric coordinates within the facet, and testing for positivity \cite{langerSphericalBarycentricCoordinates2006}, and repeating this process until an intersection is found or a stop condition is reached (see \texttt{nnMax} below). If the prediction point is contained within the simplex, all of the barycentric weights (i.e. coordinates) are positive. If it outside the simplex, this constraint is violated. Due to the large number of facets per point of a high-dimensional
+An intersection is calculated by linearly projecting a prediction point onto the hyperplane defined by a mesh facet's vertices (\cref{fig:bary-interp}, computing barycentric coordinates within the facet, and testing for positivity \cite{langerSphericalBarycentricCoordinates2006}, and repeating this process until an intersection is found or a stop condition is reached (see \texttt{nnMax} below). If the prediction point is contained within the simplex, all of the barycentric weights (i.e. coordinates) are positive. If it outside the simplex, this constraint is violated. Due to the large number of facets per point of a high-dimensional
 %simplex-based
 triangulation
 %and for computational speed,
@@ -43,18 +43,19 @@ prediction point intersections are calculated by considering facets connected to
 %in these connected facets due to high-aspect ratio facets or prediction point falling outside the mesh within a given tolerance,
 a \gls{nn} approach is used (\cref{sec:methods:interp:nn}), which represent average non-intersection rates of \SI{0.1207 \pm 1.02}{\percent} and \SI{0.68 \pm 0.11}{\percent} for input meshes of \num{388} and \num{50000}, respectively, for \num{10000} query points out of \num{10} trials.
 
-\subsubsection{Interpolation via Barycentric Coordinates}
+\subsection{Interpolation via Barycentric Coordinates}
 \label{app:bary-interp}
 
 Once barycentric coordinates are computed for a prediction point within the input mesh, the interpolated value is found by taking the dot product of the barycentric coordinates and the properties of the corresponding vertices of the intersecting facet via
 \begin{equation}
+\label{eq:bary-interp}
 v=\underset{i=1}{\overset{N}{\sum }}\lambda _i v_i
 \end{equation}
-where $\lambda$, $v$, $v_i$ and $N$, are the barycentric coordinates, interpolated property, property of the $i$th vertex of the intersecting facet, and number of vertices in a given facet ($N = 7$ for the degeneracy-free 6-sphere).
+where $\lambda$, $v$, $v_i$ and $N$, are the barycentric coordinates, interpolated property, property of the $i$th vertex of the intersecting facet, and number of vertices in a given facet ($N = 7$ for the degeneracy-free 6-sphere). A 2-sphere example is provided in \cref{fig:bary-interp}.
 
 \begin{figure}
     \centering
     \includegraphics[scale=1]{bary-interp.png}
-    \caption{Caption}
-    \label{fig:my_label}
+    \caption{A ray (red line) on the 2-sphere is linearly projected onto the hyperplane of a mesh facet (transparent black), shown as a red asterisk. The barycentric coordinates are computed as $\lambda_{i \in [1,3]} = \frac{1}{3}$. Because all barycentric coordinates are positive, it is determined that the projected point is an intersection with the mesh. Given vertex values of \num{8.183}, \num{3.446}, and \num{3.188} for vertices 1, 2, and 3, respectively, the interpolated value is calculated as \num{4.94} via \cref{eq:bary-interp}.}
+    \label{fig:bary-interp}
 \end{figure}
