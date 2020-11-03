@@ -135,7 +135,7 @@ A non-discretizing approach was recently introduced \cite{shenDeterminingGrainBo
 
 Recently, a new \gls{gb} representation termed \glspl{gbo} was reported \cite{francisGeodesicOctonionMetric2019} and tested \cite{chesserLearningGrainBoundary2020}. The \gls{gbo} representation is valuable for a number of applications. Most relevant to the present work is the resulting distance metric. The \gls{gbo} distance metric offers an advantage over other metrics in that it "correctly determines the angular distances between \glspl{gb} with a common normal or misorientation" and "closely approximates the geodesic metric on $SO(3) \times SO(3)$ \textit{for all grain boundary pairs} while maintaining the ability to be analytically minimized with respect to the $U(1)$ symmetry" \cite{francisGeodesicOctonionMetric2019}. In this context, \citet{francisGeodesicOctonionMetric2019} derived \gls{oslerp} and provided examples showing that \gls{oslerp} produces smooth, minimum distance paths through \gls{gb} character space between two arbitrary \glspl{gb}. 
 
-\Gls{lkr} (a type of \gls{idw}) involving scaled pairwise distance matrices was later used with \glspl{gbo} to predict properties of arbitrary \glspl{gb} from a set of known values \cite{chesserLearningGrainBoundary2020}. Using \gls{kfcv} with $k=10$ for \num{388} Ni \gls{gbe} simulations \cite{holmComparingGrainBoundary2010} and an optimized scaling parameter, an \gls{rmse} of \SI{0.0977}{\J\per\square\meter} was obtained. Due to computation time of pairwise distance matrices, this approach is limited to datasets with several thousand \glspl{gb} or fewer \cite{chesserLearningGrainBoundary2020}.
+\Gls{lkr} (a type of \gls{idw}) involving scaled pairwise distance matrices was later used with \glspl{gbo} to predict properties of arbitrary \glspl{gb} from a set of known values \cite{chesserLearningGrainBoundary2020}. Using \gls{kfcv} with $k=10$ for \num{388} Ni \gls{gbe} simulations \cite{olmstedSurveyComputedGrain2009a} and an optimized scaling parameter, an \gls{rmse} of \SI{0.0977}{\J\per\square\meter} was obtained. Due to computation time of pairwise distance matrices, this approach is limited to datasets with several thousand \glspl{gb} or fewer \cite{chesserLearningGrainBoundary2020}.
 
 \subsection{\glsentrytitlecase{vfzo}{long} Framework}
 The \gls{vfzo} interpolation framework introduced in this work offers an advantage over other methods because it is defined as a \gls{vfz} point set in a Riemannian manifold. This is evidenced by the ability to triangulate a mesh using standard routines (e.g. quickhull \cite{barberQuickhullAlgorithmConvex1996}) and interpolate using barycentric coordinates or machine learning methods such as \gls{gpr}. Building on previous work on \glspl{gbo} \cite{francisGeodesicOctonionMetric2019,chesserLearningGrainBoundary2020}, we create a \gls{vfz} point set by obtaining a set of octonions minimized with respect to Euclidean distance and an arbitrary reference octonion after considering all \glspl{seo}. Because \glspl{gbo} are guaranteed to reside on the surface of a hypersphere \cite{francisGeodesicOctonionMetric2019} (a type of Riemannian manifold) a point set which locally resembles Euclidean space is formed (\cref{sec:methods:vfz-dist}). Below we mention a few benefits and applications of this approach, after which we provide the detailed description of the method (\cref{sec:methods}) and numerical test results (\cref{sec:results}).
@@ -144,7 +144,7 @@ The \gls{vfzo} interpolation framework introduced in this work offers an advanta
 \subsubsection{Distance Calculations}
 Because Euclidean and arc length distances take on meaning in this framework, distance computations are much faster than other metrics. The calculation speed is even higher than explicit \gls{gbo} distance calculations using the original octonion distance given in \cite{francisGeodesicOctonionMetric2019}. For example, a \num{50000} x \num{50000} pairwise-distance matrix can be computed in approximately 70 s using built-in MATLAB \textit{Statistics and Machine Learning Toolbox} function \texttt{pdist} and 6 cores -- something that was computationally challenging before and a limitation of previous work. Compared to original octonion metric distance calculations \cite{chesserLearningGrainBoundary2020}, this represents an improvement in computational speed by five orders of magnitude!\footnote{Improvement per distance calculation per core is about \num{5e5} relative to the EMSoft \cite{degraefEMSoft2020} metric of 26 minutes using 8 cores for a 388 x 388 pairwise distance matrix in \cite{chesserLearningGrainBoundary2020}} This is largely due to the fact that \glspl{seo} only need to be considered once per \gls{gb} $L$, rather than once per distance calculation $L^2$,
 %per \gls{gb} in a \gls{gb}-pair
-and that \glspl{seo} only need to be considered once in a \gls{gb} pair $N_p^2$ rather than for every combination between the two \glspl{gb} $N_p^4$\footnote{\texttt{GBdist.m} in \cite{chesserGBOctonionCode2019} uses the assumption that if a minimum angle is repeated 9 times, the symmetrization loop is exited, whereas the \texttt{GBmod.f90} implementation in EMSoft \cite{degraefEMSoft2020} does not appear to use this assumption.}. The computational complexity of this work is thus $O(N_p^2L)$, a significant improvement compared with the original complexity of $O(N_p^4L^2)$ \cite{chesserLearningGrainBoundary2020}, where $N_p$ is the symmetry cardinality ($N_p=24$ for $m\Bar{3}m$ \gls{fcc} point group) and $L$ is the number of \glspl{gb}. Additionally, Euclidean distances can be computed faster than trigonometric inverse functions, and built-in, vectorized MATLAB functions are utilized where possible. % $O(N^2L)$ (this work) vs. $O(N^4L^2$ (octonion paper)
+and that \glspl{seo} only need to be considered once in a \gls{gb} pair $N_p^2$ rather than for every combination between the two \glspl{gb}\footnote{\texttt{GBdist.m} in \cite{chesserGBOctonionCode2019} uses the assumption that if a minimum angle is repeated 9 times, the symmetrization loop is exited, whereas the \texttt{GBmod.f90} implementation in EMSoft \cite{degraefEMSoft2020} does not appear to use this assumption.} ($N_p^4$). The computational complexity of this work is thus $O(N_p^2L)$, a significant improvement compared with the original complexity of $O(N_p^4L^2)$ \cite{chesserLearningGrainBoundary2020}, where $N_p$ is the symmetry cardinality ($N_p=24$ for $m\Bar{3}m$ \gls{fcc} point group) and $L$ is the number of \glspl{gb}. Additionally, Euclidean distances can be computed faster than trigonometric inverse functions, and built-in, vectorized MATLAB functions are utilized where possible. % $O(N^2L)$ (this work) vs. $O(N^4L^2$ (octonion paper)
 
 \subsubsection{Interpolation Error} \label{sec:intro:interp-error}
 The ability to use significantly more input data lends itself to lower interpolation error. This will be demonstrated by \gls{gbe} interpolation results for a non-smooth validation function in \cref{sec:results}.
@@ -157,7 +157,7 @@ where $q_m$, $q_A$, and $q_B$ represent the misorientation quaternion, quaternio
 
 \subsubsection{Applications}
 
-The \gls{vfzo} framework offers a great advantage in estimating property values for arbitrary \glspl{gb} based on experimental or simulated data such as energy, mobility, and diffusivity. The framework can also enable efficient surrogate modeling of computationally expensive 5DOF functions and simulations such as in evaluation of the \gls{brk} function for use in anisotropic grain growth simulations. In other words, one can evaluate the CMO surrogate model in a fraction of the time of the true property model, thereby facilitating larger scale iterative simulations, which require repetitive evaluation of a computationally expensive structure-property model.
+The \gls{vfzo} framework offers a great advantage in estimating property values for arbitrary \glspl{gb} based on experimental or simulated data such as energy, mobility, and diffusivity. The framework can also enable efficient surrogate modeling of computationally expensive 5DOF functions and simulations such as in evaluation of the \gls{brk} function for use in anisotropic grain growth simulations. In other words, one can evaluate the \gls{vfz} surrogate model in a fraction of the time of the true property model, thereby facilitating larger scale iterative simulations, which require repetitive evaluation of a computationally expensive structure-property model.
 
 % We think it is straightforward to apply these methods to full or restricted regions of \gls{5dof} space for \gls{gb} models and surrogates. In addition to interpolations involving \gls{gbe}, \gls{gbcd} (i.e. similar to fitting a curve to a histogram) and other \gls{gb} properties such as diffusivity and mobility could also be interpolated. Finally, linking this interpolation scheme with polycrystal data such as 3D microstructural \gls{tj} datasets (e.g. Ni \cite{liRelativeGrainBoundary2009}) via \textit{TJ2GBE} \cite{shenDeterminingGrainBoundary2019} or similar approaches geared towards large datasets is especially promising.
 
@@ -207,7 +207,7 @@ This approach can also be described in the context of a Voronoi tessellation. In
 \begin{figure}
     \centering
     \includegraphics[scale=1]{voronoi.png}
-    \caption{3D Cartesian analogue to a 7D Cartesian representation of \glspl{gbo} and \glspl{vfzo} demonstrating starting points (\startpt) that are symmetrized (\sympt) relative to a fixed, reference point (\refpt). The symmetrized points uniquely fall within the borders (\vbordercolor) of a single Voronoi cell (\vcellcolor), where the Voronoi tessellation is defined by the symmetric images of the reference point.}
+    \caption{3D Cartesian analogue to a 7D Cartesian representation of \glspl{gbo} and \glspl{vfzo} demonstrating a single input point (\startpt) that is symmetrized (\sympt) relative to a fixed, reference point (\refpt) (a). Only one symmetrized point is found within the borders (\vbordercolor) of each of the Voronoi cells (\vcellcolor), where the Voronoi tessellation is defined by the symmetric images of the reference point. (b) shows demonstrates the symmetrization of many points, leading to a 3D Cartesian \gls{vfz} point set.}
     \label{fig:voronoi}
 \end{figure}
 
@@ -230,7 +230,7 @@ First, random \glspl{gbo} are formed by taking a random, cubochorically sampled 
 \label{sec:methods:vfz-dist}
 
 % Explain how to compute distances in the vfz, and why you can now just use euclidean distances.
-The \gls{vfz} is defined such that directly computed Euclidean and arc length distances are meaningful. Euclidean distances are an accurate approximation of arc length distances in a \gls{vfz} because the difference between the two metrics for the maximum pairwise distance ($pd_{max} = \SI{60}{\degree})$) in a \gls{vfz} is small as shown in \cref{fig:dist-parity}. However, due to the presence of low-symmetry \glspl{gb} near the exterior of a \gls{vfz}, some \glspl{gb} pairs will exhibit larger distances than is truly representative (\cref{fig:dist-ensemble-k1}). In other words, moving "past" the low-symmetry border of a \gls{vfz} will result in an instantaneous relocation to a possibly distant point in the \gls{vfz} that in reality is highly correlated.
+The \gls{vfz} is defined such that directly computed Euclidean and arc length distances are meaningful. Euclidean distances are an accurate approximation of arc length distances in a \gls{vfz} because the difference between the two metrics for the maximum pairwise distance ($pd_{max} = \SI{60}{\degree})$) in a \gls{vfz} is small as shown in \cref{fig:dist-parity}. However, due to the presence of low-symmetry \glspl{gb} near the exterior of a \gls{vfz}, some \glspl{gb} pairs will exhibit larger distances than is truly representative (\cref{fig:dist-ensemble-k1-2-5-10}). In other words, moving "past" the low-symmetry border of a \gls{vfz} will result in an instantaneous relocation to a possibly distant point in the \gls{vfz} that in reality is highly correlated.
 
 \begin{figure}
 \centering
@@ -241,7 +241,7 @@ The \gls{vfz} is defined such that directly computed Euclidean and arc length di
 
 This is a limitation of the \gls{vfzo} framework which generates a \gls{vfz} with low-symmetry \glspl{gb} at the borders in contrast to typical \glspl{fz} \cite{patalaSymmetriesRepresentationGrain2013,homerGrainBoundaryPlane2015}. While defining a \gls{fz} with high-symmetry \glspl{gb} at the borders will certainly increase interpolation accuracy, the favorable interpolation results presented in this work are obtained because overestimation is infrequent within a small correlation length (e.g. \SI{10}{\degree}).
 
-Overestimation imposes an arbitrary "sparseness" of data within a local region of influence common to the interpolation methods in this work, whereas underestimation would give erroneous high correlations between uncorrelated \glspl{gb}. Because only overestimation relative to traditional octonion distances exist in this work (\cref{fig:dist-ensemble-k1}), it is expected that large errors will occur infrequently, as shown in \cref{fig:brkparity50000}, and that overall errors will remain low as shown in \cref{fig:brkerror}, \cref{tab:rmse-error-comparison}, and \cref{tab:mae-error-comparison}.
+Overestimation imposes an arbitrary "sparseness" of data within a local region of influence common to the interpolation methods in this work, whereas underestimation would give erroneous high correlations between uncorrelated \glspl{gb}. Because only overestimation relative to traditional octonion distances exist in this work (\cref{fig:dist-ensemble-k1-2-5-10}), it is expected that large errors will occur infrequently, as shown in \cref{fig:brkparity50000}, and that overall errors will remain low as shown in \cref{fig:brkerror}, \cref{tab:rmse-error-comparison}, and \cref{tab:mae-error-comparison}. We find that taking the minimum distance among several \gls{vfzo} sets defined by separate reference octonions leads to better correlation between the Euclidean approximation and the traditional octonion metric (\cref{fig:dist-ensemble-k1-2-5-10} and \cref{fig:dist-ensemble-rmse-mae}). We plan to explore the incorporation of ensemble \gls{vfzo} sets to interpolation methods and expect increased accuracy at reasonable computational cost.
 
 Certain simplex-based approaches \cite{connorHighdimensionalSimplexesSupermetric2017,boissonnatOnlyDistancesAre2017} may allow for other \gls{gb} distance metrics \cite{morawiecDistancesGrainInterfaces2019} to be paired with the triangulation facets computed in the barycentric interpolation approach (\cref{sec:methods:interp:bary}) and is a topic of interest for future study.
 
@@ -250,8 +250,8 @@ Certain simplex-based approaches \cite{connorHighdimensionalSimplexesSupermetric
 \begin{figure}
     \centering
     \includegraphics[scale=1]{figures/dist-ensemble-k1-2-5-10.png}
-    \caption{Hexagonally binned parity plots of the Euclidean distance approximation converted to octonions compared with the traditional octonion metric, where the minimum distance among an ensemble of \gls{vfzo} sets is used for 1 (a), 2 (b), 5 (c), and 10 (d) \gls{vfzo} sets. As the number of \gls{vfzo} sets increases, the correlation between the Euclidean distance and the traditional octonion distance improves.}
-    \label{fig:dist-ensemble-k1}
+    \caption{Hexagonally binned parity plots of pairwise distances of 388 Ni bicrystals \cite{olmstedSurveyComputedGrain2009a}. Euclidean distance approximation is converted to octonions ($x_{i,j,k}=2\frac{180}{\pi}|\hat{o}_{i,k}^{sym}-\hat{o}_{j,k}^{sym}|$) for comparison with the traditional octonion metric \cite{chesserLearningGrainBoundary2020}. The minimum distance among an ensemble of \gls{vfzo} sets ($\min_{\forall k \in [1,k_{max}]}x_{i,j,k}$) is used for 1 (a), 2 (b), 5 (c), and 10 (d) \gls{vfzo} sets. As the number of \gls{vfzo} sets increases, the correlation between the Euclidean distance and the traditional octonion distance improves.}
+    \label{fig:dist-ensemble-k1-2-5-10}
 \end{figure}
 
 \subsection{Interpolation in the \glsentrytitlecase{vfzo}{long} Framework}
@@ -361,14 +361,14 @@ For these tests, we used the 5DOF GB energy function developed by Bulatov, Reed 
 \begin{figure}
     \centering
     \includegraphics[scale=1]{brkparity50000.png}
-    \caption{Hexagonally binned parity plots for \num{50000} mesh and \num{10000} prediction octonions formed via pairs of a random cubochorically sampled quaternion and a spherically sampled random boundary plane normal. Interpolation via (a) \acrlong{gpr}, (b) \acrlong{idw}, (c) \acrlong{nn}, (d) and barycentric coordinates.  \acrlong{brk} \acrlong{gbe} function for \gls{fcc} Ni was used as the test function.}
+    \caption{Hexagonally binned parity plots for \num{50000} mesh and \num{10000} prediction octonions formed via pairs of a random cubochorically sampled quaternion and a spherically sampled random boundary plane normal. Interpolation via (a) \acrlong{gpr}, (b) \acrlong{idw}, (c) \acrlong{nn}, and (d) barycentric coordinates.  \acrlong{brk} \acrlong{gbe} function for \gls{fcc} Ni was used as the test function.}
     \label{fig:brkparity50000}
 \end{figure}
 
 All of the methods permit successful interpolation, and the highest density region in all cases falls squarely on the parity line. The \Gls{gpr} and barycentric results show a slight asymmetry such that low energy values are overpredicted more often than they are underpredicted. The width of the point clouds provides a qualitative indication of the dispersion in the prediction errors. Quantitative measures of the overall accuracy are presented for \gls{rmse} (\cref{tab:rmse-error-comparison}) and \gls{mae} (\cref{tab:mae-error-comparison}) along with results of prior work where available.
 
 \begin{table}
-\caption{Comparison of average interpolation error for each interpolation method in the present work, using \num{50000} points in the definition of the \gls{vfz}. Comparison to the work of other authors is also included. A constant model, whose value was chosen to be the mean of \texttt{f\_v}, was used as a control.}
+\caption{Comparison of average interpolation error for each interpolation method in the present work, using \num{50000} points in the definition of the \gls{vfz}. Comparison to the work of other authors is also included. A constant model (Cst, Avg \gls{rmse}), whose value was chosen to be the mean of the input \gls{gbe} was used as a control, except in the case of \gls{lobpcg} which used the mean of the true \gls{gbe} values instead. The last two columns, \gls{rmse} $\downarrow$ (\SI{}{\J\per\square\meter} and \gls{rmse}   $\downarrow$ (\%)), represent the reduction in \gls{rmse} in units of \SI{}{\J\per\square\meter} and \% relative to the control model, respectively.}
 \centering
 \begin{tabular}{lccccc}
 \toprule
@@ -407,7 +407,7 @@ Barycentric                                                   & \num{50000}  & \
 % \end{table}
 
 \begin{table}
-\caption{Comparison of average interpolation error for each interpolation method in the present work, using \num{50000} points in the definition of the \gls{vfz}. Comparison to the work of other authors is also included. A constant model, whose value was chosen to be the mean of \texttt{f\_v}, was used as a control.}
+\caption{Comparison of average interpolation error for each interpolation method in the present work, using \num{50000} points in the definition of the \gls{vfz}. Comparison to the work of other authors is also included. A constant model (Cst, Avg \gls{mae}), whose value was chosen to be the mean of the input \gls{gbe} was used as a control. The last two columns, \gls{mae} $\downarrow$ (\SI{}{\J\per\square\meter} and \gls{mae}   $\downarrow$ (\%)), represent the reduction in \gls{mae} in absolute units of \SI{}{\J\per\square\meter} and \% relative to the control model, respectively.}
 \centering
 \begin{tabular}{lccccc}
 \toprule
@@ -428,25 +428,25 @@ Barycentric                                                   & \num{50000}  & \
 \label{tab:mae-error-comparison}
 \end{table}
 
-\begin{table}
-\caption{Comparison of average runtime for each interpolation method in the present work, using \num{50000} points in the definition of the \gls{vfz}. Comparison to the work of other authors is also included. A constant model, whose value was chosen to be the mean of \texttt{f\_v}, was used as a control.}
-\centering
-\begin{tabular}{lccc}
-\toprule
-Method & \# \glspl{gb} & Runtime (\SI{}{\second}) \\
-\midrule
-\Gls{gpr} & x & x \\
-Barycentric & x & x \\
-\gls{idw} & x & x \\
-\gls{nn} & x & x \\
-Constant & 0.13 & 0.097 \\
-LOBPCG \cite{shenDeterminingGrainBoundary2019} & 0.01--0.03 & --- \\
-ANN \cite{echeverrirestrepoUsingArtificialNeural2014} & --- & 0.05--0.09 \\
-LKR \cite{chesserLearningGrainBoundary2020} & 0.0977 & --- \\
-\bottomrule
-\end{tabular}
-\label{tab:runtime-comparison}
-\end{table}
+% \begin{table}
+% \caption{Comparison of average runtime for each interpolation method in the present work, using \num{50000} points in the definition of the \gls{vfz}. Comparison to the work of other authors is also included. A constant model, whose value was chosen to be the mean of \texttt{f\_v}, was used as a control.}
+% \centering
+% \begin{tabular}{lccc}
+% \toprule
+% Method & \# \glspl{gb} & Runtime (\SI{}{\second}) \\
+% \midrule
+% \Gls{gpr} & x & x \\
+% Barycentric & x & x \\
+% \gls{idw} & x & x \\
+% \gls{nn} & x & x \\
+% Constant & 0.13 & 0.097 \\
+% LOBPCG \cite{shenDeterminingGrainBoundary2019} & 0.01--0.03 & --- \\
+% ANN \cite{echeverrirestrepoUsingArtificialNeural2014} & --- & 0.05--0.09 \\
+% LKR \cite{chesserLearningGrainBoundary2020} & 0.0977 & --- \\
+% \bottomrule
+% \end{tabular}
+% \label{tab:runtime-comparison}
+% \end{table}
 
 To aid in objective interpretation of the error metrics, comparison is made to a constant valued control model, whose value is chosen to be the average of \texttt{f\_v} (approximately \SI{1.16}{\J\per\square\meter} in the limit of $nmeshpts \rightarrow \infty$) resulting in \gls{rmse} and \gls{mae} values of approximately \num{0.130} and \SI{0.097}{\J\per\square\meter}. Because the true models differed for other articles, equivalent errors obtained by a constant valued control model (mean of input \gls{gbe} values\footnote{Because \cite{shenDeterminingGrainBoundary2019} uses polycrystal rather than bicrystal data, for which there is no direct measure of the \gls{gbe}, the mean of the true \glspl{gbe} is used instead.}) were also included for prior work in \cref{tab:rmse-error-comparison} and \cref{tab:mae-error-comparison}. These metrics give a sense of the complexity and variability of the true function being inferred and allow for a more objective comparison between differing works.
 
@@ -473,11 +473,13 @@ Both \gls{gpr} and \gls{idw} seem to reach a plateau near 20,000 input points. I
 
 % general overview statement about the interpolation time and memory requirements
 
-\Gls{gpr} is fast and has lower error compared to barycentric interpolation; however, the entire process has to be rerun (in current implementation) if the responses or the predictors change.
+\Gls{gpr} is fast and has lower error compared to barycentric interpolation; however, the entire process has to be rerun (in current implementation) if the responses or the predictors change. On the other hand, barycentric interpolation is fast once the triangulation and intersections are computed. In other words, it is fast if only responses (i.e. \glspl{gbe}) change, but slow if the input points or predictors (i.e. \glspl{gb}) change.
 
-Barycentric interpolation is fast once the triangulation is computed. In other words, it is fast if only responses (i.e. \glspl{gbe}) change, but slow if the input points or predictors (i.e. \glspl{gb}) change.
+Computational runtimes of the various interpolation methods are also shown (\cref{fig:runtime}). Barycentric interpolation takes the longest, which is compounded by the fact that it is the only parallelized method by default (not accounted for in \cref{fig:runtime}). In other words, since 12 cores were used to obtain these runtime results, the total runtime across all cores is much higher compared with the other methods; however, it is possible that other methods used multi-threading via built-in vectorized functions. The long computation times result primarily from the large number of facets present in a high-dimensional mesh triangulation and the interconnectedness of facets with respect to each other.
 
-Computational runtimes of the various interpolation methods are also shown (\cref{fig:runtime}). Barycentric interpolation takes the longest, which is compounded by the fact that it is the only parallelized method by default (not accounted for in \cref{fig:runtime}). In other words, since 12 cores were used to obtain these runtime results, the total runtime across all cores is much higher compared with the other methods; however, it is possible that other methods used multi-threading via built-in vectorized functions. The long computation times result primarily from the large number of facets present in a high-dimensional mesh triangulation and the interconnectedness of facets with respect to each other. \Gls{gpr} is the second-longest in terms of of runtime, but produces better error than any of the other three methods. \Gls{nn} and \gls{idw} interpolation have vectorized implementations and are much simpler than the barycentric and \gls{gpr} methods. Consistent with expectations, \gls{nn} and \gls{idw} exhibit almost negligible runtimes; however, this is at the expense of error trade-offs discussed earlier (\cref{sec:results:accuracy}). It should also be noted that barycentric interpolation and \gls{gpr} have much higher memory requirements than \gls{nn} and \gls{idw} due to the need to store large matrices (unless \texttt{fitrgp PredictMethod = 'fic'}). Because the default implementation of \gls{idw} uses a radius cut-off, the distance and weight matrices can be stored as sparse objects, dramatically reducing both the storage requirements and computational complexity of this method. We expect that a \gls{knn} approach would produce similar results both in terms of runtime and error when a relatively uniform sampling of \gls{gbc} is obtained.
+\Gls{gpr} is the second-longest in terms of of runtime, but produces better error than any of the other three methods. \Gls{nn} and \gls{idw} interpolation have vectorized implementations and are much simpler than the barycentric and \gls{gpr} methods. Consistent with expectations, \gls{nn} and \gls{idw} exhibit almost negligible runtimes; however, this is at the expense of error trade-offs discussed earlier (\cref{sec:results:accuracy}). It should also be noted that barycentric interpolation and \gls{gpr} have much higher memory requirements than \gls{nn} and \gls{idw} due to the need to store large matrices (unless \texttt{fitrgp PredictMethod = 'fic'}).
+
+Because the default implementation of \gls{idw} uses a radius cut-off, the distance and weight matrices can be stored as sparse objects, dramatically reducing both the storage requirements and computational complexity of this method. We expect that a \gls{knn} approach would produce similar results both in terms of runtime and error when a relatively uniform sampling of \gls{gbc} is obtained.
 
 \begin{figure}
     \centering
