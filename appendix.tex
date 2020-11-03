@@ -1,5 +1,7 @@
 \appendix \label{sec:app}
+\renewcommand\thefigure{\thesection.\arabic{figure}}
 \section{Detailed Barycentric Interpolation Methods}
+\setcounter{figure}{0}
 \subsection{Triangulating a \glsentrytitlecase{vfz}{long} Mesh}
 \label{app:bary-tri}
 
@@ -49,3 +51,10 @@ Once barycentric coordinates are computed for a prediction point within the inpu
 v=\underset{i=1}{\overset{N}{\sum }}\lambda _i v_i
 \end{equation}
 where $\lambda$, $v$, $v_i$ and $N$, are the barycentric coordinates, interpolated property, property of the $i$th vertex of the intersecting facet, and number of vertices in a given facet ($N = 7$ for the degeneracy-free 6-sphere).
+
+\begin{figure}
+    \centering
+    \includegraphics{bary-interp.png}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
