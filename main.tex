@@ -231,7 +231,7 @@ To illustrate the process of mapping points into the \gls{vfz}, we describe a 3D
 \begin{figure}
     \centering
     \includegraphics[scale=1]{voronoi.png}
-    \caption{3D Cartesian analogue to a non-degenerate 7D Cartesian representation of \glspl{gbo} and \glspl{vfzo} demonstrating a single input point (\startpt{}) that is symmetrized (\sympt{}) relative to a fixed, reference point (\refpt{}) (a). Only one symmetrized point is found within the borders (\vbordercolor{}) of each of the Voronoi cells (\vcellcolor{}), where the Voronoi tessellation is defined by the symmetric images of the reference point. (b) shows demonstrates the symmetrization of many points, leading to a 3D Cartesian \gls{vfz} point set. The spherical Voronoi diagram for this illustration was constructed using a modified version of \cite{luongVoronoiSphere2020}.}
+    \caption{3D Cartesian analogue to a non-degenerate 7D Cartesian representation of \glspl{gbo} and \glspl{vfzo} demonstrates the symmetrization of many points relative to a fixed, reference point (\refpt{}), leading to a 3D Cartesian \gls{vfz} point set (\sympt{}). A single input point (\startpt{}) is symmetrized (\sympt{}) relative to a fixed, reference point (\refpt{}) (b) demonstrating that only one symmetrized point is found within the borders (\vbordercolor{}) of each of the Voronoi cells (\vcellcolor{}). The Voronoi tessellation is defined by the symmetric images of the reference point, and the spherical Voronoi diagram for this illustration is constructed using a modified version of \cite{luongVoronoiSphere2020}.}
     \label{fig:voronoi}
 \end{figure}
 
@@ -488,9 +488,23 @@ The material presented here is based upon work supported by the National Science
 
 In this section we explain how to generate a simplicial mesh from a \gls{gbo} point cloud (\cref{fig:bary-delaunay}) on the surface of the octonion 7-sphere in 8-dimensions. Throughout the explanation we provide a visual illustration of the process as applied to lower-dimensional scenarios in \cref{fig:bary-remove-deg}, \cref{fig:bary-delaunay}, and \cref{fig:bary-interp}. We note that 3D Cartesian in \cref{fig:bary-remove-deg} corresponds to 8D Cartesian and 3D Cartesian in \cref{fig:bary-delaunay} and \cref{fig:bary-interp} correspond to 7D Cartesian in the \gls{vfz} framework. This is intentional for two reasons:
 \begin{itemize}
-    \item \cref{fig:bary-remove-deg} illustrates the importance that a symmetrized \gls{gbo} set in the 7-sphere, 8D Cartesian \gls{vfz} is analogous to a geodesic arc on the 2-sphere (\cref{fig:bary-remove-deg}a) with a degenerate dimension which is removed by the first \gls{svd} transformation (\cref{fig:bary-remove-deg}b), which would otherwise be difficult to visualize in the 4D Cartesian 3-sphere to 3D Cartesian 2-sphere case.
+    \item \cref{fig:bary-remove-deg} illustrates the importance that a symmetrized \gls{gbo} set in the 7-sphere, 8D Cartesian \gls{vfz} is analogous to a geodesic arc on the 2-sphere (\cref{fig:bary-remove-deg}b) with a degenerate dimension which is removed by the first \gls{svd} transformation (\cref{fig:bary-remove-deg}b), which would otherwise be difficult to visualize in the 4D Cartesian 3-sphere to 3D Cartesian 2-sphere case.
     \item \cref{fig:bary-delaunay} illustrates the second \gls{svd} transformation from 7D Cartesian coordinates on the tangent hyperplane to the 6-sphere (\cref{fig:bary-delaunay}a) to 6D Cartesian coordinates on the 5-sphere (\cref{fig:bary-delaunay}b) in a way that retains key features that would otherwise be lost\footnote{Non-intersection issues due to high-aspect ratios and consideration of facets connected up to \texttt{nnMax} \glspl{nn} do not manifest in triangulations on the surface of a 1-sphere.} and gives a more familiar illustration of triangulation (i.e. it uses actual triangles).
-\end{itemize}  
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=1]{bary-remove-deg.png}
+    \caption{3D Cartesian to 2D Cartesian analogue of 8D Cartesian to 7D Cartesian degeneracy removal used in barycentric interpolation approach. Starting spherical arc points on surface of 2-sphere (a) and degenerate U(1) symmetry removed via \acrlong{svd} transformation to 2D Cartesian (b) with either the origin (black plus) preserved (black asterisks, \texttt{zeroQ=T}) for triangulation or ignored (red asterisks, \texttt{zeroQ=F}) for mesh intersection. The spheres (a,b) and circle (c) each have a radius of 0.8 and are used as a visualization aid only.}
+    \label{fig:bary-remove-deg}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=1]{bary-delaunay.png}
+    \caption{3D Cartesian to 2D Cartesian analogue of 7D Cartesian to 6D Cartesian mesh triangulation used in barycentric interpolation approach. 3D Cartesian \inpt points (a) linearly projected onto hyperplane tangent to mean of starting points (b), degenerate dimension removed via rigid \gls{svd} transformation to 2D Cartesian and Delaunay triangulation calculated (black lines) with \inpt vertices (red) (c), and Delaunay triangulation superimposed onto normalized \inpt{} points (d). The spheres in (a), (b), and (d) have a radius of 0.8 and are used for visualization only.}
+    \label{fig:bary-delaunay}
+\end{figure}
 
 To reduce the computational complexity of triangulating a high-dimensional mesh \cite{barberQuickhullAlgorithmConvex1996}, some simplifications are made. First, the degenerate octonion dimension obtained from analytically minimizing $U(1)$ symmetry \cite{francisGeodesicOctonionMetric2019} is removed via a rigid (i.e. distance- and angle-preserving) \gls{svd} transformation,
 %to enable use of MATLAB's quickhull \cite{barberQuickhullAlgorithmConvex1996} implementations such as \texttt{delaunayn} and \texttt{convhulln}. Removal of the degenerate dimension is done via a rigid \gls{svd} transformation,
@@ -499,20 +513,6 @@ analogous to a Cartesian rotation and translation (see 3D to 2D \gls{svd} transf
 Next, the resulting 7D Cartesian representation of each \gls{gbo} is projected onto a hyperplane tangent to the centroid of the \gls{gbo} point cloud\footnote{This is \textit{not} a rigid transformation; however, it approximates one with sufficient accuracy to produce a high-quality triangulation in a \gls{vfz}.} (\cref{fig:bary-delaunay}(a)). The 7D Cartesian \glspl{gbo} are then subjected to another rigid \gls{svd} transformation to remove the now additional degenerate dimension and project them to a 6D Cartesian space (see 3D to 2D projection in \cref{fig:bary-delaunay}(a)-(b)). Finally, the resulting point cloud can be triangulated via the quickhull algorithm \cite{barberQuickhullAlgorithmConvex1996} (see MATLAB function \texttt{delaunayn()}) to produce a simplicial mesh. Because the simplicial mesh is simply defined by a list of edges between vertices for each simplicial facet, this list applies immediately to the \gls{gbo} point cloud in its original coordinates (i.e. no reverse transformation is necessary to use the mesh on the original octonion 7-sphere in 8D).
 
 Other distance metrics \cite{morawiecDistancesGrainInterfaces2019} could also be incorporated into the barycentric approaches described here such as by doing an edge-length based simplex reconstruction with the \gls{vfz} triangulation \cite{connorHighdimensionalSimplexesSupermetric2017,boissonnatOnlyDistancesAre2017} and is a topic of future study.
-
-\begin{figure}
-    \centering
-    \includegraphics[scale=1]{bary-remove-deg.png}
-    \caption{3D Cartesian to 2D Cartesian analogue of 8D Cartesian to 7D Cartesian degeneracy removal used in barycentric interpolation approach. Starting spherical arc points on surface of 2-sphere (a) and degenerate dimension removed via \acrlong{svd} transformation to 2D Cartesian (b) with either the origin (black plus) preserved (black asterisks, \texttt{zeroQ=T}) or ignored (red asterisks, \texttt{zeroQ=F}). The sphere (a) and circle (b) each have a radius of 0.8 and are used as a visualization aid only.}
-    \label{fig:bary-remove-deg}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[scale=1]{bary-delaunay.png}
-    \caption{3D Cartesian to 2D Cartesian analogue of 7D Cartesian to 6D Cartesian mesh triangulation used in barycentric interpolation approach. Input points linearly projected onto hyperplane tangent to mean of starting points (a), degenerate dimension removed via rigid \gls{svd} transformation to 2D Cartesian and Delaunay triangulation calculated (b), and Delaunay triangulation superimposed onto normalized \inpt{} points. The spheres in (a) and (c) have a radius of 0.8 and is used for visualization only.}
-    \label{fig:bary-delaunay}
-\end{figure}
 
 % In order to reduce the computationally complexity of computing barycentric coordinates in a high-dimensional space \cite{barberQuickhullAlgorithmConvex1996}, a single degenerate dimension (originally introduced by analytically minimizing $U(1)$ symmetry) is removed to enable use of MATLAB's quickhull \cite{barberQuickhullAlgorithmConvex1996} implementations such as \texttt{delaunayn} and \texttt{convhulln}. Removal of the degenerate dimension is done via a rigid \gls{svd} transformation, analogous to a Cartesian rotation and translation. Thus, a set of octonions originally represented by 8D Cartesian coordinates are collapsed to a 7D Cartesian representation while preserving both distances and angles among the points (see 3D to 2D analogue in \cref{fig:bary-remove-deg}). To further reduce the "curse of dimensionality" in computing the triangulation, a 7D Cartesian representation of the octonions constrained to lie on the surface of the 6-sphere are first projected onto a hyperplane tangent to the mean of the \inpt{} points and then rotated/translated again via \gls{svd} to produce a 6D Cartesian representation (see 3D to 2D analogue in Figure \cref{fig:bary-delaunay}). This 6D representation is used to compute a triangulation via the built-in MATLAB routine \texttt{delaunayn} based on the quickhull algorithm \cite{barberQuickhullAlgorithmConvex1996}, giving facet vertices for the 7D Cartesian hypersphere.
 
@@ -540,7 +540,7 @@ triangulation,
 If every edge length of every facet were equal, only facets connected to the first \gls{nn} would need to be considered to find a proper intersection. However, since the \glspl{gbo} are randomly sampled, edge lengths of facets are non-uniform, and non-unity aspect ratio facets exist. If the facets have high-aspect ratios, the intersecting facets of \outpt{} points can be far from the \glspl{nn} mesh points relative to the \outpt{} points. High-dimensional triangulations have exponentially increasing numbers of facets per vertex. On average, there are approximately \num{2000} facets per vertex for a \num{50000} point \gls{vfz} triangulation (\num{1e8} total facets). Rather than loop through every facet to find an intersection which would be computationally taxing, the \outpt{} point intersections are calculated by considering facets connected to up to some number of \gls{nn} mesh vertices (\texttt{nnMax}) relative to each \outpt{} point (in this work, \texttt{nnMax = 10}). The \gls{nn} mesh vertices to an \outpt{} point are computed via the MATLAB built-in function \texttt{dsearchn} as in the \gls{nn} approach (\cref{sec:methods:interp:nn}), and the facet IDs of facets connected to these \glspl{nn} are computed by simple calls to built-in MATLAB function \texttt{find(K==nn)}, where K is the triangulation from \texttt{sphconvhulln()} and \texttt{nn} is the ID of one of the \gls{nn} mesh vertices. For \outpt{} points where no intersecting facet is found
 %(which can occur just outside the piece-wise linear perimeter of the mesh due to finite resolution)
 (which can occur due to high-aspect ratio facets or \outpt{} point falling outside the perimeter of the mesh),
-properties are interpolated via a \gls{nn} approach (\cref{sec:methods:interp:nn}). In numerical tests, with \num{10} trials using \num{10000} query points for \gls{vfz} meshes composed of \num{388} and \num{50000} vertices, the average rate of non-intersections was \SI{0.1207 \pm 1.02}{\percent} and \SI{0.68 \pm 0.11}{\percent}, respectively.
+properties are interpolated via a \gls{nn} approach (\cref{sec:methods:interp:nn}). In numerical tests, with \num{10} trials using \num{10000} query points for \gls{vfz} meshes composed of \num{388} and \num{50000} vertices, the average rate of non-intersections was \SI{12.07 \pm 1.02}{\percent} and \SI{0.68 \pm 0.11}{\percent}, respectively.
 
 \subsection{Interpolation via Barycentric Coordinates}
 \label{app:bary-interp}
