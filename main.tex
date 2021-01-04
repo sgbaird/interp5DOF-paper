@@ -529,6 +529,29 @@ By contrast, barycentric interpolation automatically adjusts its effective regio
     \label{fig:brkerror}
 \end{figure*}
 
+Predictions of each of the four methods are plotted as a function of distance along a 1D arc ($\overline{AB}$) (i.e. each intermediate point resides on the surface of a hypersphere) between two \glspl{vfzo}, $A$ (\cref{eq:A}) and $B$ (\cref{tab:tunnel-AB}) as shown in  \cref{fig:tunnel-50000}. The two \glspl{vfzo} were chosen by taken the furthest apart pair out of \num{20000} \glspl{vfzo} and thus approximates the largest dimension of the \gls{vfz} with endpoints close to the \gls{vfz} exterior. We believe this is the first continuous plot of a \gls{gb} property interpolated between two arbitrary \glspl{gb}. Such visualizations can naturally be extended to 2D and 3D by plotting colored points in a triangle or tetrahedron, respectively, all of which (1D, 2D, and 3D) represent small "slices" of the design space.
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table*}[]
+\centering
+\caption{Approximate values of \glspl{vfzo} A and B used for the interpolation in \cref{fig:tunnel-50000}. Individual quaternions of each octonion are given in the laboratory reference frame with an assumed \gls{gb} normal pointing in the +z direction, also in the laboratory reference frame.}
+\label{tab:tunnel-AB}
+\begin{tabular}{@{}lllllllll@{}}
+\toprule
+Octonion & o(1)   & o(2)    & o(3)    & o(4)    & o(5)    & o(6)   & o(7)    & o(8)   \\ \midrule
+A        & 0.8658 & -0.4269 & -0.1270 & 0.2280  & 0.2810  & 0.8390 & -0.3852 & 0.2622 \\
+B        & 0.4684 & -0.7657 & -0.4100 & -0.1617 & -0.1483 & 0.8204 & -0.3588 & 0.4198 \\ \bottomrule
+\end{tabular}
+\end{table*}
+    
+\begin{figure}
+    \centering
+    \includegraphics{figures/tunnel-50000.png}
+    \caption{Predictions of the four methods as a function of distance along a 1D arc ($\overline{AB}$) between two \glspl{vfzo} ($A$ and $B$).}
+    \label{fig:tunnel-50000}
+\end{figure}
+
 \subsection{Interpolation Efficiency}
 \label{sec:results:efficiency}
 
