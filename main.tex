@@ -64,6 +64,20 @@
 \newcommand{\distfn}{GBdist4}
 \newcommand{\vfzorepo}{\gls{vfzo} repository}
 
+%RMSE values
+\newcommand{\baryrmse}{0.6}
+\newcommand{\gprrmse}{0.5}
+\newcommand{\idwrmse}{0.7}
+\newcommand{\nnrmse}{0.8}
+\newcommand{\avgrmse}{0.13}
+
+%MAE values
+\newcommand{\barymae}{0.5}
+\newcommand{\gprmae}{0.4}
+\newcommand{\idwmae}{0.6}
+\newcommand{\nnmae}{0.7}
+\newcommand{\avgmae}{0.097}
+
 \glssetcategoryattribute{abbreviation}{indexonlyfirst}{true}
 \glssetcategoryattribute{abbreviation}{nohyper}{true}
 \makeglossaries
@@ -141,7 +155,9 @@
 
 \begin{abstract}
     In this work we introduce the \gls{vfzo} interpolation framework for \gls{gb} structure-property models and surrogates. The \gls{vfzo} framework offers an advantage over other \gls{5dof} based property interpolation methods because it is constructed as a \gls{vfz} point set in a Riemannian manifold, for which directly computed Euclidean and arc length distances significantly reduce computation time compared with other approaches. This increased efficiency facilitates the use of significantly more input data and therefore leads to a reduction of the interpolation error. As a demonstration, we present \gls{gbe} interpolation results for a non-smooth validation function (\citet{bulatovGrainBoundaryEnergy2014}) and a simulated bi-crystal dataset for Fe (\citet{kimPhasefieldModeling3D2014}).
-    Four interpolation methods built on this framework --- barycentric interpolation, \gls{gpr} or Kriging, \gls{idw}, and \gls{nn} interpolation --- are presented for the validation function and compared against a constant, average model (\gls{rmse} $\simeq$ \SI{0.13}{\J\per\square\meter}), resulting in \gls{rmse} values of 0.063, 0.056, 0.068, and \SI{0.082}{\J\per\square\meter}, respectively, for \num{50000} randomly sampled input \glspl{gb} and evaluated for \num{10000} randomly sampled \outpt{} \glspl{gb}. A vectorized, parallelized, MATLAB interpolation function is made available (\url{github.com/sgbaird-5dof/interp}). The \gls{vfzo} framework offers advantages for computing distances between GBs, estimating property values for arbitrary \glspl{gb}, and modeling surrogates of computationally expensive \gls{5dof} functions and simulations.
+    Four interpolation methods built on this framework --- barycentric interpolation, \gls{gpr} or Kriging, \gls{idw}, and \gls{nn} interpolation --- are presented for the validation function and compared against a constant, average model (\gls{rmse} $\simeq$ \SI{\avgrmse{}}{\J\per\square\meter}), resulting in \gls{rmse} values of \baryrmse{}, \gprrmse{}, \idwrmse{}, and \SI{\nnrmse{}}{\J\per\square\meter},
+    %, 0.063, 0.056, 0.068, and \SI{0.082}{\J\per\square\meter},
+    respectively, for \num{50000} randomly sampled input \glspl{gb} and evaluated for \num{10000} randomly sampled \outpt{} \glspl{gb}. A vectorized, parallelized, MATLAB interpolation function is made available (\url{github.com/sgbaird-5dof/interp}). The \gls{vfzo} framework offers advantages for computing distances between GBs, estimating property values for arbitrary \glspl{gb}, and modeling surrogates of computationally expensive \gls{5dof} functions and simulations.
 \end{abstract}
 
 \glsresetall
@@ -386,7 +402,7 @@ For these tests, we use the 5DOF GB energy function developed by Bulatov, Reed a
 \begin{figure*}
 \centering
 \includegraphics[scale=1]{nnhist-knn-50000.png}
-\caption{Histogram of \gls{nn} octonion distances ($\omega$) in a \gls{vfzo} set of \num{50000} points. The average \gls{nn} distance was \SI{2.87 \pm 0.7}{\degree}. the average k-th nearest neighbor distances demonstrate many nearest neighbors fall within a tight yolerance (less then \SI{10}{\degree}) out of approximately 10 trial runs (b).}
+\caption{Histogram of \gls{nn} octonion distances ($\omega$) in a \gls{vfzo} set of \num{50000} points. The average \gls{nn} distance was \SI{2.87 \pm 0.7}{\degree}. the average k-th nearest neighbor distances demonstrate many nearest neighbors fall within a tight tolerance (less then \SI{10}{\degree}) out of approximately 10 trial runs (b).}
 \label{fig:nnhist-knn-50000}
 \end{figure*}
 
@@ -414,10 +430,10 @@ Method &
   \thead{Cst, Avg \gls{rmse} \\   (\SI{}{\J\per\square\meter})} &
   \thead{\gls{rmse} $\downarrow$ \\   (\SI{}{\J\per\square\meter})} &
   \thead{\gls{rmse}   $\downarrow$ \\ (\%)} \\ \midrule
-\Gls{gpr}                                                     & \num{50000}  & \num{0.0541} & \num{0.1296} & \num{0.0755} & \num{58.3} \\
-Barycentric                                                   & \num{50000}  & \num{0.0607} & \num{0.1296} & \num{0.0689} & \num{53.2} \\
-\gls{idw}                                                     & \num{50000}  & \num{0.068}  & \num{0.1296} & \num{0.0616} & \num{47.5} \\
-\gls{nn}                                                      & \num{50000}  & \num{0.0821} & \num{0.1296} & \num{0.0475} & \num{36.7} \\
+\Gls{gpr}                                                     & \num{50000}  & \num{\gprrmse{}} & \num{0.1296} & \num{0.0755} & \num{58.3} \\
+Barycentric                                                   & \num{50000}  & \num{\baryrmse{}} & \num{0.1296} & \num{0.0689} & \num{53.2} \\
+\gls{idw}                                                     & \num{50000}  & \num{\idwrmse{}}  & \num{0.1296} & \num{0.0616} & \num{47.5} \\
+\gls{nn}                                                      & \num{50000}  & \num{\nnrmse{}} & \num{0.1296} & \num{0.0475} & \num{36.7} \\
 \gls{lobpcg}$^*$   \cite{shenDeterminingGrainBoundary2019}        & \num{180000} & \num{0.0092} & \num{0.0976} & \num{0.0884} & \num{90.6} \\
 \gls{ann}   \cite{restrepoUsingArtificialNeural2014} & \num{17176}  & \NA          & \num{0.0854} & \NA          & \NA        \\
 \gls{lkr}   \cite{chesserLearningGrainBoundary2020}           & \num{388}    & \num{0.0977} & \num{0.2243} & \num{0.1266} & \num{56.4} \\ \bottomrule
@@ -437,10 +453,10 @@ Method &
   \thead{Cst, Avg \gls{mae} \\   (\SI{}{\J\per\square\meter})} &
   \thead{\gls{mae} $\downarrow$ \\   (\SI{}{\J\per\square\meter})} &
   \thead{\gls{mae}   $\downarrow$ \\ (\%)} \\ \midrule
-\Gls{gpr}                                                     & \num{50000}  & \num{0.0372} & \num{0.0964} & \num{0.0592} & \num{61.4} \\
-Barycentric                                                   & \num{50000}  & \num{0.0418} & \num{0.0964} & \num{0.0546} & \num{56.6} \\
-\gls{idw}                                                     & \num{50000}  & \num{0.047}  & \num{0.0964} & \num{0.0494} & \num{51.2} \\
-\gls{nn}                                                      & \num{50000}  & \num{0.0573} & \num{0.0964} & \num{0.0391} & \num{40.6} \\
+\Gls{gpr}                                                     & \num{50000}  & \num{\gprmae{}} & \num{0.0964} & \num{0.0592} & \num{61.4} \\
+Barycentric                                                   & \num{50000}  & \num{\barymae{}} & \num{0.0964} & \num{0.0546} & \num{56.6} \\
+\gls{idw}                                                     & \num{50000}  & \num{\idwmae{}}  & \num{0.0964} & \num{0.0494} & \num{51.2} \\
+\gls{nn}                                                      & \num{50000}  & \num{\nnmae{}} & \num{0.0964} & \num{0.0391} & \num{40.6} \\
 \gls{lobpcg}$^*$   \cite{shenDeterminingGrainBoundary2019}        & \num{180000} & \NA          & \num{0.0466} & \NA          & \NA        \\
 \gls{ann}   \cite{restrepoUsingArtificialNeural2014} & \num{17176}  & \num{0.0486} & \num{0.0617} & \num{0.0131} & \num{21.2} \\
 \gls{lkr}   \cite{chesserLearningGrainBoundary2020}           & \num{388}    & \num{0.0977} & \num{0.1752} & \num{0.0775} & \num{44.2} \\ \bottomrule
@@ -468,7 +484,7 @@ Barycentric                                                   & \num{50000}  & \
 % \label{tab:runtime-comparison}
 % \end{table}
 
-To aid in objective interpretation of the error metrics, comparison is made to a constant valued control model, whose value is chosen to be the average of \texttt{f\_v} (approximately \SI{1.16}{\J\per\square\meter} in the limit of $\texttt{\inptvar{}} \rightarrow \infty$) resulting in \gls{rmse} and \gls{mae} values of approximately \num{0.130} and \SI{0.097}{\J\per\square\meter}. Because the true models differed for other articles, equivalent errors obtained by a constant valued control model (mean of \inpt{} \gls{gbe} values\footnote{Because \cite{shenDeterminingGrainBoundary2019} uses polycrystal rather than bicrystal data, for which there is no direct measure of the \gls{gbe}, the mean of the true \glspl{gbe} is used instead.}) were also included for prior work in \cref{tab:rmse-error-comparison,tab:mae-error-comparison}. Additionally, \gls{lobpcg} is not interpolation, but rather reconstruction of specific \glspl{gbe} and is considered a complementary rather than competing technique. These metrics give a sense of the complexity and variability of the true function being inferred and allow for a more objective comparison between differing works.
+To aid in objective interpretation of the error metrics, comparison is made to a constant valued control model, whose value is chosen to be the average of \texttt{f\_v} (approximately \SI{1.16}{\J\per\square\meter} in the limit of $\texttt{\inptvar{}} \rightarrow \infty$) resulting in \gls{rmse} and \gls{mae} values of approximately \num{\avgrmse{}} and \SI{\avgrmse{}}{\J\per\square\meter}. Because the true models differed for other articles, equivalent errors obtained by a constant valued control model (mean of \inpt{} \gls{gbe} values\footnote{Because \cite{shenDeterminingGrainBoundary2019} uses polycrystal rather than bicrystal data, for which there is no direct measure of the \gls{gbe}, the mean of the true \glspl{gbe} is used instead.}) were also included for prior work in \cref{tab:rmse-error-comparison,tab:mae-error-comparison}. Additionally, \gls{lobpcg} is not interpolation, but rather reconstruction of specific \glspl{gbe} and is considered a complementary rather than competing technique. These metrics give a sense of the complexity and variability of the true function being inferred and allow for a more objective comparison between differing works.
 
 Of the four interpolation methods from this work, \Gls{gpr} has the lowest error, both in terms of \gls{rmse} and \gls{mae}, while \gls{nn} has the highest error. Compared to a constant valued control model, \gls{gpr} interpolation reduced the prediction \gls{rmse} by \SI{58.3}{\percent}, which outperforms all of the interpolation methods in this work with respect to accuracy, as well as those considered from the literature, except for \gls{lobpcg} (which is a reconstruction, not an interpolation technique). After \gls{lobpcg} and \gls{gpr} the next most accurate methods are barycentric and \gls{lkr} interpolation (with the order depending on whether \gls{rmse} or \gls{mae} are used as the error measure), followed by \gls{idw}, \gls{nn} and then \gls{ann}.
 
@@ -485,7 +501,7 @@ By contrast, barycentric interpolation automatically adjusts its effective regio
 \begin{figure*}
     \centering
     \includegraphics[scale=1]{brkerror.png}
-    \caption{Average \gls{rmse} and average \gls{mae} vs. number of \inpt{} points for (planar) barycentric (blue), \gls{gpr} (orange), \gls{idw} (yellow), and \gls{nn} (purple) interpolation for approximately 10 random runs with different \inpt{} and \outpt{} points. Standard deviations of approximately 10 runs are also included. Compare with approximately \SI{0.13}{\J\per\square\meter} and \SI{0.95}{\J\per\square\meter} \gls{rmse} and \gls{mae}, respectively, for a constant, average model (green) using the average of the \inpt{} properties (approximately \SI{1.16}{\J\per\square\meter}).}
+    \caption{Average \gls{rmse} and average \gls{mae} vs. number of \inpt{} points for (planar) barycentric (blue), \gls{gpr} (orange), \gls{idw} (yellow), and \gls{nn} (purple) interpolation for approximately 10 random runs with different \inpt{} and \outpt{} points. Standard deviations of approximately 10 runs are also included. Compare with approximately \SI{\avgrmse{}}{\J\per\square\meter} and \SI{\avgmae{}}{\J\per\square\meter} \gls{rmse} and \gls{mae}, respectively, for a constant, average model (green) using the average of the \inpt{} properties (approximately \SI{1.16}{\J\per\square\meter}).}
     \label{fig:brkerror}
 \end{figure*}
 
