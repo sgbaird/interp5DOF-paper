@@ -127,6 +127,7 @@
 \newabbreviation{gbcd}{GBCD}{grain boundary character distribution}
 \newabbreviation{mfz}{MFZ}{misorientation fundamental zone}
 \newabbreviation{bp}{BP}{boundary plane}
+\newabbreviation{bpfz}{BPFZ}{boundary plane fundamental zone}
 \newabbreviation{knn}{kNN}{k-nearest neighbor}
 \newabbreviation{gbe}{GBE}{grain boundary energy}
 \newabbreviation{gbo}{GBO}{grain boundary octonion}
@@ -529,7 +530,7 @@ By contrast, barycentric interpolation automatically adjusts its effective regio
     \label{fig:brkerror}
 \end{figure*}
 
-Predictions of each of the four methods are plotted as a function of distance along a 1D arc ($\overline{AB}$) (i.e. each intermediate point resides on the surface of a hypersphere) between two \glspl{vfzo}, $A$ (\cref{eq:A}) and $B$ (\cref{tab:tunnel-AB}) as shown in  \cref{fig:tunnel-50000}. The two \glspl{vfzo} were chosen by taken the furthest apart pair out of \num{20000} \glspl{vfzo} and thus approximates the largest dimension of the \gls{vfz} with endpoints close to the \gls{vfz} exterior. We believe this is the first continuous plot of a \gls{gb} property interpolated between two arbitrary \glspl{gb}. Such visualizations can naturally be extended to 2D and 3D by plotting colored points in a triangle or tetrahedron, respectively, all of which (1D, 2D, and 3D) represent small "slices" of the design space.
+Predictions of each of the four methods are plotted as a function of distance along a 1D arc ($\overline{AB}$) (i.e. each intermediate point resides on the surface of a hypersphere) between two \glspl{vfzo}, $A$ and $B$ (\cref{tab:tunnel-AB}) as shown in  \cref{fig:tunnel-50000}. Each model used its own set of \num{50000} random \inpt{} \glspl{vfzo}. The two \glspl{vfzo} were chosen by taken the furthest apart pair out of \num{20000} \glspl{vfzo} and thus approximates the largest dimension of the \gls{vfz} where each endpoint is close to the true \gls{vfz} exterior. We believe this is the first continuous plot of a \gls{gb} property interpolated between two arbitrary \glspl{gb} (i.e. neither residing entirely in a single \gls{mfz} nor a single \gls{bpfz}). Such visualizations can naturally be extended to 2D and 3D by plotting colored points in a triangle or tetrahedron, respectively, all of which (1D, 2D, and 3D) represent small "slices" of the design space. This naturally lends itself to facile determination of numerical derivatives or gradients and can be a useful mathematical construct for future work. For example, all local \gls{gbe} minima can be found in which \glspl{gb} may be more likely to be found due to energy minimization of grain growth.
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
@@ -548,7 +549,7 @@ B        & 0.4684 & -0.7657 & -0.4100 & -0.1617 & -0.1483 & 0.8204 & -0.3588 & 0
 \begin{figure}
     \centering
     \includegraphics{figures/tunnel-50000.png}
-    \caption{Predictions of the four methods as a function of distance along a 1D arc ($\overline{AB}$) between two \glspl{vfzo} ($A$ and $B$).}
+    \caption{Predictions of \gls{gpr} (blue circles), barycentric (red circles), \gls{nn} (magenta circles), and \gls{idw} (green circles) as a function of distance along a 1D arc ($\overline{AB}$) between two \glspl{vfzo} ($A$ and $B$). The true, underlying \gls{brk} function is also shown (black line). \num{50000} \inpt{} random \glspl{vfzo} were generated and used for each of the models. \num{150} equally spaced points between $A$ and $B$ were used as new prediction points.}
     \label{fig:tunnel-50000}
 \end{figure}
 
