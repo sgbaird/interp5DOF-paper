@@ -195,7 +195,7 @@ The close correlation between Euclidean and arc length distances in the \gls{vfz
 \section{Barycentric Interpolation}
 \label{sec:supp:bary}
 
-An artifact of the barycentric interpolation method which occurs due to the presence of high-aspect ratio facets is shown in \cref{fig:high-aspect-non-int}. As the dimensionality increases for a constant number of points and from our numerical tests, the rate of missed facet intersections increases.
+An artifact of the barycentric interpolation method which occurs due to the presence of high-aspect ratio facets is shown in \cref{fig:high-aspect-non-int}. As the dimensionality increases for a constant number of points and from our numerical tests, the rate of missed facet intersections increases. This artifact, and our method for addressing it, are discussed in \cref{app:bary-int}.
 
 \begin{figure*}
     \centering
@@ -248,6 +248,29 @@ Uncertainty of the \gls{gpr} mixing model is similarly obtained by taking a weig
 \end{equation}
 
 where $\sigma_1$ and $\sigma_2$ are the corresponding uncertainties of $\epsilon_1$ and $\epsilon_2$, respectively, and f is given by \cref{eq:sigmoid}.
+
+\begin{figure}
+    \centering
+    \includegraphics{kim-interp.png}
+    \caption{Parity plot colored by uncertainty standard deviation (a). Five models sampled from the posterior distribution of the \gls{gpr} mixture model (b).}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics{kim-interp-degeneracy-results.png}
+    \caption{Caption}
+    \label{fig:kim-interp-degeneracy-results}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics{kim-interp-degeneracy-sets.png}
+    \caption{Caption}
+    \label{fig:kim-interp-degeneracy-sets}
+\end{figure}
+
+%The true, underlying \gls{brk} function is also shown (black line) and a shaded error band of uncertainty standard deviation. \glspl{knn} ($1<=k<=6$) \inpt{} points closest to $\overline{AB}$ are plotted and colored by distance to $\overline{AB}$.
 
 The implementation is given in \texttt{gprmix.m} and \texttt{gprmix\_test.m} of the \vfzorepo{} \cite{bairdFiveDegreeofFreedom5DOF2020}.
 

@@ -435,3 +435,14 @@
 
 
 % \end{document}
+
+
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[scale=1]{runtime.png}
+%     \caption{
+%     Linear (a) and log-scale (b) average runtime (s) and standard deviation (approximately 10 runs) vs. number of \inpt{} points for barycentric (blue) and \acrlong{gpr} (\acrshort{gpr}) (red), \acrlong{idw} (\acrshort{idw}) (yellow), and \acrlong{nn} (\acrshort{nn}) (purple) interpolation using 12 cores compared against runtime (s) for an average model (b, yellow). Because \acrshort{gpr}, \acrshort{idw}, and \acrshort{nn} method defaults do not use \texttt{parfor} loops but may have internal multi-core vectorization, it is unclear to what extent the number of cores affects the runtime of methods other than barycentric interpolation. \Acrlong{gb} symmetrization runtime was not included; however, symmetrization takes approximately \SI{60}{seconds} on 6 cores (Intel i7-10750H, 2.6 GHz) and is a common step in every interpolation method (i.e. it is fundamental to the \acrlong{vfzo} framework).
+%     }
+%     \label{fig:runtime}
+% \end{figure}
