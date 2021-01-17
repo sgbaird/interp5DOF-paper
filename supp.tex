@@ -195,6 +195,8 @@ The close correlation between Euclidean and arc length distances in the \gls{vfz
 \section{Barycentric Interpolation}
 \label{sec:supp:bary}
 
+\subsection{High-Aspect Ratios}
+\label{sec:supp:bary:artifact}
 An artifact of the barycentric interpolation method which occurs due to the presence of high-aspect ratio facets is shown in \cref{fig:high-aspect-non-int}. As the dimensionality increases for a constant number of points and from our numerical tests, the rate of missed facet intersections increases. This artifact, and our method for addressing it, are discussed in \cref{app:bary-int}.
 
 \begin{figure*}
@@ -203,6 +205,9 @@ An artifact of the barycentric interpolation method which occurs due to the pres
     \caption{Illustration of two \outpt{} points (red) for which no intersecting facet is found due to being positioned within a high-aspect ratio facet. The inset shows that facets connected to the \gls{nn} do not contain the \outpt{} point. Many \glspl{nn} would need to be considered before an intersection is found. Additionally, it is expected that if found, the interpolation will suffer from higher error due to use of facet vertices far from the interpolation point. Proper intersections of \outpt{} points with the mesh are shown in blue.}
     \label{fig:high-aspect-non-int}
 \end{figure*}
+
+% \subsection{Use of Alternative Distance Metrics}
+
 
 \section{Kim Interpolation}
 \label{sec:supp:kim-interp}
@@ -255,6 +260,9 @@ where $\sigma_1$ and $\sigma_2$ are the corresponding uncertainties of $\epsilon
     \caption{Parity plot colored by uncertainty standard deviation (a). Five models sampled from the posterior distribution of the \gls{gpr} mixture model (b).}
     \label{fig:my_label}
 \end{figure}
+
+\subsection{Input Data Quality}
+9170 are repeats for mechanically selected, 112 are repeats for intentionally selected (special) GBs. 2496 "repsets", so on average there's a degeneracy of 4. Min and max deviations from the average value of a degenerate set is -0.2625 and 0.2625, resp.
 
 \begin{figure}
     \centering
