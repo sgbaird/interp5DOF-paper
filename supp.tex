@@ -55,19 +55,23 @@
 \renewcommand{\thefigure}{S\arabic{figure}}
 \renewcommand{\thesection}{S\arabic{section}}
 
-% % Cross referencing with the xr package in Overleaf (https://www.overleaf.com/learn/how-to/Cross_referencing_with_the_xr_package_in_Overleaf)
-% \makeatletter
-% \newcommand*{\addFileDependency}[1]{% argument=file name and extension
-%   \typeout{(#1)}
-%   \@addtofilelist{#1}
-%   \IfFileExists{#1}{}{\typeout{No file #1.}}
-% }
-% \makeatother
-% \newcommand*{\myexternaldocument}[1]{%
-%     \externaldocument{#1}%
-%     \addFileDependency{#1.tex}%
-%     \addFileDependency{#1.aux}%
-% }
+% Cross referencing with the xr package in Overleaf (https://www.overleaf.com/learn/how-to/Cross_referencing_with_the_xr_package_in_Overleaf)
+\makeatletter
+\newcommand*{\addFileDependency}[1]{% argument=file name and extension
+  \typeout{(#1)}
+  \@addtofilelist{#1}
+  \IfFileExists{#1}{}{\typeout{No file #1.}}
+}
+\makeatother
+\newcommand*{\myexternaldocument}[1]{%
+    \externaldocument{#1}%
+    \addFileDependency{#1.tex}%
+    \addFileDependency{#1.aux}%
+}
+
+\usepackage{nameref,zref-xr}
+\zxrsetup{toltxlabel}
+\zexternaldocument*{main}
 
 % % figure info, etc. that can dynamically change (color of points, etc.)
 % \newcommand{\startpt}{red points}
@@ -102,7 +106,8 @@
 
 % \newcommand{\symtime}{76}
 
-\newcommand{\thr}{\SI{1.1}{\joule\per\square\meter}}
+\newcommand{\thr}{\SI{1.2}{\joule\per\square\meter}}
+\newcommand{\sigthr}{\SI{1.1}{\joule\per\square\meter}}
 
 \glssetcategoryattribute{abbreviation}{indexonlyfirst}{true}
 \glssetcategoryattribute{abbreviation}{nohyper}{true}
@@ -197,7 +202,7 @@ The close correlation between Euclidean and arc length distances in the \gls{vfz
 
 \subsection{High-Aspect Ratios}
 \label{sec:supp:bary:artifact}
-An artifact of the barycentric interpolation method which occurs due to the presence of high-aspect ratio facets is shown in \cref{fig:high-aspect-non-int}. As the dimensionality increases for a constant number of points and from our numerical tests, the rate of missed facet intersections increases. This artifact, and our method for addressing it, are discussed in \cref{app:bary-int}.
+An artifact of the barycentric interpolation method which occurs due to the presence of high-aspect ratio facets is shown in \cref{fig:high-aspect-non-int}. As the dimensionality increases for a constant number of points and from our numerical tests, the rate of missed facet intersections increases. This artifact, and our method for addressing it, are discussed in \cref{sec:app:bary:int}.
 
 \begin{figure*}
     \centering
@@ -212,12 +217,16 @@ An artifact of the barycentric interpolation method which occurs due to the pres
 \section{Kim Interpolation}
 \label{sec:supp:kim-interp}
 
-A \gls{gpr} mixing model is developed to accommodate the non-uniformly distributed, noisy Fe simulation data \cite{kimPhasefieldModeling3D2014} and better predict low \gls{gbe}. As shown in \cref{fig:kim-interp-teach}d, prediction using the standard approach of the main document overestimates low \glspl{gbe} (termed the $\epsilon_1$ model). By training the data on only \glspl{gb} with a \gls{gbe} less than \thr{} (termed the $\epsilon_2$ model) and by using an exponential (\texttt{KernelFunction='exponential'}) rather than a squared exponential kernel, prediction of low \glspl{gbe} improves, but naturally underestimation occurs for higher \glspl{gbe} (\cref{fig:kim-interp-teach}c).
+A \gls{gpr} mixing model is developed to accommodate the non-uniformly distributed, noisy Fe simulation data \cite{kimPhasefieldModeling3D2014} and better predict low \gls{gbe}. Details of the method (\cref{sec:supp:kim-interp:method}) and an analysis of the input data quality (\cref{sec:supp:kim-interp:quality}) are given. The code implementation is given in \texttt{gprmix.m} and \texttt{gprmix\_test.m} of the \vfzorepo{} \cite{bairdFiveDegreeofFreedom5DOF2020}.
+
+\subsection{Details of \glsentrytitlecase{gpr}{long} Mixture}
+\label{sec:supp:kim-interp:method}
+As shown in \cref{fig:kim-interp-teach}d, prediction using the standard approach of the main document overestimates low \glspl{gbe} (termed the $\epsilon_1$ model). By training the data on only \glspl{gb} with a \gls{gbe} less than \thr{} (termed the $\epsilon_2$ model) and by using an exponential (\texttt{KernelFunction='exponential'}) rather than a squared exponential kernel, prediction of low \glspl{gbe} improves, but naturally underestimation occurs for higher \glspl{gbe} (\cref{fig:kim-interp-teach}c).
 
 \begin{figure}
     \centering
     \includegraphics{kim-interp-teach.png}
-    \caption{Teaching figure to demonstrate the \gls{gpr} mixing model. Hexagonally binned parity plots of the \gls{gpr} mixing model (a), selected points from each of the two models to be mixed (b), all prediction \glspl{gb} based on the model using only training \glspl{gb} with a \gls{gbe} less than \thr{} (c), and the standard \gls{gpr} model (d). Points in (b) are produced by splitting the prediction data into less than and greater than \thr{}. A sigmoid mixing function (\cref{fig:gprmix-sigmoid}) is then applied where the predicted \glspl{gbe} shown in (b) determines the mixing fraction (f) to produce a weighted average of models (c) and (d). A large Fe simulation database \cite{kimPhasefieldModeling3D2014} using \num{46883} training datapoints and \num{11721} validation datapoints in an 80\%/20\% split is used. The \gls{gpr} mixture model decreases error for low \gls{gbe} (a) and changes overall \gls{rmse} and \gls{mae} from \SI{0.057932}{\J\per\square\meter} and \SI{0.039857}{\J\per\square\meter} in the original model (d) to \SI{0.057502}{\J\per\square\meter} and \SI{0.041272}{\J\per\square\meter}, respectively.}
+    \caption{Teaching figure to demonstrate the \gls{gpr} mixing model. Hexagonally binned parity plot of the standard \gls{gpr} model (a). All prediction \glspl{gb} based on the model using only training \glspl{gb} with a \gls{gbe} less than \thr{} (b). Selected points from each of the two models to be mixed (c), and hexagonally binned parity plots of the \gls{gpr} mixing model (d). Points in (c) are produced by splitting the prediction data into less than and greater than \thr{}. A sigmoid mixing function (\cref{fig:gprmix-sigmoid}) is then applied where the predicted \glspl{gbe} shown in (c) determines the mixing fraction (f) to produce a weighted average of models (b) and (a). A large Fe simulation database \cite{kimPhasefieldModeling3D2014} using \num{46883} training datapoints and \num{11721} validation datapoints in an 80\%/20\% split is used. The \gls{gpr} mixture model decreases error for low \gls{gbe} (d) and changes overall \gls{rmse} and \gls{mae} from \SI{0.057932}{\J\per\square\meter} and \SI{0.039857}{\J\per\square\meter} in the original model (a) to \SI{0.057502}{\J\per\square\meter} and \SI{0.041272}{\J\per\square\meter}, respectively.}
     \label{fig:kim-interp-teach}
 \end{figure}
 
@@ -227,7 +236,6 @@ A combined, disjoint model (\cref{fig:kim-interp-teach}b) is taken ($\epsilon_3$
     \epsilon_{mix} = f \epsilon_1+(f-1) \epsilon_2
     \label{eq:gprmix}
 \end{equation}
-
 where $\epsilon_1$ and $\epsilon_2$ represent the standard \gls{gpr} model and the \gls{gpr} model trained on the subset of \glspl{gb} with a \gls{gbe} less than \thr{}, respectively, and f is the sigmoid mixing fraction given by:
 
 \begin{equation}
@@ -235,13 +243,12 @@ where $\epsilon_1$ and $\epsilon_2$ represent the standard \gls{gpr} model and t
         % f\left(\epsilon_3\right)=\frac{1}{e^{-m \left(\epsilon_3-b\right)}+1}
     \label{eq:sigmoid}
 \end{equation}
-
-as shown in \cref{fig:gprmix-sigmoid} with $m=30$ and $b=1.1$ in this work. Larger values of $m$ yield a steeper sigmoid function and larger values of $b$ shift the sigmoid function further to the right. Specific values for $m$ and $b$ were chosen by visual inspection and trial and error. This results in a \gls{gpr} mixing model which better predicts low \glspl{gbe} while retaining overall predictive accuracy (\cref{fig:kim-interp-teach}a).
+as shown in \cref{fig:gprmix-sigmoid} with $m=30$ and $b=\sigthr{}$ in this work. Larger values of $m$ yield a steeper sigmoid function and larger values of $b$ shift the sigmoid function further to the right. Specific values for $m$ and $b$ were chosen by visual inspection and trial and error. This results in a \gls{gpr} mixing model which better predicts low \glspl{gbe} while retaining overall predictive accuracy (\cref{fig:kim-interp-teach}a).
 
 \begin{figure}
     \centering
     \includegraphics{figures/gprmix-sigmoid.png}
-    \caption{Sigmoid mixing function used in the \gls{gpr} mixing model with $m=30$ and $b=1.1$ (\cref{eq:sigmoid}).}
+    \caption{Sigmoid mixing function used in the \gls{gpr} mixing model with $m=30$ and $b=\sigthr{}$ (\cref{eq:sigmoid}).}
     \label{fig:gprmix-sigmoid}
 \end{figure}
 
@@ -251,42 +258,42 @@ Uncertainty of the \gls{gpr} mixing model is similarly obtained by taking a weig
     \sigma_{mix} = f \sigma_1+(f-1) \sigma_2
     \label{eq:gprmix-sigma}
 \end{equation}
-
 where $\sigma_1$ and $\sigma_2$ are the corresponding uncertainties of $\epsilon_1$ and $\epsilon_2$, respectively, and f is given by \cref{eq:sigmoid}.
 
 \begin{figure}
     \centering
-    \includegraphics{kim-interp.png}
-    \caption{Parity plot colored by uncertainty standard deviation (a). Five models sampled from the posterior distribution of the \gls{gpr} mixture model (b).}
-    \label{fig:my_label}
+    \includegraphics{figures/kim-interp-posterior.png}
+    \caption{Interpolation results for a large Fe simulation database \cite{kimPhasefieldModeling3D2014} using \num{46883} \inpt{} \glspl{gb} and \num{11721} \outpt{} \glspl{gb} in an 80\%/20\% split and a \gls{gpr} mixture model to better approximate low \glspl{gbe}. (a) Parity plot colored by uncertainty standard deviation. (b) Prediction (black) and uncertainty standard deviation (grey band) of \gls{gpr} mixture model as a function of distance along a 1D arc ($\overline{AB}$) between two \glspl{vfzo} ($A$ and $B$). The first \inpt{} \gls{nn} is shown as a black, dashed line. The \inpt{} point \glspl{knn} ($k\in[1,2,3,4,5,6]$) relative to $\overline{AB}$ are colored and sized according to the distance to $\overline{AB}$ (\inpt{} points far from the line are small, dark red circles and \inpt{} points close to the line are large, dark blue circles). In other words, this shows the data in a small region of influence around $\overline{AB}$ that contributed to the model predictions where close data is emphasized (larger) than far-away data (smaller). (c)
+    Five models sampled from the posterior distribution of the \gls{gpr} mixture model. (d) Fe \gls{gpr} mixture model results and uncertainty standard deviation (grey band) overlaid with the Ni \gls{brk} model along the arc $\overline{AB}$. Coordinates for $A$ and $B$ are given in \cref{tab:tunnel-AB2} of the main paper and 300 equally spaced points are plotted for (b), (c), and (d).}
+    \label{fig:kim-interp-posterior}
 \end{figure}
 
 \subsection{Input Data Quality}
-9170 are repeats for mechanically selected, 112 are repeats for intentionally selected (special) GBs. 2496 "repsets", so on average there's a degeneracy of 4. Min and max deviations from the average value of a degenerate set is -0.2625 and 0.2625, resp.
-
-\begin{figure}
-    \centering
-    \includegraphics{kim-interp-degeneracy-results.png}
-    \caption{Caption}
-    \label{fig:kim-interp-degeneracy-results}
-\end{figure}
+\label{sec:supp:kim-interp:quality}
+By comparing \glspl{gbe} values of (unintentionally) repeated \glspl{gb} in the Fe simulation dataset \cite{kimPhasefieldModeling3D2014}, we can estimate the intrinsic error of the \inpt{} data. First, we see that by binning into degenerate sets, most sets have a degeneracy of fewer than 5 \cref{fig:kim-interp-degeneracy-sets}. We split the repeated data into sets with a degeneracy of fewer than 5 and greater than or equal to 5 and plot the errors (relative to the respective set mean) in both histogram form (\cref{fig:kim-interp-degeneracy-results}a and \cref{fig:kim-interp-degeneracy-results}c, respectively) and as hexagonally-binned parity plots (\cref{fig:kim-interp-degeneracy-results}b and \cref{fig:kim-interp-degeneracy-results}d, respectively). While heavily repeated \glspl{gb} tend to give similar results, occasionally repeated \glspl{gb} often have larger \gls{gbe} variability. This could have physical meaning: Certain types of (e.g. high-symmetry) \glspl{gb} tend to have less variation (i.e. fewer and/or more tightly distributed metastable states). However, it could also be an artifact of the simulation setup that produced this data (e.g. deterministic simulation output for certain types of \glspl{gb}).
 
 \begin{figure}
     \centering
     \includegraphics{kim-interp-degeneracy-sets.png}
-    \caption{Caption}
+    \caption{Histogram of number of sets vs. number of degenerate \glspl{gb} per set for the Fe simulation dataset \cite{kimPhasefieldModeling3D2014}. Most sets have a degeneracy of fewer than 5.}
     \label{fig:kim-interp-degeneracy-sets}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics{kim-interp-degeneracy-results.png}
+    \caption{Degenerate \glspl{gb} sets are split into those with a degeneracy of fewer than 5 and greater than or equal to 5 and plotted as error histograms ( (a) and (c), respectively) and hexagonally-binned parity plots ( (b) and (d), respectively.). Large degenerate sets tend to have very low error, whereas small degenerate sets tend to have higher error. In other words, \glspl{gb} that are more likely to be repeated many times based on the sampling scheme in \cite{kimPhasefieldModeling3D2014} tend to give similar results, whereas \glspl{gb} that are less likely to be repeated often have larger variability in the simulation output. We do not know if this has physical meaning or is an artifact of the simulation setup.}
+    \label{fig:kim-interp-degeneracy-results}
 \end{figure}
 
 %The true, underlying \gls{brk} function is also shown (black line) and a shaded error band of uncertainty standard deviation. \glspl{knn} ($1<=k<=6$) \inpt{} points closest to $\overline{AB}$ are plotted and colored by distance to $\overline{AB}$.
 
-The implementation is given in \texttt{gprmix.m} and \texttt{gprmix\_test.m} of the \vfzorepo{} \cite{bairdFiveDegreeofFreedom5DOF2020}.
-
-\newpage
-\printglossaries
+% \newpage
+% \printglossaries
 %need to manually clear cached files & logs in overleaf to get updated abbreviations to appear
 
 \newpage
+\clearpage
 \bibliographystyle{elsarticle-num-names}
 \bibliography{5dof-gb-energy.bib}
 
