@@ -51,9 +51,10 @@
 }
 \makeatother
 
-% Add "S" to figure captions
+% Add "S" to figure captions, sections, and equations
 \renewcommand{\thefigure}{S\arabic{figure}}
 \renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\theequation}{S\arabic{equation}}
 
 % Cross referencing with the xr package in Overleaf (https://www.overleaf.com/learn/how-to/Cross_referencing_with_the_xr_package_in_Overleaf)
 \makeatletter
@@ -90,6 +91,9 @@
 
 \newcommand{\vfzorepo}{\gls{vfzo} repository}
 
+\usepackage{matlab-prettifier}
+\newcommand{\matlab}[1]{\mbox{\lstinline[style=Matlab-editor]{#1}}}
+
 % %RMSE values
 % \newcommand{\baryrmse}{0.0242}
 % \newcommand{\gprrmse}{0.0220}
@@ -125,6 +129,7 @@
 \newabbreviation{bcs}{BCs}{boundary conditions}
 \newabbreviation[longplural={triple junctions}]{tj}{TJ}{triple junction}
 \newabbreviation{gpr}{GPR}{Gaussian process regression}
+\newabbreviation{gprm}{GPRM}{Gaussian process regression mixture}
 \newabbreviation{ann}{ANN}{artificial neural network}
 \newabbreviation{nn}{NN}{nearest neighbor}
 \newabbreviation{rmse}{RMSE}{root mean square error}
@@ -168,7 +173,7 @@
 
 \biboptions{sort&compress}
 \interfootnotelinepenalty=10000
-\patchcmd{\emailauthor}{(#2)}{(O.K. Johnson).}{}{}
+% \patchcmd{\emailauthor}{(#2)}{(O.K. Johnson).}{}{}
 % Double Spacing
 % \doublespacing
 \begin{document}
@@ -178,11 +183,11 @@
 %\title{Grain Boundary Octonion Meshing and Interpolation}
 \title{Five Degree-of-Freedom Property Interpolation of Arbitrary Grain Boundaries via \glsentrytitlecase{vfzo}{long} Framework: Supplementary Information}
 
-\author[myu]{Sterling G. Baird}
+\author[myu]{Sterling G. Baird\corref{cor1}}
+\ead{ster.g.baird@gmail.com}
 \author[myu]{Eric R. Homer}
 \author[myu]{David T. Fullwood}
-\author[myu]{Oliver K. Johnson\corref{cor1}}
-\ead{ojohnson@byu.edu}
+\author[myu]{Oliver K. Johnson}
 
 \address[myu]{Department of Mechanical Engineering, Brigham Young University, Provo, UT 84602, USA}
 
@@ -195,7 +200,7 @@
 
 \section{Euclidean and Arc Length Distances}
 \label{sec:supp:dist-parity}
-The close correlation between Euclidean and arc length distances in the \gls{vfzo} sense is shown in \cref{fig:dist-parity} using pairwise distances of \num{10000} \glspl{vfzo}. This justifies our use of Euclidean distance as an approximation of hyperspherical arc length (and by extension, that a scaled Euclidean distance approximates an non-symmetrized octonion distance, see \cref{eq:8Deuclidean_dist}, \cref{eq:7sphere_arc_length}, and \cref{eq:omega}). However, comparison with the original octonion metric \cite{francisGeodesicOctonionMetric2019} gives overestimation for some boundaries. This is an inherent feature of the \gls{vfzo} framework (\cref{sec:intro:distancecalculations}) which can be addressed via use of ensemble methods (\cref{fig:dist-ensemble-k1-2-10-20} and \cref{fig:dist-ensemble-rmse-mae}).
+The close correlation between Euclidean and arc length distances in the \gls{vfzo} sense is shown in \cref{fig:dist-parity} using pairwise distances of \num{10000} \glspl{vfzo}. This justifies our use of Euclidean distance as an approximation of hyperspherical arc length (and by extension, that a scaled Euclidean distance approximates a non-symmetrized octonion distance, see \cref{eq:8Deuclidean_dist,eq:7sphere_arc_length,eq:omega} of the main paper). However, comparison with the original octonion metric \cite{francisGeodesicOctonionMetric2019} gives overestimation for some boundaries. This is an inherent feature of the \gls{vfzo} framework that can be addressed via use of the ensemble methods described in \cref{sec:methods:framework:vfz-dist} (see also \cref{fig:dist-ensemble-k1-2-10-20,fig:dist-ensemble-rmse-mae}).
 
 
 \begin{figure}
@@ -207,8 +212,10 @@ The close correlation between Euclidean and arc length distances in the \gls{vfz
 
 \section{Ensemble Interpolation Results}
 \label{sec:ensemble-interp}
+Ensemble interpolation is a classic technique that can be used to enhance predictive performance of models. Here we describe our methods (\cref{sec:ensemble-interp:methods}), results (\cref{sec:ensemble-interp:results}), and the potential of integrating ensemble interpolation with a \gls{gprm} scheme (\cref{sec:ensemble-interp:egprm}).
 
-\subsection{Method}
+\subsection{Methods}
+\label{sec:ensemble-interp:methods}
 \Gls{vfzo} ensemble\footnote{Ours is a "bagging"-esque ensemble scheme because the same interpolation method (\acrshort{gpr}) is used but with different representations for the \inpt{} data. } interpolation occurs by:
 \begin{enumerate}
     \item generating multiple reference octonions to define multiple \glspl{vfz}
@@ -218,16 +225,9 @@ The close correlation between Euclidean and arc length distances in the \gls{vfz
 \end{enumerate}
 
 \subsection{Results}
+\label{sec:ensemble-interp:results}
 
-Use of an ensemble interpolation scheme decreases interpolation error for a \gls{gpr} model with \num{50000} \inpt{} and \num{10000} \outpt{} \glspl{vfzo}. By using an ensemble size of 10 (i.e. 10 \gls{gpr} models each with different reference octonions and therefore different \glspl{vfz}), \gls{rmse} and \gls{mae} decreased from \SIlist{0.0241;0.0160}{\J\per\square\m} to \SIlist{0.0187;0.0116}{\J\per\square\m}, respectively, using the median homogenization function (\cref{fig:ensemble-interp-rmse-mae}). Qualitatively, the ensemble mean and ensemble median parity plots look similar to those from the main text (\cref{fig:brkparity50000}), though the distributions of the ensemble scheme are somewhat tighter. The ensemble minimum produces better predictions of low \gls{gbe} than any of the other models, but underestimates high \gls{gbe} as expected. Naturally, the ensemble maximum overestimates in general. Diminishing returns manifest in \cref{fig:ensemble-interp-rmse-mae} for mean and median homogenizations. This is to be expected because the original octonion distances \cite{francisGeodesicOctonionMetric2019} are well-approximated using an ensemble size of 10 (\cref{fig:dist-ensemble-k1-2-10-20}c and \cref{fig:dist-ensemble-rmse-mae}).
-
-\begin{figure}
-    \centering
-    \includegraphics[scale=1]{figures/ensemble-interp.png}
-    \caption{Hexagonally binned parity plots for (a) mean, (b) median, (c) minimum, and (d) maximum ensemble homogenization functions. A \gls{gpr} model with \num{50000} \inpt{} and \num{10000} \outpt{} \glspl{vfzo} was used. }
-    \label{fig:ensemble-interp}
-\end{figure}
-
+Use of an ensemble interpolation scheme decreases interpolation error for a \gls{gpr} model with \num{50000} \inpt{} and \num{10000} \outpt{} \glspl{vfzo}. By using an ensemble size of 10 (i.e. 10 \gls{gpr} models each with different reference octonions and therefore different \glspl{vfz}), \gls{rmse} and \gls{mae} decreased from \SIlist{0.0241;0.0160}{\J\per\square\m} to \SIlist{0.0187;0.0116}{\J\per\square\m}, respectively, using the median homogenization function (\cref{fig:ensemble-interp-rmse-mae}). 
 \begin{figure}
     \centering
     \includegraphics[scale=1]{figures/ensemble-interp-rmse-mae.png}
@@ -235,7 +235,16 @@ Use of an ensemble interpolation scheme decreases interpolation error for a \gls
     \label{fig:ensemble-interp-rmse-mae}
 \end{figure}
 
+\Cref{fig:ensemble-interp} shows the hexagonally binned parity plots for predictions made using the mean, median, minimum, and maximum predicted values over an ensemble of 10 \glspl{vfz}. Qualitatively, the ensemble mean and ensemble median parity plots look similar to those from the main text (\cref{fig:brkparity50000}), though the distributions of the ensemble scheme are somewhat tighter. The ensemble minimum produces better predictions of low \gls{gbe} than any of the other models, but underestimates high \gls{gbe} as expected. Naturally, the ensemble maximum overestimates in general. Diminishing returns manifest in \cref{fig:ensemble-interp-rmse-mae} for mean and median homogenizations. This is to be expected because the original octonion distances \cite{francisGeodesicOctonionMetric2019} are well-approximated using an ensemble size of 10 (\cref{fig:dist-ensemble-k1-2-10-20}c and \cref{fig:dist-ensemble-rmse-mae}).
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=1]{figures/ensemble-interp.png}
+    \caption{Hexagonally binned parity plots for (a) mean, (b) median, (c) minimum, and (d) maximum ensemble homogenization functions. A \gls{gpr} model with \num{50000} \inpt{} and \num{10000} \outpt{} \glspl{vfzo} was used. }
+    \label{fig:ensemble-interp}
+\end{figure}
+
 \subsection{Possibility: Combining Ensemble with \glsentrytitlecase{gpr}{long} Mixture}
+\label{sec:ensemble-interp:egprm}
 
 A scheme which preferentially favors the ensemble minimum for low \gls{gbe} predictions and defaults to ensemble mean or median for all other \glspl{gbe} may produce even better results across the full range of \glspl{gbe}. For example, this could be accomplished by combining the ensemble scheme described here with the \gls{gpr} mixture model described in \cref{sec:supp:kim-interp:method}.
 
@@ -263,12 +272,12 @@ A \gls{gpr} mixing model is developed to accommodate the non-uniformly distribut
 
 \subsection{Details of \glsentrytitlecase{gpr}{long} Mixture}
 \label{sec:supp:kim-interp:method}
-As shown in \cref{fig:kim-interp-teach}d, prediction using the standard approach of the main document overestimates low \glspl{gbe} (termed the $\epsilon_1$ model). By training the data on only \glspl{gb} with a \gls{gbe} less than \thr{} (termed the $\epsilon_2$ model) and by using an exponential (\texttt{KernelFunction='exponential'}) rather than a squared exponential kernel, prediction of low \glspl{gbe} improves, but naturally underestimation occurs for higher \glspl{gbe} (\cref{fig:kim-interp-teach}b).
+As shown in \cref{fig:kim-interp-teach}a, prediction using the standard approach of the main document (termed the $\epsilon_1$ model) overestimates low \glspl{gbe} for this dataset. By training the model on only \glspl{gb} with a \gls{gbe} less than \thr{} (termed the $\epsilon_2$ model) and by using an exponential (\matlab{KernelFunction='exponential'}) rather than a squared exponential kernel, prediction of low \glspl{gbe} improves, but naturally underestimation occurs for higher \glspl{gbe} (\cref{fig:kim-interp-teach}b).
 
 \begin{figure}
     \centering
     \includegraphics[scale=1]{kim-interp-teach.png}
-    \caption{Teaching figure to demonstrate the \gls{gpr} mixing model. (a) Hexagonally binned parity plot of the standard \gls{gpr} model. (b) All prediction \glspl{gb} based on the model using only training \glspl{gb} with a \gls{gbe} less than \thr{}. (c) Selected points from each of the two models to be mixed, and (d) hexagonally binned parity plots of the \gls{gpr} mixing model. Points in (c) are produced by splitting the prediction data into less than and greater than \thr{}. A sigmoid mixing function (\cref{fig:gprmix-sigmoid}) is then applied where the predicted \glspl{gbe} shown in (c) determines the mixing fraction (f) to produce a weighted average of models (b) and (a). A large Fe simulation database \cite{kimPhasefieldModeling3D2014} using \num{46883} training datapoints and \num{11721} validation datapoints in an 80\%/20\% split is used. The \gls{gpr} mixture model decreases error for low \gls{gbe} (d) and changes overall \gls{rmse} and \gls{mae} from \SI{0.057932}{\J\per\square\meter} and \SI{0.039857}{\J\per\square\meter} in the original model (a) to \SI{0.057502}{\J\per\square\meter} and \SI{0.041272}{\J\per\square\meter}, respectively.}
+    \caption{(a) Hexagonally binned parity plot of the standard \gls{gpr} model. (b) All prediction \glspl{gb} based on the model using only training \glspl{gb} with a \gls{gbe} less than \thr{}. (c) Combined disjoint model as explained in the text. (d) Hexagonally binned parity plots of the final \gls{gpr} mixing model. Points in (c) are produced by splitting the prediction data into less than and greater than \thr{}. A sigmoid mixing function (\cref{fig:gprmix-sigmoid}) is then applied where the predicted \glspl{gbe} shown in (c) determines the mixing fraction ($f$) to produce a weighted average of models (a) and (b). A large Fe simulation database \cite{kimPhasefieldModeling3D2014} using \num{46883} training datapoints and \num{11721} validation datapoints in an 80\%/20\% split. The \gls{gpr} mixture model decreases error for low \gls{gbe} and changes overall \gls{rmse} and \gls{mae} from \SI{0.057932}{\J\per\square\meter} and \SI{0.039857}{\J\per\square\meter} in the original model (shown in (a)) to \SI{0.057502}{\J\per\square\meter} and \SI{0.041272}{\J\per\square\meter} (shown in (d)), respectively.}
     \label{fig:kim-interp-teach}
 \end{figure}
 
@@ -278,14 +287,14 @@ A combined, disjoint model (\cref{fig:kim-interp-teach}c) is taken ($\epsilon_3$
     \epsilon_{mix} = f \epsilon_1+(f-1) \epsilon_2
     \label{eq:gprmix}
 \end{equation}
-where $\epsilon_1$ and $\epsilon_2$ represent the standard \gls{gpr} model and the \gls{gpr} model trained on the subset of \glspl{gb} with a \gls{gbe} less than \thr{}, respectively, and f is the sigmoid mixing fraction given by:
+where $\epsilon_1$ and $\epsilon_2$ represent the standard \gls{gpr} model and the \gls{gpr} model trained on the subset of \glspl{gb} with a \gls{gbe} less than \thr{}, respectively, and $f$ is the sigmoid mixing fraction given by:
 
 \begin{equation}
     f=\frac{1}{e^{-m \left(\epsilon_3-b\right)}+1}
         % f\left(\epsilon_3\right)=\frac{1}{e^{-m \left(\epsilon_3-b\right)}+1}
     \label{eq:sigmoid}
 \end{equation}
-as shown in \cref{fig:gprmix-sigmoid} with $m=30$ and $b=\sigthr{}$ in this work. Larger values of $m$ yield a steeper sigmoid function and larger values of $b$ shift the sigmoid function further to the right. Specific values for $m$ and $b$ were chosen by visual inspection and trial and error. This results in a \gls{gpr} mixing model which better predicts low \glspl{gbe} while retaining overall predictive accuracy (\cref{fig:kim-interp-teach}d).
+and shown in \cref{fig:gprmix-sigmoid} with $m=30$ and $b=\sigthr{}$, as used in this work. Larger values of $m$ yield a steeper sigmoid function and larger values of $b$ shift the sigmoid function further to the right. Specific values for $m$ and $b$ were chosen by visual inspection and trial and error. This results in a \gls{gpr} mixing model which better predicts low \glspl{gbe} while retaining overall predictive accuracy (\cref{fig:kim-interp-teach}d).
 
 \begin{figure}
     \centering
@@ -300,21 +309,13 @@ Uncertainty of the \gls{gpr} mixing model is similarly obtained by taking a weig
     \sigma_{mix} = f \sigma_1+(f-1) \sigma_2
     \label{eq:gprmix-sigma}
 \end{equation}
-where $\sigma_1$ and $\sigma_2$ are the corresponding uncertainties of $\epsilon_1$ and $\epsilon_2$, respectively, and f is given by \cref{eq:sigmoid}.
-
-\begin{figure}
-    \centering
-    \includegraphics[scale=1]{figures/kim-interp-posterior.png}
-    \caption{Interpolation results for a large Fe simulation database \cite{kimPhasefieldModeling3D2014} using \num{46883} \inpt{} \glspl{gb} and \num{11721} \outpt{} \glspl{gb} in an 80\%/20\% split and a \gls{gpr} mixture model to better approximate low \glspl{gbe}. (a) Parity plot colored by uncertainty standard deviation. (b) Prediction (black) and uncertainty standard deviation (grey band) of \gls{gpr} mixture model as a function of distance along a 1D arc ($\overline{AB}$) between two \glspl{vfzo} ($A$ and $B$). The first \inpt{} \gls{nn} is shown as a black, dashed line. The \inpt{} point \glspl{knn} ($k\in[1,2,3,4,5,6]$) relative to $\overline{AB}$ are colored and sized according to the distance to $\overline{AB}$ (\inpt{} points far from the line are small, dark red circles and \inpt{} points close to the line are large, dark blue circles). In other words, this shows the data in a small region of influence around $\overline{AB}$ that contributed to the model predictions where close data is emphasized (larger) than far-away data (smaller). (c)
-    Five models sampled from the posterior distribution of the \gls{gpr} mixture model. (d) Fe \gls{gpr} mixture model results and uncertainty standard deviation (grey band) overlaid with the Ni \gls{brk} model along the arc $\overline{AB}$. Coordinates for $A$ and $B$ are given in \cref{tab:tunnel-AB2} of the main paper and 300 equally spaced points are plotted for (b), (c), and (d).}
-    \label{fig:kim-interp-posterior}
-\end{figure}
+where $\sigma_1$ and $\sigma_2$ are the corresponding uncertainties of $\epsilon_1$ and $\epsilon_2$, respectively, and $f$ is given by \cref{eq:sigmoid}. 
 
 \subsection{Input Data Quality}
 \label{sec:supp:kim-interp:quality}
-Of the $\sim$\num{60000}\footnote{The "no-boundary" \glspl{gb} (i.e. \glspl{gb} with close to \SI{0}{\joule\per\square\meter} \gls{gbe}) were removed before testing for degeneracy.} \glspl{gb} in \cite{kimPhasefieldModeling3D2014}, $\sim$\num{10000} \glspl{gb} were repeats that were identified by converting to \glspl{vfzo} and applying \vfzorepo{} function \texttt{avg\_repeats.m}. In \cite{kimPhasefieldModeling3D2014}, mechanically selected \glspl{gb} were those which involved sampling in equally spaced increments\footnote{In some cases, this was equally spaced increments of the argument of a trigonometric function.} for each \gls{5dof} parameter, and a few thousand intentionally selected \glspl{gb} (i.e. special \glspl{gb}) were also considered. Of mechanically and intentionally selected \glspl{gb}, \numlist{9170;112} are repeats, respectively, with a total of \num{2496} degenerate sets\footnote{A degenerate "set" is distinct from a \glspl{vfzo} "set", the latter of which is often used in the main text.} (see \cref{fig:kim-interp-degeneracy-sets} for a degeneracy histogram). Thus, on average there is a degeneracy of approximately four per set of degenerate \glspl{gb}.
+Of the $\sim$\num{60000}\footnote{The "no-boundary" \glspl{gb} (i.e. \glspl{gb} with close to \SI{0}{\joule\per\square\meter} \gls{gbe}) were removed before testing for degeneracy.} \glspl{gb} in \cite{kimPhasefieldModeling3D2014}, $\sim$\num{10000} \glspl{gb} were repeats that were identified by converting to \glspl{vfzo} and applying \vfzorepo{} function \texttt{avg\_repeats.m}. In \cite{kimPhasefieldModeling3D2014}, mechanically selected \glspl{gb} were those which involved sampling in equally spaced increments\footnote{In some cases, this was equally spaced increments of the argument of a trigonometric function.} for each \gls{5dof} parameter, and a few thousand intentionally selected \glspl{gb} (i.e. special \glspl{gb}) were also considered. Of mechanically and intentionally selected \glspl{gb}, \numlist{9170;112} are repeats, respectively, with a total of \num{2496} degenerate sets\footnote{A degenerate "set" is distinct from a \gls{vfzo} "set", the latter of which is often used in the main text.} (see \cref{fig:kim-interp-degeneracy-sets} for a degeneracy histogram). Thus, on average there is a degeneracy of approximately four per set of degenerate \glspl{gb}.
 
-By comparing \glspl{gbe} values of (unintentionally\footnote{To our knowledge, the presence of repeat \glspl{gb} were not mentioned in \cite{kimIdentificationSchemeGrain2011} or \cite{kimPhasefieldModeling3D2014}}) repeated \glspl{gb} in the Fe simulation dataset \cite{kimPhasefieldModeling3D2014}, we can estimate the intrinsic error of the \inpt{} data. For example, minimum and maximum deviations from the average value of a degenerate set are \SIlist{-0.2625;0.2625}{\joule\per\square\meter}, respectively, indicating that a repeated Fe \gls{gb} simulation from \cite{kimPhasefieldModeling3D2014} can vary by as much as \SI{0.525}{\joule\per\square\meter}, though rare. Additionally, \Gls{rmse} and \gls{mae} values can be obtained within each degenerate set by comparing against the set mean. Overall \gls{rmse} and \gls{mae} are then obtained by averaging and weighting by the number of \glspl{gb} in each degenerate set. Following this procedure, we obtain an average set-wise \gls{rmse} and \gls{mae} of \SIlist{0.06529;0.06190}{\joule\per\square\meter}, respectively, which is an approximate measure of the intrinsic error of the data. \cref{fig:kim-interp-degeneracy-results} shows histograms and parity plots of the intrinsic error. The overestimation of intrinsic error mentioned in the main text (\cref{sec:results:simulation}) could stem from bias as to what type of \glspl{gb} exhibit repeats based on the sampling scheme used in \cite{kimPhasefieldModeling3D2014} and/or that many of the degenerate sets contain a low number of repeats (\cref{fig:kim-interp-degeneracy-sets}).
+By comparing \gls{gbe} values of (unintentionally\footnote{To our knowledge, the presence of repeat \glspl{gb} were not mentioned in \cite{kimPhasefieldModeling3D2014} or \cite{kimIdentificationSchemeGrain2011}}) repeated \glspl{gb} in the Fe simulation dataset \cite{kimPhasefieldModeling3D2014}, we can estimate the intrinsic error of the \inpt{} data. For example, minimum and maximum deviations from the average value of a degenerate set are \SIlist{-0.2625;0.2625}{\joule\per\square\meter}, respectively, indicating that a repeated Fe \gls{gb} simulation from \cite{kimPhasefieldModeling3D2014} can vary by as much as \SI{0.525}{\joule\per\square\meter}, though rare. Additionally, \Gls{rmse} and \gls{mae} values can be obtained within each degenerate set by comparing against the set mean. Overall \gls{rmse} and \gls{mae} are then obtained by averaging and weighting by the number of \glspl{gb} in each degenerate set. Following this procedure, we obtain an average set-wise \gls{rmse} and \gls{mae} of \SIlist{0.06529;0.06190}{\joule\per\square\meter}, respectively, which is an approximate measure of the intrinsic error of the data. \cref{fig:kim-interp-degeneracy-results} shows histograms and parity plots of the intrinsic error. The overestimation of intrinsic error mentioned in the main text (\cref{sec:results:simulation}) could stem from bias as to what type of \glspl{gb} exhibit repeats based on the sampling scheme used in \cite{kimPhasefieldModeling3D2014} and/or that many of the degenerate sets contain a low number of repeats (\cref{fig:kim-interp-degeneracy-sets}).
 
 Next, we see that by binning \glspl{gb} into degenerate sets, most degenerate sets have a degeneracy of fewer than 5 \cref{fig:kim-interp-degeneracy-sets}. We split the repeated data into sets with a degeneracy of fewer than 5 and greater than or equal to 5 and plot the errors (relative to the respective set mean) in both histogram form (\cref{fig:kim-interp-degeneracy-results}a and \cref{fig:kim-interp-degeneracy-results}c, respectively) and as hexagonally-binned parity plots (\cref{fig:kim-interp-degeneracy-results}b and \cref{fig:kim-interp-degeneracy-results}d, respectively). While heavily repeated \glspl{gb} tend to give similar results, occasionally repeated \glspl{gb} often have larger \gls{gbe} variability. This could have physical meaning: Certain types of (e.g. high-symmetry) \glspl{gb} tend to have less variation (i.e. fewer and/or more tightly distributed metastable states). However, it could also be an artifact of the simulation setup that produced this data (e.g. deterministic simulation output for certain types of \glspl{gb}).
 
@@ -332,16 +333,48 @@ Next, we see that by binning \glspl{gb} into degenerate sets, most degenerate se
     \label{fig:kim-interp-degeneracy-results}
 \end{figure}
 
+% \subsection{Uncertainty Quantification and the Posterior Distribution of \glsentrytitlecase{gprm}{long} }
+% The use of \gls{gpr} in the \gls{gprm} model facilitates uncertainty quantification which we discuss in more detail. We find that use of \cref{eq:gprmix-sigma} on two models with differing amounts of data leads to a model with typically higher uncertainty for low \glspl{gbe} than high \glspl{gbe} (\cref{fig:kim-interp-posterior}a). By observing the \glspl{nn} relative to an arc $\overline{AB}$, we find that there is a large scatter of \glspl{gbe} for \glspl{gb} that are within a radius of $\sim$\SI{6}{\degree} (\cref{fig:kim-interp-posterior}b). By sampling from the posterior distribution, we find that 
+
+% Uncertainty results, as well as posterior samples of the \gls{gprm} distribution of models are shown in \cref{fig:kim-interp-posterior}.
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[scale=1]{figures/kim-interp-posterior.png}
+%     \caption{Interpolation results for a large Fe simulation database \cite{kimPhasefieldModeling3D2014} using \num{46883} \inpt{} \glspl{gb} and \num{11721} \outpt{} \glspl{gb} in an 80\%/20\% split and a \gls{gpr} mixture model to better approximate low \glspl{gbe}. (a) Parity plot colored by uncertainty standard deviation. (b) Prediction (black) and uncertainty standard deviation (grey band) of \gls{gpr} mixture model as a function of distance along a 1D arc ($\overline{AB}$) between two \glspl{vfzo} ($A$ and $B$). The first \inpt{} \gls{nn} is shown as a black, dashed line. The \inpt{} point \glspl{knn} ($k\in[1,2,3,4,5,6]$) relative to $\overline{AB}$ are colored and sized according to the distance to $\overline{AB}$ (\inpt{} points far from the line are small, dark red circles and \inpt{} points close to the line are large, dark blue circles). In other words, this shows the data in a small region of influence around $\overline{AB}$ that contributed to the model predictions where close data is emphasized (larger) than far-away data (smaller). (c)
+%     Five models sampled from the posterior distribution of the \gls{gpr} mixture model. (d) Fe \gls{gpr} mixture model results and uncertainty standard deviation (grey band) overlaid with the Ni \gls{brk} model along the arc $\overline{AB}$. Coordinates for $A$ and $B$ are given in \cref{tab:tunnel-AB2} of the main paper and 300 equally spaced points are plotted for (b), (c), and (d).}
+%     \label{fig:kim-interp-posterior}
+% \end{figure}
+
 \section{Olmsted Interpolation}
 
-Interpolation results for \SI{0}{\kelvin} \gls{ms} low-noise Ni simulations are shown as a hexagonally binned parity plot in \cref{fig:olmsted-Ni-loocv} and can be visually compared with Figure 6(a) of \citet{chesserLearningGrainBoundary2020}.
+As illustrated in \cref{fig:olmsted-Ni-loocv}, \gls{loocv} interpolation results for \SI{0}{\kelvin} \gls{ms} low-noise Ni simulations using the \gls{gpr} method are similar to \gls{lkr} results reported in Figure 6a of \citet{chesserLearningGrainBoundary2020} (reproduced on the right of \cref{fig:olmsted-Ni-loocv} for convenience).
 
 \begin{figure}
-    \centering
-    \includegraphics{figures/olmsted-Ni-loocv.png}
-    \caption{Hexagonally binned parity plot for Ni simulation \acrfull{gbe} interpolation using \Acrfull{loocv}. }
-    \label{fig:olmsted-Ni-loocv}
+     \centering
+     \begin{subfigure}[b]{0.5\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/olmsted-Ni-loocv.png}
+        %  \caption{}
+         \label{fig:our-loocv}
+     \hfill
+     \end{subfigure}
+          \begin{subfigure}[b]{0.4\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/ChesserFigure.jpg}
+        %  \caption{}
+         \label{fig:chesser-loocv}
+     \end{subfigure}
+        \caption{(left) Hexagonally binned parity plot for Ni simulation \acrfull{gbe} interpolation using \acrshort{loocv}. (right) Parity plot for \acrfull{loocv} interpolation results reproduced from Figure 6a of \citet{chesserLearningGrainBoundary2020} under CC-BY Creative Commons license. }
+        \label{fig:olmsted-Ni-loocv}
 \end{figure}
+
+% \begin{figure}
+%     \centering
+%     \includegraphics{figures/olmsted-Ni-loocv.png}
+%     \caption{Hexagonally binned parity plot for Ni simulation \acrfull{gbe} interpolation using \Acrfull{loocv}. }
+%     \label{fig:olmsted-Ni-loocv}
+% \end{figure}
 
 %The true, underlying \gls{brk} function is also shown (black line) and a shaded error band of uncertainty standard deviation. \glspl{knn} ($1<=k<=6$) \inpt{} points closest to $\overline{AB}$ are plotted and colored by distance to $\overline{AB}$.
 

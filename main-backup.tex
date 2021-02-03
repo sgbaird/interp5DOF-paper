@@ -474,3 +474,11 @@
 %The \gls{vfzo} framework offers a great advantage in estimating property values for arbitrary \glspl{gb} based on experimental or simulated data such as energy, mobility, and diffusivity. The framework can also enable efficient surrogate modeling of computationally expensive 5DOF functions and simulations such as in evaluation of the \gls{brk} function \cite{bulatovGrainBoundaryEnergy2014} for use in anisotropic grain growth simulations. In other words, one can evaluate the \gls{vfzo} surrogate model in a fraction of the time of the true property model, thereby facilitating larger scale iterative simulations, which require repetitive evaluation of a computationally expensive structure-property model.
 
 % We think it is straightforward to apply these methods to full or restricted regions of \gls{5dof} space for \gls{gb} models and surrogates. In addition to interpolations involving \gls{gbe}, \gls{gbcd} (i.e. similar to fitting a curve to a histogram) and other \gls{gb} properties such as diffusivity and mobility could also be interpolated. Finally, linking this interpolation scheme with polycrystal data such as 3D microstructural \gls{tj} datasets (e.g. Ni \cite{liRelativeGrainBoundary2009}) via \textit{TJ2GBE} \cite{shenDeterminingGrainBoundary2019} or similar approaches geared towards large datasets is especially promising.
+
+
+In other words, we find that:
+\begin{equation}
+    T(N_p^2L) \approx T_{\text{sym}}(N_p^2L)+T_\text{\text{pd}}(L^2) 
+\end{equation}
+where $T$, $T_{\text{sym}}$ and $T_{\text{pd}}$ are the runtimes of the symmetrization and pairwise-distance computations, respectively.
+%In other words, even though the symmetrization step scales as $O(N_p^2L)$, while the pairwise distance step scales as $O_\text{pd}(L^2)$, and $N_p^2L \ll L^2$, the actual \emph{time} to compute the pairwise distance matrix is nearly negligible
