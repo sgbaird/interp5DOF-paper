@@ -1,0 +1,14 @@
+Reviewer #1: The authors develop a framework for approximating grain boundary geodesic distance kernels that is more computationally efficient than prior work without significantly impacting the accuracy of property regression on reference datasets. Two ideas central to the efficiency of the framework are 1) the approximation of geodesic GB distances with a Euclidean metric and 2) the construction of a fundamental zone for GBs based on Voronoi tessellations on the 7-sphere. It is argued that the distance approximation errors arising from (2) are small and insignificant for property prediction. Out of several regression methods explored in the paper, the authors recommend Gaussian Process Regression (GPR) for GB property interpolation because of its relative accuracy and built-in uncertainty quantification. 
+
+The main impact of this work, in my view, is that it provides a method for GB property interpolation that scales to large GB datasets.  The structure of the GB character space, and the way in which properties vary over that space, are complex and not well understood yet, and methods which help advance scientific efforts in this direction are welcome. 
+
+I do have several comments and concerns. My primary concern about this paper is its atypical and somewhat confusing organization, addressed in points 1-4 below. One theoretical comment is given in point 5. Finally, several typos are identified in points 6. 
+
+1.	Several sections seem to overlap in content and should be merged or reorganized, such as "3.1.3 Our Four Interpolation Methods" and "3.2.1 Comparison of Models". 
+2.	The narrative is difficult to read sequentially: sections do not clearly transition from one to another, sections do not have topic sentences summarizing main points. 
+3.	The Introduction starts with an outline, where claims about a "highly efficient" model seem premature. Consider moving the outline to the end of the Introduction.
+4.	Consider relegating details of the codebase to the Supplementary Information. This is a suggestion meant to lead to a better reading experience. 
+5.	In Section 2.1.1, an example is given for VFZ construction on the 2-sphere. It seems that this construction should be related to the standard stereographic triangle, a space with which materials scientists are already familiar. Is there a relationship between these constructions? 
+6.	Typos: 
+Figure 1 caption, "fixed reference point": no comma needed
+Figure 1 caption, insert comma before "demonstrating"
