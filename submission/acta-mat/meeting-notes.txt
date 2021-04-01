@@ -1,0 +1,26 @@
+Materials & Design
+Acta Materialia
+Computational Materials Science
+
+Philosophical Magazine
+
+Phys Rev B
+Phys Rev Materials
+npj Compuational Materials
+
+Call it the VFZ framework rather than the VFZO framework. You could do this with other metrics (Olmsted, Sutton, Morawiec)
+
+If you wanted, you could probably do this. The challenge is the curvature of the space. Are local Euclidean approximations bad approximations?
+
+Pick a Journal
+
+
+How to make through-thickness grain samples
+How to find processing history of samples and physical locations
+
+
+What is the surface energy of Ni 
+
+Include some instructions from egprm_setup.m
+
+Supplementary info
