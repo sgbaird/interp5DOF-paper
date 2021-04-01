@@ -1,6 +1,7 @@
-\ProvidesPackage{auto-paper}
-% uploading packages
+\usepackage[margin=1.5cm,includefoot]{geometry}
 \usepackage{setspace}
+
+% uploading packages
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{textcomp} % https://latex.org/forum/viewtopic.php?f=4&t=3364#p13124, https://tex.stackexchange.com/questions/165115
@@ -15,8 +16,9 @@
 }
 \usepackage[separate-uncertainty=true]{siunitx} % \usepackage{xr-hyper} %needs to  be before hyperref
 \usepackage{xurl} %needs to be before hyperref
-\usepackage{hyperref}
-% \PassOptionsToPackage{hyphens}{url} \usepackage{hyperref} %allow URLs to break across lines
+\usepackage[colorlinks]{hyperref}
+\hypersetup{breaklinks=true} % set automatically by hyperref?
+% \PassOptionsToPackage{hyphens}{url}\usepackage{hyperref} %allow URLs to break across lines
 \usepackage[nameinlink,capitalise]{cleveref} %needs to appear after hyperref, https://tex.stackexchange.com/questions/396728/my-equations-referencing-not-working
 \Crefname{figure}{Figure}{Figures} %needs to appear after hyperref and cleveref
 \crefname{appsec}{Appendix}{Appendices}
@@ -65,22 +67,14 @@
     \addFileDependency{#1.tex}%
     \addFileDependency{#1.aux}%
 }
+
 \usepackage{nameref,zref-xr}
 \zxrsetup{toltxlabel}
-% \zexternaldocument*{supp} %https://tex.stackexchange.com/questions/77774/undefined-control-sequence-when-cross-referencing-with-xr-hyper
+%https://tex.stackexchange.com/questions/77774/undefined-control-sequence-when-cross-referencing-with-xr-hyper
 % \myexternaldocument{supp}
-\ifcsname biboptions\endcsname
-  \biboptions{sort&compress} %only use if defined
-\else
-  % do nothing
-\fi
-% https://tex.stackexchange.com/questions/46223/if-document-class-is-equal-to-something-then-do-not-use-package
 
+\biboptions{sort&compress}
 \interfootnotelinepenalty=10000 %prevent footnotes from getting split across columns/pages 
 %\patchcmd{\emailauthor}{(#2)}{(S.G. Baird).}{}{} %Removes/Abbreviates corresponding author name after Email address so that the footnote doesn't take up 2 lines.
 % Double Spacing
 % \doublespacing
-
-\newcommand*{\glsentrytitlecasefull}[1]{\glsentrytitlecase{#1}{long} (\glsentryshort{#1}) }
-
-\newcommand*{\glsentrytitlecasefullplural}[1]{\glsentrytitlecase{#1}{longpl} (\glsentryshort{#1}s) }
