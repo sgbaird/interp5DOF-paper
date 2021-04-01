@@ -4,6 +4,7 @@
 \documentclass[preprint,12pt]{elsarticle}
 % \documentclass[final,twocolumn,12pt]{elsarticle}
 \input{pkgs}
+\zexternaldocument*{main}
 \input{values.tex}
 \input{abbrev.tex}
 \makeglossaries
@@ -100,12 +101,12 @@ A \gls{gpr} mixing model is developed to accommodate the non-uniformly distribut
 
 \subsection{Details of \glsentrytitlecase{gpr}{long} Mixture}
 \label{sec:supp:kim-interp:method}
-As shown in \cref{fig:kim-interp-teach}a, prediction using the standard approach of the main document (termed the $\epsilon_1$ model) overestimates low \glspl{gbe} for this dataset. By training the model on only \glspl{gb} with a \gls{gbe} less than \thr{} (termed the $\epsilon_2$ model) and by using an exponential (\matlab{KernelFunction='exponential'}) rather than a squared exponential kernel, prediction of low \glspl{gbe} improves, but naturally underestimation occurs for higher \glspl{gbe} (\cref{fig:kim-interp-teach}b).
+As shown in \cref{fig:kim-interp-teach}a, prediction using the standard approach of the main document (termed the $\epsilon_1$ model) overestimates low \glspl{gbe} for this dataset. By training the model on only \glspl{gb} with a \gls{gbe} less than \thrtwo{} (termed the $\epsilon_2$ model) and by using an exponential (\matlab{KernelFunction='exponential'}) rather than a squared exponential kernel, prediction of low \glspl{gbe} improves, but naturally underestimation occurs for higher \glspl{gbe} (\cref{fig:kim-interp-teach}b).
 
 \begin{figure}
     \centering
     \includegraphics[scale=1]{kim-interp-teach.png}
-    \caption{(a) Hexagonally binned parity plot of the standard \gls{gpr} model. (b) All prediction \glspl{gb} based on the model using only training \glspl{gb} with a \gls{gbe} less than \thr{}. (c) Combined disjoint model as explained in the text. (d) Hexagonally binned parity plots of the final \gls{gpr} mixing model. Points in (c) are produced by splitting the prediction data into less than and greater than \thr{}. A sigmoid mixing function (\cref{fig:gprmix-sigmoid}) is then applied where the predicted \glspl{gbe} shown in (c) determines the mixing fraction ($f$) to produce a weighted average of models (a) and (b). A large Fe simulation database \cite{kimPhasefieldModeling3D2014} using \num{46883} training datapoints and \num{11721} validation datapoints in an 80\%/20\% split. The \gls{gpr} mixture model decreases error for low \gls{gbe} and changes overall \gls{rmse} and \gls{mae} from \SI{0.057932}{\J\per\square\meter} and \SI{0.039857}{\J\per\square\meter} in the original model (shown in (a)) to \SI{0.057502}{\J\per\square\meter} and \SI{0.041272}{\J\per\square\meter} (shown in (d)), respectively.}
+    \caption{(a) Hexagonally binned parity plot of the standard \gls{gpr} model. (b) All prediction \glspl{gb} based on the model using only training \glspl{gb} with a \gls{gbe} less than \thrtwo{}. (c) Combined disjoint model as explained in the text. (d) Hexagonally binned parity plots of the final \gls{gpr} mixing model. Points in (c) are produced by splitting the prediction data into less than and greater than \thr{}. A sigmoid mixing function (\cref{fig:gprmix-sigmoid}) is then applied where the predicted \glspl{gbe} shown in (c) determines the mixing fraction ($f$) to produce a weighted average of models (a) and (b). A large Fe simulation database \cite{kimPhasefieldModeling3D2014} using \num{46883} training datapoints and \num{11721} validation datapoints in an 80\%/20\% split. The \gls{gpr} mixture model decreases error for low \gls{gbe} and changes overall \gls{rmse} and \gls{mae} from \SI{0.057932}{\J\per\square\meter} and \SI{0.039857}{\J\per\square\meter} in the original model (shown in (a)) to \SI{0.055035}{\J\per\square\meter} and \SI{0.039185}{\J\per\square\meter} (shown in (d)), respectively.}
     \label{fig:kim-interp-teach}
 \end{figure}
 
@@ -115,7 +116,7 @@ A combined, disjoint model (\cref{fig:kim-interp-teach}c) is taken ($\epsilon_3$
     \epsilon_{mix} = f \epsilon_1+(f-1) \epsilon_2
     \label{eq:gprmix}
 \end{equation}
-where $\epsilon_1$ and $\epsilon_2$ represent the standard \gls{gpr} model and the \gls{gpr} model trained on the subset of \glspl{gb} with a \gls{gbe} less than \thr{}, respectively, and $f$ is the sigmoid mixing fraction given by:
+where $\epsilon_1$ and $\epsilon_2$ represent the standard \gls{gpr} model and the \gls{gpr} model trained on the subset of \glspl{gb} with a \gls{gbe} less than \thrtwo{}, respectively, and $f$ is the sigmoid mixing fraction given by:
 
 \begin{equation}
     f=\frac{1}{e^{-m \left(\epsilon_3-b\right)}+1}
@@ -174,28 +175,10 @@ Next, we see that by binning \glspl{gb} into degenerate sets, most degenerate se
 %     \label{fig:kim-interp-posterior}
 % \end{figure}
 
-\section{Olmsted Interpolation}
+% \section{Olmsted Interpolation}
 
-As illustrated in \cref{fig:olmsted-Ni-loocv}, \gls{loocv} interpolation results for \SI{0}{\kelvin} \gls{ms} low-noise Ni simulations using the \gls{gpr} method are similar to \gls{lkr} results reported in Figure 6a of \citet{chesserLearningGrainBoundary2020} (reproduced on the right of \cref{fig:olmsted-Ni-loocv} for convenience).
+% As illustrated in \cref{fig:olmsted-Ni-loocv}, \gls{loocv} interpolation results for \SI{0}{\kelvin} \gls{ms} low-noise Ni simulations using the \gls{gpr} method are similar to \gls{lkr} results reported in Figure 6a of \citet{chesserLearningGrainBoundary2020} (reproduced on the right of \cref{fig:olmsted-Ni-loocv} for convenience).
 
-\begin{figure}
-     \centering
-     \begin{subfigure}[b]{0.5\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures/olmsted-Ni-loocv.png}
-        %  \caption{}
-         \label{fig:our-loocv}
-     \hfill
-     \end{subfigure}
-          \begin{subfigure}[b]{0.4\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures/ChesserFigure.jpg}
-        %  \caption{}
-         \label{fig:chesser-loocv}
-     \end{subfigure}
-        \caption{(left) Hexagonally binned parity plot for Ni simulation \acrfull{gbe} interpolation using \acrshort{loocv}. (right) Parity plot for \acrfull{loocv} interpolation results reproduced from Figure 6a of \citet{chesserLearningGrainBoundary2020} under CC-BY Creative Commons license. }
-        \label{fig:olmsted-Ni-loocv}
-\end{figure}
 
 % \begin{figure}
 %     \centering
