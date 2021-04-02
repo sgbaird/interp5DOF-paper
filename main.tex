@@ -4,13 +4,10 @@
 %\documentclass[review,12pt]{elsarticle}
 \documentclass[final,twocolumn,12pt]{elsarticle}
 \usepackage[margin=1.5cm,includefoot]{geometry}
-% \input{paper-pkgs}
-% \input{pkgs.tex}
 \usepackage{auto-paper}
 \zexternaldocument*{supp}
 \input{values.tex}
 \input{abbrev.tex}
-\makeglossaries
 
 \begin{document}
 \begin{frontmatter}
@@ -41,7 +38,7 @@
 % \includegraphics[width=130mm]{abstract.png}
 % \end{graphicalabstract}
 
-\glsresetall %reset the abbreviations
+% \glsresetall %reset the abbreviations
 
 \begin{keyword}
 Grain Boundary \sep Structure-Property Model \sep Interpolation \sep Octonion \sep Machine Learning % \sep Metastability \sep Grain Boundary Distance \sep Grain Boundary Energy
@@ -166,13 +163,7 @@ The expectation that a single, unique \gls{seo} will be found (within numerical 
 \subsubsection{Mapping \glsfmtshortpl{gb} to the \glsentrytitlecase{vfz}{long}}
 \label{sec:methods:framework:proj}
 
-% With the reference GB chosen, and consequently the vfz defined, explain that a GB is mapped into the vfz simply by finding among its \glspl{seo} the one that is closest to the reference GB.
-
 As described above in the 3D analogy, with a reference \gls{gbo} chosen ($o_{\text{ref}}$), and consequently the \gls{vfz} defined (\cref{sec:methods:framework:vfz}), a \gls{gbo} is mapped into the \gls{vfz} by finding among its \glspl{seo} the one that is closest to $o_{\text{ref}}$ according to $d_{\text{E}}$ (\cref{eq:8Deuclidean_dist}). This is performed for all \inpt{} and \outpt{} points with respect to $o_{\text{ref}}$, and the result is a \gls{vfz} point set.
-
-% In the \gls{vfzo} framework, \glspl{seo} are chosen based on minimum Euclidean distance relative to a fixed, arbitrary reference octonion rather than allowing either octonion in a pair to vary in the traditional octonion approach with arc-length distances \cite{francisGeodesicOctonionMetric2019}. We consider all symmetrically equivalent \glspl{gbo} rather than a subset. For barycentric interpolation (\cref{sec:methods:bary}), we also remove a degenerate dimension via a rigid \gls{svd} transformation to 7D Cartesian and employ a further projection to 6D Cartesian only for the triangulation. These differences are summarized in Table \cref{tab:closed-mesh-comparison}. By choosing \glspl{seo} based on Euclidean distance with respect to a fixed octonion, a "closed-mesh" is obtained in the sense that directly computed Euclidean and arc length distances become meaningful and a unique octonion is found within numerical tolerance as long as the reference \gls{gbo} is low-symmetry (very likely based on random sampling and can be verified). This facilitates the use of standard triangulation and interpolation routines rather than needing to rely on pairwise-distance matrices where each distance calculation requires consideration of \glspl{seo}.
-
-% \subsubsection{Generating Random \glsentrytitlecase{vfzo}{long}s} \label{sec:methods:rand} First, random \glspl{gbo} are formed by taking a random, cubochorically sampled quaternion \cite{singhOrientationSamplingDictionarybased2016} \matlab{qm} and random \gls{bp} unit vector \matlab{nA} pair and converting these to an octonion representation \matlab{o} using a modified version \cite{bairdFiveDegreeofFreedom5DOF2020} of \matlab{GBfive2oct.m} \cite{chesserGBOctonionCode2019} via \matlab{o=GBfive2oct(qm,nA)}. The conventions used for \matlab{qm} and \matlab{nA} are given in \cref{sec:intro:interp-error}. After mapping random \glspl{gbo} (\cref{sec:methods:rand}) into the \gls{vfz} (\cref{sec:methods:framework:proj}) to obtain \glspl{vfzo} %
 
 \begin{figure*}
 \centering
@@ -184,7 +175,6 @@ As described above in the 3D analogy, with a reference \gls{gbo} chosen ($o_{\te
 \subsubsection{Distance Calculations in the \glsentrytitlecase{vfz}{long}}
 \label{sec:methods:framework:vfz-dist}
 
-% Explain how to compute distances in the vfz, and why you can now just use euclidean distances.
 Euclidean distances are an accurate approximation of arc length distances in a \gls{vfz} because the difference between the two metrics for the maximum pairwise distance ($pd_{max} \simeq \SI{60}{\degree}$) in a \gls{vfz} is small as shown in \cref{fig:dist-parity}. However, when compared with the traditional octonion distance \cite{francisGeodesicOctonionMetric2019}, due to the presence of low-symmetry \glspl{gb} near the exterior of a \gls{vfz}, some \gls{gb} pairs will exhibit larger Euclidean or arc length distances than is truly representative (see e.g. \cref{fig:dist-ensemble-k1-2-10-20}a). In other words, moving "past" the low-symmetry border of a \gls{vfz} will result in an instantaneous relocation to a possibly distant point in the \gls{vfz} that in reality is highly correlated.
 \begin{figure*}[h!]
     \centering
@@ -199,7 +189,7 @@ Overestimation imposes a "sparseness" of data within a local region of influence
 
 While distance calculations are subject to these infrequent overestimates, they are largely immaterial for interpolation. This is because all interpolation methods in this work involve a region of influence that is small, so that if the distance to a \gls{nn} is overestimated it simply does not contribute to the interpolation (the "sparseness" referred to earlier). Consequently the accuracy of the interpolation is not significantly impacted by infrequent distance overestimates, and excellent results can be achieved without addressing this limitation. However, if even greater accuracy is desired it can be obtained for a relatively minor cost by considering multiple \glspl{vfz}.
 
-We find that taking the minimum distance among several \gls{vfzo} sets defined by separate reference octonions leads to better correlation between the Euclidean approximation and the traditional octonion metric as shown in \cref{fig:dist-ensemble-k1-2-10-20}. Additionally, \cref{fig:dist-ensemble-rmse-mae} shows that the error between scaled Euclidean distance and the traditional octonion metric decreases rapidly as the number of ensemble \gls{vfzo} components increases. This confirms that employing a small ensemble of \gls{vfzo} sets results in significant improvement to the Euclidean distance approximation (\cref{fig:dist-ensemble-k1-2-10-20,fig:dist-ensemble-rmse-mae}) of the traditional octonion metric. However, as already mentioned, improvements to interpolation results are expected to be less significant since they are already robust to occasional distance overestimates. In terms of computational runtime, use of an ensemble of 10 \glspl{vfzo} will increase runtime by a factor of $\sim$10 via a loop-based implementation. For a symmetrized $\num{50000}\times\num{50000}$ pairwise distance matrix, this results in a runtime of approximately 1 CPU hour instead of $\sim$7 CPU minutes for a single \gls{vfz}. However, this is still much faster than the original octonion approach used in \cite{chesserLearningGrainBoundary2020}, which would take an estimated 6.6 CPU years using the original implementation (or 153 CPU days if one \gls{gb} in the \gls{gb} pair is fixed according to the assumption in \citet{morawiecDistancesGrainInterfaces2019}). %might be worth making a note here about how many function calls you might expect during a single grain growth simulation. Then we can translate these times into expected minimum CPU time for a 3D grain growth simulation for X number of grains. Maybe Jose has an estimate for this.
+We find that taking the minimum distance among several \gls{vfzo} sets defined by separate reference octonions leads to better correlation between the Euclidean approximation and the traditional octonion metric as shown in \cref{fig:dist-ensemble-k1-2-10-20}. Additionally, \cref{fig:dist-ensemble-rmse-mae} shows that the error between scaled Euclidean distance and the traditional octonion metric decreases rapidly as the number of ensemble \gls{vfzo} components increases. This confirms that employing a small ensemble of \gls{vfzo} sets results in significant improvement to the Euclidean distance approximation (\cref{fig:dist-ensemble-k1-2-10-20,fig:dist-ensemble-rmse-mae}) of the traditional octonion metric. However, as already mentioned, improvements to interpolation results are expected to be less significant since they are already robust to occasional distance overestimates. In terms of computational runtime, use of an ensemble of 10 \glspl{vfzo} will increase runtime by a factor of $\sim$10 via a loop-based implementation. For a symmetrized $\num{50000}\times\num{50000}$ pairwise distance matrix, this results in a runtime of approximately 1 CPU hour instead of $\sim$7 CPU minutes for a single \gls{vfz}. However, this is still much faster than the original octonion approach used in \cite{chesserLearningGrainBoundary2020}, which would take an estimated 6.6 CPU years using the original implementation (or 153 CPU days if one \gls{gb} in the \gls{gb} pair is fixed according to the assumption in \citet{morawiecDistancesGrainInterfaces2019}). %might be worth making a note here about how many function calls you might expect during a single grain growth simulation. Then we can translate these times into expected minimum CPU time for a 3D grain growth simulation for X number of grains. Maybe Jose has an estimate for this. I think I included something later
 
 \begin{figure}
     \centering
@@ -497,7 +487,7 @@ In addition to the interpolation runtime of the methods just presented, it is va
 
 Directly computed, scaled Euclidean and arc length distances in the \gls{vfzo} framework approximate the original octonion distance by \citet{francisGeodesicOctonionMetric2019}, and the calculation speed is even higher than explicit \gls{gbo} distance calculations using the original octonion distance. For example, \num{50000} \glspl{gbo} can by symmetrized into \glspl{vfzo} in approximately \SI{\symtime}{seconds} using \SI{6}{cores} (e.g. via \vfzorepo{} function \matlab{get\_octpairs.m}), and the corresponding \num{50000} $\times$ \num{50000} pairwise-distance matrix can be computed in approximately \SI{10}{seconds} using the built-in MATLAB \textit{Statistics and Machine Learning Toolbox} function \matlab{pdist.m}, giving a total runtime of approximately \SI{86}{seconds} (\num{466} total CPU seconds). Compared to the original octonion metric distance calculations \cite{chesserLearningGrainBoundary2020} in the Fortran-based EMSoft package \cite{degraefEMSoft2020}, this represents an improvement in computational speed by $\sim$\num{5} orders of magnitude using our MATLAB implementation in the \vfzorepo{} \cite{bairdFiveDegreeofFreedom5DOF2020}.
 
-Improvement per distance calculation per core of the \vfzorepo{} is about \num{4e5} relative to the EMSoft \cite{degraefEMSoft2020} metric of 26 minutes using 8 cores for a $\num{388}\times\num{388}$ pairwise distance matrix. This EMSoft timing information is directly reported in \citet{chesserLearningGrainBoundary2020}. In other words, computation of a $\num{50000}\times\num{50000}$ using the traditional octonion metric and EMSoft implementation would take approximately 6.6 CPU years (or 153 CPU days by applying the isometry equation in Section 7 of \citet{morawiecDistancesGrainInterfaces2019}). Since most interpolation methods will depend on computing new distances, probing the model at new \glspl{gb} will also be expensive. For example, it would take at minimum $\sim$30 CPU days (after isometry equivalence has been applied) to perform property interpolation for \num{10000} \outpt{} \glspl{gb} assuming the pairwise-distance matrix relative to \num{50000} \inpt{} \glspl{gbo} needs to be computed. This presents an issue for iterative simulations in which \num{1000}'s of new \glspl{gb} segments would need to be sampled at each time step. By contrast, property values for \num{10000} new \glspl{gb} would be sampled in our approach in $\sim$\num{90} CPU seconds. For perspective, a phase-field simulation might have \num{10000} or more time steps with thousands of \glspl{gb} \citet{kimPhasefieldModeling3D2014,dimokratiSPFMModelIdeal2020}. %(50000^2/(86*6))/(388^2/(26*60*8))
+Improvement per distance calculation per core of the \vfzorepo{} is about \num{4e5} relative to the EMSoft \cite{degraefEMSoft2020} metric of 26 minutes using 8 cores for a $\num{388}\times\num{388}$ pairwise distance matrix. This EMSoft timing information is directly reported in \citet{chesserLearningGrainBoundary2020}. In other words, computation of a $\num{50000}\times\num{50000}$ using the traditional octonion metric and EMSoft implementation would take approximately 6.6 CPU years (or 153 CPU days by applying the isometry equation in Section 7 of \citet{morawiecDistancesGrainInterfaces2019}). Since most interpolation methods will depend on computing new distances, probing the model at new \glspl{gb} will also be expensive. For example, it would take at minimum $\sim$30 CPU days (after isometry equivalence has been applied) to perform property interpolation for \num{10000} \outpt{} \glspl{gb} assuming the pairwise-distance matrix relative to \num{50000} \inpt{} \glspl{gbo} needs to be computed. This presents an issue for iterative simulations (e.g. mesoscale grain growth) in which \num{1000}'s of new \glspl{gb} segments would need to be sampled at each time step. By contrast, property values for \num{10000} new \glspl{gb} would be sampled in our approach in $\sim$\num{90} CPU seconds. For perspective, a phase-field simulation might have \num{10000} or more time steps with thousands of \glspl{gb} \citet{kimPhasefieldModeling3D2014,dimokratiSPFMModelIdeal2020}.  Recently, \citet{miyoshiLargescalePhasefieldStudy2021} presented Reed-Shockley anisotropic 3D phase-field grain growth results for initially \num{3125000} grains with as many as \num{125000} time steps to reach $\sim$\num{10000} final grains. Performing such a simulation with  %(50000^2/(86*6))/(388^2/(26*60*8))
 
 This significant speed up stems from the fact that in the \gls{vfzo} framework \glspl{seo} only need to be considered once per \gls{gb}, $O(L)$, rather than once per distance calculation, $O(L^2)$,
 %per \gls{gb} in a \gls{gb}-pair
@@ -563,36 +553,18 @@ Method &
 \end{tabular}
 \end{table*}
 
-For the Fe case, we see a larger improvement than prior work likely due to our incorporation of \gls{gb} symmetry, which was not considered in \citet{restrepoUsingArtificialNeural2014}. For the Ni case, %there is a slight improvement relative to prior work, indicating that accuracy is similar to the original octonion metric while maintaining the significant computational benefits of the \gls{vfzo} framework.
-as illustrated in \cref{fig:olmsted-Ni-loocv}, \gls{loocv} interpolation results for \SI{0}{\kelvin} \gls{ms} low-noise Ni simulations using the \gls{gpr} method are similar to \gls{lkr} results reported in Figure 6a of \citet{chesserLearningGrainBoundary2020} (reproduced on the right of \cref{fig:olmsted-Ni-loocv} for convenience).
+For the Fe case, we see a larger improvement than prior work likely due to our incorporation of \gls{gb} symmetry, which was not considered in \citet{restrepoUsingArtificialNeural2014}. For the Ni case, there is a slight improvement relative to prior work, indicating that accuracy is similar to the original octonion metric while maintaining the significant computational benefits of the \gls{vfzo} framework.
 
-\begin{figure}
-     \centering
-     \begin{subfigure}[b]{0.5\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures/olmsted-Ni-loocv.png}
-        %  \caption{}
-         \label{fig:our-loocv}
-     \hfill
-     \end{subfigure}
-          \begin{subfigure}[b]{0.4\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures/ChesserFigure.jpg}
-        %  \caption{}
-         \label{fig:chesser-loocv}
-     \end{subfigure}
-        \caption{(left) Hexagonally binned parity plot for Ni simulation \acrfull{gbe} interpolation using \acrshort{loocv}. (right) Parity plot for \acrfull{loocv} interpolation results reproduced from Figure 6a of \citet{chesserLearningGrainBoundary2020} under CC-BY Creative Commons license. }
-        \label{fig:olmsted-Ni-loocv}
-\end{figure}
-
-Since the \gls{brk} validation function is also an interpolation function on the Ni simulation data, \gls{gpr} within the \gls{vfzo} framework and the \gls{brk} function results are directly compared via parity plot in \cref{}.
+Since the \gls{brk} validation function is also an interpolation function on the Ni simulation data, \gls{gpr} within the \gls{vfzo} framework and the \gls{brk} function results are directly compared via parity plot in \cref{fig:resubloss-ni}.
 
 \begin{figure*}
     \centering
-    \includegraphics{}
-    \caption{Caption}
-    \label{fig:my_label}
+    \includegraphics[scale=1]{figures/resubloss-ni.png}
+    \caption{Hexagonally binned parity plots of (a) \gls{brk} and (b) \gls{gpr} model \glspl{gbe} fitted using Olmsted Ni simulation data vs. Olmsted Ni simulation \glspl{gbe}. \Gls{mae} is \SIlist{0.00975;0.03626}{\J\per\square\m} for (a) and (b), respectively. Likewise, \gls{rmse} is \SIlist{0.01727;0.04972}{\J\per\square\m}, respectively.}
+    \label{fig:resubloss-ni}
 \end{figure*}
+
+For the \gls{brk} and \gls{gpr} interpolations, \gls{mae} is \SIlist{0.00975;0.03626}{\J\per\square\m}, respectively. Likewise, \gls{rmse} is \SIlist{0.01727;0.04972}{\J\per\square\m}, respectively. From \cref{fig:resubloss-ni}a, we see that low \gls{gbe} is predicted more accurately and high \gls{gbe} less accurately with \gls{brk} interpolation vs. \gls{gpr} in the \gls{vfzo} framework. Without access to the original fitting routines used to produce the \gls{brk} function, we have not performed \gls{loocv} which would allow for a safer model evaluation (i.e. one in which fair results are less likely due to overfitting). \Gls{loocv} results for the \gls{gpr} case are, however, shown in \cref{fig:olmsted-Ni-loocv}, indicating that the model performs much worse in such a data-limited regime at points the model has never seen before.
 
 \subsubsection{\glsentrytitlecase{gprm}{long} Applied to Fe Simulation Data}
 \label{sec:results:simulation:gprm}
@@ -632,9 +604,7 @@ Next, given the theoretical existence of a true minimum \gls{gbe} for a given \g
 
 Finally, datasets where multiple metastable \glspl{gbe} (e.g. 3-10 repeats) are provided for each \gls{gb} will likely greatly improve the performance of the \gls{gpr} model in predicting either the most likely metastable \gls{gbe} (when all \glspl{gbe} are considered) or the true minimum \gls{gbe} (when only the minimum \gls{gbe} is considered for each \gls{gb}) and may even negate the need for a \gls{gprm} approach. Thus, it is suggested that, where feasible, future large-scale \gls{gb} bicrystal simulation studies will report all property data for repeated trial runs rather than a single trial run or a single value from a set of trial runs. Ideally, data for the three additional microscopic \glspl{dof} for \glspl{gb} (which falls into the category of epistemic uncertainty in this work) would also be included. We believe it is likely that minimum energy paths (i.e. paths of steepest descent) in the \gls{gbe} landscape depend on both macroscopic and microscopic \glspl{dof} (in total, 8DOF) and could offer a more holistic view of \gls{gb} behavior that better mimics and explains experimental grain growth observations. Indeed, it has been experimentally observed that at least some \gls{gb} migration mechanisms involve structural transformations between equilibrium \glspl{gb} via metastable states \cite{weiDirectImagingAtomistic2021}.
 
-
 \section{Conclusion} \label{sec:conclusion}
-
 In this work, we presented the \gls{vfzo} framework for (i) computing distances between GBs and (ii) predicting the properties of GBs from existing measurements. We found that distance calculations in the \gls{vfzo} framework (via \vfzorepo{} function \matlab{GBdist4.m}) are dramatically more computationally efficient ($O(N_p^2L)$) than traditional methods ($O(N_p^4L^2)$) at the expense of infrequent, large distance overestimation which can be addressed through ensemble techniques at a small computational cost (relative to traditional methods) as discussed in \cref{sec:methods:framework:vfz-dist}.
 
 We also developed and tested a barycentric interpolation method, and adapted three other interpolation methods for use in the \gls{vfzo} framework. We provide an easy-to-use, versatile implementation of our methods through an interpolation function \matlab{interp5DOF.m} written in MATLAB  (\url{github.com/sgbaird-5dof/interp}, \cite{bairdFiveDegreeofFreedom5DOF2020}) and many companion functions in the \vfzorepo{}.  This approach is general and can be applied to any crystal system (any of the 32 crystallographic point groups can be selected by the parameter \matlab{pgnum}\footnote{While our testing focused on cubic point group symmetry, symmetry operators for other point group symmetries were provided in the TutorialCode/crystal\_symmetry\_ops directory of \url{github.com/ichesser/GB\_octonion\_code} (as of commit: f57f9be). Other point groups (in particular those which are noncentrosymmetric) may give rise to differently shaped/larger VFZs for which a Euclidean distance approximation will have the worst case error of 2 vs. the true value of $\pi$ which represent the furthest Euclidean and arc length distances on a unit hypersphere, respectively. We plan to investigate this in future work.}) and may be applicable to other distance metrics. We also developed a \gls{gprm} model specifically for better low \gls{gbe} prediction using a non-uniformly distributed, noisy dataset.
@@ -646,7 +616,7 @@ We anticipate that the \gls{vfzo} framework and corresponding implementation wil
 \section*{Acknowledgement}
 \label{sec:acknowledgement}
 
-The authors thank Ian Chesser, Toby Francis, Victoria Baird, and Brandon Snow for useful discussions. This work was supported by the National Science Foundation under Grant No. 1610077. This work was supported in part through computational resources provided by Brigham Young University's Office of Research Computing.
+The authors thank Ian Chesser, Toby Francis, Victoria Baird, Brandon Snow, and José Niño for useful discussions. This work was supported by the National Science Foundation under Grant No. 1610077. This work was supported in part through computational resources provided by Brigham Young University's Office of Research Computing.
 
 \section*{CRediT Statement}
 \textbf{Sterling Baird}: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data Curation, Writing - Original Draft, Writing - Review \& Editing, Visualization. \textbf{Oliver Johnson}: Supervision, Project administration, Funding acquisition, Conceptualization, Writing - Review \& Editing. \textbf{David Fullwood}: Funding acquisition, Writing - Review \& Editing. \textbf{Eric Homer}: Funding acquisition, Writing - Review \& Editing
@@ -814,6 +784,7 @@ where $\lambda_{m,i}$, $v_{m,q}$, $v_{m,i}$ and $N$, are the barycentric coordin
 
 % \newpage
 \printglossaries
+% \printabbreviations
 %need to manually clear cached files & logs in overleaf to get new abbreviations to appear
 
 % \newpage

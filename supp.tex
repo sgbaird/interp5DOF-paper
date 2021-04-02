@@ -175,10 +175,28 @@ Next, we see that by binning \glspl{gb} into degenerate sets, most degenerate se
 %     \label{fig:kim-interp-posterior}
 % \end{figure}
 
-% \section{Olmsted Interpolation}
+\section{Olmsted Interpolation}
 
-% As illustrated in \cref{fig:olmsted-Ni-loocv}, \gls{loocv} interpolation results for \SI{0}{\kelvin} \gls{ms} low-noise Ni simulations using the \gls{gpr} method are similar to \gls{lkr} results reported in Figure 6a of \citet{chesserLearningGrainBoundary2020} (reproduced on the right of \cref{fig:olmsted-Ni-loocv} for convenience).
+As illustrated in \cref{fig:olmsted-Ni-loocv}, \gls{loocv} interpolation results for \SI{0}{\kelvin} \gls{ms} low-noise Ni simulations using the \gls{gpr} method are similar to \gls{lkr} results reported in Figure 6a of \citet{chesserLearningGrainBoundary2020} (reproduced on the right of \cref{fig:olmsted-Ni-loocv} for convenience).
 
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.5\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/olmsted-Ni-loocv.png}
+        %  \caption{}
+         \label{fig:our-loocv}
+     \hfill
+     \end{subfigure}
+          \begin{subfigure}[b]{0.4\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/ChesserFigure.jpg}
+        %  \caption{}
+         \label{fig:chesser-loocv}
+     \end{subfigure}
+        \caption{(left) Hexagonally binned parity plot for Ni simulation \acrfull{gbe} interpolation using \acrshort{loocv}. (right) Parity plot for \acrfull{loocv} interpolation results reproduced from Figure 6a of \citet{chesserLearningGrainBoundary2020} under CC-BY Creative Commons license. }
+        \label{fig:olmsted-Ni-loocv}
+\end{figure}
 
 % \begin{figure}
 %     \centering

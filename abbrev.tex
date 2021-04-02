@@ -1,5 +1,12 @@
-\glssetcategoryattribute{abbreviation}{indexonlyfirst}{true}
+\makeglossaries
+\GlsXtrEnableEntryCounting{abbreviation}{2}
+% \glssetcategoryattribute{abbreviation}{indexonlyfirst}{true}
 \glssetcategoryattribute{abbreviation}{nohyper}{true}
+
+% \setabbreviationstyle[abbreviation]{long-short}
+
+% \glsenableentrycount
+% \glssetcategoryattribute{abbreviation}{entrycount}{2}
 
 \newabbreviation[longplural=five degrees of freedom]{5dof}{5DOF}{five degree-of-freedom}
 \newabbreviation[longplural=three degrees of freedom]{3dof}{3DOF}{three degree-of-freedom}
@@ -7,7 +14,6 @@
 \newabbreviation{ebsd}{EBSD}{electron backscatter diffraction}
 \newabbreviation[longplural={grain boundaries}]{gb}{GB}{grain boundary}
 \newabbreviation{fcc}{FCC}{face-centered cubic}
-\newabbreviation{mfc}{MFC}{mass flow controller}
 \newabbreviation{sem}{SEM}{scanning electron microscope}
 \newabbreviation{fea}{FEA}{finite element analysis}
 \newabbreviation{bcs}{BCs}{boundary conditions}

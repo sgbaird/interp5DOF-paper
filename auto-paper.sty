@@ -1,3 +1,4 @@
+%MIT License
 \ProvidesPackage{auto-paper}
 % uploading packages
 \usepackage{setspace}
@@ -40,7 +41,8 @@
 %alternatively can use `` '' format for double quotes
 \usepackage{booktabs}
 \setlength{\abovetopsep}{1ex}
-\usepackage[shortcuts,abbreviations]{glossaries-extra}
+\usepackage[shortcuts]{glossaries-extra}
+% \usepackage[shortcuts,abbreviations]{glossaries-extra} %for some reason, abbreviations seemed to be messing with automatic regeneration of Glossary and the counting stuff
 \newcommand*{\TCac}[1]{\ecapitalisewords{\glsentrylong{#1}}}
 % remove the "Preprint submitted to Elsevier" footer on the first page
 \makeatletter
