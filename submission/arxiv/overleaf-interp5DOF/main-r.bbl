@@ -1,0 +1,953 @@
+\newcommand{\noopsort}[1]{}
+\begin{thebibliography}{95}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Jin et~al.(2018)Jin, Huang, Kwon, Zhang, Li, Oh, Dong, Luo, Biswal,
+  Cunning, Bakharev, Moon, Yoo, {Camacho-Mojica}, Kim, Lee, Wang, Seong,
+  Saxena, Ding, Shin, and Ruoff}]{jinColossalGrainGrowth2018}
+\bibinfo{author}{S.~Jin}, \bibinfo{author}{M.~Huang},
+  \bibinfo{author}{Y.~Kwon}, \bibinfo{author}{L.~Zhang}, \bibinfo{author}{B.~W.
+  Li}, \bibinfo{author}{S.~Oh}, \bibinfo{author}{J.~Dong},
+  \bibinfo{author}{D.~Luo}, \bibinfo{author}{M.~Biswal}, \bibinfo{author}{B.~V.
+  Cunning}, \bibinfo{author}{P.~V. Bakharev}, \bibinfo{author}{I.~Moon},
+  \bibinfo{author}{W.~J. Yoo}, \bibinfo{author}{D.~C. {Camacho-Mojica}},
+  \bibinfo{author}{Y.~J. Kim}, \bibinfo{author}{S.~H. Lee},
+  \bibinfo{author}{B.~Wang}, \bibinfo{author}{W.~K. Seong},
+  \bibinfo{author}{M.~Saxena}, \bibinfo{author}{F.~Ding},
+  \bibinfo{author}{H.~J. Shin}, \bibinfo{author}{R.~S. Ruoff},
+\newblock \bibinfo{title}{Colossal grain growth yields single-crystal metal
+  foils by contact-free annealing},
+\newblock \bibinfo{journal}{Science} \bibinfo{volume}{362}
+  (\bibinfo{year}{2018}) \bibinfo{pages}{1021--1025}.
+  \DOIprefix\doi{10.1126/science.aao3373}.
+%Type = Article
+\bibitem[{Brandenburg et~al.(2014)Brandenburg, {Barrales-Mora}, and
+  Molodov}]{brandenburgMigrationFacetingLowangle2014}
+\bibinfo{author}{J.~E. Brandenburg}, \bibinfo{author}{L.~A. {Barrales-Mora}},
+  \bibinfo{author}{D.~A. Molodov},
+\newblock \bibinfo{title}{On migration and faceting of low-angle grain
+  boundaries: {{Experimental}} and computational study},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{77}
+  (\bibinfo{year}{2014}) \bibinfo{pages}{294--309}.
+  \DOIprefix\doi{10.1016/j.actamat.2014.06.006}.
+%Type = Article
+\bibitem[{Huang et~al.(2015)Huang, Bartels, Xu, Osterhoff, Kalbfleisch, Sprung,
+  Suzuki, Takahashi, Blanton, Salditt, and
+  Miao}]{huangGrainRotationLattice2015}
+\bibinfo{author}{Z.~Huang}, \bibinfo{author}{M.~Bartels},
+  \bibinfo{author}{R.~Xu}, \bibinfo{author}{M.~Osterhoff},
+  \bibinfo{author}{S.~Kalbfleisch}, \bibinfo{author}{M.~Sprung},
+  \bibinfo{author}{A.~Suzuki}, \bibinfo{author}{Y.~Takahashi},
+  \bibinfo{author}{T.~N. Blanton}, \bibinfo{author}{T.~Salditt},
+  \bibinfo{author}{J.~Miao},
+\newblock \bibinfo{title}{Grain rotation and lattice deformation during
+  photoinduced chemical reactions revealed by in situ {{X}}-ray
+  nanodiffraction},
+\newblock \bibinfo{journal}{Nature Materials} \bibinfo{volume}{14}
+  (\bibinfo{year}{2015}) \bibinfo{pages}{691--695}.
+  \DOIprefix\doi{10.1038/nmat4311}.
+%Type = Article
+\bibitem[{Trautt and Mishin(2014)}]{trauttCapillarydrivenGrainBoundary2014}
+\bibinfo{author}{Z.~Trautt}, \bibinfo{author}{Y.~Mishin},
+\newblock \bibinfo{title}{Capillary-driven grain boundary motion and grain
+  rotation in a tricrystal: {{A}} molecular dynamics study},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{65}
+  (\bibinfo{year}{2014}) \bibinfo{pages}{19--31}.
+  \DOIprefix\doi{10.1016/j.actamat.2013.11.059}.
+%Type = Article
+\bibitem[{Sharma et~al.(2012)Sharma, Huizenga, Bytchkov, Sietsma, and
+  Offerman}]{sharmaObservationChangingCrystal2012}
+\bibinfo{author}{H.~Sharma}, \bibinfo{author}{R.~M. Huizenga},
+  \bibinfo{author}{A.~Bytchkov}, \bibinfo{author}{J.~Sietsma},
+  \bibinfo{author}{S.~E. Offerman},
+\newblock \bibinfo{title}{Observation of changing crystal orientations during
+  grain coarsening},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{60}
+  (\bibinfo{year}{2012}) \bibinfo{pages}{229--237}.
+  \DOIprefix\doi{10.1016/j.actamat.2011.09.057}.
+%Type = Article
+\bibitem[{Ware et~al.(2018)Ware, Suzuki, Wicker, and
+  Cordero}]{wareGrainBoundaryPlane2018}
+\bibinfo{author}{L.~G. Ware}, \bibinfo{author}{D.~H. Suzuki},
+  \bibinfo{author}{K.~R. Wicker}, \bibinfo{author}{Z.~C. Cordero},
+\newblock \bibinfo{title}{Grain boundary plane manipulation in directionally
+  solidified bicrystals and tricrystals},
+\newblock \bibinfo{journal}{Scripta Materialia} \bibinfo{volume}{152}
+  (\bibinfo{year}{2018}) \bibinfo{pages}{98--101}.
+  \DOIprefix\doi{10.1016/j.scriptamat.2018.03.047}.
+%Type = Article
+\bibitem[{Li et~al.(2017)Li, Oudriss, Metsue, Bouhattate, and
+  Feaugas}]{liAnisotropyHydrogenDiffusion2017}
+\bibinfo{author}{J.~Li}, \bibinfo{author}{A.~Oudriss},
+  \bibinfo{author}{A.~Metsue}, \bibinfo{author}{J.~Bouhattate},
+  \bibinfo{author}{X.~Feaugas},
+\newblock \bibinfo{title}{Anisotropy of hydrogen diffusion in nickel single
+  crystals: The effects of self-stress and hydrogen concentration on
+  diffusion},
+\newblock \bibinfo{journal}{Scientific Reports} \bibinfo{volume}{7}
+  (\bibinfo{year}{2017}) \bibinfo{pages}{45041}.
+  \DOIprefix\doi{10.1038/srep45041}.
+%Type = Article
+\bibitem[{Oudriss et~al.(2012)Oudriss, Creus, Bouhattate, Conforto, Berziou,
+  Savall, and Feaugas}]{oudrissGrainSizeGrainboundary2012}
+\bibinfo{author}{A.~Oudriss}, \bibinfo{author}{J.~Creus},
+  \bibinfo{author}{J.~Bouhattate}, \bibinfo{author}{E.~Conforto},
+  \bibinfo{author}{C.~Berziou}, \bibinfo{author}{C.~Savall},
+  \bibinfo{author}{X.~Feaugas},
+\newblock \bibinfo{title}{Grain size and grain-boundary effects on diffusion
+  and trapping of hydrogen in pure nickel},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{60}
+  (\bibinfo{year}{2012}) \bibinfo{pages}{6814--6828}.
+  \DOIprefix\doi{10.1016/j.actamat.2012.09.004}.
+%Type = Article
+\bibitem[{Metsue et~al.(2016)Metsue, Oudriss, and
+  Feaugas}]{metsueHydrogenSolubilityVacancy2016}
+\bibinfo{author}{A.~Metsue}, \bibinfo{author}{A.~Oudriss},
+  \bibinfo{author}{X.~Feaugas},
+\newblock \bibinfo{title}{Hydrogen solubility and vacancy concentration in
+  nickel single crystals at thermal equilibrium: {{New}} insights from
+  statistical mechanics and ab initio calculations},
+\newblock \bibinfo{journal}{Journal of Alloys and Compounds}
+  \bibinfo{volume}{656} (\bibinfo{year}{2016}) \bibinfo{pages}{555--567}.
+  \DOIprefix\doi{10.1016/j.jallcom.2015.09.252}.
+%Type = Article
+\bibitem[{Huang et~al.(2017)Huang, Chen, Song, McDowell, and
+  Zhu}]{huangHydrogenEmbrittlementGrain2017}
+\bibinfo{author}{S.~Huang}, \bibinfo{author}{D.~Chen},
+  \bibinfo{author}{J.~Song}, \bibinfo{author}{D.~L. McDowell},
+  \bibinfo{author}{T.~Zhu},
+\newblock \bibinfo{title}{Hydrogen embrittlement of grain boundaries in nickel:
+  An atomistic study},
+\newblock \bibinfo{journal}{npj Computational Materials} \bibinfo{volume}{3}
+  (\bibinfo{year}{2017}) \bibinfo{pages}{1--8}.
+  \DOIprefix\doi{10.1038/s41524-017-0031-1}.
+%Type = Article
+\bibitem[{Xia et~al.(2011)Xia, Li, Liu, and Zhou}]{xiaApplingGrainBoundary2011}
+\bibinfo{author}{S.~Xia}, \bibinfo{author}{H.~Li}, \bibinfo{author}{T.~G. Liu},
+  \bibinfo{author}{B.~X. Zhou},
+\newblock \bibinfo{title}{Appling grain boundary engineering to {{Alloy}} 690
+  tube for enhancing intergranular corrosion resistance},
+\newblock \bibinfo{journal}{Journal of Nuclear Materials} \bibinfo{volume}{416}
+  (\bibinfo{year}{2011}) \bibinfo{pages}{303--310}.
+  \DOIprefix\doi{10.1016/j.jnucmat.2011.06.017}.
+%Type = Article
+\bibitem[{Demkowicz(2020)}]{demkowiczThresholdDensityHelium2020}
+\bibinfo{author}{M.~J. Demkowicz},
+\newblock \bibinfo{title}{A threshold density of helium bubbles induces a
+  ductile-to-brittle transition at a grain boundary in nickel},
+\newblock \bibinfo{journal}{Journal of Nuclear Materials} \bibinfo{volume}{533}
+  (\bibinfo{year}{2020}) \bibinfo{pages}{152118}.
+  \DOIprefix\doi{10.1016/j.jnucmat.2020.152118}.
+%Type = Article
+\bibitem[{Hanson et~al.(2018)Hanson, Bagri, Lind, Kenesei, Suter, Grade{\v
+  c}ak, and Demkowicz}]{hansonCrystallographicCharacterGrain2018}
+\bibinfo{author}{J.~P. Hanson}, \bibinfo{author}{A.~Bagri},
+  \bibinfo{author}{J.~Lind}, \bibinfo{author}{P.~Kenesei},
+  \bibinfo{author}{R.~M. Suter}, \bibinfo{author}{S.~Grade{\v c}ak},
+  \bibinfo{author}{M.~J. Demkowicz},
+\newblock \bibinfo{title}{Crystallographic character of grain boundaries
+  resistant to hydrogen-assisted fracture in {{Ni}}-base alloy 725},
+\newblock \bibinfo{journal}{Nature Communications} \bibinfo{volume}{9}
+  (\bibinfo{year}{2018}) \bibinfo{pages}{1--11}.
+  \DOIprefix\doi{10.1038/s41467-018-05549-y}.
+%Type = Article
+\bibitem[{Jothi et~al.(2016)Jothi, Merzlikin, Croft, Andersson, and
+  Brown}]{jothiInvestigationMicromechanismsHydrogen2016}
+\bibinfo{author}{S.~Jothi}, \bibinfo{author}{S.~V. Merzlikin},
+  \bibinfo{author}{T.~N. Croft}, \bibinfo{author}{J.~Andersson},
+  \bibinfo{author}{S.~G. Brown},
+\newblock \bibinfo{title}{An investigation of micro-mechanisms in hydrogen
+  induced cracking in nickel-based superalloy 718},
+\newblock \bibinfo{journal}{Journal of Alloys and Compounds}
+  \bibinfo{volume}{664} (\bibinfo{year}{2016}) \bibinfo{pages}{664--681}.
+  \DOIprefix\doi{10.1016/j.jallcom.2016.01.033}.
+%Type = Article
+\bibitem[{Zhou et~al.(2016)Zhou, Marchand, McDowell, Zhu, and
+  Song}]{zhouChemomechanicalOriginHydrogen2016}
+\bibinfo{author}{X.~Zhou}, \bibinfo{author}{D.~Marchand},
+  \bibinfo{author}{D.~L. McDowell}, \bibinfo{author}{T.~Zhu},
+  \bibinfo{author}{J.~Song},
+\newblock \bibinfo{title}{Chemomechanical {{Origin}} of {{Hydrogen Trapping}}
+  at {{Grain Boundaries}} in fcc {{Metals}}},
+\newblock \bibinfo{journal}{Physical Review Letters} \bibinfo{volume}{116}
+  (\bibinfo{year}{2016}) \bibinfo{pages}{1--33}.
+  \DOIprefix\doi{10.1103/PhysRevLett.116.075502}.
+%Type = Article
+\bibitem[{Huang et~al.(2020)Huang, Shishehbor, {Guar{\'i}n-Zapata}, Kirchhofer,
+  Li, Cruz, Wang, Bhowmick, Stauffer, Manimunda, Bozhilov, Caldwell,
+  Zavattieri, and Kisailus}]{huangNaturalImpactresistantBicontinuous2020}
+\bibinfo{author}{W.~Huang}, \bibinfo{author}{M.~Shishehbor},
+  \bibinfo{author}{N.~{Guar{\'i}n-Zapata}}, \bibinfo{author}{N.~D. Kirchhofer},
+  \bibinfo{author}{J.~Li}, \bibinfo{author}{L.~Cruz},
+  \bibinfo{author}{T.~Wang}, \bibinfo{author}{S.~Bhowmick},
+  \bibinfo{author}{D.~Stauffer}, \bibinfo{author}{P.~Manimunda},
+  \bibinfo{author}{K.~N. Bozhilov}, \bibinfo{author}{R.~Caldwell},
+  \bibinfo{author}{P.~Zavattieri}, \bibinfo{author}{D.~Kisailus},
+\newblock \bibinfo{title}{A natural impact-resistant bicontinuous composite
+  nanoparticle coating},
+\newblock \bibinfo{journal}{Nature Materials} \bibinfo{volume}{19}
+  (\bibinfo{year}{2020}) \bibinfo{pages}{1236--1243}.
+  \DOIprefix\doi{10.1038/s41563-020-0768-7}.
+%Type = Article
+\bibitem[{Wang et~al.(2018)Wang, Voisin, McKeown, Ye, Calta, Li, Zeng, Zhang,
+  Chen, Roehling, Ott, Santala, Depond, Matthews, Hamza, and
+  Zhu}]{wangAdditivelyManufacturedHierarchical2018}
+\bibinfo{author}{Y.~M. Wang}, \bibinfo{author}{T.~Voisin},
+  \bibinfo{author}{J.~T. McKeown}, \bibinfo{author}{J.~Ye},
+  \bibinfo{author}{N.~P. Calta}, \bibinfo{author}{Z.~Li},
+  \bibinfo{author}{Z.~Zeng}, \bibinfo{author}{Y.~Zhang},
+  \bibinfo{author}{W.~Chen}, \bibinfo{author}{T.~T. Roehling},
+  \bibinfo{author}{R.~T. Ott}, \bibinfo{author}{M.~K. Santala},
+  \bibinfo{author}{P.~J. Depond}, \bibinfo{author}{M.~J. Matthews},
+  \bibinfo{author}{A.~V. Hamza}, \bibinfo{author}{T.~Zhu},
+\newblock \bibinfo{title}{Additively manufactured hierarchical stainless steels
+  with high strength and ductility},
+\newblock \bibinfo{journal}{Nature Materials} \bibinfo{volume}{17}
+  (\bibinfo{year}{2018}) \bibinfo{pages}{63--71}.
+  \DOIprefix\doi{10.1038/nmat5021}.
+%Type = Article
+\bibitem[{Lin et~al.(2016)Lin, Bierbaum, Schall, Sethna, and
+  Cohen}]{linMeasuringNonlinearStresses2016}
+\bibinfo{author}{N.~Y.~C. Lin}, \bibinfo{author}{M.~Bierbaum},
+  \bibinfo{author}{P.~Schall}, \bibinfo{author}{J.~P. Sethna},
+  \bibinfo{author}{I.~Cohen},
+\newblock \bibinfo{title}{Measuring nonlinear stresses generated by defects in
+  {{3D}} colloidal crystals},
+\newblock \bibinfo{journal}{Nature Materials} \bibinfo{volume}{15}
+  (\bibinfo{year}{2016}) \bibinfo{pages}{1172--1176}.
+  \DOIprefix\doi{10.1038/nmat4715}.
+%Type = Article
+\bibitem[{Yin et~al.(2019)Yin, Chen, Saito, Inoue, and
+  Ikuhara}]{yinCeramicPhasesOnedimensional2019}
+\bibinfo{author}{D.~Yin}, \bibinfo{author}{C.~Chen},
+  \bibinfo{author}{M.~Saito}, \bibinfo{author}{K.~Inoue},
+  \bibinfo{author}{Y.~Ikuhara},
+\newblock \bibinfo{title}{Ceramic phases with one-dimensional long-range
+  order},
+\newblock \bibinfo{journal}{Nature Materials} \bibinfo{volume}{18}
+  (\bibinfo{year}{2019}) \bibinfo{pages}{19--23}.
+  \DOIprefix\doi{10.1038/s41563-018-0240-0}.
+%Type = Article
+\bibitem[{Guan et~al.(2011)Guan, Li, Gong, Liu, Zhang, Chen, Gelb, Yun, Xiong,
+  Tian, and Wang}]{guanAnalysisThreedimensionalMicrostructure2011}
+\bibinfo{author}{Y.~Guan}, \bibinfo{author}{W.~Li}, \bibinfo{author}{Y.~Gong},
+  \bibinfo{author}{G.~Liu}, \bibinfo{author}{X.~Zhang},
+  \bibinfo{author}{J.~Chen}, \bibinfo{author}{J.~Gelb},
+  \bibinfo{author}{W.~Yun}, \bibinfo{author}{Y.~Xiong},
+  \bibinfo{author}{Y.~Tian}, \bibinfo{author}{H.~Wang},
+\newblock \bibinfo{title}{Analysis of the three-dimensional microstructure of a
+  solid-oxide fuel cell anode using nano {{X}}-ray tomography},
+\newblock \bibinfo{journal}{Journal of Power Sources} \bibinfo{volume}{196}
+  (\bibinfo{year}{2011}) \bibinfo{pages}{1915--1919}.
+  \DOIprefix\doi{10.1016/j.jpowsour.2010.09.059}.
+%Type = Article
+\bibitem[{Vlassiouk et~al.(2018)Vlassiouk, Stehle, Pudasaini, Unocic, Rack,
+  Baddorf, Ivanov, Lavrik, List, Gupta, Bets, Yakobson, and
+  Smirnov}]{vlassioukEvolutionarySelectionGrowth2018}
+\bibinfo{author}{I.~V. Vlassiouk}, \bibinfo{author}{Y.~Stehle},
+  \bibinfo{author}{P.~R. Pudasaini}, \bibinfo{author}{R.~R. Unocic},
+  \bibinfo{author}{P.~D. Rack}, \bibinfo{author}{A.~P. Baddorf},
+  \bibinfo{author}{I.~N. Ivanov}, \bibinfo{author}{N.~V. Lavrik},
+  \bibinfo{author}{F.~List}, \bibinfo{author}{N.~Gupta}, \bibinfo{author}{K.~V.
+  Bets}, \bibinfo{author}{B.~I. Yakobson}, \bibinfo{author}{S.~N. Smirnov},
+\newblock \bibinfo{title}{Evolutionary selection growth of two-dimensional
+  materials on polycrystalline substrates},
+\newblock \bibinfo{journal}{Nature Materials} \bibinfo{volume}{17}
+  (\bibinfo{year}{2018}) \bibinfo{pages}{318--322}.
+  \DOIprefix\doi{10.1038/s41563-018-0019-3}.
+%Type = Article
+\bibitem[{Han et~al.(2018)Han, Li, Jung, Marsalis, Qin, Buehler, Li, and
+  Muller}]{hanSubnanometreChannelsEmbedded2018}
+\bibinfo{author}{Y.~Han}, \bibinfo{author}{M.-Y. Li}, \bibinfo{author}{G.-S.
+  Jung}, \bibinfo{author}{M.~A. Marsalis}, \bibinfo{author}{Z.~Qin},
+  \bibinfo{author}{M.~J. Buehler}, \bibinfo{author}{L.-J. Li},
+  \bibinfo{author}{D.~A. Muller},
+\newblock \bibinfo{title}{Sub-nanometre channels embedded in two-dimensional
+  materials},
+\newblock \bibinfo{journal}{Nature Materials} \bibinfo{volume}{17}
+  (\bibinfo{year}{2018}) \bibinfo{pages}{129--133}.
+  \DOIprefix\doi{10.1038/nmat5038}.
+%Type = Article
+\bibitem[{Sun et~al.(2020)Sun, Yu, Guo, and Wang}]{sunEnhancingPowerFactor2020}
+\bibinfo{author}{J.~Sun}, \bibinfo{author}{J.~Yu}, \bibinfo{author}{Y.~Guo},
+  \bibinfo{author}{Q.~Wang},
+\newblock \bibinfo{title}{Enhancing power factor of {{SnSe}} sheet with grain
+  boundary by doping germanium or silicon},
+\newblock \bibinfo{journal}{npj Computational Materials} \bibinfo{volume}{6}
+  (\bibinfo{year}{2020}) \bibinfo{pages}{1--6}.
+  \DOIprefix\doi{10.1038/s41524-020-00368-6}.
+%Type = Article
+\bibitem[{Johnson et~al.(2015)Johnson, Li, Demkowicz, and
+  Schuh}]{johnsonInferringGrainBoundary2015}
+\bibinfo{author}{O.~K. Johnson}, \bibinfo{author}{L.~Li},
+  \bibinfo{author}{M.~J. Demkowicz}, \bibinfo{author}{C.~A. Schuh},
+\newblock \bibinfo{title}{Inferring grain boundary structure\textendash
+  property relations from effective property measurements},
+\newblock \bibinfo{journal}{Journal of Materials Science} \bibinfo{volume}{50}
+  (\bibinfo{year}{2015}) \bibinfo{pages}{6907--6919}.
+  \DOIprefix\doi{10.1007/s10853-015-9241-4}.
+%Type = Article
+\bibitem[{Yang et~al.(2001)Yang, Rollett, and
+  Mullins}]{yangMeasuringRelativeGrain2001}
+\bibinfo{author}{C.-C. Yang}, \bibinfo{author}{A.~Rollett},
+  \bibinfo{author}{W.~Mullins},
+\newblock \bibinfo{title}{Measuring relative grain boundary energies and
+  mobilities in an aluminum foil from triple junction geometry},
+\newblock \bibinfo{journal}{Scripta Materialia} \bibinfo{volume}{44}
+  (\bibinfo{year}{2001}) \bibinfo{pages}{2735--2740}.
+  \DOIprefix\doi{10.1016/S1359-6462(01)00960-5}.
+%Type = Article
+\bibitem[{Zhang et~al.(2020)Zhang, Ludwig, Zhang, S{\o}rensen, Rowenhorst,
+  Yamanaka, Voorhees, and Poulsen}]{zhangGrainBoundaryMobilities2020}
+\bibinfo{author}{J.~Zhang}, \bibinfo{author}{W.~Ludwig},
+  \bibinfo{author}{Y.~Zhang}, \bibinfo{author}{H.~H.~B. S{\o}rensen},
+  \bibinfo{author}{D.~J. Rowenhorst}, \bibinfo{author}{A.~Yamanaka},
+  \bibinfo{author}{P.~W. Voorhees}, \bibinfo{author}{H.~F. Poulsen},
+\newblock \bibinfo{title}{Grain boundary mobilities in polycrystals},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{191}
+  (\bibinfo{year}{2020}) \bibinfo{pages}{211--220}.
+  \DOIprefix\doi{10.1016/j.actamat.2020.03.044}.
+%Type = Article
+\bibitem[{Han et~al.(2016)Han, Vitek, and
+  Srolovitz}]{hanGrainboundaryMetastabilityIts2016}
+\bibinfo{author}{J.~Han}, \bibinfo{author}{V.~Vitek}, \bibinfo{author}{D.~J.
+  Srolovitz},
+\newblock \bibinfo{title}{Grain-boundary metastability and its statistical
+  properties},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{104}
+  (\bibinfo{year}{2016}) \bibinfo{pages}{259--273}.
+  \DOIprefix\doi{10.1016/j.actamat.2015.11.035}.
+%Type = Article
+\bibitem[{Wei et~al.(2021)Wei, Feng, Ishikawa, Yokoi, Matsunaga, Shibata, and
+  Ikuhara}]{weiDirectImagingAtomistic2021}
+\bibinfo{author}{J.~Wei}, \bibinfo{author}{B.~Feng},
+  \bibinfo{author}{R.~Ishikawa}, \bibinfo{author}{T.~Yokoi},
+  \bibinfo{author}{K.~Matsunaga}, \bibinfo{author}{N.~Shibata},
+  \bibinfo{author}{Y.~Ikuhara},
+\newblock \bibinfo{title}{Direct imaging of atomistic grain boundary
+  migration},
+\newblock \bibinfo{journal}{Nature Materials}  (\bibinfo{year}{2021}).
+  \DOIprefix\doi{10.1038/s41563-020-00879-z}.
+%Type = Article
+\bibitem[{Bostanabad et~al.(2016)Bostanabad, Bui, Xie, Apley, and
+  Chen}]{bostanabadStochasticMicrostructureCharacterization2016}
+\bibinfo{author}{R.~Bostanabad}, \bibinfo{author}{A.~T. Bui},
+  \bibinfo{author}{W.~Xie}, \bibinfo{author}{D.~W. Apley},
+  \bibinfo{author}{W.~Chen},
+\newblock \bibinfo{title}{Stochastic microstructure characterization and
+  reconstruction via supervised learning},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{103}
+  (\bibinfo{year}{2016}). \DOIprefix\doi{10.1016/j.actamat.2015.09.044}.
+%Type = Article
+\bibitem[{Homer(2019)}]{Homer2019c}
+\bibinfo{author}{E.~R. Homer},
+\newblock \bibinfo{title}{High-throughput simulations for insight into grain
+  boundary structure-property relationships and other complex microstructural
+  phenomena},
+\newblock \bibinfo{journal}{Computational Materials Science}
+  \bibinfo{volume}{161} (\bibinfo{year}{2019}) \bibinfo{pages}{244--254}.
+  \DOIprefix\doi{10.1016/j.commatsci.2019.01.041}.
+%Type = Article
+\bibitem[{Jothi et~al.(2015)Jothi, Croft, and Brown}]{Jothi2015h}
+\bibinfo{author}{S.~Jothi}, \bibinfo{author}{T.~N. Croft},
+  \bibinfo{author}{S.~G. Brown},
+\newblock \bibinfo{title}{Multiscale multiphysics model for hydrogen
+  embrittlement in polycrystalline nickel},
+\newblock \bibinfo{journal}{Journal of Alloys and Compounds}
+  \bibinfo{volume}{645} (\bibinfo{year}{2015}) \bibinfo{pages}{S500--S504}.
+  \DOIprefix\doi{10.1016/j.jallcom.2014.12.073}.
+%Type = Article
+\bibitem[{Pirgazi(2019)}]{pirgaziAlignment3DEBSD2019}
+\bibinfo{author}{H.~Pirgazi},
+\newblock \bibinfo{title}{On the alignment of {{3D EBSD}} data collected by
+  serial sectioning technique},
+\newblock \bibinfo{journal}{Materials Characterization} \bibinfo{volume}{152}
+  (\bibinfo{year}{2019}) \bibinfo{pages}{223--229}.
+  \DOIprefix\doi{10.1016/j.matchar.2019.04.026}.
+%Type = Article
+\bibitem[{Pirgazi et~al.(2015)Pirgazi, Glowinski, Morawiec, and
+  Kestens}]{pirgaziThreedimensionalCharacterizationGrain2015}
+\bibinfo{author}{H.~Pirgazi}, \bibinfo{author}{K.~Glowinski},
+  \bibinfo{author}{A.~Morawiec}, \bibinfo{author}{L.~A. Kestens},
+\newblock \bibinfo{title}{Three-dimensional characterization of grain
+  boundaries in pure nickel by serial sectioning via mechanical polishing},
+\newblock \bibinfo{journal}{Journal of Applied Crystallography}
+  \bibinfo{volume}{48} (\bibinfo{year}{2015}) \bibinfo{pages}{1672--1678}.
+  \DOIprefix\doi{10.1107/S1600576715017616}.
+%Type = Article
+\bibitem[{Speidel et~al.(2018)Speidel, Su, {Mitchell-Smith}, Dryburgh,
+  Bisterov, Pieris, Li, Patel, Clark, and
+  Clare}]{speidelCrystallographicTextureCan2018}
+\bibinfo{author}{A.~Speidel}, \bibinfo{author}{R.~Su},
+  \bibinfo{author}{J.~{Mitchell-Smith}}, \bibinfo{author}{P.~Dryburgh},
+  \bibinfo{author}{I.~Bisterov}, \bibinfo{author}{D.~Pieris},
+  \bibinfo{author}{W.~Li}, \bibinfo{author}{R.~Patel},
+  \bibinfo{author}{M.~Clark}, \bibinfo{author}{A.~T. Clare},
+\newblock \bibinfo{title}{Crystallographic texture can be rapidly determined by
+  electrochemical surface analytics},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{159}
+  (\bibinfo{year}{2018}) \bibinfo{pages}{89--101}.
+  \DOIprefix\doi{10.1016/J.ACTAMAT.2018.07.059}.
+%Type = Article
+\bibitem[{Zheng et~al.(2020)Zheng, Li, Tran, Chen, Horton, Winston, Persson,
+  and Ong}]{zhengGrainBoundaryProperties2020}
+\bibinfo{author}{H.~Zheng}, \bibinfo{author}{X.~G. Li},
+  \bibinfo{author}{R.~Tran}, \bibinfo{author}{C.~Chen},
+  \bibinfo{author}{M.~Horton}, \bibinfo{author}{D.~Winston},
+  \bibinfo{author}{K.~A. Persson}, \bibinfo{author}{S.~P. Ong},
+\newblock \bibinfo{title}{Grain boundary properties of elemental metals},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{186}
+  (\bibinfo{year}{2020}) \bibinfo{pages}{40--49}.
+  \DOIprefix\doi{10.1016/j.actamat.2019.12.030}.
+  \href{http://arxiv.org/abs/1907.08905}{{\tt arXiv:1907.08905}}.
+%Type = Article
+\bibitem[{Keinan et~al.(2018)Keinan, Bale, Gueninchault, Lauridsen, and
+  Shahani}]{keinanIntegratedImagingThree2018}
+\bibinfo{author}{R.~Keinan}, \bibinfo{author}{H.~Bale},
+  \bibinfo{author}{N.~Gueninchault}, \bibinfo{author}{E.~Lauridsen},
+  \bibinfo{author}{A.~Shahani},
+\newblock \bibinfo{title}{Integrated imaging in three dimensions: {{Providing}}
+  a new lens on grain boundaries, particles, and their correlations in
+  polycrystalline silicon},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{148}
+  (\bibinfo{year}{2018}) \bibinfo{pages}{225--234}.
+  \DOIprefix\doi{10.1016/J.ACTAMAT.2018.01.045}.
+%Type = Article
+\bibitem[{Seita et~al.(2016)Seita, Volpi, Patala, McCue, Schuh, Diamanti,
+  Erlebacher, and Demkowicz}]{Seita2016}
+\bibinfo{author}{M.~Seita}, \bibinfo{author}{M.~Volpi},
+  \bibinfo{author}{S.~Patala}, \bibinfo{author}{I.~McCue},
+  \bibinfo{author}{C.~A. Schuh}, \bibinfo{author}{M.~V. Diamanti},
+  \bibinfo{author}{J.~Erlebacher}, \bibinfo{author}{M.~J. Demkowicz},
+\newblock \bibinfo{title}{A high-throughput technique for determining grain
+  boundary character non-destructively in microstructures with
+  through-thickness grains},
+\newblock \bibinfo{journal}{Npj Computational Materials} \bibinfo{volume}{2}
+  (\bibinfo{year}{2016}) \bibinfo{pages}{16016}. \URLprefix
+  \url{http://dx.doi.org/10.1038/npjcompumats.2016.16}.
+%Type = Article
+\bibitem[{Winiarski et~al.(2017)Winiarski, Gholinia, Mingard, Gee, Thompson,
+  and Withers}]{winiarskiBroadIonBeam2017}
+\bibinfo{author}{B.~Winiarski}, \bibinfo{author}{A.~Gholinia},
+  \bibinfo{author}{K.~Mingard}, \bibinfo{author}{M.~Gee},
+  \bibinfo{author}{G.~Thompson}, \bibinfo{author}{P.~Withers},
+\newblock \bibinfo{title}{Broad ion beam serial section tomography},
+\newblock \bibinfo{journal}{Ultramicroscopy} \bibinfo{volume}{172}
+  (\bibinfo{year}{2017}) \bibinfo{pages}{52--64}.
+  \DOIprefix\doi{10.1016/j.ultramic.2016.10.014}.
+%Type = Article
+\bibitem[{Kim et~al.(2011)Kim, Ko, Lee, Kim, and
+  Lee}]{kimIdentificationSchemeGrain2011}
+\bibinfo{author}{H.~K. Kim}, \bibinfo{author}{W.~S. Ko}, \bibinfo{author}{H.~J.
+  Lee}, \bibinfo{author}{S.~G. Kim}, \bibinfo{author}{B.~J. Lee},
+\newblock \bibinfo{title}{An identification scheme of grain boundaries and
+  construction of a grain boundary energy database},
+\newblock \bibinfo{journal}{Scripta Materialia} \bibinfo{volume}{64}
+  (\bibinfo{year}{2011}) \bibinfo{pages}{1152--1155}.
+  \DOIprefix\doi{10.1016/j.scriptamat.2011.03.020}.
+%Type = Article
+\bibitem[{Li et~al.(2019)Li, Yang, and
+  Lai}]{liAtomisticSimulationsEnergies2019}
+\bibinfo{author}{S.~Li}, \bibinfo{author}{L.~Yang}, \bibinfo{author}{C.~Lai},
+\newblock \bibinfo{title}{Atomistic simulations of energies for arbitrary grain
+  boundaries. {{Part I}}: {{Model}} and validation},
+\newblock \bibinfo{journal}{Computational Materials Science}
+  \bibinfo{volume}{161} (\bibinfo{year}{2019}) \bibinfo{pages}{330--338}.
+  \DOIprefix\doi{10.1016/j.commatsci.2019.02.003}.
+%Type = Article
+\bibitem[{Li et~al.(2009)Li, Dillon, and Rohrer}]{liRelativeGrainBoundary2009}
+\bibinfo{author}{J.~Li}, \bibinfo{author}{S.~J. Dillon}, \bibinfo{author}{G.~S.
+  Rohrer},
+\newblock \bibinfo{title}{Relative grain boundary area and energy distributions
+  in nickel},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{57}
+  (\bibinfo{year}{2009}) \bibinfo{pages}{4304--4311}.
+  \DOIprefix\doi{10.1016/j.actamat.2009.06.004}.
+%Type = Article
+\bibitem[{Olmsted et~al.(2009{\natexlab{a}})Olmsted, Holm, and
+  Foiles}]{olmstedSurveyComputedGrain2009}
+\bibinfo{author}{D.~L. Olmsted}, \bibinfo{author}{E.~A. Holm},
+  \bibinfo{author}{S.~M. Foiles},
+\newblock \bibinfo{title}{Survey of computed grain boundary properties in
+  face-centered cubic metals-{{II}}: {{Grain}} boundary mobility},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{57}
+  (\bibinfo{year}{2009}{\natexlab{a}}) \bibinfo{pages}{3704--3713}.
+  \DOIprefix\doi{10.1016/j.actamat.2009.04.015}.
+%Type = Article
+\bibitem[{Olmsted et~al.(2009{\natexlab{b}})Olmsted, Foiles, and
+  Holm}]{olmstedSurveyComputedGrain2009a}
+\bibinfo{author}{D.~L. Olmsted}, \bibinfo{author}{S.~M. Foiles},
+  \bibinfo{author}{E.~A. Holm},
+\newblock \bibinfo{title}{Survey of computed grain boundary properties in
+  face-centered cubic metals: {{I}}. {{Grain}} boundary energy},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{57}
+  (\bibinfo{year}{2009}{\natexlab{b}}) \bibinfo{pages}{3694--3703}.
+  \DOIprefix\doi{10.1016/j.actamat.2009.04.007}.
+%Type = Article
+\bibitem[{Randle et~al.(2008)Randle, Rohrer, Miller, Coleman, and
+  Owen}]{randleFiveparameterGrainBoundary2008}
+\bibinfo{author}{V.~Randle}, \bibinfo{author}{G.~S. Rohrer},
+  \bibinfo{author}{H.~M. Miller}, \bibinfo{author}{M.~Coleman},
+  \bibinfo{author}{G.~T. Owen},
+\newblock \bibinfo{title}{Five-parameter grain boundary distribution of
+  commercially grain boundary engineered nickel and copper},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{56}
+  (\bibinfo{year}{2008}) \bibinfo{pages}{2363--2373}.
+  \DOIprefix\doi{10.1016/j.actamat.2008.01.039}.
+%Type = Article
+\bibitem[{Saylor et~al.(2000)Saylor, Morawiec, Adams, and
+  Rohrer}]{saylorMisorientationDependenceGrain2000}
+\bibinfo{author}{D.~M. Saylor}, \bibinfo{author}{A.~Morawiec},
+  \bibinfo{author}{B.~L. Adams}, \bibinfo{author}{G.~S. Rohrer},
+\newblock \bibinfo{title}{Misorientation dependence of the grain boundary
+  energy in magnesia},
+\newblock \bibinfo{journal}{Interface Science} \bibinfo{volume}{8}
+  (\bibinfo{year}{2000}) \bibinfo{pages}{131--140}.
+  \DOIprefix\doi{10.1023/A:1008764219575}.
+%Type = Article
+\bibitem[{Saylor et~al.(2003)Saylor, Morawiec, and
+  Rohrer}]{saylorRelativeFreeEnergies2003}
+\bibinfo{author}{D.~M. Saylor}, \bibinfo{author}{A.~Morawiec},
+  \bibinfo{author}{G.~S. Rohrer},
+\newblock \bibinfo{title}{The relative free energies of grain boundaries in
+  magnesia as a function of five macroscopic parameters},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{51}
+  (\bibinfo{year}{2003}) \bibinfo{pages}{3675--3686}.
+  \DOIprefix\doi{10.1016/S1359-6454(03)00182-4}.
+%Type = Article
+\bibitem[{Yang et~al.(2019)Yang, Lai, and
+  Li}]{yangAtomisticSimulationsEnergies2019}
+\bibinfo{author}{L.~Yang}, \bibinfo{author}{C.~Lai}, \bibinfo{author}{S.~Li},
+\newblock \bibinfo{title}{Atomistic simulations of energies for arbitrary grain
+  boundaries. {{Part II}}: {{Statistical}} analysis of energies for tilt and
+  twist grain boundaries},
+\newblock \bibinfo{journal}{Computational Materials Science}
+  \bibinfo{volume}{162} (\bibinfo{year}{2019}) \bibinfo{pages}{268--276}.
+  \DOIprefix\doi{10.1016/j.commatsci.2019.03.010}.
+%Type = Article
+\bibitem[{Dillon and
+  Rohrer(2009)}]{dillonCharacterizationGrainboundaryCharacter2009}
+\bibinfo{author}{S.~J. Dillon}, \bibinfo{author}{G.~S. Rohrer},
+\newblock \bibinfo{title}{Characterization of the grain-boundary character and
+  energy distributions of yttria using automated serial sectioning and ebsd in
+  the {{FIB}}},
+\newblock \bibinfo{journal}{Journal of the American Ceramic Society}
+  \bibinfo{volume}{92} (\bibinfo{year}{2009}) \bibinfo{pages}{1580--1585}.
+  \DOIprefix\doi{10.1111/j.1551-2916.2009.03064.x}.
+%Type = Article
+\bibitem[{Restrepo et~al.(2014)Restrepo, Giraldo, and
+  Thijsse}]{restrepoUsingArtificialNeural2014}
+\bibinfo{author}{S.~E. Restrepo}, \bibinfo{author}{S.~T. Giraldo},
+  \bibinfo{author}{B.~J. Thijsse},
+\newblock \bibinfo{title}{Using artificial neural networks to predict grain
+  boundary energies},
+\newblock \bibinfo{journal}{Computational Materials Science}
+  \bibinfo{volume}{86} (\bibinfo{year}{2014}) \bibinfo{pages}{170--173}.
+  \DOIprefix\doi{10.1016/j.commatsci.2014.01.039}.
+%Type = Article
+\bibitem[{Guziewski et~al.(2021)Guziewski, {Montes de Oca Zapiain},
+  Dingreville, and
+  Coleman}]{guziewskiMicroscopicMacroscopicCharacterization2021}
+\bibinfo{author}{M.~Guziewski}, \bibinfo{author}{D.~{Montes de Oca Zapiain}},
+  \bibinfo{author}{R.~Dingreville}, \bibinfo{author}{S.~P. Coleman},
+\newblock \bibinfo{title}{Microscopic and {{Macroscopic Characterization}} of
+  {{Grain Boundary Energy}} and {{Strength}} in {{Silicon Carbide}} via
+  {{Machine}}-{{Learning Techniques}}},
+\newblock \bibinfo{journal}{ACS Applied Materials \& Interfaces}
+  \bibinfo{volume}{13} (\bibinfo{year}{2021}) \bibinfo{pages}{3311--3324}.
+  \DOIprefix\doi{10.1021/acsami.0c15980}.
+%Type = Article
+\bibitem[{Hu et~al.(2020)Hu, Zuo, Chen, Ping~Ong, and
+  Luo}]{huGeneticAlgorithmguidedDeep2020}
+\bibinfo{author}{C.~Hu}, \bibinfo{author}{Y.~Zuo}, \bibinfo{author}{C.~Chen},
+  \bibinfo{author}{S.~Ping~Ong}, \bibinfo{author}{J.~Luo},
+\newblock \bibinfo{title}{Genetic algorithm-guided deep learning of grain
+  boundary diagrams: {{Addressing}} the challenge of five degrees of freedom},
+\newblock \bibinfo{journal}{Materials Today} \bibinfo{volume}{38}
+  (\bibinfo{year}{2020}) \bibinfo{pages}{49--57}.
+  \DOIprefix\doi{10.1016/j.mattod.2020.03.004}.
+  \href{http://arxiv.org/abs/2002.10632}{{\tt arXiv:2002.10632}}.
+%Type = Article
+\bibitem[{Francis et~al.(2019)Francis, Chesser, Singh, Holm, and
+  De~Graef}]{francisGeodesicOctonionMetric2019}
+\bibinfo{author}{T.~Francis}, \bibinfo{author}{I.~Chesser},
+  \bibinfo{author}{S.~Singh}, \bibinfo{author}{E.~A. Holm},
+  \bibinfo{author}{M.~De~Graef},
+\newblock \bibinfo{title}{A geodesic octonion metric for grain boundaries},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{166}
+  (\bibinfo{year}{2019}) \bibinfo{pages}{135--147}.
+  \DOIprefix\doi{10.1016/j.actamat.2018.12.034}.
+%Type = Article
+\bibitem[{Chesser et~al.(2020)Chesser, Francis, De~Graef, and
+  Holm}]{chesserLearningGrainBoundary2020}
+\bibinfo{author}{I.~Chesser}, \bibinfo{author}{T.~Francis},
+  \bibinfo{author}{M.~De~Graef}, \bibinfo{author}{E.~Holm},
+\newblock \bibinfo{title}{Learning the grain boundary manifold: Tools for
+  visualizing and fitting grain boundary properties},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{195}
+  (\bibinfo{year}{2020}) \bibinfo{pages}{209--218}.
+  \DOIprefix\doi{10.1016/j.actamat.2020.05.024}.
+%Type = Article
+\bibitem[{Morawiec(2019)}]{morawiecDistancesGrainInterfaces2019}
+\bibinfo{author}{A.~Morawiec},
+\newblock \bibinfo{title}{On distances between grain interfaces in macroscopic
+  parameter space},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{181}
+  (\bibinfo{year}{2019}) \bibinfo{pages}{399--407}.
+  \DOIprefix\doi{10.1016/j.actamat.2019.09.032}.
+%Type = Article
+\bibitem[{Barber et~al.(1996)Barber, Dobkin, and
+  Huhdanpaa}]{barberQuickhullAlgorithmConvex1996}
+\bibinfo{author}{C.~B. Barber}, \bibinfo{author}{D.~P. Dobkin},
+  \bibinfo{author}{H.~Huhdanpaa},
+\newblock \bibinfo{title}{The quickhull algorithm for convex hulls},
+\newblock \bibinfo{journal}{ACM Transactions on Mathematical Software}
+  \bibinfo{volume}{22} (\bibinfo{year}{1996}) \bibinfo{pages}{469--483}.
+  \DOIprefix\doi{10.1145/235815.235821}.
+%Type = Article
+\bibitem[{Heinz and
+  Neumann(1991)}]{heinzRepresentationOrientationDisorientation1991}
+\bibinfo{author}{A.~Heinz}, \bibinfo{author}{P.~Neumann},
+\newblock \bibinfo{title}{Representation of orientation and disorientation data
+  for cubic, hexagonal, tetragonal and orthorhombic crystals},
+\newblock \bibinfo{journal}{Acta Crystallographica Section A}
+  \bibinfo{volume}{47} (\bibinfo{year}{1991}) \bibinfo{pages}{780--789}.
+  \DOIprefix\doi{10.1107/S0108767391006864}.
+%Type = Article
+\bibitem[{Grimmer(1980)}]{grimmerUniqueDescriptionRelative1980}
+\bibinfo{author}{H.~Grimmer},
+\newblock \bibinfo{title}{A unique description of the relative orientation of
+  neighbouring grains},
+\newblock \bibinfo{journal}{Acta Crystallographica Section A}
+  \bibinfo{volume}{36} (\bibinfo{year}{1980}) \bibinfo{pages}{382--389}.
+  \DOIprefix\doi{10.1107/S0567739480000861}.
+%Type = Misc
+\bibitem[{Luong(2020)}]{luongVoronoiSphere2020}
+\bibinfo{author}{B.~Luong}, \bibinfo{title}{Voronoi {{Sphere}}},
+  \bibinfo{howpublished}{MATLAB Central File Exchange}, \bibinfo{year}{2020}.
+  \URLprefix
+  \url{https://www.mathworks.com/matlabcentral/fileexchange/40989-voronoi-sphere}.
+%Type = Misc
+\bibitem[{Baird and Johnson(2020)}]{bairdFiveDegreeofFreedom5DOF2020}
+\bibinfo{author}{S.~Baird}, \bibinfo{author}{O.~Johnson}, \bibinfo{title}{Five
+  {{Degree}}-of-{{Freedom}} ({{5DOF}}) {{Interpolation}}},
+  \bibinfo{year}{2020}. \URLprefix \url{github.com/sgbaird-5dof/interp}.
+%Type = Article
+\bibitem[{Patala and Schuh(2013)}]{patalaSymmetriesRepresentationGrain2013}
+\bibinfo{author}{S.~Patala}, \bibinfo{author}{C.~A. Schuh},
+\newblock \bibinfo{title}{Symmetries in the representation of grain
+  boundary-plane distributions},
+\newblock \bibinfo{journal}{Philosophical Magazine} \bibinfo{volume}{93}
+  (\bibinfo{year}{2013}) \bibinfo{pages}{524--573}.
+  \DOIprefix\doi{10.1080/14786435.2012.722700}.
+%Type = Article
+\bibitem[{Homer et~al.(2015)Homer, Patala, and
+  Priedeman}]{homerGrainBoundaryPlane2015}
+\bibinfo{author}{E.~R. Homer}, \bibinfo{author}{S.~Patala},
+  \bibinfo{author}{J.~L. Priedeman},
+\newblock \bibinfo{title}{Grain {{Boundary Plane Orientation Fundamental
+  Zones}} and {{Structure}}-{{Property Relationships}}},
+\newblock \bibinfo{journal}{Scientific Reports} \bibinfo{volume}{5}
+  (\bibinfo{year}{2015}) \bibinfo{pages}{1--13}.
+  \DOIprefix\doi{10.1038/srep15476}.
+%Type = Article
+\bibitem[{Singh and
+  De~Graef(2016)}]{singhOrientationSamplingDictionarybased2016}
+\bibinfo{author}{S.~Singh}, \bibinfo{author}{M.~De~Graef},
+\newblock \bibinfo{title}{Orientation sampling for dictionary-based diffraction
+  pattern indexing methods},
+\newblock \bibinfo{journal}{Modelling and Simulation in Materials Science and
+  Engineering} \bibinfo{volume}{24} (\bibinfo{year}{2016}).
+  \DOIprefix\doi{10.1088/0965-0393/24/8/085013}.
+%Type = Article
+\bibitem[{Langer et~al.(2006)Langer, Belyaev, and
+  Seidel}]{langerSphericalBarycentricCoordinates2006}
+\bibinfo{author}{T.~Langer}, \bibinfo{author}{A.~Belyaev},
+  \bibinfo{author}{H.-P. Seidel},
+\newblock \bibinfo{title}{Spherical barycentric coordinates},
+\newblock \bibinfo{journal}{Proceedings of the fourth Eurographics symposium on
+  Geometry processing}  (\bibinfo{year}{2006}) \bibinfo{pages}{81--88}.
+  \URLprefix \url{http://portal.acm.org/citation.cfm?id=1281957.1281968}.
+%Type = Article
+\bibitem[{Floater(2015)}]{floaterGeneralizedBarycentricCoordinates2015}
+\bibinfo{author}{M.~Floater},
+\newblock \bibinfo{title}{Generalized barycentric coordinates and
+  applications},
+\newblock \bibinfo{journal}{Acta Numerica} \bibinfo{volume}{24}
+  (\bibinfo{year}{2015}) \bibinfo{pages}{161--214}.
+  \DOIprefix\doi{10.1017/S09624929}.
+  \href{http://arxiv.org/abs/1711.05337v1}{{\tt arXiv:1711.05337v1}}.
+%Type = Article
+\bibitem[{Meyer et~al.(2002)Meyer, Barr, Lee, and
+  Desbrun}]{meyerGeneralizedBarycentricCoordinates2002}
+\bibinfo{author}{M.~Meyer}, \bibinfo{author}{A.~Barr},
+  \bibinfo{author}{H.~Lee}, \bibinfo{author}{M.~Desbrun},
+\newblock \bibinfo{title}{Generalized {{Barycentric Coordinates}} on
+  {{Irregular Polygons}}},
+\newblock \bibinfo{journal}{Journal of Graphics Tools} \bibinfo{volume}{7}
+  (\bibinfo{year}{2002}) \bibinfo{pages}{13--22}.
+  \DOIprefix\doi{10.1080/10867651.2002.10487551}.
+%Type = Book
+\bibitem[{Rasmussen and Williams(2006)}]{rasmussenGaussianProcessesMachine2006}
+\bibinfo{author}{C.~E. Rasmussen}, \bibinfo{author}{C.~K.~I. Williams},
+  \bibinfo{title}{Gaussian Processes for Machine Learning}, Adaptive
+  Computation and Machine Learning, \bibinfo{publisher}{{MIT Press}},
+  \bibinfo{address}{{Cambridge, Mass}}, \bibinfo{year}{2006}.
+%Type = Misc
+\bibitem[{Tovar(2020)}]{tovarInverseDistanceWeight2020}
+\bibinfo{author}{A.~Tovar}, \bibinfo{title}{Inverse distance weight function},
+  \bibinfo{howpublished}{MATLAB Central File Exchange}, \bibinfo{year}{2020}.
+  \URLprefix
+  \url{https://www.mathworks.com/matlabcentral/fileexchange/46350-inverse-distance-weight-function}.
+%Type = Article
+\bibitem[{Kim et~al.(2014)Kim, Kim, Dong, Steinbach, and
+  Lee}]{kimPhasefieldModeling3D2014}
+\bibinfo{author}{H.-K. Kim}, \bibinfo{author}{S.~G. Kim},
+  \bibinfo{author}{W.~Dong}, \bibinfo{author}{I.~Steinbach},
+  \bibinfo{author}{B.-J. Lee},
+\newblock \bibinfo{title}{Phase-field modeling for {{3D}} grain growth based on
+  a grain boundary energy database},
+\newblock \bibinfo{journal}{Modelling and Simulation in Materials Science and
+  Engineering} \bibinfo{volume}{22} (\bibinfo{year}{2014})
+  \bibinfo{pages}{034004}. \DOIprefix\doi{10.1088/0965-0393/22/3/034004}.
+%Type = Misc
+\bibitem[{Chesser(2019)}]{chesserGBOctonionCode2019}
+\bibinfo{author}{I.~Chesser}, \bibinfo{title}{{{GB Octonion Code}}},
+  \bibinfo{year}{2019}. \URLprefix
+  \url{https://github.com/ichesser/GB_octonion_code}.
+%Type = Article
+\bibitem[{Bulatov et~al.(2014)Bulatov, Reed, and
+  Kumar}]{bulatovGrainBoundaryEnergy2014}
+\bibinfo{author}{V.~V. Bulatov}, \bibinfo{author}{B.~W. Reed},
+  \bibinfo{author}{M.~Kumar},
+\newblock \bibinfo{title}{Grain boundary energy function for fcc metals},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{65}
+  (\bibinfo{year}{2014}) \bibinfo{pages}{161--175}.
+  \DOIprefix\doi{10.1016/j.actamat.2013.10.057}.
+%Type = Misc
+\bibitem[{Bean(2020)}]{beanHexscatter2020}
+\bibinfo{author}{G.~Bean}, \bibinfo{title}{Hexscatter},
+  \bibinfo{howpublished}{MATLAB Central File Exchange}, \bibinfo{year}{2020}.
+  \URLprefix
+  \url{https://www.mathworks.com/matlabcentral/fileexchange/45639-hexscatter-m}.
+%Type = Techreport
+\bibitem[{Dolan et~al.(2004)Dolan, More, and
+  Munson}]{dolanBenchmarkingOptimizationSoftware2004}
+\bibinfo{author}{E.~D. Dolan}, \bibinfo{author}{J.~J. More},
+  \bibinfo{author}{T.~S. Munson}, \bibinfo{title}{Benchmarking Optimization
+  Software with {{COPS}} 3.0}, \bibinfo{type}{Technical Report}, {Argonne
+  National Laboratory (ANL)}, \bibinfo{address}{{United States}},
+  \bibinfo{year}{2004}. \DOIprefix\doi{10.2172/834714}.
+%Type = Misc
+\bibitem[{MATLAB Optimization
+  Toolbox(2020)}]{ConstrainedElectrostaticNonlinear2020}
+MATLAB Optimization Toolbox, \bibinfo{title}{Constrained {{Electrostatic
+  Nonlinear Optimization}}, {{Problem}}-{{Based}}}, \bibinfo{year}{2020}.
+  \URLprefix
+  \url{https://www.mathworks.com/help/optim/ug/constrained-electrostatic-problem-based-optimization.html}.
+%Type = Article
+\bibitem[{Shen et~al.(2019)Shen, Zhong, Liu, Suter, Morawiec, and
+  Rohrer}]{shenDeterminingGrainBoundary2019}
+\bibinfo{author}{Y.~F. Shen}, \bibinfo{author}{X.~Zhong},
+  \bibinfo{author}{H.~Liu}, \bibinfo{author}{R.~M. Suter},
+  \bibinfo{author}{A.~Morawiec}, \bibinfo{author}{G.~S. Rohrer},
+\newblock \bibinfo{title}{Determining grain boundary energies from triple
+  junction geometries without discretizing the five-parameter space},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{166}
+  (\bibinfo{year}{2019}) \bibinfo{pages}{126--134}.
+  \DOIprefix\doi{10.1016/j.actamat.2018.12.022}.
+%Type = Misc
+\bibitem[{De~Graef(2020)}]{degraefEMSoft2020}
+\bibinfo{author}{M.~De~Graef}, \bibinfo{title}{{{EMSoft}}},
+  \bibinfo{year}{2020}. \DOIprefix\doi{10.5281/zenodo.3489720}.
+%Type = Article
+\bibitem[{Dimokrati et~al.(2020)Dimokrati, Le~Bouar, Benyoucef, and
+  Finel}]{dimokratiSPFMModelIdeal2020}
+\bibinfo{author}{A.~Dimokrati}, \bibinfo{author}{Y.~Le~Bouar},
+  \bibinfo{author}{M.~Benyoucef}, \bibinfo{author}{A.~Finel},
+\newblock \bibinfo{title}{S-{{PFM}} model for ideal grain growth},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{201}
+  (\bibinfo{year}{2020}) \bibinfo{pages}{147--157}.
+  \DOIprefix\doi{10.1016/j.actamat.2020.09.073}.
+%Type = Article
+\bibitem[{Miyoshi et~al.(2021)Miyoshi, Takaki, Sakane, Ohno, Shibuta, and
+  Aoki}]{miyoshiLargescalePhasefieldStudy2021}
+\bibinfo{author}{E.~Miyoshi}, \bibinfo{author}{T.~Takaki},
+  \bibinfo{author}{S.~Sakane}, \bibinfo{author}{M.~Ohno},
+  \bibinfo{author}{Y.~Shibuta}, \bibinfo{author}{T.~Aoki},
+\newblock \bibinfo{title}{Large-scale phase-field study of anisotropic grain
+  growth: {{Effects}} of misorientation-dependent grain boundary energy and
+  mobility},
+\newblock \bibinfo{journal}{Computational Materials Science}
+  \bibinfo{volume}{186} (\bibinfo{year}{2021}) \bibinfo{pages}{109992}.
+  \DOIprefix\doi{10.1016/j.commatsci.2020.109992}.
+%Type = Article
+\bibitem[{Rowenhorst et~al.(2015)Rowenhorst, Rollett, Rohrer, Groeber, Jackson,
+  Konijnenberg, and
+  De~Graef}]{rowenhorstConsistentRepresentationsConversions2015}
+\bibinfo{author}{D.~Rowenhorst}, \bibinfo{author}{A.~D. Rollett},
+  \bibinfo{author}{G.~S. Rohrer}, \bibinfo{author}{M.~Groeber},
+  \bibinfo{author}{M.~Jackson}, \bibinfo{author}{P.~J. Konijnenberg},
+  \bibinfo{author}{M.~De~Graef},
+\newblock \bibinfo{title}{Consistent representations of and conversions between
+  {{3D}} rotations},
+\newblock \bibinfo{journal}{Modelling and Simulation in Materials Science and
+  Engineering} \bibinfo{volume}{23} (\bibinfo{year}{2015})
+  \bibinfo{pages}{083501}. \DOIprefix\doi{10.1088/0965-0393/23/8/083501}.
+%Type = Article
+\bibitem[{Connor et~al.(2017)Connor, Vadicamo, and
+  Rabitti}]{connorHighdimensionalSimplexesSupermetric2017}
+\bibinfo{author}{R.~Connor}, \bibinfo{author}{L.~Vadicamo},
+  \bibinfo{author}{F.~Rabitti},
+\newblock \bibinfo{title}{High-dimensional simplexes for supermetric search},
+\newblock \bibinfo{journal}{Lecture Notes in Computer Science (including
+  subseries Lecture Notes in Artificial Intelligence and Lecture Notes in
+  Bioinformatics)} \bibinfo{volume}{10609 LNCS} (\bibinfo{year}{2017})
+  \bibinfo{pages}{96--109}. \DOIprefix\doi{10.1007/978-3-319-68474-1_7}.
+  \href{http://arxiv.org/abs/1707.08370}{{\tt arXiv:1707.08370}}.
+%Type = Article
+\bibitem[{Boissonnat et~al.(2017)Boissonnat, Dyer, Ghosh, and
+  Oudot}]{boissonnatOnlyDistancesAre2017}
+\bibinfo{author}{J.~D. Boissonnat}, \bibinfo{author}{R.~Dyer},
+  \bibinfo{author}{A.~Ghosh}, \bibinfo{author}{S.~Y. Oudot},
+\newblock \bibinfo{title}{Only distances are required to reconstruct
+  submanifolds},
+\newblock \bibinfo{journal}{Computational Geometry: Theory and Applications}
+  \bibinfo{volume}{66} (\bibinfo{year}{2017}) \bibinfo{pages}{32--67}.
+  \DOIprefix\doi{10.1016/j.comgeo.2017.08.001}.
+  \href{http://arxiv.org/abs/1410.7012}{{\tt arXiv:1410.7012}}.
+%Type = Misc
+\bibitem[{Anatoliy(2015)}]{anatoliyCheckIfRay2015}
+\bibinfo{author}{T.~Anatoliy}, \bibinfo{title}{Check if ray intersects
+  internals of {{D}}-facet}, \bibinfo{howpublished}{Mathematics Stack
+  Exchange}, \bibinfo{year}{2015}. \URLprefix
+  \url{https://math.stackexchange.com/q/1256236}.
+%Type = Article
+\bibitem[{Skala(2013)}]{skalaRobustBarycentricCoordinates2013}
+\bibinfo{author}{V.~Skala},
+\newblock \bibinfo{title}{Robust {{Barycentric Coordinates Computation}} of the
+  {{Closest Point}} to a {{Hyperplane}} in {{E}}\^n},
+\newblock \bibinfo{journal}{Proceedings of the 2013 Internation Conference on
+  Applies Mathematics and Computational Methods in Engineering}
+  (\bibinfo{year}{2013}) \bibinfo{pages}{239--244}.
+%Type = Article
+\bibitem[{Anisimov et~al.(2016)Anisimov, Deng, and
+  Hormann}]{anisimovSubdividingBarycentricCoordinates2016}
+\bibinfo{author}{D.~Anisimov}, \bibinfo{author}{C.~Deng},
+  \bibinfo{author}{K.~Hormann},
+\newblock \bibinfo{title}{Subdividing barycentric coordinates},
+\newblock \bibinfo{journal}{Computer Aided Geometric Design}
+  \bibinfo{volume}{43} (\bibinfo{year}{2016}) \bibinfo{pages}{172--185}.
+  \DOIprefix\doi{10.1016/j.cagd.2016.02.005}.
+%Type = Article
+\bibitem[{Budninskiy et~al.(2016)Budninskiy, Liu, Tong, and
+  Desbrun}]{budninskiyPowerCoordinatesGeometric2016}
+\bibinfo{author}{M.~Budninskiy}, \bibinfo{author}{B.~Liu},
+  \bibinfo{author}{Y.~Tong}, \bibinfo{author}{M.~Desbrun},
+\newblock \bibinfo{title}{Power coordinates: {{A}} geometric construction of
+  barycentric coordinates on convex polytopes},
+\newblock \bibinfo{journal}{ACM Transactions on Graphics} \bibinfo{volume}{35}
+  (\bibinfo{year}{2016}). \DOIprefix\doi{10.1145/2980179.2982441}.
+%Type = Article
+\bibitem[{Dyer et~al.(2016)Dyer, Vegter, and
+  Wintraecken}]{dyerBarycentricCoordinateNeighbourhoods2016}
+\bibinfo{author}{R.~Dyer}, \bibinfo{author}{G.~Vegter},
+  \bibinfo{author}{M.~Wintraecken},
+\newblock \bibinfo{title}{Barycentric coordinate neighbourhoods in
+  {{Riemannian}} manifolds},
+\newblock \bibinfo{journal}{arXiv}  (\bibinfo{year}{2016}). \URLprefix
+  \url{http://arxiv.org/abs/1606.01585}.
+  \href{http://arxiv.org/abs/1606.01585}{{\tt arXiv:1606.01585}}.
+%Type = Article
+\bibitem[{Floater and Kosinka(2010)}]{floaterInjectivityWachspressMean2010}
+\bibinfo{author}{M.~S. Floater}, \bibinfo{author}{J.~Kosinka},
+\newblock \bibinfo{title}{On the injectivity of {{Wachspress}} and mean value
+  mappings between convex polygons},
+\newblock \bibinfo{journal}{Advances in Computational Mathematics}
+  \bibinfo{volume}{32} (\bibinfo{year}{2010}) \bibinfo{pages}{163--174}.
+  \DOIprefix\doi{10.1007/s10444-008-9098-z}.
+%Type = Article
+\bibitem[{Hormann and Kosinka(2017)}]{hormannDiscretizingWachspressKernels2017}
+\bibinfo{author}{K.~Hormann}, \bibinfo{author}{J.~Kosinka},
+\newblock \bibinfo{title}{Discretizing {{Wachspress}} kernels is safe},
+\newblock \bibinfo{journal}{Computer Aided Geometric Design}
+  \bibinfo{volume}{52-53} (\bibinfo{year}{2017}) \bibinfo{pages}{126--134}.
+  \DOIprefix\doi{10.1016/j.cagd.2017.02.015}.
+%Type = Article
+\bibitem[{Hormann and Sukumar(2008)}]{hormannMaximumEntropyCoordinates2008}
+\bibinfo{author}{K.~Hormann}, \bibinfo{author}{N.~Sukumar},
+\newblock \bibinfo{title}{Maximum entropy coordinates for arbitrary polytopes},
+\newblock \bibinfo{journal}{Eurographics Symposium on Geometry Processing}
+  \bibinfo{volume}{27} (\bibinfo{year}{2008}) \bibinfo{pages}{1513--1520}.
+%Type = Article
+\bibitem[{Langer and Seidel(2008)}]{langerHigherOrderBarycentric2008}
+\bibinfo{author}{T.~Langer}, \bibinfo{author}{H.~P. Seidel},
+\newblock \bibinfo{title}{Higher order barycentric coordinates},
+\newblock \bibinfo{journal}{Computer Graphics Forum} \bibinfo{volume}{27}
+  (\bibinfo{year}{2008}) \bibinfo{pages}{459--466}.
+  \DOIprefix\doi{10.1111/j.1467-8659.2008.01143.x}.
+%Type = Article
+\bibitem[{Lei et~al.(2020)Lei, Qi, and Tian}]{leiNewCoordinateSystem2020}
+\bibinfo{author}{K.~Lei}, \bibinfo{author}{D.~Qi}, \bibinfo{author}{X.~Tian},
+\newblock \bibinfo{title}{A {{New Coordinate System}} for {{Constructing
+  Spherical Grid Systems}}},
+\newblock \bibinfo{journal}{Applied Sciences} \bibinfo{volume}{10}
+  (\bibinfo{year}{2020}) \bibinfo{pages}{655}.
+  \DOIprefix\doi{10.3390/app10020655}.
+%Type = Article
+\bibitem[{Peixoto and Barros(2014)}]{peixotoVectorFieldReconstructions2014}
+\bibinfo{author}{P.~S. Peixoto}, \bibinfo{author}{S.~R. Barros},
+\newblock \bibinfo{title}{On vector field reconstructions for
+  semi-{{Lagrangian}} transport methods on geodesic staggered grids},
+\newblock \bibinfo{journal}{Journal of Computational Physics}
+  \bibinfo{volume}{273} (\bibinfo{year}{2014}) \bibinfo{pages}{185--211}.
+  \DOIprefix\doi{10.1016/j.jcp.2014.04.043}.
+%Type = Article
+\bibitem[{Pihajoki et~al.(2019)Pihajoki, Mannerkoski, and
+  Johansson}]{pihajokiBarycentricInterpolationRiemannian2019}
+\bibinfo{author}{P.~Pihajoki}, \bibinfo{author}{M.~Mannerkoski},
+  \bibinfo{author}{P.~H. Johansson},
+\newblock \bibinfo{title}{Barycentric interpolation on {{Riemannian}} and
+  semi-{{Riemannian}} spaces},
+\newblock \bibinfo{journal}{Monthly Notices of the Royal Astronomical Society}
+  \bibinfo{volume}{489} (\bibinfo{year}{2019}) \bibinfo{pages}{4161--4169}.
+  \DOIprefix\doi{10.1093/mnras/stz2447}.
+  \href{http://arxiv.org/abs/1907.09487}{{\tt arXiv:1907.09487}}.
+%Type = Article
+\bibitem[{Rustamov(2010)}]{rustamovBarycentricCoordinatesSurfaces2010}
+\bibinfo{author}{R.~M. Rustamov},
+\newblock \bibinfo{title}{Barycentric coordinates on surfaces},
+\newblock \bibinfo{journal}{Computer Graphics Forum} \bibinfo{volume}{29}
+  (\bibinfo{year}{2010}) \bibinfo{pages}{1507--1516}.
+  \DOIprefix\doi{10.1111/j.1467-8659.2010.01759.x}.
+%Type = Article
+\bibitem[{Tao et~al.(2019)Tao, Deng, and Zhang}]{taoFastNumericalSolver2019}
+\bibinfo{author}{J.~Tao}, \bibinfo{author}{B.~Deng},
+  \bibinfo{author}{J.~Zhang},
+\newblock \bibinfo{title}{A fast numerical solver for local barycentric
+  coordinates},
+\newblock \bibinfo{journal}{Computer Aided Geometric Design}
+  \bibinfo{volume}{70} (\bibinfo{year}{2019}) \bibinfo{pages}{46--58}.
+  \DOIprefix\doi{10.1016/j.cagd.2019.04.006}.
+%Type = Article
+\bibitem[{Warren et~al.(2007)Warren, Schaefer, Hirani, and
+  Desbrun}]{warrenBarycentricCoordinatesConvex2007}
+\bibinfo{author}{J.~Warren}, \bibinfo{author}{S.~Schaefer},
+  \bibinfo{author}{A.~N. Hirani}, \bibinfo{author}{M.~Desbrun},
+\newblock \bibinfo{title}{Barycentric coordinates for convex sets},
+\newblock \bibinfo{journal}{Advances in Computational Mathematics}
+  \bibinfo{volume}{27} (\bibinfo{year}{2007}) \bibinfo{pages}{319--338}.
+  \DOIprefix\doi{10.1007/s10444-005-9008-6}.
+
+\end{thebibliography}

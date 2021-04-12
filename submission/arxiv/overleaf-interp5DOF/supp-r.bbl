@@ -1,0 +1,79 @@
+\newcommand{\noopsort}[1]{}
+\begin{thebibliography}{7}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Misc
+\bibitem[{Baird and Johnson(2020)}]{bairdFiveDegreeofFreedom5DOF2020}
+\bibinfo{author}{S.~Baird}, \bibinfo{author}{O.~Johnson}, \bibinfo{title}{Five
+  {{Degree}}-of-{{Freedom}} ({{5DOF}}) {{Interpolation}}},
+  \bibinfo{year}{2020}. \URLprefix \url{github.com/sgbaird-5dof/interp}.
+%Type = Article
+\bibitem[{Francis et~al.(2019)Francis, Chesser, Singh, Holm, and
+  De~Graef}]{francisGeodesicOctonionMetric2019}
+\bibinfo{author}{T.~Francis}, \bibinfo{author}{I.~Chesser},
+  \bibinfo{author}{S.~Singh}, \bibinfo{author}{E.~A. Holm},
+  \bibinfo{author}{M.~De~Graef},
+\newblock \bibinfo{title}{A geodesic octonion metric for grain boundaries},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{166}
+  (\bibinfo{year}{2019}) \bibinfo{pages}{135--147}.
+  \DOIprefix\doi{10.1016/j.actamat.2018.12.034}.
+%Type = Article
+\bibitem[{Chesser et~al.(2020)Chesser, Francis, De~Graef, and
+  Holm}]{chesserLearningGrainBoundary2020}
+\bibinfo{author}{I.~Chesser}, \bibinfo{author}{T.~Francis},
+  \bibinfo{author}{M.~De~Graef}, \bibinfo{author}{E.~Holm},
+\newblock \bibinfo{title}{Learning the grain boundary manifold: Tools for
+  visualizing and fitting grain boundary properties},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{195}
+  (\bibinfo{year}{2020}) \bibinfo{pages}{209--218}.
+  \DOIprefix\doi{10.1016/j.actamat.2020.05.024}.
+%Type = Article
+\bibitem[{Morawiec(2019)}]{morawiecDistancesGrainInterfaces2019}
+\bibinfo{author}{A.~Morawiec},
+\newblock \bibinfo{title}{On distances between grain interfaces in macroscopic
+  parameter space},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{181}
+  (\bibinfo{year}{2019}) \bibinfo{pages}{399--407}.
+  \DOIprefix\doi{10.1016/j.actamat.2019.09.032}.
+%Type = Article
+\bibitem[{Bulatov et~al.(2014)Bulatov, Reed, and
+  Kumar}]{bulatovGrainBoundaryEnergy2014}
+\bibinfo{author}{V.~V. Bulatov}, \bibinfo{author}{B.~W. Reed},
+  \bibinfo{author}{M.~Kumar},
+\newblock \bibinfo{title}{Grain boundary energy function for fcc metals},
+\newblock \bibinfo{journal}{Acta Materialia} \bibinfo{volume}{65}
+  (\bibinfo{year}{2014}) \bibinfo{pages}{161--175}.
+  \DOIprefix\doi{10.1016/j.actamat.2013.10.057}.
+%Type = Article
+\bibitem[{Kim et~al.(2014)Kim, Kim, Dong, Steinbach, and
+  Lee}]{kimPhasefieldModeling3D2014}
+\bibinfo{author}{H.-K. Kim}, \bibinfo{author}{S.~G. Kim},
+  \bibinfo{author}{W.~Dong}, \bibinfo{author}{I.~Steinbach},
+  \bibinfo{author}{B.-J. Lee},
+\newblock \bibinfo{title}{Phase-field modeling for {{3D}} grain growth based on
+  a grain boundary energy database},
+\newblock \bibinfo{journal}{Modelling and Simulation in Materials Science and
+  Engineering} \bibinfo{volume}{22} (\bibinfo{year}{2014})
+  \bibinfo{pages}{034004}. \DOIprefix\doi{10.1088/0965-0393/22/3/034004}.
+%Type = Article
+\bibitem[{Kim et~al.(2011)Kim, Ko, Lee, Kim, and
+  Lee}]{kimIdentificationSchemeGrain2011}
+\bibinfo{author}{H.~K. Kim}, \bibinfo{author}{W.~S. Ko}, \bibinfo{author}{H.~J.
+  Lee}, \bibinfo{author}{S.~G. Kim}, \bibinfo{author}{B.~J. Lee},
+\newblock \bibinfo{title}{An identification scheme of grain boundaries and
+  construction of a grain boundary energy database},
+\newblock \bibinfo{journal}{Scripta Materialia} \bibinfo{volume}{64}
+  (\bibinfo{year}{2011}) \bibinfo{pages}{1152--1155}.
+  \DOIprefix\doi{10.1016/j.scriptamat.2011.03.020}.
+
+\end{thebibliography}

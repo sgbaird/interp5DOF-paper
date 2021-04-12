@@ -1,0 +1,88 @@
+%MIT License
+\ProvidesPackage{auto-paper}
+% uploading packages
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{textcomp} % https://latex.org/forum/viewtopic.php?f=4&t=3364#p13124, https://tex.stackexchange.com/questions/165115
+\usepackage{gensymb}
+\usepackage{lineno}
+\usepackage{mathtools}
+\usepackage[title]{appendix}
+\usepackage{pgfmath}
+\newcommand{\calcnum}[1]{%
+    \pgfmathparse{#1}%
+    \num[round-mode=places,round-precision=1]{\pgfmathresult}%
+}
+\usepackage[separate-uncertainty=true]{siunitx} % \usepackage{xr-hyper} %needs to  be before hyperref
+\usepackage{xurl} %needs to be before hyperref
+\usepackage{hyperref}
+% \PassOptionsToPackage{hyphens}{url} \usepackage{hyperref} %allow URLs to break across lines
+\usepackage[nameinlink,capitalise]{cleveref} %needs to appear after hyperref, https://tex.stackexchange.com/questions/396728/my-equations-referencing-not-working
+\Crefname{figure}{Figure}{Figures} %needs to appear after hyperref and cleveref
+\crefname{appsec}{Appendix}{Appendices}
+\newcommand\crefrangeconjunction{--} % modify the reference style
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+\usepackage{tabulary}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{makecell} % https://tex.stackexchange.com/questions/2441/how-to-add-a-forced-line-break-inside-a-table-cell
+\newcommand{\NA}{---} % holds an m-dash
+\graphicspath{{figures/}} %Setting the graphicspath
+% ---------to deal with the double quotes-----------
+\usepackage [english]{babel}
+\usepackage [autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
+\usepackage{listings}[breakatwhitespace=true,escapechar=\%]
+\usepackage{matlab-prettifier}
+\newcommand{\matlab}[1]{\mbox{\lstinline[style=Matlab-editor]{#1}}}
+%alternatively can use `` '' format for double quotes
+\usepackage{booktabs}
+\setlength{\abovetopsep}{1ex}
+\usepackage[shortcuts]{glossaries-extra}
+% \usepackage[shortcuts,abbreviations]{glossaries-extra} %for some reason, abbreviations seemed to be messing with automatic regeneration of Glossary and the counting stuff
+\newcommand*{\TCac}[1]{\ecapitalisewords{\glsentrylong{#1}}}
+% remove the "Preprint submitted to Elsevier" footer on the first page
+\makeatletter
+\def\ps@pprintTitle{%
+   \let\@oddhead\@empty
+   \let\@evenhead\@empty
+   \def\@oddfoot{\reset@font\hfil\thepage\hfil}
+   \let\@evenfoot\@oddfoot
+}
+\makeatother
+
+% Cross referencing with the xr package in Overleaf (https://www.overleaf.com/learn/how-to/Cross_referencing_with_the_xr_package_in_Overleaf)
+\makeatletter
+\newcommand*{\addFileDependency}[1]{% argument=file name and extension
+  \typeout{(#1)}
+  \@addtofilelist{#1}
+  \IfFileExists{#1}{}{\typeout{No file #1.}}
+}
+\makeatother
+\newcommand*{\myexternaldocument}[3][SI]{%
+  \externaldocument[#1]{#2/#3}%
+    \addFileDependency{#3.tex}%
+    \addFileDependency{#2/#3.aux}%
+}
+\usepackage{nameref,zref-xr}
+\zxrsetup{toltxlabel}
+% \zexternaldocument*{supp} %https://tex.stackexchange.com/questions/77774/undefined-control-sequence-when-cross-referencing-with-xr-hyper
+% \myexternaldocument{supp}
+\ifcsname biboptions\endcsname
+  \biboptions{sort&compress} %only use if defined
+\else
+  % do nothing
+\fi
+% https://tex.stackexchange.com/questions/46223/if-document-class-is-equal-to-something-then-do-not-use-package
+
+\interfootnotelinepenalty=10000 %prevent footnotes from getting split across columns/pages
+%\patchcmd{\emailauthor}{(#2)}{(S.G. Baird).}{}{} %Removes/Abbreviates corresponding author name after Email address so that the footnote doesn't take up 2 lines.
+% Double Spacing
+% \doublespacing
+
+\newcommand*{\glsentrytitlecasefull}[1]{\glsentrytitlecase{#1}{long} (\glsentryshort{#1}) }
+
+\newcommand*{\glsentrytitlecasefullplural}[1]{\glsentrytitlecase{#1}{longpl} (\glsentryshort{#1}s) }
