@@ -1303,6 +1303,15 @@
   isbn = {978-3-0348-7600-1}
 }
 
+@article{festerCUDAbasedMulticoreImplementation,
+  title = {{{CUDA}}-Based Multi-Core Implementation of {{MDS}}-Based Bioinformatics Algorithms},
+  author = {Fester, Thilo and {Halle-Wittenberg}, Martin-Luther-University and Strickert, Marc},
+  pages = {14},
+  abstract = {Solving problems in bioinformatics often needs extensive computational power. Current trends in processor architecture, especially massive multi-core processors for graphic cards, combine a large number of cores into a single chip to improve the overall performance. The Compute Unified Device Architecture (CUDA) provides programming interfaces to make full use of the computing power of graphics processing units. We present a way to use CUDA for substantial performance improvement of methods based on multi-dimensional scaling (MDS). The suitability of the CUDA architecture as a high-performance computing platform is studied by adapting a MDS algorithm on specific hardware properties. We show how typical bioinformatics problems related to dimension reduction and network layout benefit from the multi-core implementation of the MDS algorithm. CUDA-based methods are introduced and compared to standard solutions, demonstrating 50-fold acceleration and above.},
+  file = {C\:\\Users\\sterg\\Zotero\\storage\\CZ2MUGVY\\Fester et al. - CUDA-based multi-core implementation of MDS-based .pdf},
+  language = {en}
+}
+
 @article{fichtnerAdjointMethodSeismology2006,
   title = {The Adjoint Method in Seismology. {{I}}. {{Theory}}},
   author = {Fichtner, A. and Bunge, H. P. and Igel, H.},
@@ -2077,6 +2086,23 @@
   number = {September}
 }
 
+@article{ingramGlimmerMultilevelMDS2009,
+  title = {Glimmer: {{Multilevel MDS}} on the {{GPU}}},
+  shorttitle = {Glimmer},
+  author = {Ingram, S. and Munzner, T. and Olano, M.},
+  year = {2009},
+  month = mar,
+  volume = {15},
+  pages = {249--261},
+  issn = {1077-2626},
+  doi = {10.1109/TVCG.2008.85},
+  abstract = {We present Glimmer, a new multilevel algorithm for multidimensional scaling designed to exploit modern graphics processing unit (GPU) hardware. We also present GPU-SF, a parallel, force-based subsystem used by Glimmer. Glimmer organizes input into a hierarchy of levels and recursively applies GPU-SF to combine and refine the levels. The multilevel nature of the algorithm makes local minima less likely while the GPU parallelism improves speed of computation. We propose a robust termination condition for GPU-SF based on a filtered approximation of the normalized stress function. We demonstrate the benefits of Glimmer in terms of speed, normalized stress, and visual quality against several previous algorithms for a range of synthetic and real benchmark datasets. We also show that the performance of Glimmer on GPUs is substantially faster than a CPU implementation of the same algorithm.},
+  file = {C\:\\Users\\sterg\\Zotero\\storage\\AJT98MWD\\Ingram et al. - 2009 - Glimmer Multilevel MDS on the GPU.pdf},
+  journal = {IEEE Transactions on Visualization and Computer Graphics},
+  language = {en},
+  number = {2}
+}
+
 @misc{InverseProblemsExercices,
   ids = {InverseProblemsExercicesa,InverseProblemsExercicesb,InverseProblemsExercicesc,InverseProblemsExercicesd,InverseProblemsExercicese},
   title = {Inverse {{Problems}}: {{Exercices}} - {{Albert Tarantola}}},
@@ -2309,6 +2335,23 @@
   journal = {Oral Medicine},
   keywords = {\#nosource},
   number = {3}
+}
+
+@article{lambertImeallComputationalFramework2018,
+  title = {Imeall: {{A}} Computational Framework for the Calculation of the Atomistic Properties of Grain Boundaries},
+  shorttitle = {Imeall},
+  author = {Lambert, H. and Fekete, Adam and Kermode, J. R. and Vita, A. De},
+  year = {2018},
+  month = nov,
+  volume = {232},
+  pages = {256--263},
+  issn = {0010-4655},
+  doi = {10.1016/j.cpc.2018.04.029},
+  abstract = {We describe the Imeall package for the calculation and indexing of atomistic properties of grain boundaries in materials. The package provides a structured database for the storage of atomistic structures and their associated properties, equipped with a programmable application interface to interatomic potential calculators. The database adopts a general indexing system that allows storing arbitrary grain boundary structures for any crystalline material. The usefulness of the Imeall package is demonstrated by computing, storing, and analysing relaxed grain boundary structures for a dense range of low index orientation axis symmetric tilt and twist boundaries in {$\alpha$}-iron for various interatomic potentials. The package's capabilities are further demonstrated by carrying out automated structure generation, dislocation analysis, interstitial site detection, and impurity segregation energies across the grain boundary range. All computed atomistic properties are exposed via a web framework, providing open access to the grain boundary repository and the analytic tools suite. Program summary Program Title: Imeall Program Files doi: http://dx.doi.org/10.17632/nj77stc62b.1 Licensing provisions: Apache-2.0 Programming languages: python, fortran, javascript Nature of problem: Determining the minimum energy structure for a specific grain boundary and interatomic force field involves extensive searches in configuration space. Duplication of this effort should be avoided, and providing a unique database to gather the resulting structures is needed for this. Accurately cataloguing the chemical and electronic environments associated with the interface atoms in the grain boundary furthermore requires a useable interface between a database of grain boundary structures and an expandible set of interatomic potential calculators. Solution method: We introduce a standard indexing convention that allows the integration of grain boundary structures for arbitrary materials, generated by different users/research groups, into a normalised database that can be easily queried and used as a starting point for further research projects. The Imeall package accomplishes this by specifying a standard naming convention for the grain boundary database and by providing the software routines necessary to populate and query such a database, as well as an interface to interatomic calculators and analysis tools. References: [1] QUIPPY https://libatoms.github.io/QUIP/ [2] ASE https://wiki.fysik.dtu.dk/ase/ [3] OVITO https://www.ovito.org [4] Transformations http://www.lfd.uci.edu/\textasciitilde gohlke/code/transformations.py [5] pylada-defect https://github.com/pylada/pylada-defects},
+  file = {C\:\\Users\\sterg\\Zotero\\storage\\J9KI3GFL\\Lambert et al_2018_Imeall.pdf;C\:\\Users\\sterg\\Zotero\\storage\\CIL8NE3C\\S0010465518301450.html},
+  journal = {Computer Physics Communications},
+  keywords = {Atomistic simulation,Database,Dislocation analysis,Grain boundaries,Hydrogen embrittlement,Interatomic potentials},
+  language = {en}
 }
 
 @article{lamniiQuadraticSphericalSpline2009,
@@ -2951,6 +2994,23 @@
   keywords = {daleckiˇ,generalized matrix function}
 }
 
+@article{olmstedNewClassMetrics2009,
+  title = {A New Class of Metrics for the Macroscopic Crystallographic Space of Grain Boundaries},
+  author = {Olmsted, David L.},
+  year = {2009},
+  month = may,
+  volume = {57},
+  pages = {2793--2799},
+  issn = {1359-6454},
+  doi = {10.1016/j.actamat.2009.02.030},
+  abstract = {The macroscopic description of a defect-free, flat grain boundary in a pure material requires five degrees of freedom. There is a need to define the distance between boundaries in this five-dimensional space, because boundaries that are close together crystallographically should have similar properties. Morawiec has recently proposed such a metric, defined in terms of the misorientation of the two grains and their boundary normals. This approach has the disadvantage that there is no unique way of weighting the importance of the difference in disorientation compared to the difference in boundary normals, as was pointed out by Cahn and Taylor. In this work a metric is developed using a less familiar description of the crystallographic space which avoids this problem. Two technical results are proven, and a sample application to grain boundary properties is offered.},
+  file = {C\:\\Users\\sterg\\Zotero\\storage\\NJ6Y4558\\Olmsted_2009_A new class of metrics for the macroscopic crystallographic space of grain.pdf;C\:\\Users\\sterg\\Zotero\\storage\\A5VVUQ57\\S1359645409001281.html},
+  journal = {Acta Materialia},
+  keywords = {Grain boundaries,Theory},
+  language = {en},
+  number = {9}
+}
+
 @article{olmstedSurveyComputedGrain2009,
   ids = {Olmsted2009h},
   title = {Survey of Computed Grain Boundary Properties in Face-Centered Cubic Metals-{{II}}: {{Grain}} Boundary Mobility},
@@ -2962,7 +3022,7 @@
   issn = {13596454},
   doi = {10.1016/j.actamat.2009.04.015},
   abstract = {The absolute grain boundary mobility of 388 nickel grain boundaries was calculated using a synthetic driving force molecular dynamics method; complete results appear in the Supplementary materials. Over 25\% of the boundaries, including most of the non-{$\Sigma$}3 highest mobility boundaries, moved by a coupled shear mechanism. The range of non-shearing boundary mobilities is from 40 to 400 m/s GPa, except for {$\Sigma$}3 incoherent twins which have mobilities of 200-2000 m/s GPa. Some boundaries, including all the {$\langle$}1 1 1{$\rangle$} twist boundaries, are immobile within the resolution of the simulation. Boundary mobility is not correlated with scalar parameters such as disorientation angle, {$\Sigma$} value, excess volume or boundary energy. Boundaries less than 15\textdegree{} from each other in five-dimensional crystallographic space tend to have similar mobilities. Some boundaries move via a non-activated motion mechanism, which greatly increases low-temperature mobility. Thermal roughening of grain boundaries is widely observed, with estimated roughening temperatures substantially among boundaries. \textcopyright{} 2009 Acta Materialia Inc.},
-  file = {C\:\\Users\\sterg\\Zotero\\storage\\5ECMNXUD\\Olmsted et al_2009_Survey of computed grain boundary properties in face-centered cubic metals-II.pdf;C\:\\Users\\sterg\\Zotero\\storage\\IAECB9TS\\Olmsted, Holm, Foiles - 2009 - Survey of computed grain boundary properties in face-centered cubic metals-II Grain boundary mobility(6).pdf;C\:\\Users\\sterg\\Zotero\\storage\\L3U23965\\Olmsted et al_2009_Survey of computed grain boundary properties in face-centered cubic metals-II.pdf;C\:\\Users\\sterg\\Zotero\\storage\\STB2L4JP\\Olmsted et al_2009_Survey of computed grain boundary properties in face-centered cubic metals-II.pdf;C\:\\Users\\sterg\\Zotero\\storage\\SYCZAUSC\\Olmsted, Holm, Foiles - 2009 - Survey of computed grain boundary properties in face-centered cubic metals-II Grain boundary mobility(6).pdf},
+  file = {C\:\\Users\\sterg\\Zotero\\storage\\SYCZAUSC\\Olmsted, Holm, Foiles - 2009 - Survey of computed grain boundary properties in face-centered cubic metals-II Grain boundary mobility(6).pdf},
   journal = {Acta Materialia},
   keywords = {\#nosource,Grain boundary migration,Grain boundary roughening,MD-simulations},
   number = {13}
@@ -2979,7 +3039,7 @@
   issn = {13596454},
   doi = {10.1016/j.actamat.2009.04.007},
   abstract = {The energies of a set of 388 distinct grain boundaries have been calculated based on embedded-atom method interatomic potentials for Ni and Al. The boundaries considered are a complete catalog of the coincident site lattice boundaries constructible in a computational cell of a prescribed size. Correlations of the boundary energy with other boundary properties (disorientation angle, {$\Sigma$} value, excess boundary volume and proximity of boundary normals to {$\langle$}1 1 1{$\rangle$}) are examined. None of the usual geometric properties associated with grain boundary energy are useful predictors for this data set. The data set is incorporated as supplementary material to facilitate the search for more complex correlations. The energies of corresponding boundaries in Ni and Al are found to differ by approximately a scaling factor related to the Voigt average shear modulus or C44. Crystallographically close boundaries have similar energies; hence a table of grain boundary energies could be used for interpolation. \textcopyright{} 2009 Acta Materialia Inc.},
-  file = {C\:\\Users\\sterg\\Zotero\\storage\\ASRQRGX7\\Olmsted et al_2009_Survey of computed grain boundary properties in face-centered cubic metals.pdf;C\:\\Users\\sterg\\Zotero\\storage\\FFM9GZ2U\\Olmsted et al_2009_Survey of computed grain boundary properties in face-centered cubic metals.pdf;C\:\\Users\\sterg\\Zotero\\storage\\M2NLCV8V\\Olmsted et al_2009_Survey of computed grain boundary properties in face-centered cubic metals.pdf;C\:\\Users\\sterg\\Zotero\\storage\\P9AK8GXD\\Olmsted et al_2009_Survey of computed grain boundary properties in face-centered cubic metals.pdf},
+  file = {C\:\\Users\\sterg\\Zotero\\storage\\FFM9GZ2U\\Olmsted et al_2009_Survey of computed grain boundary properties in face-centered cubic metals.pdf},
   journal = {Acta Materialia},
   keywords = {\#nosource,★,Grain boundary energy,Grain boundary structure,Molecular statics simulations},
   number = {13}
@@ -3513,6 +3573,23 @@
   keywords = {\#nosource,★,Grain boundary energy,Grain boundary structure,Modelling,Molecular dynamics,Neural networks}
 }
 
+@article{ribotNewApproachPhase2019,
+  title = {A New Approach for Phase Field Modeling of Grain Boundaries with Strongly Nonconvex Energy},
+  author = {Ribot, Josep Gras and Agrawal, Vinamra and Runnels, Brandon},
+  year = {2019},
+  month = oct,
+  volume = {27},
+  pages = {084007},
+  publisher = {{IOP Publishing}},
+  issn = {0965-0393},
+  doi = {10.1088/1361-651X/ab47a0},
+  abstract = {Grain boundaries (GBs) are key players in determining macroscopic material behavior and driving the creation of microstructure in nanocrystalline materials. Microstructure typically features irregular features and morphology such as microfaceting, due to the strong nonconvexity of GB energy with respect to boundary plane orientation. Mesoscale simulation of microstructure evolution can be done effectively using the multiphase field (MPF) method. However, strongly nonconvex boundary energies present numerical challenges in MPF simulations. The lack of convexity in GB energy causes the minimal GB energy problem to be mathematically ill-defined. Numerically, this causes mesh dependency and instability. In this work we present an additively decoupled regularization scheme utilizing a K23 second order curvature regularization to penalize regions of sharp curvature induced by nonconvex GB energy. Physically, the K23 regularization corresponds to corner or triple junction dislocations, and does not adversely affect the diffuse properties of the GB or the GB energy. It is shown that the additively decoupled K23 regularization term admits a numerically convenient variational derivative, when evolved in the eigenbasis of the Hessian curvature tensor. This enables K23 to be determined in terms of derivatives in the natural coordinate system, which is advantageous for implementations on a regular grid. The faceting behavior in GBs is demonstrated using a parallel adaptive mesh refinement code. It is shown that faceting is stable even if the GB energy exhibits cusps and the regularization parameter effectively controls the faceting length scale. Evolution of an inclusion is studied for smooth and non-smooth GB energies and results are compared against analytic Wulff shapes. The proposed scheme leverages Lagrange multipliers to use a modified fourth order Allen\textendash Cahn system in lieu of a sixth order Cahn\textendash Hilliard system for numerical efficiency.},
+  file = {C\:\\Users\\sterg\\Zotero\\storage\\ALDFVFCQ\\Ribot et al_2019_A new approach for phase field modeling of grain boundaries with strongly.pdf},
+  journal = {Modelling and Simulation in Materials Science and Engineering},
+  language = {en},
+  number = {8}
+}
+
 @article{rohrerComparingCalculatedMeasured2010,
   ids = {Rohrer2010f},
   title = {Comparing Calculated and Measured Grain Boundary Energies in Nickel},
@@ -3590,19 +3667,6 @@
   keywords = {\#nosource,aluminum,grain boundaries,grain boundary character,grain boundary energy}
 }
 
-@article{Rosca2014g,
-  title = {A New Method of Constructing a Grid in the Space of {{3D}} Rotations and Its Applications to Texture Analysis},
-  author = {Ro{\c s}ca, D. and Morawiec, A. and De Graef, M.},
-  year = {2014},
-  volume = {22},
-  issn = {1361651X},
-  doi = {10.1088/0965-0393/22/7/075013},
-  abstract = {In computational work, data sets must often be represented on the surface of a sphere or inside a ball, requiring uniform grids. We construct a new volume-preserving projection between a cube and the set of unit quaternions. The projection consists of two steps: an equal-volume mapping from the cube to the unit ball, followed by an inverse generalized Lambert projection to either of the two unit quaternion hemispheres. The new projection provides a one-to-one mapping between a grid in the cube and elements of the special orthogonal group SO(3), i.e., 3D rotations. We provide connections to other rotation representation schemes, including the Rodrigues-Frank vector and the homochoric parameterizations, and illustrate the new mapping through example applications relevant to texture analysis.},
-  journal = {Modelling and Simulation in Materials Science and Engineering},
-  keywords = {equal-area mapping,homochoric,quaternions,rotations,texture analysis},
-  number = {7}
-}
-
 @article{roscaNewMethodConstructing2014,
   title = {A New Method of Constructing a Grid in the Space of {{3D}} Rotations and Its Applications to Texture Analysis},
   author = {Ro{\c s}ca, D. and Morawiec, A. and De Graef, M.},
@@ -3611,7 +3675,7 @@
   issn = {1361651X},
   doi = {10.1088/0965-0393/22/7/075013},
   abstract = {In computational work, data sets must often be represented on the surface of a sphere or inside a ball, requiring uniform grids. We construct a new volume-preserving projection between a cube and the set of unit quaternions. The projection consists of two steps: an equal-volume mapping from the cube to the unit ball, followed by an inverse generalized Lambert projection to either of the two unit quaternion hemispheres. The new projection provides a one-to-one mapping between a grid in the cube and elements of the special orthogonal group SO(3), i.e., 3D rotations. We provide connections to other rotation representation schemes, including the Rodrigues-Frank vector and the homochoric parameterizations, and illustrate the new mapping through example applications relevant to texture analysis.},
-  file = {C\:\\Users\\sterg\\Zotero\\storage\\6ZR3D5DH\\Roşca et al_2014_A new method of constructing a grid in the space of 3D rotations and its.pdf;C\:\\Users\\sterg\\Zotero\\storage\\9H7BUHCZ\\Roşca et al_2014_A new method of constructing a grid in the space of 3D rotations and its.pdf;C\:\\Users\\sterg\\Zotero\\storage\\C3SXPZW9\\Roşca et al_2014_A new method of constructing a grid in the space of 3D rotations and its.pdf;C\:\\Users\\sterg\\Zotero\\storage\\GENBBHP8\\Roşca et al_2014_A new method of constructing a grid in the space of 3D rotations and its.pdf;C\:\\Users\\sterg\\Zotero\\storage\\K5PMK5GV\\Roşca et al_2014_A new method of constructing a grid in the space of 3D rotations and its.pdf;C\:\\Users\\sterg\\Zotero\\storage\\NMQKKDGB\\Roşca et al_2014_A new method of constructing a grid in the space of 3D rotations and its.pdf;C\:\\Users\\sterg\\Zotero\\storage\\PTSDTHX8\\Roşca et al_2014_A new method of constructing a grid in the space of 3D rotations and its.pdf},
+  file = {C\:\\Users\\sterg\\Zotero\\storage\\NMQKKDGB\\Roşca et al_2014_A new method of constructing a grid in the space of 3D rotations and its.pdf},
   journal = {Modelling and Simulation in Materials Science and Engineering},
   keywords = {equal-area mapping,homochoric,quaternions,rotations,texture analysis},
   number = {7}
@@ -4057,7 +4121,7 @@
   issn = {14712946},
   doi = {10.1098/rspa.2015.0442},
   abstract = {To specify a grain boundary at a macroscopic length scale requires the specification of five degrees of freedom. We use a specification in which three degrees of freedom associated with the boundary misorientation are in an orthogonal subspace from two associated with the mean boundary plane. By using Rodrigues vectors to describe rotations, we show how paths through these subspaces may be characterized. Some of these paths correspond to physical processes involving grain boundaries during microstructural evolution. Exploiting the orthogonality of the subspaces, a metric to measure 'distance' between two boundaries is defined in terms of the minimum set of rotations required to map one boundary on to the other. We compare our metric with others that have appeared. The existence of rotational symmetry in face-centred cubic crystals leads to as many as 2304 equivalent specifications of a boundary. We illustrate this multiplicity of descriptions for the (111) twin and a more general boundary. We present an algorithm to evaluate the geodesic distance between two boundaries, and apply it to identify the path along which the distance between these two boundaries is minimized. In general, the shortest path does not involve descriptions of boundary misorientations with the smallest misorientation angles.},
-  file = {C\:\\Users\\sterg\\Zotero\\storage\\6APZW58Y\\Sutton et al_2015_The five-dimensional parameter space of grain boundaries.pdf;C\:\\Users\\sterg\\Zotero\\storage\\HE3WRKZ3\\Sutton et al_2015_The five-dimensional parameter space of grain boundaries.pdf;C\:\\Users\\sterg\\Zotero\\storage\\IIT6GNKV\\Sutton, Banks, Warwick - 2015 - The five-dimensional parameter space of grain boundaries(7).pdf;C\:\\Users\\sterg\\Zotero\\storage\\QWYHNSWL\\Sutton, Banks, Warwick - 2015 - The five-dimensional parameter space of grain boundaries(7).pdf;C\:\\Users\\sterg\\Zotero\\storage\\RRHNW644\\Sutton et al_2015_The five-dimensional parameter space of grain boundaries.pdf;C\:\\Users\\sterg\\Zotero\\storage\\VM527K26\\Sutton et al_2015_The five-dimensional parameter space of grain boundaries.pdf},
+  file = {C\:\\Users\\sterg\\Zotero\\storage\\VM527K26\\Sutton et al_2015_The five-dimensional parameter space of grain boundaries.pdf},
   journal = {Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences},
   keywords = {Crystal symmetry,Geodesics,Grain boundaries,Metric,Microstructure,Rodrigues vectors},
   number = {2181}
@@ -4606,7 +4670,7 @@
   month = jan,
   issn = {1476-1122, 1476-4660},
   doi = {10.1038/s41563-020-00879-z},
-  file = {C\:\\Users\\sterg\\Zotero\\storage\\49Y3CU38\\Wei et al. - 2021 - Direct imaging of atomistic grain boundary migrati.pdf},
+  file = {C\:\\Users\\sterg\\Zotero\\storage\\49Y3CU38\\Wei et al. - 2021 - Direct imaging of atomistic grain boundary migrati.pdf;C\:\\Users\\sterg\\Zotero\\storage\\G63SLKVX\\41563_2020_879_MOESM1_ESM.pdf},
   journal = {Nature Materials},
   language = {en}
 }
