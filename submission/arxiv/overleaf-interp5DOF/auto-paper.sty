@@ -18,6 +18,13 @@
 \usepackage{xurl} %needs to be before hyperref
 \usepackage{hyperref}
 % \PassOptionsToPackage{hyphens}{url} \usepackage{hyperref} %allow URLs to break across lines
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+} %https://tex.stackexchange.com/a/847/224861
 \usepackage[nameinlink,capitalise]{cleveref} %needs to appear after hyperref, https://tex.stackexchange.com/questions/396728/my-equations-referencing-not-working
 \Crefname{figure}{Figure}{Figures} %needs to appear after hyperref and cleveref
 \crefname{appsec}{Appendix}{Appendices}
@@ -31,7 +38,7 @@
 \usepackage{makecell} % https://tex.stackexchange.com/questions/2441/how-to-add-a-forced-line-break-inside-a-table-cell
 \newcommand{\NA}{---} % holds an m-dash
 \graphicspath{{figures/}} %Setting the graphicspath
-% ---------to deal with the double quotes-----------
+% ---------to deal with the double quotes----------- 
 \usepackage [english]{babel}
 \usepackage [autostyle, english = american]{csquotes}
 \MakeOuterQuote{"}
@@ -62,10 +69,14 @@
   \IfFileExists{#1}{}{\typeout{No file #1.}}
 }
 \makeatother
-\newcommand*{\myexternaldocument}[3][SI]{%
-  \externaldocument[#1]{#2/#3}%
-    \addFileDependency{#3.tex}%
-    \addFileDependency{#2/#3.aux}%
+% \newcommand*{\myexternaldocument}[2]{%
+%   \externaldocument{#1/#2}%
+%     \addFileDependency{#2.tex}%
+%     \addFileDependency{#1/#2.aux}% https://tex.stackexchange.com/a/590837/224861
+\newcommand*{\myexternaldocument}[1]{%
+    \externaldocument{#1}%
+    \addFileDependency{#1.tex}%
+    \addFileDependency{#1.aux}%
 }
 \usepackage{nameref,zref-xr}
 \zxrsetup{toltxlabel}
@@ -78,7 +89,7 @@
 \fi
 % https://tex.stackexchange.com/questions/46223/if-document-class-is-equal-to-something-then-do-not-use-package
 
-\interfootnotelinepenalty=10000 %prevent footnotes from getting split across columns/pages
+\interfootnotelinepenalty=10000 %prevent footnotes from getting split across columns/pages 
 %\patchcmd{\emailauthor}{(#2)}{(S.G. Baird).}{}{} %Removes/Abbreviates corresponding author name after Email address so that the footnote doesn't take up 2 lines.
 % Double Spacing
 % \doublespacing

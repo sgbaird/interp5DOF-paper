@@ -632,6 +632,14 @@
 \newblock \bibinfo{journal}{Acta Crystallographica Section A}
   \bibinfo{volume}{36} (\bibinfo{year}{1980}) \bibinfo{pages}{382--389}.
   \DOIprefix\doi{10.1107/S0567739480000861}.
+%Type = Article
+\bibitem[{Patala and Schuh(2013)}]{patalaSymmetriesRepresentationGrain2013}
+\bibinfo{author}{S.~Patala}, \bibinfo{author}{C.~A. Schuh},
+\newblock \bibinfo{title}{Symmetries in the representation of grain
+  boundary-plane distributions},
+\newblock \bibinfo{journal}{Philosophical Magazine} \bibinfo{volume}{93}
+  (\bibinfo{year}{2013}) \bibinfo{pages}{524--573}.
+  \DOIprefix\doi{10.1080/14786435.2012.722700}.
 %Type = Misc
 \bibitem[{Luong(2020)}]{luongVoronoiSphere2020}
 \bibinfo{author}{B.~Luong}, \bibinfo{title}{Voronoi {{Sphere}}},
@@ -643,14 +651,6 @@
 \bibinfo{author}{S.~Baird}, \bibinfo{author}{O.~Johnson}, \bibinfo{title}{Five
   {{Degree}}-of-{{Freedom}} ({{5DOF}}) {{Interpolation}}},
   \bibinfo{year}{2020}. \URLprefix \url{github.com/sgbaird-5dof/interp}.
-%Type = Article
-\bibitem[{Patala and Schuh(2013)}]{patalaSymmetriesRepresentationGrain2013}
-\bibinfo{author}{S.~Patala}, \bibinfo{author}{C.~A. Schuh},
-\newblock \bibinfo{title}{Symmetries in the representation of grain
-  boundary-plane distributions},
-\newblock \bibinfo{journal}{Philosophical Magazine} \bibinfo{volume}{93}
-  (\bibinfo{year}{2013}) \bibinfo{pages}{524--573}.
-  \DOIprefix\doi{10.1080/14786435.2012.722700}.
 %Type = Article
 \bibitem[{Homer et~al.(2015)Homer, Patala, and
   Priedeman}]{homerGrainBoundaryPlane2015}
