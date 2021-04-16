@@ -42,7 +42,6 @@ Internally, these are converted to \glspl{gbo} and interpolation is performed us
 \label{sec:supp:dist-parity}
 The close correlation between Euclidean and arc length distances in the \gls{vfzgbo} sense is shown in \cref{fig:dist-parity} using pairwise distances of \num{10000} \glspl{vfzgbo}. This justifies our use of Euclidean distance as an approximation of hyperspherical arc length (and by extension, that a scaled Euclidean distance approximates a non-symmetrized \gls{gbo} distance, see \cref{eq:8Deuclidean_dist,eq:7sphere_arc_length,eq:omega} of the main paper). However, comparison with the original \gls{gbo} metric \cite{francisGeodesicOctonionMetric2019} gives overestimation for some boundaries. This is an inherent feature of the \gls{vfz} framework that can be addressed via use of the ensemble methods described in \cref{sec:methods:framework:vfz-dist} (see also \cref{fig:dist-ensemble-k1-2-10-20,fig:dist-ensemble-rmse-mae}).
 
-
 \begin{figure}
 \centering
 \includegraphics[scale=1]{dist-parity.png}
@@ -55,13 +54,13 @@ Additionally, the use of an isometry equivalence relationship in \citet{morawiec
 \begin{figure}
     \centering
     \includegraphics{figures/pd-fix.png}
-    \caption{\Gls{gb} distances calculated with one \gls{gbo} fixed vs. the traditional calculations in \citet{chesserLearningGrainBoundary2020} show that the isometry equivalence discussed in \citet{morawiecDistancesGrainInterfaces2019} applies to \glspl{gbo}. }
+    \caption{\Gls{gb} distances calculated with one \gls{gbo} fixed vs. the traditional calculations in \citet{chesserLearningGrainBoundary2020} show that the isometry equivalence discussed in \citet{morawiecDistancesGrainInterfaces2019} applies to \glspl{gbo}. The pairwise-distance matrix for the Olmsted \glspl{gb} supplied in \cite{chesserGBOctonionCode2019} was used. }
     \label{fig:pd-fix}
 \end{figure}
 
 \section{Additional Interpolation Results}
 
-\subsection{\num{388} and \num{10000} \inpt{} GBs}
+\subsection{Smaller Set Sizes of Input GBs}
 Interpolation results for \num{388} and \num{10000} \glspl{gb} are given in \cref{fig:brkparity388} and \cref{fig:brkparity10000}, respectively.
 
 \begin{figure}[!ht]
