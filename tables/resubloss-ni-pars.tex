@@ -1,13 +1,13 @@
 \begin{table}
 \centering
-\caption{Fitted parameters for two \gls{gpr} models fitted to the 388 simulated Ni \glspl{gbe} by \citet{olmstedSurveyComputedGrain2009a}. The first model allows $\sigma$ to vary, whereas the second constrains $\sigma$ to be fixed. $\sigma_L$, $\sigma_F$, $\beta$, and $\sigma$ are the kernel length scale, signal standard deviation, constant basis function, and input property standard deviation, respectively.}
+\caption{Fitted parameters for two \gls{gpr} models fitted to the 388 simulated Ni \glspl{gbe} by \citet{olmstedSurveyComputedGrain2009a}. The first model allows $\sigma$ to vary, whereas the second constrains $\sigma$ to be fixed. $\sigma_L$, $\sigma_F$, $\beta$, and $\sigma$ are the kernel length scale, signal standard deviation, constant basis function, and input property standard deviation, respectively. See \url{https://www.mathworks.com/help/stats/fitrgp.html} for additional details.}
 \label{table:resubloss-ni-pars}
-\begin{tabular}{cccc}
+\begin{tabular}{ccccc}
 \toprule
-$\sigma_L$ ($^\circ{}$) & $\sigma_F$ ($J m^{-2}$) & \beta ($J m^{-2}$) & \sigma ($J m^{-2}$) \\
+Constant $\sigma$ & $\sigma_L$ ($^\circ{}$) & $\sigma_F$ ($J m^{-2}$) & $\beta$ ($J m^{-2}$) & $\sigma_\mathrm{in}$ ($J m^{-2}$) \\
 \midrule
-0.0646 & 0.0169 & 1.0913 & 0.0321 \\
-0.2049 & 0.2010 & 1.1044 & 0.0001 \\
+0.0000 & 7.3995 & 0.0169 & 1.0913 & 0.0321 \\
+1.0000 & 23.4786 & 0.2010 & 1.1044 & 0.0001 \\
 \bottomrule
 \end{tabular}
 \label{table:resubloss-ni-pars}
