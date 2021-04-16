@@ -523,12 +523,37 @@ For the Fe case, we see a larger improvement than prior work likely due to our i
 
 Since the \gls{brk} validation function is also an interpolation function on the Ni simulation data, \gls{gpr} within the \gls{vfz} framework and the \gls{brk} function results are directly compared via parity plot in \cref{fig:resubloss-ni}.
 
-\begin{figure*}
-    \centering
-    \includegraphics[scale=1]{figures/resubloss-ni.png}
-    \caption{Hexagonally binned parity plots of (a) \gls{brk} and (b) \gls{gpr} model \glspl{gbe} fitted using Olmsted Ni simulation data vs. Olmsted Ni simulation \glspl{gbe}. \Gls{mae} is \SIlist{0.00975;0.03626}{\J\per\square\m} for (a) and (b), respectively. Likewise, \gls{rmse} is \SIlist{0.01727;0.04972}{\J\per\square\m}, respectively.}
-    \label{fig:resubloss-ni}
+% \begin{figure*}
+%     \centering
+%     \includegraphics[scale=1]{figures/resubloss-ni.png}
+%     \caption{Hexagonally binned parity plots of (a) \gls{brk} and (b) \gls{gpr} model \glspl{gbe} fitted using Olmsted Ni simulation data vs. Olmsted Ni simulation \glspl{gbe}. \Gls{mae} is \SIlist{0.00975;0.03626}{\J\per\square\m} for (a) and (b), respectively. Likewise, \gls{rmse} is \SIlist{0.01727;0.04972}{\J\per\square\m}, respectively.}
+%     \label{fig:resubloss-ni}
+% \end{figure*}
+
+\begin{figure*}[!htb]
+     \centering
+     \begin{subfigure}[b]{0.32\textwidth}
+         \includegraphics[width=\textwidth]{figures/resubloss-ni-brk.png}
+         \caption{}
+         \label{fig:resubloss-ni-brk}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.32\textwidth}
+         \includegraphics[width=\textwidth]{figures/resubloss-ni-gpr.png}
+         \caption{}
+         \label{fig:resubloss-ni-gpr}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.32\textwidth}
+         \includegraphics[width=\textwidth]{figures/resubloss-ni-low-noise-gpr.png}
+         \caption{}
+         \label{fig:resubloss-ni-low-noise-gpr}
+     \end{subfigure}
+        \caption{(\subref*{fig:resubloss-ni-brk}), (\subref*{fig:resubloss-ni-gpr}), and (\subref*{fig:resubloss-ni-low-noise-gpr}).}
+        \label{fig:resubloss-ni}
 \end{figure*}
+
+\input{tables/resubloss-ni-pars} %generated via plotting.m
 
 For the \gls{brk} and \gls{gpr} interpolations, \gls{mae} is \SIlist{0.00975;0.03626}{\J\per\square\m}, respectively. Likewise, \gls{rmse} is \SIlist{0.01727;0.04972}{\J\per\square\m}, respectively. From \cref{fig:resubloss-ni}a, we see that low \gls{gbe} is predicted more accurately and high \gls{gbe} less accurately with \gls{brk} interpolation vs. \gls{gpr} in the \gls{vfz} framework. Without access to the original fitting routines used to produce the \gls{brk} function, we have not performed \gls{loocv} which would allow for a safer model evaluation (i.e. one in which fair results are less likely due to overfitting). \Gls{loocv} results for the \gls{gpr} case are, however, shown in \cref{fig:olmsted-Ni-loocv}, indicating that the model performs much worse in such a data-limited regime at points the model has never seen before.
 
