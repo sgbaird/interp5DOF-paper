@@ -21,17 +21,35 @@
 \input{authors.tex}
 
 \begin{abstract}
-    In this work we introduce the \gls{vfz} interpolation framework for \gls{gb} structure-property models and surrogates. The \gls{vfz} framework offers an advantage over other \gls{5dof} based property interpolation methods because it is constructed as a point set in a manifold. This means that directly computed Euclidean distances approximate the original \gls{gbo} distance with significantly reduced computation runtime ($\sim$7 CPU minutes vs. 153 CPU days for a $\num{50000}\times\num{50000}$ pairwise-distance matrix). This increased efficiency facilitates lower interpolation error through the use of significantly more input data.
-    We demonstrate \gls{gbe} interpolation results for a non-smooth validation function and simulated bi-crystal datasets for Fe and Ni using four interpolation methods: barycentric interpolation, \gls{gpr} or Kriging, \gls{idw}, and \gls{nn} interpolation. These are evaluated for \num{50000} random \inpt{} \glspl{gb} and \num{10000} random \outpt{} \glspl{gb}. The best performance was achieved with \gls{gpr}, which resulted in a reduction of the \gls{rmse} by \calcnum{(\avgrmse-\gprrmse)/\avgrmse*100}\% relative to \gls{rmse} of a constant, average model. Likewise, interpolation on a large, noisy, \gls{ms} Fe simulation dataset improves performance by \SI{34.4}{\percent} compared to \SI{21.2}{\percent} in prior work. Interpolation on a small, low-noise \gls{ms} Ni simulation dataset is similar to interpolation results for the original \gls{gbo} metric (\SI{57.6}{\percent} vs. \SI{56.4}{\percent}). A vectorized, parallelized, MATLAB interpolation function (\matlab{interp5DOF.m}) and related routines are available in our \vfzorepo{} (\url{github.com/sgbaird-5dof/interp}) which can be applied to other crystallographic point groups. The \gls{vfz} framework offers advantages for computing distances between \glspl{gb}, estimating property values for arbitrary \glspl{gb}, and modeling surrogates of computationally expensive \gls{5dof} functions and simulations.
+    In this work we introduce the \gls{vfz} framework which is useful for \gls{gb} structure-property models and gaining insights about the nature of a \gls{5dof} \gls{fz}. The \gls{vfz} framework offers an advantage over other \gls{5dof} based property interpolation methods because %it is constructed as a point set in a manifold. This means that
+    directly computed Euclidean distances approximate the original \gls{gbo} distance with significantly reduced computation runtime ($\sim$7 CPU minutes vs. 153 CPU days for a $\num{50000}\times\num{50000}$ pairwise-distance matrix). %this is where some fundamental insights probably need to be addressed before losing certain readers' attention
+    Aided by the increased computational efficiency, we find that the maximum dimension of an ($O_h$) \gls{vfz} is $~sim$\SI{60}{\degree}, and that \gls{nn} distances are normally distributed with a mean of approximately by $0.0000250247 x-1.27396 \log (x)+15.4499, x\in \{388,50000\}$ where $x$ is the number of \glspl{gb}.
+    %This increased efficiency facilitates lower interpolation error through the use of significantly more input data.
+    We perform \gls{gbe} interpolation for a non-smooth validation function using four interpolation methods: barycentric interpolation, \gls{gpr} or Kriging, \gls{idw}, and \gls{nn} interpolation on up to \num{50000} \glspl{gb}. % These are evaluated for \num{50000} random \inpt{} \glspl{gb} and \num{10000} random \outpt{} \glspl{gb}.
+    The best performance was achieved with \gls{gpr}, which resulted in a reduction of the \gls{rmse} by \calcnum{(\avgrmse-\gprrmse)/\avgrmse*100}\%.% relative to \gls{rmse} of a constant, average model.
+    We then apply \gls{gpr} to simulated bi-crystal datasets for Fe and Ni. Interpolation on a large, noisy, \gls{ms} Fe simulation dataset improves performance by \SI{34.4}{\percent} compared to \SI{21.2}{\percent} in prior work, and we discover that despite a large dataset size, the noise makes it difficult to resolve low \gls{gbe} (i.e. cusps). Interpolation on a small, low-noise \gls{ms} Ni simulation dataset is similar to interpolation results previously reported, and we estimate the correlation length to be $\sim$\SI{7.4}{\degree} via \gls{gpr} fitting. % (\SI{57.6}{\percent} vs. \SI{56.4}{\percent}).
+    A vectorized, parallelized, MATLAB interpolation function (\matlab{interp5DOF.m}) and related routines are available in our \vfzorepo{} (\url{github.com/sgbaird-5dof/interp}) which may be applied to alloys and non-cubic crystallographic point groups for the development of \gls{gb} structure-property models. %The \gls{vfz} framework offers advantages for computing distances between \glspl{gb}, estimating property values for arbitrary \glspl{gb}, and modeling surrogates of computationally expensive \gls{5dof} functions and simulations.
 \end{abstract}
 
 % Some of the less-emphasized fundamental contributions to understanding (that maybe I should incorporate into the abstract/emphasize more) are:
-% - an estimate of the intrinsic error of an Fe simulation dataset (Section 3.1.1. Experimental and Simulation Error, see also Figure S11)
-% - 1NN distribution and kNN distances for 50000 random cubochorically sampled points in a VFZ (Figure 2)
-% - average 1NN distance as a function of set size (Figure 5)
-% - the maximum dimension of a VFZ is ~60 deg (2.1.3. Distance Calculations in the Voronoi Fundamental Zone, see also Figure S1)
-% - large amounts of noise in the data makes it difficult to resolve deep cusps accurately
-% - a GB correlation length of 10 degrees is probably an overestimate. A 
+
+% - an estimate of the intrinsic error of an Fe simulation dataset (Section 3.1.1. Experimental and Simulation Error, see also Figure S11). The data is estimated to have an intrinsic error on the order of 0.065 J m^-2.
+
+% - 1NN distribution and kNN distances for 50000 random cubochorically sampled points in a VFZ (Figure 2). If you take 50000 random points, the average NN distance is 2.87 +/- 0.69 deg and the distribution is Gaussian. Typically, the first 10 NNs have average NN distances less than 5 deg.
+
+% - average 1NN distance as a function of set size (Figure 5). I.e. how closely spaced is the data based on a random set of points?
+
+% - the maximum dimension of an O_h VFZ is ~60 deg (2.1.3. Distance Calculations in the Voronoi Fundamental Zone, see also Figure S1), i.e. the largest minimum distance path for O_h point group symmetry is ~60 deg. Puts correlation lengths into perspective (10 deg is pretty large).
+
+% - large amounts of noise in the input data make it difficult to resolve deep cusps accurately (sort of a negative to large, noisy datasets --> smaller, low-noise datasets are generally to be preferred)
+
+% - a GB correlation length of 10 degrees is probably an overestimate. The GPR model gives a correlation length of 7.4 degrees for the Olmsted Ni GBE data. If you assume near-zero input noise, the correlation length drops to ~2 degrees. If you take 50,000 points from the BRK model, the fitted correlation length is 10.5 degrees.
+
+% - I could swap out "A" and "B" with Sigma 3 and Sigma 7 to show that they're connected, or with Sigma 3 and Sigma 5 to show two cusps. Also, minimum energy path vs. minimum distance path vs. VFZ path. An application for earth mover's distance?
+
+% we have an estimate for the most likely function value (1.16 J/m^2) in a random cubochoric sense for the BRK function.
+
+% the first 5DOF FZ with continuous coordinates
 
 \begin{keyword}
 Grain Boundary \sep Structure-Property Model \sep Interpolation \sep Octonion \sep Machine Learning % \sep Metastability \sep Grain Boundary Distance \sep Grain Boundary Energy
@@ -549,7 +567,7 @@ Since the \gls{brk} validation function is also an interpolation function on the
          \caption{}
          \label{fig:resubloss-ni-low-noise-gpr}
      \end{subfigure}
-        \caption{(\subref*{fig:resubloss-ni-brk}), (\subref*{fig:resubloss-ni-gpr}), and (\subref*{fig:resubloss-ni-low-noise-gpr}).}
+        \caption{Resubstitution parity plots for (\subref*{fig:resubloss-ni-brk}) \gls{brk} model, (\subref*{fig:resubloss-ni-gpr}) \gls{gpr}, and (\subref*{fig:resubloss-ni-low-noise-gpr}) \gls{gpr} constrained to negligible property noise vs. Olmsted Ni simulation \inpt{} data.}
         \label{fig:resubloss-ni}
 \end{figure*}
 
@@ -557,16 +575,16 @@ Since the \gls{brk} validation function is also an interpolation function on the
 
 \begin{table}[]
     \centering
-    \caption{Fitted parameters for two \gls{gpr} models fitted to the 388 simulated Ni \glspl{gbe} by \citet{olmstedSurveyComputedGrain2009a}. The first model allows $\sigma$ to vary, whereas the second constrains $\sigma$ to be fixed. $\sigma_L$, $\sigma_F$, $\beta$, and $\sigma$ are the kernel length scale, signal standard deviation, constant basis function, and input property standard deviation, respectively.}
+    \caption{Fitted parameters for two \gls{gpr} models fitted to the 388 simulated Ni \glspl{gbe} by \citet{olmstedSurveyComputedGrain2009a}. The first model allows $\sigma$ to vary, whereas the second constrains $\sigma$ to be fixed. $\sigma_L$, $\sigma_F$, $\beta$, and $\sigma$ are the kernel length scale ($^\circ{}$), signal standard deviation ($J m^{-2}$), constant basis function ($J m^{-2}$), and input property standard deviation ($J m^{-2}$), respectively. }
     \label{table:resubloss-ni-pars}
-    \csvautobooktabular[table head=]{tables/resubloss-ni-pars.csv}
+    \csvautobooktabular[table head={\toprule  Fix $\sigma$ & $\sigma_L$ ($^\circ{}$) & $\sigma_F$ & $\beta$ & $\sigma$ \\\midrule}]{tables/resubloss-ni-pars.csv}
 \end{table}
 
 For the \gls{brk} and \gls{gpr} interpolations, \gls{mae} is \SIlist{0.00975;0.03626}{\J\per\square\m}, respectively. Likewise, \gls{rmse} is \SIlist{0.01727;0.04972}{\J\per\square\m}, respectively. From \cref{fig:resubloss-ni}a, we see that low \gls{gbe} is predicted more accurately and high \gls{gbe} less accurately with \gls{brk} interpolation vs. \gls{gpr} in the \gls{vfz} framework. Without access to the original fitting routines used to produce the \gls{brk} function, we have not performed \gls{loocv} which would allow for a safer model evaluation (i.e. one in which fair results are less likely due to overfitting). \Gls{loocv} results for the \gls{gpr} case are, however, shown in \cref{fig:olmsted-Ni-loocv}, indicating that the model performs much worse in such a data-limited regime at points the model has never seen before.
 
 \subsubsection{\glsentrytitlecase{gprm}{long} Applied to Metastable Fe Simulation Data}
 \label{sec:results:simulation:gprm}
-In addition to \gls{gpr}, a \gls{gprm} model (\cref{fig:kim-interp-teach}) based on a sigmoid mixing function (\cref{fig:gprmix-sigmoid}) is used to better predict low \gls{gbe} values of the non-uniformly distributed, noisy Fe dataset (\cref{sec:methods:gprmix})\footnote{Alternatively, including \glspl{nbo} may likewise improve low \gls{gbe} performance, but possibly at the expense of high \gls{gbe} predictive accuracy.}. \Gls{gprm} interpolation results for the Fe \gls{gbe} simulations \cite{kimPhasefieldModeling3D2014} are shown in \cref{fig:kim-interp}, where approximate coordinates for the \glspl{gbo} $A$ and $B$ in \cref{fig:kim-interp}b are given in \cref{tab:tunnel-AB2}. 
+In addition to \gls{gpr}, a \gls{gprm} model (\cref{fig:kim-interp-teach}) based on a sigmoid mixing function (\cref{fig:gprmix-sigmoid}) is used to better predict low \gls{gbe} values of the non-uniformly distributed, noisy Fe dataset (\cref{sec:methods:gprmix})\footnote{Some alternatives: including \glspl{nbo} may likewise improve low \gls{gbe} performance, but possibly at the expense of high \gls{gbe} predictive accuracy. Specifying no noise in input data will cause the model to pass through the low \gls{gbe}, but is an unrealistic assumption for the Fe simulation data.}. \Gls{gprm} interpolation results for the Fe \gls{gbe} simulations \cite{kimPhasefieldModeling3D2014} are shown in \cref{fig:kim-interp}, where approximate coordinates for the \glspl{gbo} $A$ and $B$ in \cref{fig:kim-interp}b are given in \cref{tab:tunnel-AB2}. 
 
 We find that:
 \begin{itemize}
