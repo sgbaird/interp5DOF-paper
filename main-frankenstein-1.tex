@@ -5,7 +5,7 @@
 \documentclass[final,twocolumn,12pt]{elsarticle}
 \usepackage[margin=1.5cm,includefoot]{geometry}
 \usepackage{auto-paper}
-\zexternaldocument*{supp}
+\zexternaldocument*{supp-frankenstein-1}
 \input{values.tex}
 \input{abbrev.tex}
 
@@ -21,18 +21,19 @@
 \input{authors.tex}
 
 \begin{abstract}
-    We introduce the \gls{vfz} framework which is useful for \gls{gb} structure-property models and gaining insights about the nature of a \gls{5dof} \gls{fz} for both cubic and non-cubic symmetries and potentially alloys. The \gls{vfz} framework offers an advantage over other \gls{5dof} based property interpolation methods because %it is constructed as a point set in a manifold. This means that
+    We introduce the \gls{vfz} framework which is useful for \gls{gb} structure-property models and gaining insights about the nature of a \gls{5dof} \gls{fz} for both cubic and non-cubic symmetries and potentially alloys. We cover the methods associated with the \gls{vfz} framework. The \gls{vfz} framework offers an advantage over other \gls{5dof} based property interpolation methods because %it is constructed as a point set in a manifold. This means that
     directly computed Euclidean distances approximate the original \gls{gbo} distance with significantly reduced runtime ($\sim$7 CPU minutes vs. 153 CPU days for a $\num{50000}\times\num{50000}$ pairwise-distance matrix). %this is where some fundamental insights probably need to be addressed before losing certain readers' attention
-    Aided by the increased computational efficiency, we find that the maximum dimension of an $O_h$ \gls{vfz} is $\sim$\SI{60}{\degree}, and that \gls{nn} distances for cubochorically sampled \glspl{gb} are normally distributed. % with a mean (\SI{}{\degree}) of approximately $2.5025\times10^{-5} x-1.27396 \log (x)+15.4499, x\in \{388,50000\}$ where $x$ is the number of \glspl{gb}.
+    %Aided by the increased computational efficiency, we find that the maximum dimension of an $O_h$ \gls{vfz} is $\sim$\SI{60}{\degree}, and that \gls{nn} distances for cubochorically sampled \glspl{gb} are normally distributed. % with a mean (\SI{}{\degree}) of approximately $2.5025\times10^{-5} x-1.27396 \log (x)+15.4499, x\in \{388,50000\}$ where $x$ is the number of \glspl{gb}.
     %This increased efficiency facilitates lower interpolation error through the use of significantly more input data.
-    We perform \gls{gbe} interpolation for a non-smooth validation function on sets of up to \num{50000} \glspl{gb} using four interpolation methods: barycentric interpolation, \gls{gpr} or Kriging, \gls{idw}, and \gls{nn} interpolation. % These are evaluated for \num{50000} random \inpt{} \glspl{gb} and \num{10000} random \outpt{} \glspl{gb}.
-    The best performance was achieved with \gls{gpr}. %, which results in a reduction of the \gls{rmse} by \calcnum{(\avgrmse-\gprrmse)/\avgrmse*100}\%. % relative to \gls{rmse} of a constant, average model.
-    We then use \gls{gpr} to interpolate simulated bi-crystal datasets for Fe and Ni and demonstrate better than and similar performance to prior work, respectively. % Interpolation on a large, noisy, \gls{ms} Fe simulation dataset improves performance by \SI{34.4}{\percent} compared to \SI{21.2}{\percent} in prior work, and we discover that
-    The \gls{vfz} framework allows us to easily identify repeated \glspl{gb} which in turn enables us to estimate the intrinsic error of the large Fe simulation dataset (\SI{0.065}{\J\per\square\m}).
+    We perform \gls{gbe} interpolation for a non-smooth validation function on sets of up to \num{50000} \glspl{gb} using four interpolation methods: barycentric interpolation, \gls{gpr} or Kriging, \gls{idw}, and \gls{nn} interpolation.  These are evaluated for \num{50000} random \inpt{} \glspl{gb} and \num{10000} random \outpt{} \glspl{gb}.
+    The best performance was achieved with \gls{gpr} which results in a reduction of the \gls{rmse} by \calcnum{(\avgrmse-\gprrmse)/\avgrmse*100}\% relative to \gls{rmse} of a constant, average model.
+    We then use \gls{gpr} to interpolate simulated bi-crystal datasets for Fe and Ni and demonstrate better than and similar performance to prior work, respectively. Interpolation on a large, noisy, \gls{ms} Fe simulation dataset improves performance by \SI{34.4}{\percent} compared to \SI{21.2}{\percent} in prior work. %and we discover that
+    %The \gls{vfz} framework allows us to easily identify repeated \glspl{gb} which in turn enables us to estimate the intrinsic error of the large Fe simulation dataset (\SI{0.065}{\J\per\square\m}).
     We find that the noise and non-uniform sampling make it difficult to resolve low \gls{gbe} (i.e. cusps) and to validate the model. %Interpolation on a small, low-noise \gls{ms} Ni simulation dataset is similar to interpolation results previously reported, and
-    For the small, low-noise Ni simulation data, we resolve cusps with high accuracy, but uncertainty may be high in regions far from the input data. The trade-offs between noise, dataset size, sampling scheme, and repeat measurements must be carefully managed. Using \gls{gpr}, we estimate the correlation lengths of the Fe and Ni datasets to be $\sim$\SIlist{8.3;7.4}{\degree}, respectively, compared with a traditionally accepted value of $\sim$\SI{10}{\degree}. % (\SI{57.6}{\percent} vs. \SI{56.4}{\percent}).
-    Finally, we provide a vectorized, parallelized, MATLAB interpolation function (\matlab{interp5DOF.m}) and related routines %in our \vfzorepo{} 
-    (\url{github.com/sgbaird-5dof/interp}) which can be applied to future datasets for a variety of \gls{gb} properties. % which has potential for the creation of advanced \gls{gb} structure-property models for alloys and cubic/non-cubic crystallographic point groups. %The \gls{vfz} framework offers advantages for computing distances between \glspl{gb}, estimating property values for arbitrary \glspl{gb}, and modeling surrogates of computationally expensive \gls{5dof} functions and simulations.
+    For the small, low-noise Ni simulation data, we resolve cusps with high accuracy, but uncertainty may be high in regions far from the input data. The trade-offs between noise, dataset size, sampling scheme, and repeat measurements must be carefully managed. % Using \gls{gpr}, we estimate the correlation lengths of the Fe and Ni datasets to be $\sim$\SIlist{8.3;7.4}{\degree}, respectively, compared with a traditionally accepted value of $\sim$\SI{10}{\degree}. % (\SI{57.6}{\percent} vs. \SI{56.4}{\percent}).
+    %Finally
+    We provide a vectorized, parallelized, MATLAB interpolation function (\matlab{interp5DOF.m}) and related routines %in our \vfzorepo{} 
+    (\url{github.com/sgbaird-5dof/interp}) which can be applied to future datasets for a variety of \gls{gb} properties and comment on future work involving the application of the \gls{vfz} framework as a tool for better understanding of \gls{gb} properties within a \gls{5dof} \gls{fz}. % which has potential for the creation of advanced \gls{gb} structure-property models for alloys and cubic/non-cubic crystallographic point groups. %The \gls{vfz} framework offers advantages for computing distances between \glspl{gb}, estimating property values for arbitrary \glspl{gb}, and modeling surrogates of computationally expensive \gls{5dof} functions and simulations.
 \end{abstract}
 
 % Some of the less-emphasized fundamental contributions to understanding (that maybe I should incorporate into the abstract/emphasize more) are:
