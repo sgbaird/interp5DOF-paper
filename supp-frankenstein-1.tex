@@ -6,6 +6,7 @@
 % \input{pkgs}
 \usepackage[margin=1.5cm,includefoot]{geometry}
 \usepackage{auto-paper}
+\usepackage{refcheck}
 \zexternaldocument*{main-frankenstein-1} %try deleting log files if producing an error, see https://tex.stackexchange.com/questions/131709/unclean-aux-file-causes-file-ended-while-scanning-use-of-newlbel-error-wh
 \input{values.tex}
 \input{abbrev.tex}
@@ -40,6 +41,14 @@ Internally, these are converted to \glspl{gbo} and interpolation is performed us
 
 \section{Euclidean and Arc Length Distances}
 \label{sec:supp:dist-parity}
+
+In addition to enabling us to leverage the machinery of efficient and established algorithms, the choice of using Euclidean distance as opposed to hyperspherical arclength can be justified by the following observations:
+\begin{itemize}
+	\item The minimum Euclidean distance \gls{seo} will be the same as the minimum arc length distance \gls{seo} because $d_{\text{S}}$ is a monotonically increasing function of $d_{\text{E}}$, for $d_{\text{S}}\!\left(d_{\text{E}}\right)\in[0,\pi]$ (\cref{fig:dist-parity}). 
+	\item For the FCC point group symmetry ($m\bar{3}m$) the portion of $\mathbb{S}^7$ subtended by the \gls{vfz} is sufficiently small that the approximation $d_{\text{E}} \simeq d_{\text{S}}$ holds to very high accuracy\footnote{This is true for a specific pair of \glspl{gbo} within a \gls{vfz}. When calculating the \emph{minimum} distance between \glspl{seo} of two points, there are additional considerations that must be attended to as discussed in detail in \cref{sec:methods:framework:vfz-dist}.} as shown in \cref{fig:dist-parity}. 
+	\item Calculation of $d_{\text{E}}$ does not require the use of any inverse trigonometric functions and is about \SI{23}{\percent} faster than calculation of $d_{\text{S}}$ or $d_\Omega$.
+\end{itemize}
+
 The close correlation between Euclidean and arc length distances in the \gls{vfzgbo} sense is shown in \cref{fig:dist-parity} using pairwise distances of \num{10000} \glspl{vfzgbo}. This justifies our use of Euclidean distance as an approximation of hyperspherical arc length (and by extension, that a scaled Euclidean distance approximates a non-symmetrized \gls{gbo} distance, see \cref{eq:8Deuclidean_dist,eq:7sphere_arc_length,eq:omega} of the main paper). However, comparison with the original \gls{gbo} metric \cite{francisGeodesicOctonionMetric2019} gives overestimation for some boundaries. This is an inherent feature of the \gls{vfz} framework that can be addressed via use of the ensemble methods described in \cref{sec:methods:framework:vfz-dist} (see also \cref{fig:dist-ensemble-k1-2-10-20,fig:dist-ensemble-rmse-mae}).
 
 \begin{figure}
@@ -57,6 +66,12 @@ Additionally, the use of an isometry equivalence relationship in \citet{morawiec
     \caption{\Gls{gb} distances calculated with one \gls{gbo} fixed vs. the traditional calculations in \citet{chesserLearningGrainBoundary2020} show that the isometry equivalence discussed in \citet{morawiecDistancesGrainInterfaces2019} applies to \glspl{gbo}. The pairwise-distance matrix for the Olmsted \glspl{gb} supplied in \cite{chesserGBOctonionCode2019} was used. }
     \label{fig:pd-fix}
 \end{figure}
+
+\section{Computational Complexity of \glsentryshort{vfz} vs. \glsentryshort{gbo} Distances }
+Let $o_1$ and $o_2$ denote two \glspl{gb} represented in \gls{gbo} coordinates. 
+To perform a traditional symmetrized \gls{gbo} distance calculation according to \citet{francisGeodesicOctonionMetric2019}, we compare all \glspl{seo} of $o_1$ to all of the \glspl{seo} of $o_2$ and take the smallest distance. If $N_p$ is the number of proper rotations of the crystallographic point group, this single minimum distance calculation requires a total of $4N_p^4$ \glspl{seo} to be considered (Sections 4.3 and 4.5 of \citet{francisGeodesicOctonionMetric2019}). Thus, the total number of \gls{seo} computations will be $4N_p^4L^2$. However, it is possible to fix a single \gls{gb} in the \gls{gb} pair and still obtain accurate\footnote{Compared with the pairwise distance matrix of the 388 Olmsted \glspl{gb}, we obtained a \gls{rmse} of \SI{1.6566E-7}{\degree} for this computation which completed in \SI{133}{\s} using 6 cores (see \matlab{get_pd_fix.m})} due to isometry equivalence (see Section 7 of \cite{morawiecDistancesGrainInterfaces2019} and \cref{fig:pd-fix}).
+
+In contrast, for a single distance calculation using the \gls{vfz} framework, $o_1$ and $o_2$ are first mapped into the \gls{vfz}, and then only a single distance calculation is required between them. Mapping $o_1$ into the \gls{vfz} requires comparison of $8N_p^2$ \glspl{seo}\footnote{This is 8 instead of 4 because the simplifying assumption that only two of the four double cover cases need to be considered \cite{francisGeodesicOctonionMetric2019} does not apply in the \gls{vfz} framework. This is confirmed by applying \matlab{uniquetol()} on a set of $4608$ \glspl{gbo} which has a final set size of $4608$, where $4608=8\times N_p^2$ and $N_p=24$ (see \matlab{osymset.m}).} of $o_1$ with a fixed reference \gls{gb} in the interior of the \gls{vfz}; and likewise for $o_2$. Consequently, a single distance calculation between $o_1$ and $o_2$ under the \gls{vfz} framework requires $O(N_p^2)$ \gls{seo} computations. If one desires to compute a pairwise distance matrix between $L$ \glspl{gb}, the total computational cost\footnote{See \cref{sec:results:efficiency:symruntime} for a detailed explanation of why this is \emph{not} $O(N_p^2L^2)$.} will be $O(N_p^2L)$, which represents a dramatic reduction compared to the traditional approach.
 
 \section{Additional Interpolation Results}
 
