@@ -6,8 +6,8 @@
 \usepackage[margin=1.5cm,includefoot]{geometry}
 \usepackage{auto-paper}
 \usepackage{enumitem}
-% \usepackage{refcheck} %checks for unused labels - comment when done
 
+% \usepackage{refcheck} %checks for unused labels - comment when done
 % %%% Infrastructure    
 % \makeatletter
 % \newcommand{\refcheckize}[1]{%
@@ -18,7 +18,6 @@
 % }
 % \makeatother
 % %%%
-
 % %%% Now we add the reference commands we want refcheck to be aware of
 % \refcheckize{\cref}
 % \refcheckize{\Cref}
@@ -38,7 +37,7 @@
 		\input{authors.tex}
 		
 		\begin{abstract}
-			
+			We present a method for performing efficient barycentric interpolation for large point sets which reside on the surface of less than a hemisphere of a hypersphere. This method includes removal of degenerate dimensions via \gls{svd} transformations, determination of intersecting facets via \gls{nn} searches, and interpolation. Corresponding MATLAB code is available at \url{github.com/sgbaird-5dof/interp}.
 		\end{abstract}
 	
 	\begin{keyword}
@@ -50,20 +49,22 @@
 \section{Introduction}
 Barycentric coordinates are a type of homogeneous coordinate system that reference a \outpt{} point within a simplex \cite{langerSphericalBarycentricCoordinates2006} or convex polytope \cite{floaterGeneralizedBarycentricCoordinates2015,meyerGeneralizedBarycentricCoordinates2002,langerSphericalBarycentricCoordinates2006} based on "masses" or weights at the vertices, which can be negative. The \outpt{} point is assumed to be the barycenter (center of mass) of the simplex or convex polytope, and weights at the vertices necessary to make this assumption true are determined. We utilize rigid \gls{svd} transformations and a standard triangulation algorithm (quickhull \cite{barberQuickhullAlgorithmConvex1996} via \matlab{delaunayn()} in \matlab{sphconvhulln.m} to define a simplicial mesh (\cref{sec:app:bary:tri}). We then use barycentric weights (i.e. coordinates) for computing intersections of a point within a simplicial facet (\cref{sec:app:bary:int}) and for interpolation (\cref{sec:app:bary-interp}) \cite{langerSphericalBarycentricCoordinates2006}. For further information on barycentric coordinates and its applications and generalizations, see \cite{anisimovSubdividingBarycentricCoordinates2016,budninskiyPowerCoordinatesGeometric2016,dyerBarycentricCoordinateNeighbourhoods2016,floaterGeneralizedBarycentricCoordinates2015,floaterInjectivityWachspressMean2010,hormannDiscretizingWachspressKernels2017,hormannMaximumEntropyCoordinates2008,langerHigherOrderBarycentric2008,langerSphericalBarycentricCoordinates2006,leiNewCoordinateSystem2020,meyerGeneralizedBarycentricCoordinates2002,peixotoVectorFieldReconstructions2014,pihajokiBarycentricInterpolationRiemannian2019,rustamovBarycentricCoordinatesSurfaces2010,skalaRobustBarycentricCoordinates2013,taoFastNumericalSolver2019,warrenBarycentricCoordinatesConvex2007}.
 
-Our barycentric interpolation approach includes:
-\begin{itemize}%[nolistsep]
-	\item[1.] triangulation of a mesh (\cref{sec:app:bary:tri})
-	\item[2.] finding intersections (\cref{sec:app:bary:int})
-	\item[3.] calculating interpolated values (\cref{sec:app:bary-interp})
-\end{itemize}
-
+Built-in MATLAB functions are indicated with parantheses (e.g. \matlab{delaunayn()}), whereas custom functions are indicated with the \matlab{.m} extension (e.g. \matlab{sphconvhulln.m}).
+%
+% Our barycentric interpolation approach includes:
+% \begin{itemize}%[nolistsep]
+% 	\item[1.] triangulation of a mesh (\cref{sec:app:bary:tri})
+% 	\item[2.] finding intersections (\cref{sec:app:bary:int})
+% 	\item[3.] calculating interpolated values (\cref{sec:app:bary-interp})
+% \end{itemize}
+%
 \section{Triangulating a Mesh}
 \label{sec:app:bary:tri}
 
 Creation of a simplicial mesh is necessary to perform barycentric interpolation. Due to the difficulty of visualizing a 7-sphere, we provide visual illustrations of the process as applied to lower-dimensional analogues. The triangulation process occurs by:
 \begin{enumerate}%[nolistsep]
 	\item[1.1] applying a \gls{svd} transformation to remove any degeneracies (e.g. U(1)-symmetry degeneracy for \glspl{gbo} \cite{francisGeodesicOctonionMetric2019}) inherent in the coordinates (\cref{sec:app:bary:tri:svd1})
-	\item[1.2] When the data resides on less than a hemisphere, linearly projecting points onto a hyperplane that is tangent to the vector between the origin and the mean of the \inpt{} points to reduce computational burden of the triangulation
+	\item[1.2] When the data resides on less than a hemisphere, linearly projecting points onto a hyperplane that is tangent to the vector between the origin and the mean of the \inpt{} points to reduce computational burden of the triangulation (\cref{sec:app:bary:tri:project})
 	\item[1.3] performing a second \gls{svd} transformation (\cref{sec:app:bary:tri:svd2})
 	\item[1.4] computing the triangulation according to the quickhull algorithm \cite{barberQuickhullAlgorithmConvex1996} using built-in methods
 \end{enumerate}
@@ -72,7 +73,7 @@ In the explanation of each step that follows, we make reference to lower-dimensi
 
 First, \cref{fig:bary-remove-deg} illustrates that 8D Cartesian points constrained to the surface of a hypersphere are analogous to a point cloud on the 2-sphere (\cref{fig:bary-remove-deg}a) and that an 8D Cartesian point set constrained to the surface of a hypersphere is analogous to a geodesic arc on the 2-sphere (\cref{fig:bary-remove-deg}b). If a point set has a degenerate dimension, this can be removed by a rigid \gls{svd} transformation to 7D Cartesian coordinates (analogous to 2D Cartesian coordinates in \cref{fig:bary-remove-deg}c). This sequence would be more difficult to visualize if \cref{fig:bary-remove-deg}a was meant to represent a point cloud on the 3-sphere (4D Cartesian coordinates), etc.
 
-Second, \cref{fig:bary-delaunay} illustrates a second transformation from normalized 7D Cartesian coordinates (\cref{fig:bary-delaunay}a) to a hyperplane (\cref{fig:bary-delaunay}b) which is then transformed into 6D Cartesian coordinates via a second \gls{svd}. In this case, key issues are retained that would otherwise be lost (\cref{sec:supp:bary:artifact}) if an arc on a circle (1-sphere) to 1D Cartesian coordinates were used instead\footnote{Non-intersection issues due to high-aspect ratios and consideration of facets connected up to \matlab{nnMax} \glspl{nn} do not manifest in triangulations on the surface of a 1-sphere because one of the two facets (i.e. line segments) connected to the first \gls{nn} mesh vertex relative to the \outpt{} point is guaranteed to have an intersection.}. Additionally, the use of actual triangles is a more familiar and compelling illustration of \textit{triangulation}.
+Second, \cref{fig:bary-delaunay} illustrates a second transformation from normalized 7D Cartesian coordinates (\cref{fig:bary-delaunay}a) to a hyperplane (\cref{fig:bary-delaunay}b) which is then transformed into 6D Cartesian coordinates via a second \gls{svd}. In this case, key issues are retained that would otherwise be lost if an arc on a circle (1-sphere) to 1D Cartesian coordinates were used instead\footnote{Non-intersection issues due to high-aspect ratios and consideration of facets connected up to \matlab{nnMax} \glspl{nn} do not manifest in triangulations on the surface of a 1-sphere because one of the two facets (i.e. line segments) connected to the first \gls{nn} mesh vertex relative to the \outpt{} point is guaranteed to have an intersection.}. Additionally, the use of actual triangles is a more familiar and compelling illustration of \textit{triangulation}.
 
 \begin{figure*}
 	\centering
@@ -120,7 +121,7 @@ This is accomplished by:
 \begin{itemize}%[nolistsep]
 	\item[2.1a] concatenating both \inpt{} and
 	\outpt{} points
-	\item[2.1b] using the \matlab{interp5DOF.m} sub-routine \matlab{proj\_down.m} (which depends on MATLAB's built-in \gls{svd} implementation \matlab{svd()}) to perform the transformation
+	\item[2.1b] using the \matlab{interp5DOF.m} sub-routine \matlab{proj\_down.m} (via \matlab{svd()}) to perform the transformation
 	\item[2.1c] subsequently separating the transformed \inpt{} and \outpt{} points (reverse of concatenation step)
 \end{itemize}
 
@@ -145,7 +146,7 @@ Once the \outpt{} points are lined up properly with the mesh, the facet containi
 %
 %For further information on barycentric coordinates and its applications and generalizations, see \cite{anisimovSubdividingBarycentricCoordinates2016,budninskiyPowerCoordinatesGeometric2016,dyerBarycentricCoordinateNeighbourhoods2016,floaterGeneralizedBarycentricCoordinates2015,floaterInjectivityWachspressMean2010,hormannDiscretizingWachspressKernels2017,hormannMaximumEntropyCoordinates2008,langerHigherOrderBarycentric2008,langerSphericalBarycentricCoordinates2006,leiNewCoordinateSystem2020,meyerGeneralizedBarycentricCoordinates2002,peixotoVectorFieldReconstructions2014,pihajokiBarycentricInterpolationRiemannian2019,rustamovBarycentricCoordinatesSurfaces2010,skalaRobustBarycentricCoordinates2013,taoFastNumericalSolver2019,warrenBarycentricCoordinatesConvex2007}.
 %
-Due to the large number of facets per point of a high-dimensional triangulation (approximately \num{2000} facets per vertex for a \num{50000} point triangulation, or \num{1e8} total facets), some simplifications are made in order to determine intersections of \outpt{} points with the mesh. If every edge length of every facet were equal, only facets connected to the first \gls{nn} would need to be considered to find a proper intersection. However, since the points are randomly sampled, edge lengths of facets are non-uniform, and non-unity aspect-ratio facets exist (\cref{fig:bary-delaunay}, \cref{fig:high-aspect-non-int}). If the facets have high-aspect ratios, the intersecting facets of \outpt{} points can be far from the \glspl{nn} mesh points relative to the \outpt{} points (see \cref{fig:high-aspect-non-int} inset), especially near the perimeter of a hyperspherical surface mesh. Rather than loop through every facet to find an intersection ($\sim$\num{1e8} facets in a \num{50000} point mesh), the \outpt{} point intersections are calculated by considering facets connected to up to some number of \gls{nn} mesh vertices (\matlab{nnMax}) relative to each \outpt{} point (in this work, \matlab{nnMax=10}). The \gls{nn} mesh vertices relative to a \outpt{} point are computed via the MATLAB built-in function \matlab{dsearchn}. The facet IDs of facets connected to these \glspl{nn} are computed by calling built-in MATLAB function \matlab{find()}, as in \matlab{find(K==nn)}, where \matlab{K} is the triangulation from \matlab{sphconvhulln.m} and \matlab{nn} is the ID of one of the \gls{nn} mesh vertices. 
+Due to the large number of facets per point of a high-dimensional triangulation (approximately \num{2000} facets per vertex for a \num{50000} point triangulation, or \num{1e8} total facets), some simplifications are made in order to determine intersections of \outpt{} points with the mesh. If every edge length of every facet were equal, only facets connected to the first \gls{nn} would need to be considered to find a proper intersection. However, since the points are randomly sampled, edge lengths of facets are non-uniform, and non-unity aspect-ratio facets exist (\cref{fig:bary-delaunay}, \cref{fig:high-aspect-non-int}). If the facets have high-aspect ratios, the intersecting facets of \outpt{} points can be far from the \glspl{nn} mesh points relative to the \outpt{} points (see \cref{fig:high-aspect-non-int} inset), especially near the perimeter of a hyperspherical surface mesh. Rather than loop through every facet to find an intersection ($\sim$\num{1e8} facets in a \num{50000} point mesh), the \outpt{} point intersections are calculated by considering facets connected to up to some number of \gls{nn} mesh vertices (\matlab{nnMax}) relative to each \outpt{} point (in this work, \matlab{nnMax=10}). The \gls{nn} mesh vertices relative to a \outpt{} point are computed (\matlab{dsearchn()}). The facet IDs of facets connected to these \glspl{nn} are computed (via \matlab{find()}, as in \matlab{find(K==nn)}, where \matlab{K} is the triangulation from \matlab{sphconvhulln.m} and \matlab{nn} is the ID of one of the \gls{nn} mesh vertices).
 
 Some \outpt{} points will have no intersecting facet found.
 %(which can occur just outside the piece-wise linear perimeter of the mesh due to finite resolution)
@@ -158,6 +159,10 @@ In the first case, barycentric interpolation within high-aspect ratio facets may
 
 Testing intersections for nearby facets is handled in \matlab{intersect\_facet.m} and depends on the barycentric coordinate computations in \matlab{projray2hypersphere.m}.
 
+% \subsection{High-Aspect Ratios}
+% \label{sec:supp:bary:artifact}
+% An artifact of the barycentric interpolation method which occurs due to the presence of high-aspect ratio facets is shown in \cref{fig:high-aspect-non-int}. As the dimensionality increases for a constant number of points and from our numerical tests, the rate of missed facet intersections increases. This artifact and our method for addressing it are discussed in \cref{sec:app:bary:int}.
+
 \section{Interpolation}
 \label{sec:app:bary-interp}
 
@@ -166,21 +171,17 @@ Once a mesh triangulation has been determined (\cref{sec:app:bary:tri}), barycen
 	\label{eq:bary-interp}
 	v_{m,q}=\underset{i=1}{\overset{N}{\sum }}\lambda _{m,i} v_{m,i}
 \end{equation}
-where $\lambda_{m,i}$, $v_{m,q}$, $v_{m,i}$ and $N$, are the barycentric coordinates of the m-th \outpt{} point, interpolated property at the m-th \outpt{} point, property of the $i$-th vertex of the intersecting facet for the m-th \outpt{} point, and number of vertices in a given facet ($N = 7$ for facets of the simplicial mesh on the degeneracy-free 6-sphere), respectively. Interpolation of many \outpt{} points simultaneously can be accomplished by a simple, vectorized approach via MATLAB built-in function \matlab{dot()} as used in \matlab{interp\_bary\_fast.m}. This function assumes triangulation and weights have been precomputed. In other words, both \inpt{} and \outpt{} coordinates remain fixed, and only \inpt{} property values change. If this is the case, barycentric interpolation of new points is incredibly fast. By contrast, if \inpt{} coordinates change, the triangulation must be recomputed, and if \outpt{} coordinates change, the intersecting facets must be recomputed. Both triangulation and finding intersecting facets are computationally demanding with respect to memory and runtime (\cref{sec:results:efficiency}).
-
-\section{High-Aspect Ratios}
-\label{sec:supp:bary:artifact}
-An artifact of the barycentric interpolation method which occurs due to the presence of high-aspect ratio facets is shown in \cref{fig:high-aspect-non-int}. As the dimensionality increases for a constant number of points and from our numerical tests, the rate of missed facet intersections increases. This artifact and our method for addressing it are discussed in \cref{sec:app:bary:int} of the main text.
+where $\lambda_{m,i}$, $v_{m,q}$, $v_{m,i}$ and $N$, are the barycentric coordinates of the m-th \outpt{} point, interpolated property at the m-th \outpt{} point, property of the $i$-th vertex of the intersecting facet for the m-th \outpt{} point, and number of vertices in a given facet ($N = 7$ for facets of the simplicial mesh on the degeneracy-free 6-sphere), respectively. Interpolation of many \outpt{} points simultaneously can be accomplished by a simple, vectorized approach (i.e. \matlab{dot()} as used in \matlab{interp\_bary\_fast.m}). This function assumes triangulation and weights have been precomputed. In other words, both \inpt{} and \outpt{} coordinates remain fixed, and only \inpt{} property values change. If this is the case, barycentric interpolation of new points is incredibly fast. By contrast, if \inpt{} coordinates change, the triangulation must be recomputed, and if \outpt{} coordinates change, the intersecting facets must be recomputed. Both triangulation and finding intersecting facets are computationally demanding with respect to memory and runtime for large datasets. For example, a mesh triangulation consisting of \num{50000} points evaluated for \num{10000} interpolation points requires $\sim$1.6~hours using 12 cores ($\sim$20~CPU~hours in total) with \num{128}~GB of RAM available. The triangulation itself ($\sim$\num{1e8} facets) requires $\sim$6~GB of memory storage.
 
 \begin{figure*}
 	\centering
-	\includegraphics[scale=1]{figures/high-aspect-non-int.png}
+	\includegraphics[scale=0.8]{figures/high-aspect-non-int.png}
 	\caption{Illustration of two \outpt{} points (red) for which no intersecting facet is found due to being positioned within a high-aspect ratio facet. The inset shows that facets connected to the \gls{nn} do not contain the \outpt{} point. Many \glspl{nn} would need to be considered before an intersection is found. Additionally, it is expected that if found, the interpolation will suffer from higher error due to use of facet vertices far from the interpolation point. Proper intersections of \outpt{} points with the mesh are shown in blue.}
 	\label{fig:high-aspect-non-int}
 \end{figure*}
 
 \section{Conclusion}
-We presented an application of barycentric interpolation on a 7-sphere which uses computational tricks such as \gls{svd} transformations to reduce the computational burden of high-dimensional triangulations.
+We presented an application of barycentric interpolation on a 7-sphere which uses \gls{svd} transformations, linear projections, and \gls{nn} searches to reduce the computational burden of high-dimensional hyperspherical triangulations and intersection-finding. Large point sets in high-dimensions still have large memory and runtime requirements, but are more tractable with these methods.
 
 \printglossaries
 
