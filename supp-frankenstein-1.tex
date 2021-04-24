@@ -6,7 +6,8 @@
 % \input{pkgs}
 \usepackage[margin=1.5cm,includefoot]{geometry}
 \usepackage{auto-paper}
-\usepackage{refcheck}
+% \PassOptionsToPackage{refcheck}{auto-paper} %comment this out before submission
+
 \zexternaldocument*{main-frankenstein-1} %try deleting log files if producing an error, see https://tex.stackexchange.com/questions/131709/unclean-aux-file-causes-file-ended-while-scanning-use-of-newlbel-error-wh
 \input{values.tex}
 \input{abbrev.tex}
@@ -22,7 +23,7 @@
 \begin{frontmatter}
 
 %\title{Grain Boundary Octonion Meshing and Interpolation}
-\title{\mytitle{}: Supplementary Information}
+\title{\mytitleone{}: Supplementary Information}
 
 \input{authors}
 
@@ -67,7 +68,7 @@ Additionally, the use of an isometry equivalence relationship in \citet{morawiec
     \label{fig:pd-fix}
 \end{figure}
 
-\section{Computational Complexity of \glsentryshort{vfz} vs. \glsentryshort{gbo} Distances }
+\section{Computational Complexity of \glsentryshort{vfz} vs. \glsentryshort{gbo} Distances } \label{sec:computational-complexity}
 Let $o_1$ and $o_2$ denote two \glspl{gb} represented in \gls{gbo} coordinates. 
 To perform a traditional symmetrized \gls{gbo} distance calculation according to \citet{francisGeodesicOctonionMetric2019}, we compare all \glspl{seo} of $o_1$ to all of the \glspl{seo} of $o_2$ and take the smallest distance. If $N_p$ is the number of proper rotations of the crystallographic point group, this single minimum distance calculation requires a total of $4N_p^4$ \glspl{seo} to be considered (Sections 4.3 and 4.5 of \citet{francisGeodesicOctonionMetric2019}). Thus, the total number of \gls{seo} computations will be $4N_p^4L^2$. However, it is possible to fix a single \gls{gb} in the \gls{gb} pair and still obtain accurate\footnote{Compared with the pairwise distance matrix of the 388 Olmsted \glspl{gb}, we obtained a \gls{rmse} of \SI{1.6566E-7}{\degree} for this computation which completed in \SI{133}{\s} using 6 cores (see \matlab{get_pd_fix.m})} due to isometry equivalence (see Section 7 of \cite{morawiecDistancesGrainInterfaces2019} and \cref{fig:pd-fix}).
 
@@ -91,6 +92,13 @@ Interpolation results for \num{388} and \num{10000} \glspl{gb} are given in \cre
     \caption{Hexagonally binned parity plots for \num{10000} \inpt{} and \num{10000} \outpt{} \glspl{gbo} formed via pairs of a random cubochorically sampled quaternion and a spherically sampled random boundary plane normal. Interpolation via (a) \gls{gpr}, (b) \gls{idw}, (c) \gls{nn}, and (d) barycentric coordinates.  \gls{brk} \gls{gbe} function for \gls{fcc} Ni \cite{bulatovGrainBoundaryEnergy2014} was used as the test function.}
     \label{fig:brkparity10000}
 \end{figure}
+
+\section{Mitigating Distance Overestimation} \label{sec:overestimation}
+Overestimation imposes a "sparseness" of data within a local region of influence common to the interpolation methods in this work, whereas underestimation would give erroneous high correlations between uncorrelated \glspl{gb}. Because only overestimation relative to traditional \gls{gbo} distances exist in this work (as shown in \cref{fig:dist-ensemble-k1-2-10-20}), we expect that large errors will occur infrequently (\cref{sec:results:accuracy}). 
+
+While distance calculations are subject to these infrequent overestimates, they are largely immaterial for interpolation. This is because all interpolation methods in this work involve a region of influence that is small, so that if the distance to a \gls{nn} is overestimated it simply does not contribute to the interpolation (the "sparseness" referred to earlier). Consequently the accuracy of the interpolation is not significantly impacted by infrequent distance overestimates, and excellent results can be achieved without addressing this limitation. However, if even greater accuracy is desired it can be obtained for a relatively minor cost by considering multiple \glspl{vfz}.
+
+We find that taking the minimum distance among several \gls{vfzgbo} sets defined by separate reference \glspl{gbo} leads to better correlation between the Euclidean approximation and the traditional \gls{gbo} metric as shown in \cref{fig:dist-ensemble-k1-2-10-20}. Additionally, \cref{fig:dist-ensemble-rmse-mae} shows that the error between scaled Euclidean distance and the traditional \gls{gbo} metric decreases rapidly as the number of ensemble \gls{vfzgbo} components increases. This confirms that employing a small ensemble of \gls{vfzgbo} sets results in significant improvement to the Euclidean distance approximation (\cref{fig:dist-ensemble-k1-2-10-20,fig:dist-ensemble-rmse-mae}) of the traditional \gls{gbo} metric. However, as already mentioned, improvements to interpolation results are expected to be less significant since they are already robust to occasional distance overestimates. In terms of computational runtime, use of an ensemble of 10 \glspl{vfz} will increase runtime by a factor of $\sim$10 via a loop-based implementation. For a symmetrized $\num{50000}\times\num{50000}$ pairwise distance matrix, this results in a runtime of approximately 1~CPU~hour instead of $\sim$7~CPU~minutes for a single \gls{vfz}. However, this is still much faster than the original \gls{gbo} approach used in \cite{chesserLearningGrainBoundary2020}, which would take an estimated 6.6 CPU years using the original implementation (or 153 CPU days if one \gls{gb} in the \gls{gb} pair is fixed according to the assumption in \citet{morawiecDistancesGrainInterfaces2019}). Additionally, it may be worthwhile to make the distance calculations GPU-compatible for further speed-up. %might be worth making a note here about how many function calls you might expect during a single grain growth simulation. Then we can translate these times into expected minimum CPU time for a 3D grain growth simulation for X number of grains. Maybe Jose has an estimate for this. I think I included something later
 
 \section{Ensemble Interpolation Results}
 \label{sec:ensemble-interp}
@@ -129,24 +137,23 @@ Use of an ensemble interpolation scheme decreases interpolation error for a \gls
 \label{sec:ensemble-interp:egprm}
 
 A scheme which preferentially favors the ensemble minimum for low \gls{gbe} predictions and defaults to ensemble mean or median for all other \glspl{gbe} may produce even better results across the full range of \glspl{gbe}. For example, this could be accomplished by combining the ensemble scheme described here with the \gls{gpr} mixture model described in \cref{sec:supp:kim-interp:method}.
+%
+% \section{Barycentric Interpolation}
+% \label{sec:supp:bary}
+%
+% \subsection{High-Aspect Ratios}
+% \label{sec:supp:bary:artifact}
+% An artifact of the barycentric interpolation method which occurs due to the presence of high-aspect ratio facets is shown in \cref{fig:high-aspect-non-int}. As the dimensionality increases for a constant number of points and from our numerical tests, the rate of missed facet intersections increases. This artifact and our method for addressing it are discussed in \cref{sec:app:bary:int} of the main text.
 
-\section{Barycentric Interpolation}
-\label{sec:supp:bary}
-
-\subsection{High-Aspect Ratios}
-\label{sec:supp:bary:artifact}
-An artifact of the barycentric interpolation method which occurs due to the presence of high-aspect ratio facets is shown in \cref{fig:high-aspect-non-int}. As the dimensionality increases for a constant number of points and from our numerical tests, the rate of missed facet intersections increases. This artifact and our method for addressing it are discussed in \cref{sec:app:bary:int} of the main text.
-
-\begin{figure*}
-    \centering
-    \includegraphics[scale=1]{figures/high-aspect-non-int.png}
-    \caption{Illustration of two \outpt{} points (red) for which no intersecting facet is found due to being positioned within a high-aspect ratio facet. The inset shows that facets connected to the \gls{nn} do not contain the \outpt{} point. Many \glspl{nn} would need to be considered before an intersection is found. Additionally, it is expected that if found, the interpolation will suffer from higher error due to use of facet vertices far from the interpolation point. Proper intersections of \outpt{} points with the mesh are shown in blue.}
-    \label{fig:high-aspect-non-int}
-\end{figure*}
+% \begin{figure*}
+%     \centering
+%     \includegraphics[scale=1]{figures/high-aspect-non-int.png}
+%     \caption{Illustration of two \outpt{} points (red) for which no intersecting facet is found due to being positioned within a high-aspect ratio facet. The inset shows that facets connected to the \gls{nn} do not contain the \outpt{} point. Many \glspl{nn} would need to be considered before an intersection is found. Additionally, it is expected that if found, the interpolation will suffer from higher error due to use of facet vertices far from the interpolation point. Proper intersections of \outpt{} points with the mesh are shown in blue.}
+%     \label{fig:high-aspect-non-int}
+% \end{figure*}
 
 % \subsection{Use of Alternative Distance Metrics}
-
-
+%
 \section{Kim Interpolation}
 \label{sec:supp:kim-interp}
 
