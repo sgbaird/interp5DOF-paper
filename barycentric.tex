@@ -96,6 +96,11 @@ To reduce the computational complexity of triangulating a high-dimensional mesh 
 analogous to a Cartesian rotation and translation (see 3D to 2D \gls{svd} transformation from \cref{fig:bary-remove-deg}b to \cref{fig:bary-remove-deg}c).
 %Thus, a set of \glspl{gbo} originally represented by 8D Cartesian coordinates are collapsed to a 7D Cartesian representation while preserving both distances and angles among the points
 
+An \gls{svd} is given by:
+\input{equations/svd-cond}
+The \gls{svd} transformed coordinates are given by:
+\input{equations/svd-force}
+%
 \subsection{Linearly Project onto Hyperplane}
 \label{sec:app:bary:tri:project}
 Next, the resulting 7D Cartesian representation of each point is projected onto a hyperplane that is tangent to the centroid (i.e. mean) of the point set\footnote{This is \textit{not} a rigid transformation; however, it approximates one with sufficient accuracy to produce a high-quality triangulation.} (\cref{fig:bary-delaunay}a). By performing this linear projection, one of the dimensions becomes degenerate.
