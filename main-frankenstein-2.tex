@@ -5,7 +5,8 @@
 \documentclass[final,twocolumn,12pt]{elsarticle}
 \usepackage[margin=1.5cm,includefoot]{geometry}
 \usepackage{auto-paper}
-\usepackage{refcheck}
+\PassOptionsToPackage{refcheck}{auto-paper} %comment this out before submission
+
 \zexternaldocument*{supp-frankenstein-2}
 \input{values.tex}
 \input{abbrev.tex}
@@ -17,7 +18,7 @@
 	\begin{frontmatter}
 		
 		%\title{Grain Boundary Octonion Meshing and Interpolation}
-		\title{\mytitle{}}
+		\title{\mytitletwo{}}
 		
 		\input{authors.tex}
 		
@@ -66,8 +67,34 @@
 	
 	\section{Introduction} \label{sec:intro}
 	
+	During processing and microstructure evolution, grain boundaries (GBs) can change their macroscopic crystallographic character to minimize their energy through, e.g., grain rotation or rotation of the GB plane. Such transformations constitute trajectories or paths along the GB energy landscape, which is a function over the 5D GB character space. Consequently, to understand, model, and predict such transformations it is necessary to understand those paths and the relationships between GBs that are near each other in that space.
+	
+	Examples: during grain growth when one grain disappears a new GB is formed between its neighbors where one did not exist previously, the resulting interface may not have a minimum energy so while the misorientation is fixed the boundary plane will rotate to minimize the energy of the interface. During high temperature deformation or recrystallization grains can rotate to minimize the interfacial energy. In this case the boundary plane can also change so that such a transformation represents a path that is not contained within a given misorientation or BP subspace but rather traverses a more general trajectory through the 5D space.
+	
+	Maybe consider choosing terminal GBs for the paths to investigate this-> research shows that grain rotation only occurs for misorientations that are pure-tilt in character (ones with general tilt-twist character do not show grain rotation). We could test or show why this is the case (my guess is there would be grain rotation for some general GBs-> those for which there is a strictly downhill path). Maybe look at a sigma 5, which is a minimum in the symmetric tilt space so it likely would not rotate, but maybe it has another downhil path that leaves the symmetric tilt space? Or maybe we could find a general GB that we think would show grain rotation because it has a downhill path.
+	
+	GBE -> could drive towards regions might understand kinematic pathways 
+	
+	Spontaneous (microstructure evolution) vs. imposed changes (processesing)
+	
+	Paths between ground state structures
+	
+	During microstructure evolution a variety of events can occur that create an instantaneous state in which a GB may be able to lower its energy by changing is macroscopic parameters (e.g. GB plane).
+	
+	Perhaps we can also discuss faceting. For example, if we pick a GB in the middle of the path, would it show facets of the terminal GBs when there is a maximum and not exhibit faceting when there is no maximum?
+	
+% 	papers that discuss changes to GB character to minimize energy
+% 	https://www.sciencedirect.com/science/article/pii/S1359645414005679
+	
+% 	https://www.sciencedirect.com/science/article/pii/S1359646213001425?via%3Dihub
+	
+% 	https://www.sciencedirect.com/science/article/pii/S1359645414004261?via%3Dihub
+
+% https://www.nature.com/articles/ncomms5402#:~:text=Grain%20rotation%20is%20a%20well,and%20recrystallization%20of%20polycrystalline%20materials.&text=The%20mechanism%20underlying%20the%20grain,boundary%20sliding%20or%20diffusional%20creep.
+	
 	\subsection{Motivation} %the need for understanding 5DOF space
 	\label{sec:intro:motivation}
+	% this is identical to the other paper and needs to be revised to avoid self-plagiarism
 	High fidelity \gls{gb} structure-property models can accelerate the design and understanding of materials for \gls{gb} engineering applications such as grain growth (\gls{gbe} \cite{jinColossalGrainGrowth2018}, mobility \cite{brandenburgMigrationFacetingLowangle2014}, and grain rotation \cite{huangGrainRotationLattice2015,trauttCapillarydrivenGrainBoundary2014,sharmaObservationChangingCrystal2012,wareGrainBoundaryPlane2018}), stress-corrosion cracking (diffusivity \cite{liAnisotropyHydrogenDiffusion2017,oudrissGrainSizeGrainboundary2012}, solubility \cite{metsueHydrogenSolubilityVacancy2016}, and segregation \cite{huangHydrogenEmbrittlementGrain2017}) \cite{xiaApplingGrainBoundary2011,demkowiczThresholdDensityHelium2020,hansonCrystallographicCharacterGrain2018,jothiInvestigationMicromechanismsHydrogen2016,zhouChemomechanicalOriginHydrogen2016}, strength \cite{huangNaturalImpactresistantBicontinuous2020,wangAdditivelyManufacturedHierarchical2018,linMeasuringNonlinearStresses2016}, ceramics \cite{yinCeramicPhasesOnedimensional2019,guanAnalysisThreedimensionalMicrostructure2011}, electronics \cite{vlassioukEvolutionarySelectionGrowth2018,hanSubnanometreChannelsEmbedded2018}, and thermoelectrics \cite{sunEnhancingPowerFactor2020}. With the increased use of nanomaterials \cite{hanSubnanometreChannelsEmbedded2018,huangNaturalImpactresistantBicontinuous2020}, \glspl{gb} take on increasingly larger roles as the \gls{gb} volume fraction becomes significant; this is complicated by the fact that properties of \glspl{gb} can span orders of magnitude depending on the five macroscopic \glspl{dof} \cite{johnsonInferringGrainBoundary2015,yangMeasuringRelativeGrain2001,zhangGrainBoundaryMobilities2020} as well as the three microscopic \glspl{dof} \cite{hanGrainboundaryMetastabilityIts2016,weiDirectImagingAtomistic2021}. However, the mentioned studies generally only consider a binary classification of \glspl{gb} or variation of a few \glspl{dof} which represents a small "slice" of the full \gls{gbc} space. Recent advances in high-throughput simulation \cite{bostanabadStochasticMicrostructureCharacterization2016,Homer2019c,Jothi2015h,pirgaziAlignment3DEBSD2019,pirgaziThreedimensionalCharacterizationGrain2015,speidelCrystallographicTextureCan2018,zhangGrainBoundaryMobilities2020,zhengGrainBoundaryProperties2020}, experimental characterization \cite{keinanIntegratedImagingThree2018,Seita2016,speidelCrystallographicTextureCan2018,winiarskiBroadIonBeam2017,zhangGrainBoundaryMobilities2020}, and availability of rich \gls{gb} datasets \cite{kimIdentificationSchemeGrain2011,liAtomisticSimulationsEnergies2019,liRelativeGrainBoundary2009,olmstedSurveyComputedGrain2009,olmstedSurveyComputedGrain2009a,pirgaziThreedimensionalCharacterizationGrain2015,randleFiveparameterGrainBoundary2008,saylorMisorientationDependenceGrain2000,saylorRelativeFreeEnergies2003,yangAtomisticSimulationsEnergies2019,zhengGrainBoundaryProperties2020} warrant high-fidelity structure-property models capable of handling large amounts of input data to aid in the aforementioned applications.
 	
 	\subsection{Prior Work} %what has been done to understand 5DOF space and 5DOF subspaces
@@ -86,7 +113,7 @@
 	
 	\subsection{\glsentrytitlecase{vfz}{long} Framework} %how the VFZ framework allows us to learn about 5DOF space in ways we couldn't before
 	\label{sec:intro:vfzo}
-	Recently, we introduced a highly efficient method for creating \gls{5dof} structure-property models. We focus on the application of the \gls{vfz} framework towards probing and understanding a \gls{5dof} \gls{fz} rather than on the computational aspects which have been thoroughly addressed in \citet{REF}. Many of our results depend on functions from \url{https://github.com/sgbaird-5dof/interp}.
+	Recently, we introduced a highly efficient method for creating \gls{5dof} structure-property models. We focus on the application of the \gls{vfz} framework towards probing and understanding a \gls{5dof} \gls{fz} rather than on the computational aspects which we thoroughly addressed in \citet{REF}. Many of our results depend on functions from \url{https://github.com/sgbaird-5dof/interp}.
 % 	We present a new method for interpolating and predicting \gls{gb} properties from a set of measured/calculated values (e.g. \gls{gbe} from \gls{ms} simulations). We term our approach the \gls{vfz} framework. It is highly efficient and facilitates the use of large data sets to enhance prediction accuracy. We discuss motivation for (\cref{sec:intro:motivation}) and prior implementations of \gls{5dof} property prediction (\cref{sec:intro:prior}) and then highlight unique properties of the \gls{vfz} framework that offer advantages over other methods (\cref{sec:intro:vfzo}).
 	
 % 	The \gls{vfz} interpolation framework introduced in this work offers an advantage over other methods because it is defined as a \gls{vfz} point set in a manifold\footnote{"In mathematics, a manifold is a topological space that locally resembles Euclidean space" \cite{morawiecDistancesGrainInterfaces2019}. By removing the Euclidean approximation in the \gls{vfz} framework and the renormalization of \glspl{gbo}, the metric is intrinsic \cite{morawiecDistancesGrainInterfaces2019}. } for which directly computed, scaled Euclidean distances approximate the original \gls{gbo} distance given by \citet{francisGeodesicOctonionMetric2019}. This advantage is manifest in the ability to triangulate a mesh using standard routines (e.g. quickhull \cite{barberQuickhullAlgorithmConvex1996}) and interpolate using barycentric coordinates or machine learning methods such as \gls{gpr}. Building on prior work on \glspl{gbo} \cite{francisGeodesicOctonionMetric2019,chesserLearningGrainBoundary2020}, we create a \gls{vfz} point set by obtaining a set of \glspl{gbo} minimized with respect to Euclidean distance and an arbitrary reference \gls{gbo} after considering all \glspl{seo}. Because \glspl{gbo} are guaranteed to reside on the surface of a hypersphere \cite{francisGeodesicOctonionMetric2019} (a type of Riemannian manifold) a point set which locally resembles Euclidean space is the result (\cref{sec:methods:framework:vfz-dist}). Our implementation of the \gls{vfz} strategy utilizes \glspl{gbo}; however, it may be possible to apply the same strategy using other distance metrics that have been proposed in the literature (for a comparison of many different metrics, see \citet{morawiecDistancesGrainInterfaces2019}). Below we provide the detailed description of our methods (\cref{sec:methods}), followed by numerical test results (\cref{sec:results}).
@@ -709,9 +736,9 @@
 We analyze implications of results for a \gls{gprm} model developed for a noisy, Fe \gls{ms} simulation dataset.
 	We find that:
 	\begin{itemize}
-		\item the model error is on par with the intrinsic error of the data \cref{{sec:discuss:lit:error}
-		\item the predictions likely exhibit overprediction bias relative to the true minimum for a given \gls{gb} \cref{sec:discuss:lit:overprediction}
-		\item future availability of multiple metastable state \glspl{gbe} is anticipated to greatly improve the model performance \cref{sec:discuss:lit:improve}
+		\item the model error is on par with the intrinsic error of the data (\cref{sec:discuss:lit:error})
+		\item the predictions likely exhibit overprediction bias relative to the true minimum for a given \gls{gb} (\cref{sec:discuss:lit:overprediction})
+		\item future availability of multiple metastable state \glspl{gbe} is anticipated to greatly improve the model performance (\cref{sec:discuss:lit:improve})
 	\end{itemize}
 	We now elaborate each of these points.
 %	
