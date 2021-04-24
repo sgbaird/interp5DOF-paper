@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      9671,        240]
-NotebookOptionsPosition[      8090,        208]
-NotebookOutlinePosition[      8497,        224]
-CellTagsIndexPosition[      8454,        221]
+NotebookDataLength[      9749,        237]
+NotebookOptionsPosition[      8168,        205]
+NotebookOutlinePosition[      8575,        221]
+CellTagsIndexPosition[      8532,        218]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -131,14 +131,10 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"TeXport", "[", 
-  RowBox[{"\"\<linear-proj\>\"", ",", 
-   RowBox[{"a", "\[Equal]", 
-    RowBox[{
-     RowBox[{"-", 
-      FractionBox[
-       RowBox[{
-       "\[LeftDoubleBracketingBar]", "v", "\[RightDoubleBracketingBar]"}], 
-       RowBox[{"v", "\[CenterDot]", "p"}]]}], "p"}]}], ",", 
+  RowBox[{
+  "\"\<linear-proj\>\"", ",", 
+   "\"\<a=-\!\(\*FractionBox[\(\[LeftDoubleBracketingBar]v\
+\[RightDoubleBracketingBar]\), \(v\[CenterDot]p\)]\)p\>\"", ",", 
    RowBox[{
     RowBox[{"(", GridBox[{
        {"\"\<v\>\"", "\"\<unit normal to hyperplane of interest\>\""},
@@ -152,19 +148,19 @@ Cell[BoxData[
   3.828224341716953*^9, 3.8282243566904793`*^9}, {3.828224506195247*^9, 
   3.8282246404118834`*^9}, {3.828224680418873*^9, 3.828224740084345*^9}, {
   3.828225657638093*^9, 3.8282256633470693`*^9}, {3.82822570554526*^9, 
-  3.8282257812272973`*^9}},
- CellLabel->"In[57]:=",ExpressionUUID->"ea9a4af7-c8a4-4e2b-a64a-f9efbc9e8ec2"],
+  3.8282257812272973`*^9}, {3.8282264544161425`*^9, 3.8282264597790937`*^9}},
+ CellLabel->"In[68]:=",ExpressionUUID->"ea9a4af7-c8a4-4e2b-a64a-f9efbc9e8ec2"],
 
 Cell[BoxData["\<\"\\\\begin{equation} \
-\\\\label{eq:linear-proj}\\n\\ta=-\\\\frac{p \\\\| v\\\\| }{v\\\\cdot p}\\n\\\
-\\end{equation}\\nwhere $\\\\text{v}$, $\\\\text{p}$, $\\\\| \\\\, \\\\|$, \
-and $\\\\cdot$ represent unit normal to hyperplane of interest, point to \
-project from hypersphere to hyperplane, 2-norm, and dot product, \
+\\\\label{eq:linear-proj}\\n\\t\\\\text{a=-}\\\\frac{\\\\| v\\\\| }{v\\\\cdot \
+p}p\\n\\\\end{equation}\\nwhere $\\\\text{v}$, $\\\\text{p}$, $\\\\| \\\\, \\\
+\\|$, and $\\\\cdot$ represent unit normal to hyperplane of interest, point \
+to project from hypersphere to hyperplane, 2-norm, and dot product, \
 respectively.\"\>"], "Output",
  CellChangeTimes->{{3.8282247242111444`*^9, 3.828224740523125*^9}, {
    3.828224773657725*^9, 3.8282248001779957`*^9}, {3.828224900744915*^9, 
-   3.828224908733714*^9}, 3.8282257888104916`*^9},
- CellLabel->"Out[57]=",ExpressionUUID->"01c0f0f7-307e-4c1f-848a-a5464b24132e"]
+   3.828224908733714*^9}, 3.8282257888104916`*^9, 3.828226460518896*^9},
+ CellLabel->"Out[68]=",ExpressionUUID->"24357457-9681-449d-9b8c-7fef5a95c146"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -190,20 +186,21 @@ Cell[BoxData[
    3.8282259021311784`*^9}, {3.828225938144331*^9, 3.82822595661839*^9}, 
    3.8282260137617245`*^9, {3.828226052577078*^9, 3.828226072395158*^9}, {
    3.82822614089888*^9, 3.8282261448135242`*^9}, {3.8282262035702133`*^9, 
-   3.8282262566516275`*^9}},ExpressionUUID->"b94bc248-3a6c-4b8b-ac77-\
-4288bbb94d21"],
+   3.8282262566516275`*^9}},
+ CellLabel->"In[67]:=",ExpressionUUID->"b94bc248-3a6c-4b8b-ac77-4288bbb94d21"],
 
 Cell[BoxData["\<\"\\\\begin{equation} \\\\label{eq:projtol}\\n\\t\\\\lambda \
 _i\\\\text{$\\\\geq $-$\\\\sigma $, i$\\\\in \
-$[1..d]}\\n\\\\end{equation}\\nwhere $\\\\lambda _i$ and $\\\\sigma$ \
-represent i-th barycentric coordinate and projection (or intersection) \
-tolerance, respectively.\"\>"], "Output",
+$[1..d]}\\n\\\\end{equation}\\nwhere $\\\\lambda _i$, $\\\\sigma$, and \
+$\\\\text{d}$ represent i-th barycentric coordinate, projection (or \
+intersection) tolerance, and dimension of barycentric coordinates, \
+respectively.\"\>"], "Output",
  CellChangeTimes->{
   3.8282254679739017`*^9, 3.8282255285058627`*^9, 3.828225586802615*^9, 
    3.828225793458952*^9, 3.8282259496786575`*^9, 3.8282260168996115`*^9, {
    3.828226054991125*^9, 3.828226073180962*^9}, 3.828226146343009*^9, 
-   3.8282262138945684`*^9},
- CellLabel->"Out[66]=",ExpressionUUID->"8c5e3a02-66fa-4ba2-b16f-0d5bf9b69689"]
+   3.8282262138945684`*^9, 3.828226257660408*^9},
+ CellLabel->"Out[67]=",ExpressionUUID->"56c37297-9947-4b59-9a67-88889510917a"]
 }, Open  ]]
 },
 WindowSize->{574.8, 579.6},
@@ -235,12 +232,12 @@ Cell[3615, 112, 423, 7, 88, "Input",ExpressionUUID->"d5bd5a61-34f9-4238-8c5f-6e1
 Cell[4041, 121, 383, 5, 53, "Output",ExpressionUUID->"81a8de0a-b305-49fb-9b7d-d01302cf6773"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[4461, 131, 1122, 24, 124, "Input",ExpressionUUID->"ea9a4af7-c8a4-4e2b-a64a-f9efbc9e8ec2"],
-Cell[5586, 157, 641, 9, 150, "Output",ExpressionUUID->"01c0f0f7-307e-4c1f-848a-a5464b24132e"]
+Cell[4461, 131, 1068, 20, 124, "Input",ExpressionUUID->"ea9a4af7-c8a4-4e2b-a64a-f9efbc9e8ec2"],
+Cell[5532, 153, 672, 9, 174, "Output",ExpressionUUID->"24357457-9681-449d-9b8c-7fef5a95c146"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6264, 171, 1151, 22, 92, "Input",ExpressionUUID->"b94bc248-3a6c-4b8b-ac77-4288bbb94d21"],
-Cell[7418, 195, 656, 10, 131, "Output",ExpressionUUID->"8c5e3a02-66fa-4ba2-b16f-0d5bf9b69689"]
+Cell[6241, 167, 1173, 22, 92, "Input",ExpressionUUID->"b94bc248-3a6c-4b8b-ac77-4288bbb94d21"],
+Cell[7417, 191, 735, 11, 150, "Output",ExpressionUUID->"56c37297-9947-4b59-9a67-88889510917a"]
 }, Open  ]]
 }
 ]
