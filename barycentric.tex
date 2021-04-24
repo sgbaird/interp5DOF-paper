@@ -134,7 +134,7 @@ The same \gls{svd} transformation can be applied without major issue to new poin
 \subsection{Testing Nearby Facets for Intersections}
 \label{sec:app:bary:int:facets}
 Once the \outpt{} points are lined up properly with the mesh, the facet containing the \outpt{} point (i.e. intersecting facet) is found\footnote{Testing intersections for nearby facets is handled in \matlab{intersect\_facet.m} and depends on the barycentric coordinate computations in \matlab{projray2hypersphere.m}.}. We define the intersecting facet as the one for which a point's barycentric coordinates are positive within a given tolerance:
-
+\input{equations/projtol}
 
 Consequently, we determine facet affiliation by:
 \begin{enumerate}%[nolistsep]
