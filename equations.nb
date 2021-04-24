@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      8492,        220]
-NotebookOptionsPosition[      6915,        188]
-NotebookOutlinePosition[      7322,        204]
-CellTagsIndexPosition[      7279,        201]
+NotebookDataLength[      8754,        226]
+NotebookOptionsPosition[      7177,        194]
+NotebookOutlinePosition[      7584,        210]
+CellTagsIndexPosition[      7541,        207]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -169,21 +169,27 @@ Cell[BoxData[
    "\"\<\!\(\*SubscriptBox[\(\[Lambda]\), \(i\)]\)\[GreaterEqual]-\[Sigma],i\
 \[Element][1,d]\>\"", ",", 
    RowBox[{"(", GridBox[{
-      {"\"\<\[Lambda]\>\"", "\"\<i-th barycentric coordinate\>\""},
-      {"\"\<\[Sigma]\>\"", "\"\<projection (or intersection) tolerance\>\""}
+      {
+       RowBox[{"MathText", "@", "\[Lambda]"}], 
+       "\"\<i-th barycentric coordinate\>\""},
+      {
+       RowBox[{"MathText", "@", "\[Sigma]"}], 
+       "\"\<projection (or intersection) tolerance\>\""}
      }], ")"}]}], "]"}]], "Input",
  CellChangeTimes->{{3.8282252781594853`*^9, 3.8282253011280017`*^9}, {
   3.8282253494255605`*^9, 3.82822545889791*^9}, {3.82822551233368*^9, 
-  3.828225517521914*^9}},ExpressionUUID->"b94bc248-3a6c-4b8b-ac77-\
-4288bbb94d21"],
+  3.828225517521914*^9}, {3.8282255764779625`*^9, 3.8282255843965683`*^9}},
+ CellLabel->"In[53]:=",ExpressionUUID->"b94bc248-3a6c-4b8b-ac77-4288bbb94d21"],
 
 Cell[BoxData["\<\"\\\\begin{equation} \\\\label{eq:projtol}\\n\\t\\\\lambda \
 _i\\\\text{$\\\\geq $-$\\\\sigma $,i$\\\\in \
-$[1,d]}\\n\\\\end{equation}\\nwhere $\\\\lambda$ and $\\\\text{i-th \
-barycentric coordinate}$ represent \[Sigma] and projection tolerance, \
+$[1,d]}\\n\\\\end{equation}\\nwhere $\\\\text{$\\\\$\\\\backslash \
+\\\\backslash $lambda$\\\\$$}$ and $\\\\text{i-th barycentric coordinate}$ \
+represent $\\\\sigma$ and projection (or intersection) tolerance, \
 respectively.\"\>"], "Output",
- CellChangeTimes->{3.8282254679739017`*^9},
- CellLabel->"Out[51]=",ExpressionUUID->"316e7f68-ba10-46c4-bde0-fa475d10cc3d"]
+ CellChangeTimes->{3.8282254679739017`*^9, 3.8282255285058627`*^9, 
+  3.828225586802615*^9},
+ CellLabel->"Out[53]=",ExpressionUUID->"46454610-9ce9-4b16-96ba-685db15b6e04"]
 }, Open  ]]
 },
 WindowSize->{574.8, 579.6},
@@ -219,8 +225,8 @@ Cell[4461, 131, 813, 18, 85, "Input",ExpressionUUID->"ea9a4af7-c8a4-4e2b-a64a-f9
 Cell[5277, 151, 549, 8, 131, "Output",ExpressionUUID->"6ecb98d2-0d66-4670-b772-ab4c4881c2b3"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[5863, 164, 614, 13, 73, "Input",ExpressionUUID->"b94bc248-3a6c-4b8b-ac77-4288bbb94d21"],
-Cell[6480, 179, 419, 6, 111, "Output",ExpressionUUID->"316e7f68-ba10-46c4-bde0-fa475d10cc3d"]
+Cell[5863, 164, 756, 17, 73, "Input",ExpressionUUID->"b94bc248-3a6c-4b8b-ac77-4288bbb94d21"],
+Cell[6622, 183, 539, 8, 155, "Output",ExpressionUUID->"46454610-9ce9-4b16-96ba-685db15b6e04"]
 }, Open  ]]
 }
 ]
