@@ -95,19 +95,20 @@ To reduce the computational complexity of triangulating a high-dimensional mesh 
 %to enable use of MATLAB's quickhull \cite{barberQuickhullAlgorithmConvex1996} implementations such as \matlab{delaunayn} and \matlab{convhulln}. Removal of the degenerate dimension is done via a rigid \gls{svd} transformation,
 analogous to a Cartesian rotation and translation (see 3D to 2D \gls{svd} transformation from \cref{fig:bary-remove-deg}b to \cref{fig:bary-remove-deg}c).
 %Thus, a set of \glspl{gbo} originally represented by 8D Cartesian coordinates are collapsed to a 7D Cartesian representation while preserving both distances and angles among the points
-
-An \gls{svd} is given by:
+A \gls{svd} is given by:
 \input{equations/svd-cond}
-The \gls{svd} transformed coordinates are given by:
+The \gls{svd} transformed coordinates \cite{anatoliyCheckIfRay2015} are given by:
 \input{equations/svd-force}
 %
 \subsection{Linearly Project onto Hyperplane}
 \label{sec:app:bary:tri:project}
-Next, the resulting 7D Cartesian representation of each point is projected onto a hyperplane that is tangent to the centroid (i.e. mean) of the point set\footnote{This is \textit{not} a rigid transformation; however, it approximates one with sufficient accuracy to produce a high-quality triangulation.} (\cref{fig:bary-delaunay}a). By performing this linear projection, one of the dimensions becomes degenerate.
+Next, the resulting 7D Cartesian representation of each point is projected onto a hyperplane that is tangent to the centroid (i.e. mean) of the point set\footnote{This is \textit{not} a rigid transformation; however, it approximates one with sufficient accuracy to produce a high-quality triangulation.} (\cref{fig:bary-delaunay}a). The linear projection is given by \cite{anatoliyCheckIfRay2015}:
+\input{equations/linear-proj}
+By performing this linear projection, one of the dimensions becomes degenerate.
 
 \subsection{\glsentrytitlecase{svd}{long} Transformation from 7D Cartesian to 6D Cartesian}
 \label{sec:app:bary:tri:svd2}
-This additional degeneracy is removed via a second \gls{svd} transformation, this time to 6D Cartesian coordinates (see 3D to 2D projection in \cref{fig:bary-delaunay}a-b). Finally, the resulting points can be triangulated via the quickhull algorithm \cite{barberQuickhullAlgorithmConvex1996} \footnote{See \matlab{sphconvhulln.m} and \matlab{delaunayn()}}, which relies on Euclidean distances\footnote{While the triangulation algorithm used in this work relies on Euclidean distances, other distance metrics that are non-Euclidean \cite{morawiecDistancesGrainInterfaces2019} could potentially be incorporated into the barycentric approach such as by doing an edge-length based simplex reconstruction \cite{connorHighdimensionalSimplexesSupermetric2017,boissonnatOnlyDistancesAre2017} using the triangulation edge lengths.}. Because the simplicial mesh is defined by a list of edges between vertices for each simplicial facet, this list applies immediately to the point set in its 7D Cartesian coordinates (i.e. no reverse transformation is necessary to use the mesh on the 6-sphere in 7D).
+This additional degeneracy is removed via a second \gls{svd} transformation, this time to 6D Cartesian coordinates (see 3D to 2D projection in \cref{fig:bary-delaunay}a-b). Finally, the resulting points can be triangulated via the quickhull algorithm \cite{barberQuickhullAlgorithmConvex1996}\footnote{See \matlab{sphconvhulln.m} and \matlab{delaunayn()}}, which relies on Euclidean distances\footnote{While the triangulation algorithm used in this work relies on Euclidean distances, other distance metrics that are non-Euclidean \cite{morawiecDistancesGrainInterfaces2019} could potentially be incorporated into the barycentric approach such as by doing an edge-length based simplex reconstruction \cite{connorHighdimensionalSimplexesSupermetric2017,boissonnatOnlyDistancesAre2017} using the triangulation edge lengths.}. Because the simplicial mesh is defined by a list of edges between vertices for each simplicial facet, this list applies immediately to the point set in its 7D Cartesian coordinates (i.e. no reverse transformation is necessary to use the mesh on the 6-sphere in 7D).
 
 \section{Intersections in a Mesh}
 \label{sec:app:bary:int}
@@ -132,7 +133,10 @@ The same \gls{svd} transformation can be applied without major issue to new poin
 %
 \subsection{Testing Nearby Facets for Intersections}
 \label{sec:app:bary:int:facets}
-Once the \outpt{} points are lined up properly with the mesh, the facet containing the \outpt{} point (i.e. intersecting facet) is found\footnote{Testing intersections for nearby facets is handled in \matlab{intersect\_facet.m} and depends on the barycentric coordinate computations in \matlab{projray2hypersphere.m}.}. We define the intersecting facet as the one for which a point's barycentric coordinates are positive within a given tolerance. Consequently, we determine facet affiliation by:
+Once the \outpt{} points are lined up properly with the mesh, the facet containing the \outpt{} point (i.e. intersecting facet) is found\footnote{Testing intersections for nearby facets is handled in \matlab{intersect\_facet.m} and depends on the barycentric coordinate computations in \matlab{projray2hypersphere.m}.}. We define the intersecting facet as the one for which a point's barycentric coordinates are positive within a given tolerance:
+
+
+Consequently, we determine facet affiliation by:
 \begin{enumerate}%[nolistsep]
 	\item[2.2a] linearly projecting the \outpt{} point onto the hyperplane defined by a mesh facet's vertices (\cref{fig:bary-interp})
 	\item[2.2b] computing\footnote{See \matlab{projray2hypersphere.m}} the point's barycentric coordinates within the facet \cite{anatoliyCheckIfRay2015,skalaRobustBarycentricCoordinates2013}
