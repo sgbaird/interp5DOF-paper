@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      9584,        237]
-NotebookOptionsPosition[      8003,        205]
-NotebookOutlinePosition[      8410,        221]
-CellTagsIndexPosition[      8367,        218]
+NotebookDataLength[      9671,        240]
+NotebookOptionsPosition[      8090,        208]
+NotebookOutlinePosition[      8497,        224]
+CellTagsIndexPosition[      8454,        221]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -177,9 +177,11 @@ Cell[BoxData[
 \[Element][1..d]\>\"", ",", 
    RowBox[{
     RowBox[{"(", GridBox[{
-       {
-        SubscriptBox["\[Lambda]", "i"], "\"\<i-th barycentric coordinate\>\""},
-       {"\[Sigma]", "\"\<projection (or intersection) tolerance\>\""}
+       {"\"\<\!\(\*SubscriptBox[\(\[Lambda]\), \(i\)]\)\>\"", 
+        "\"\<i-th barycentric coordinate\>\""},
+       {"\"\<\[Sigma]\>\"", 
+        "\"\<projection (or intersection) tolerance\>\""},
+       {"\"\<d\>\"", "\"\<dimension of barycentric coordinates\>\""}
       }], ")"}], "\[Transpose]"}]}], "]"}]], "Input",
  CellChangeTimes->{{3.8282252781594853`*^9, 3.8282253011280017`*^9}, {
    3.8282253494255605`*^9, 3.82822545889791*^9}, {3.82822551233368*^9, 
@@ -187,20 +189,21 @@ Cell[BoxData[
    3.828225792385344*^9, 3.828225792976512*^9}, {3.8282258343817244`*^9, 
    3.8282259021311784`*^9}, {3.828225938144331*^9, 3.82822595661839*^9}, 
    3.8282260137617245`*^9, {3.828226052577078*^9, 3.828226072395158*^9}, {
-   3.82822614089888*^9, 3.8282261448135242`*^9}},
- CellLabel->"In[65]:=",ExpressionUUID->"b94bc248-3a6c-4b8b-ac77-4288bbb94d21"],
+   3.82822614089888*^9, 3.8282261448135242`*^9}, {3.8282262035702133`*^9, 
+   3.8282262566516275`*^9}},ExpressionUUID->"b94bc248-3a6c-4b8b-ac77-\
+4288bbb94d21"],
 
 Cell[BoxData["\<\"\\\\begin{equation} \\\\label{eq:projtol}\\n\\t\\\\lambda \
 _i\\\\text{$\\\\geq $-$\\\\sigma $, i$\\\\in \
-$[1..d]}\\n\\\\end{equation}\\nwhere $\\\\text{$\\\\lambda \
-\\\\mathsym{\\\\UnderBracket}$Subscript$\\\\mathsym{\\\\UnderBracket}$i}$ and \
-$\\\\sigma$ represent i-th barycentric coordinate and projection (or \
-intersection) tolerance, respectively.\"\>"], "Output",
+$[1..d]}\\n\\\\end{equation}\\nwhere $\\\\lambda _i$ and $\\\\sigma$ \
+represent i-th barycentric coordinate and projection (or intersection) \
+tolerance, respectively.\"\>"], "Output",
  CellChangeTimes->{
   3.8282254679739017`*^9, 3.8282255285058627`*^9, 3.828225586802615*^9, 
    3.828225793458952*^9, 3.8282259496786575`*^9, 3.8282260168996115`*^9, {
-   3.828226054991125*^9, 3.828226073180962*^9}, 3.828226146343009*^9},
- CellLabel->"Out[65]=",ExpressionUUID->"4904299f-b0f7-4437-a1d0-e4e25f837fb9"]
+   3.828226054991125*^9, 3.828226073180962*^9}, 3.828226146343009*^9, 
+   3.8282262138945684`*^9},
+ CellLabel->"Out[66]=",ExpressionUUID->"8c5e3a02-66fa-4ba2-b16f-0d5bf9b69689"]
 }, Open  ]]
 },
 WindowSize->{574.8, 579.6},
@@ -236,8 +239,8 @@ Cell[4461, 131, 1122, 24, 124, "Input",ExpressionUUID->"ea9a4af7-c8a4-4e2b-a64a-
 Cell[5586, 157, 641, 9, 150, "Output",ExpressionUUID->"01c0f0f7-307e-4c1f-848a-a5464b24132e"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6264, 171, 1010, 19, 73, "Input",ExpressionUUID->"b94bc248-3a6c-4b8b-ac77-4288bbb94d21"],
-Cell[7277, 192, 710, 10, 174, "Output",ExpressionUUID->"4904299f-b0f7-4437-a1d0-e4e25f837fb9"]
+Cell[6264, 171, 1151, 22, 92, "Input",ExpressionUUID->"b94bc248-3a6c-4b8b-ac77-4288bbb94d21"],
+Cell[7418, 195, 656, 10, 131, "Output",ExpressionUUID->"8c5e3a02-66fa-4ba2-b16f-0d5bf9b69689"]
 }, Open  ]]
 }
 ]
