@@ -6,7 +6,8 @@
 % \input{pkgs}
 \usepackage[margin=1.5cm,includefoot]{geometry}
 \usepackage{auto-paper}
-\usepackage{refcheck}
+% \PassOptionsToPackage{refcheck}{auto-paper} %comment this out before submission
+
 \zexternaldocument*{main-frankenstein-2} %try deleting log files if producing an error, see https://tex.stackexchange.com/questions/131709/unclean-aux-file-causes-file-ended-while-scanning-use-of-newlbel-error-wh
 \input{values.tex}
 \input{abbrev.tex}
@@ -22,7 +23,7 @@
 	\begin{frontmatter}
 		
 		%\title{Grain Boundary Octonion Meshing and Interpolation}
-		\title{\mytitle{}: Supplementary Information}
+		\title{\mytitletwo{}: Supplementary Information}
 		
 		\input{authors}
 		

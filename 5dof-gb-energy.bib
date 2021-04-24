@@ -233,6 +233,7 @@
   pages = {8},
   abstract = {We present a method for performing efficient barycentric interpolation for large point sets which reside on the surface of less than a hemisphere of a hypersphere. This method includes removal of degenerate dimensions via singular value decomposition (SVD) transformations, determination of intersecting facets via nearest neighbor (NN) searches, and interpolation. Corresponding MATLAB code is available at github.com/sgbaird-5dof/interp.},
   file = {C\:\\Users\\sterg\\Zotero\\storage\\UYYSHFCD\\Baird et al. - Barycentric Interpolation on the 7-Sphere.pdf},
+  journal = {Computer Aided Geometric Design},
   language = {en}
 }
 
@@ -242,6 +243,16 @@
   year = {2020},
   url = {github.com/sgbaird-5dof/interp},
   abstract = {Code related to meshing and interpolation of grain boundaries by representing 5DOF of grain boundaries as octonions and forming a closed mesh.}
+}
+
+@article{bairdFiveDegreeofFreedomPropertya,
+  title = {Five {{Degree}}-of-{{Freedom Property Interpolation}} of {{Arbitrary Grain Boundaries}} via {{Voronoi}} Fundamental Zone {{Framework}}},
+  author = {Baird, Sterling G and Homer, Eric R and Fullwood, David T and Johnson, Oliver K},
+  pages = {26},
+  abstract = {We introduce the Voronoi fundamental zone (VFZ) framework which is useful for grain boundary (GB) structure-property models and gaining insights about the nature of a five degree-of-freedom (5DOF) fundamental zone (FZ) for both cubic and non-cubic symmetries and potentially alloys. We cover the methods associated with the VFZ framework. The VFZ framework offers an advantage over other 5DOF based property interpolation methods because directly computed Euclidean distances approximate the original grain boundary octonion (GBO) distance with significantly reduced runtime ({$\sim$}7 CPU minutes vs. 153 CPU days for a 50 000 \texttimes{} 50 000 pairwise-distance matrix). We perform grain boundary energy (GBE) interpolation for a non-smooth validation function on sets of up to 50 000 GBs using four interpolation methods: barycentric interpolation, Gaussian process regression (GPR) or Kriging, inverse-distance weighting (IDW), and nearest neighbor (NN) interpolation. These are evaluated for 50 000 random input GBs and 10 000 random prediction GBs. The best performance was achieved with GPR which results in a reduction of the root mean square error (RMSE) by 83.0\% relative to RMSE of a constant, average model. We then use GPR to interpolate simulated bi-crystal datasets for Fe and Ni and demonstrate better than and similar performance to prior work, respectively. Interpolation on a large, noisy, molecular statics (MS) Fe simulation dataset improves performance by 34.4 \% compared to 21.2 \% in prior work. We find that the noise and non-uniform sampling make it difficult to resolve low GBE (i.e. cusps) and to validate the model. For the small, low-noise Ni simulation data, we resolve cusps with high accuracy, but uncertainty may be high in regions far from the input data. The trade-offs between noise, dataset size, sampling scheme, and repeat measurements must be carefully managed. We provide a vectorized, parallelized, MATLAB interpolation function (interp5DOF.m) and related routines (github.com/sgbaird-5dof/interp) which can be applied to future datasets for a variety of GB properties We comment on future work involving the application of the VFZ framework as a tool for better understanding of GB properties within a 5DOF FZ.},
+  file = {C\:\\Users\\sterg\\Zotero\\storage\\SXQDPVJB\\Baird et al. - Five Degree-of-Freedom Property Interpolation of A.pdf},
+  journal = {Computational Materials Science},
+  language = {en}
 }
 
 @article{baiSolutionStrategiesLinear2017,
@@ -4818,6 +4829,39 @@
   journal = {Advances in Computational Mathematics},
   keywords = {Distribution of points on the sphere,Interpolation on the sphere,Lebesgue constant,Spherical polynomials,Uniform norm},
   number = {3}
+}
+
+@article{wuDeepOctonionNetworks2020,
+  title = {Deep Octonion Networks},
+  author = {Wu, Jiasong and Xu, Ling and Wu, Fuzhi and Kong, Youyong and Senhadji, Lotfi and Shu, Huazhong},
+  year = {2020},
+  month = jul,
+  volume = {397},
+  pages = {179--191},
+  issn = {0925-2312},
+  doi = {10.1016/j.neucom.2020.02.053},
+  abstract = {Deep learning is a hot research topic in the field of machine learning methods and applications. Real-value neural networks (Real NNs), especially deep real networks (DRNs), have been widely used in many research fields. In recent years, the deep complex networks (DCNs) and the deep quaternion networks (DQNs) have attracted more and more attentions. The octonion algebra, which is an extension of complex algebra and quaternion algebra, can provide more efficient and compact expressions. This paper constructs a general framework of deep octonion networks (DONs) and provides the main building blocks of DONs such as octonion convolution, octonion batch normalization and octonion weight initialization; DONs are then used in image classification tasks for CIFAR-10 and CIFAR-100 data sets. Compared with the DRNs, the DCNs, and the DQNs, the proposed DONs have better convergence and higher classification accuracy. The success of DONs is also explained by multi-task learning.},
+  file = {C\:\\Users\\sterg\\Zotero\\storage\\Y69HDDTA\\Wu et al_2020_Deep octonion networks.pdf;C\:\\Users\\sterg\\Zotero\\storage\\CWLDYM2F\\S0925231220302435.html},
+  journal = {Neurocomputing},
+  keywords = {Complex,Convolutional neural network,Image classification,Octonion,Quaternion},
+  language = {en}
+}
+
+@article{wuHandEyeCalibration4D2020,
+  title = {Hand-{{Eye Calibration}}: 4-{{D Procrustes Analysis Approach}}},
+  shorttitle = {Hand-{{Eye Calibration}}},
+  author = {Wu, Jin and Sun, Yuxiang and Wang, Miaomiao and Liu, Ming},
+  year = {2020},
+  month = jun,
+  volume = {69},
+  pages = {2966--2981},
+  issn = {0018-9456, 1557-9662},
+  doi = {10.1109/TIM.2019.2930710},
+  abstract = {We give a universal analytical solution to the hand-eye calibration problem AX = X B with known matrices A and B and unknown variable X, all in the set of special Euclidean group SE(3). The developed method relies on the 4-D Procrustes analysis. A unit-octonion representation is proposed for the first time to solve such a Procrustes problem through which an optimal closed-form eigendecomposition solution is derived. By virtue of such a solution, the uncertainty description of X, being a sophisticated problem previously, can be solved in a simpler manner. The proposed approach is then verified using simulations and real-world experimentations on an industrial robotic arm. The results indicate that it owns better accuracy and better description of uncertainty and consumes much less computation time.},
+  file = {C\:\\Users\\sterg\\Zotero\\storage\\4IW7UGDC\\Wu et al. - 2020 - Hand-Eye Calibration 4-D Procrustes Analysis Appr.pdf},
+  journal = {IEEE Transactions on Instrumentation and Measurement},
+  language = {en},
+  number = {6}
 }
 
 @article{xiaApplingGrainBoundary2011,
