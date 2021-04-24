@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      9302,        235]
-NotebookOptionsPosition[      7723,        203]
-NotebookOutlinePosition[      8130,        219]
-CellTagsIndexPosition[      8087,        216]
+NotebookDataLength[      9606,        240]
+NotebookOptionsPosition[      8025,        208]
+NotebookOutlinePosition[      8432,        224]
+CellTagsIndexPosition[      8389,        221]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -171,10 +171,10 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"TeXport", "[", 
-  RowBox[{
-  "\"\<projtol\>\"", ",", 
-   "\"\<\!\(\*SubscriptBox[\(\[Lambda]\), \(i\)]\)\[GreaterEqual]-\[Sigma],i\
-\[Element][1,d]\>\"", ",", 
+  RowBox[{"\"\<projtol\>\"", ",", GridBox[{
+     {"\"\<\!\(\*SubscriptBox[\(\[Lambda]\), \(i\)]\)\[GreaterEqual]-\[Sigma]\
+\>\"", "\"\<i\[Element][1..d]\>\""}
+    }], ",", 
    RowBox[{
     RowBox[{"(", GridBox[{
        {
@@ -185,20 +185,25 @@ Cell[BoxData[
         "\"\<projection (or intersection) tolerance\>\""}
       }], ")"}], "\[Transpose]"}]}], "]"}]], "Input",
  CellChangeTimes->{{3.8282252781594853`*^9, 3.8282253011280017`*^9}, {
-  3.8282253494255605`*^9, 3.82822545889791*^9}, {3.82822551233368*^9, 
-  3.828225517521914*^9}, {3.8282255764779625`*^9, 3.8282255843965683`*^9}, {
-  3.828225792385344*^9, 3.828225792976512*^9}},
- CellLabel->"In[58]:=",ExpressionUUID->"b94bc248-3a6c-4b8b-ac77-4288bbb94d21"],
+   3.8282253494255605`*^9, 3.82822545889791*^9}, {3.82822551233368*^9, 
+   3.828225517521914*^9}, {3.8282255764779625`*^9, 3.8282255843965683`*^9}, {
+   3.828225792385344*^9, 3.828225792976512*^9}, {3.8282258343817244`*^9, 
+   3.8282259021311784`*^9}, {3.828225938144331*^9, 3.82822595661839*^9}, 
+   3.8282260137617245`*^9},
+ CellLabel->"In[62]:=",ExpressionUUID->"b94bc248-3a6c-4b8b-ac77-4288bbb94d21"],
 
-Cell[BoxData["\<\"\\\\begin{equation} \\\\label{eq:projtol}\\n\\t\\\\lambda \
-_i\\\\text{$\\\\geq $-$\\\\sigma $,i$\\\\in \
-$[1,d]}\\n\\\\end{equation}\\nwhere $\\\\text{$\\\\$\\\\backslash \
-\\\\backslash $lambda$\\\\$$}$ and $\\\\text{$\\\\$\\\\backslash \
-\\\\backslash $sigma$\\\\$$}$ represent i-th barycentric coordinate and \
-projection (or intersection) tolerance, respectively.\"\>"], "Output",
+Cell[BoxData["\<\"\\\\begin{equation} \\\\label{eq:projtol}\\n\\t\\\\left(\\n\
+\\\\begin{array}{cc}\\n \\\\lambda _i\\\\text{$\\\\geq $-$\\\\sigma $} & \
+\\\\text{i$\\\\in $[1..d]} \
+\\\\\\\\\\n\\\\end{array}\\n\\\\right)\\n\\\\end{equation}\\nwhere \
+$\\\\text{$\\\\$\\\\backslash \\\\backslash $lambda$\\\\$$}$ and \
+$\\\\text{$\\\\$\\\\backslash \\\\backslash $sigma$\\\\$$}$ represent i-th \
+barycentric coordinate and projection (or intersection) tolerance, \
+respectively.\"\>"], "Output",
  CellChangeTimes->{3.8282254679739017`*^9, 3.8282255285058627`*^9, 
-  3.828225586802615*^9, 3.828225793458952*^9},
- CellLabel->"Out[58]=",ExpressionUUID->"e429c3ac-51f2-4a92-b6bc-9bcff9053408"]
+  3.828225586802615*^9, 3.828225793458952*^9, 3.8282259496786575`*^9, 
+  3.8282260168996115`*^9},
+ CellLabel->"Out[62]=",ExpressionUUID->"b3b46491-8946-4fe3-9e3d-529de2af7feb"]
 }, Open  ]]
 },
 WindowSize->{574.8, 579.6},
@@ -234,8 +239,8 @@ Cell[4461, 131, 1122, 24, 124, "Input",ExpressionUUID->"ea9a4af7-c8a4-4e2b-a64a-
 Cell[5586, 157, 641, 9, 150, "Output",ExpressionUUID->"01c0f0f7-307e-4c1f-848a-a5464b24132e"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6264, 171, 843, 19, 73, "Input",ExpressionUUID->"b94bc248-3a6c-4b8b-ac77-4288bbb94d21"],
-Cell[7110, 192, 597, 8, 174, "Output",ExpressionUUID->"e429c3ac-51f2-4a92-b6bc-9bcff9053408"]
+Cell[6264, 171, 1002, 21, 73, "Input",ExpressionUUID->"b94bc248-3a6c-4b8b-ac77-4288bbb94d21"],
+Cell[7269, 194, 740, 11, 228, "Output",ExpressionUUID->"b3b46491-8946-4fe3-9e3d-529de2af7feb"]
 }, Open  ]]
 }
 ]
