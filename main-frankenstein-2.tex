@@ -18,7 +18,8 @@
 	\begin{frontmatter}
 		
 		%\title{Grain Boundary Octonion Meshing and Interpolation}
-		\title{\mytitletwo{}}
+% 		\title{\mytitletwo{}}
+        \title{Towards a Quantitative Cartography of the GB Energy Landscape: Paths and Correlations}
 		
 		\input{authors.tex}
 		
@@ -67,21 +68,17 @@
 	
 	\section{Introduction} \label{sec:intro}
 	
-	During processing and microstructure evolution, grain boundaries (GBs) can change their macroscopic crystallographic character to minimize their energy through, e.g., grain rotation or rotation of the GB plane. Such transformations constitute trajectories or paths along the GB energy landscape, which is a function over the 5D GB character space. Consequently, to understand, model, and predict such transformations it is necessary to understand those paths and the relationships between GBs that are near each other in that space.
+	When subjected to plastic deformation and/or elevated temperatures, the crystallographic character of grain boundaries (GBs) in polycrystalline microstructures can change to reduce the total system energy [REF]. These energy minimizing transformations of GB crystallography constitute trajectories or paths along the GB energy landscape, which is a function over the 5-dimensional (5D) GB character space. Consequently, to understand, model, and predict such transformations and their effects on microstructure evolution, it is necessary to understand these paths and the relationships between GBs that are near each other in that space.
 	
-	Examples: during grain growth when one grain disappears a new GB is formed between its neighbors where one did not exist previously, the resulting interface may not have a minimum energy so while the misorientation is fixed the boundary plane will rotate to minimize the energy of the interface. During high temperature deformation or recrystallization grains can rotate to minimize the interfacial energy. In this case the boundary plane can also change so that such a transformation represents a path that is not contained within a given misorientation or BP subspace but rather traverses a more general trajectory through the 5D space.
+	Examples of such spontaneous energy minimizing changes to GB character include the rotation of the GB plane to achieve equilibrium at triple junctions [REF]---both those formed by the intersection of three GBs within a polycrystal and those formed between a GB and two free surfaces at the exterior of a microstructure. It is this phenomenon that is exploited to produce the quarter- and half-loop bicrystal geometries used in classic constant-driving-force GB migration experiments [REF]. The inclination of the GB plane can also change during GB migration [REF], or upon the disappearance of a grain during grain growth, which requires establishment of new equilibrium configurations at the newly formed triple junctions. This class of energy minimizing changes to GB character constitute paths through the GB energy landscape that are restricted to two-dimensional sub-manifolds (the GB plane fundamental zone (FZ) for a fixed misorientation).
 	
-	Maybe consider choosing terminal GBs for the paths to investigate this-> research shows that grain rotation only occurs for misorientations that are pure-tilt in character (ones with general tilt-twist character do not show grain rotation). We could test or show why this is the case (my guess is there would be grain rotation for some general GBs-> those for which there is a strictly downhill path). Maybe look at a sigma 5, which is a minimum in the symmetric tilt space so it likely would not rotate, but maybe it has another downhil path that leaves the symmetric tilt space? Or maybe we could find a general GB that we think would show grain rotation because it has a downhill path.
+	Another class of energy minimizing changes to GB character are illustrated by the phenomenon of grain rotation [REF], which can occur during high-temperature plastic deformation [REF] or recrystallization [REF], as well as at lower temperatures in nanocrystalline materials [REF]. The primary feature of grain rotation is the change in crystal orientation of one grain relative to its neighbors resulting in lower-energy GBs between them. However, when the misorientation between two grains changes there will also be an accompanying change to the GB plane inclination\footnote{Even if the GB plane remains fixed in the macroscopic reference frame, a change in the GB misorientation results in a change of the GB normal in the crystal reference frame, which is the physically relevant reference frame.}. Consequently, such GB character transformations represent more general paths through the 5D GB character space that are not restricted to any misorientation or boundary plane subspaces.
 	
-	GBE -> could drive towards regions might understand kinematic pathways 
+	Until recently, models for GB energy that depend on their full 5D crystallographic character were unavailable. The first such model was developed by Bulatov, Reed, and Kumar (BRK) \cite{bulatovGrainBoundaryEnergy2014} by fitting a closed-form function to GB energies from a database \cite{olmstedSurveyComputedGrain2009a} of 388 GBs in several materials. This function has been employed in a variety of applications to study mesoscale microstructure phenomena like X [REF], Y [REF], and Z [REF]. We recently developed a general approach, called the Voronoi fundamental zone (VFZ) framework, for inferring GB structure-property models from GB structure-property databases [REF]. 
 	
-	Spontaneous (microstructure evolution) vs. imposed changes (processesing)
+	In this work we present 5D GB structure-property models for FCC Ni and BCC Fe developed using the VFZ framework. Using these models we investigate general paths through the GB energy landscape and show qualitatively distinct types of relationships between important types of GBs. We also study correlations in GB energy as a function of crystallographic distance. The VFZ framework allows us to give context to GB property correlation lengths, and shows that previous estimates are likely too high.
 	
-	Paths between ground state structures
-	
-	During microstructure evolution a variety of events can occur that create an instantaneous state in which a GB may be able to lower its energy by changing is macroscopic parameters (e.g. GB plane).
-	
-	Perhaps we can also discuss faceting. For example, if we pick a GB in the middle of the path, would it show facets of the terminal GBs when there is a maximum and not exhibit faceting when there is no maximum?
+% 	Maybe consider choosing terminal GBs for the paths to investigate this-> research shows that grain rotation only occurs for misorientations that are pure-tilt in character (ones with general tilt-twist character do not show grain rotation). We could test or show why this is the case (my guess is there would be grain rotation for some general GBs-> those for which there is a strictly downhill path). Maybe look at a sigma 5, which is a minimum in the symmetric tilt space so it likely would not rotate, but maybe it has another downhil path that leaves the symmetric tilt space? Or maybe we could find a general GB that we think would show grain rotation because it has a downhill path.
 	
 % 	papers that discuss changes to GB character to minimize energy
 % 	https://www.sciencedirect.com/science/article/pii/S1359645414005679
