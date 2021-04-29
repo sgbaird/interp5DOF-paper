@@ -27,15 +27,14 @@
     directly computed Euclidean distances approximate the original \gls{gbo} distance with significantly reduced runtime ($\sim$7 CPU minutes vs. 153 CPU days for a $\num{50000}\times\num{50000}$ pairwise-distance matrix). %this is where some fundamental insights probably need to be addressed before losing certain readers' attention
     %Aided by the increased computational efficiency, we find that the maximum dimension of an $O_h$ \gls{vfz} is $\sim$\SI{60}{\degree}, and that \gls{nn} distances for cubochorically sampled \glspl{gb} are normally distributed. % with a mean (\SI{}{\degree}) of approximately $2.5025\times10^{-5} x-1.27396 \log (x)+15.4499, x\in \{388,50000\}$ where $x$ is the number of \glspl{gb}.
     %This increased efficiency facilitates lower interpolation error through the use of significantly more input data.
-    We perform \gls{gbe} interpolation for a non-smooth validation function on sets of up to \num{50000} \glspl{gb} using four interpolation methods: barycentric interpolation, \gls{gpr} or Kriging, \gls{idw}, and \gls{nn} interpolation.  These are evaluated for \num{50000} random \inpt{} \glspl{gb} and \num{10000} random \outpt{} \glspl{gb}.
-    The best performance was achieved with \gls{gpr} which results in a reduction of the \gls{rmse} by \calcnum{(\avgrmse-\gprrmse)/\avgrmse*100}\% relative to \gls{rmse} of a constant, average model.
-    We then use \gls{gpr} to interpolate simulated bi-crystal datasets for Fe and Ni and demonstrate better than and similar performance to prior work, respectively. Interpolation on a large, noisy, \gls{ms} Fe simulation dataset improves performance by \SI{34.4}{\percent} compared to \SI{21.2}{\percent} in prior work. %and we discover that
+    We perform \gls{gbe} interpolation for a non-smooth validation function on sets of up to \num{50000} \glspl{gb} using four interpolation methods: barycentric interpolation, \gls{gpr} or Kriging, \gls{idw}, and \gls{nn} interpolation. %These are evaluated for \num{50000} random \inpt{} \glspl{gb} and \num{10000} random \outpt{} \glspl{gb}.
+    The best performance was achieved with \gls{gpr} which results in a reduction of the \gls{rmse} by \calcnum{(\avgrmse-\gprrmse)/\avgrmse*100}\% relative to \gls{rmse} of a constant, average model. This error is comparable to the minimum expected uncertainty associated with reconstruction of noise-free experimental polycrystalline data. We then use \gls{gpr} to interpolate simulated bi-crystal datasets for Fe and Ni and demonstrate better than (\SI{34.4}{\percent} vs. \SI{21.2}{\percent} improvement) and similar (\SI{57.6}{\percent} vs. \SI{56.4}{\percent} improvement) performance to prior work, respectively. %Interpolation on a large, noisy, \gls{ms} Fe simulation dataset improves performance by \SI{34.4}{\percent} compared to \SI{21.2}{\percent} in prior work. %and we discover that
     %The \gls{vfz} framework allows us to easily identify repeated \glspl{gb} which in turn enables us to estimate the intrinsic error of the large Fe simulation dataset (\SI{0.065}{\J\per\square\m}).
-    We find that the noise and non-uniform sampling make it difficult to resolve low \gls{gbe} (i.e. cusps) and to validate the model. %Interpolation on a small, low-noise \gls{ms} Ni simulation dataset is similar to interpolation results previously reported, and
-    For the small, low-noise Ni simulation data, we resolve cusps with high accuracy, but uncertainty may be high in regions far from the input data. The trade-offs between noise, dataset size, sampling scheme, and repeat measurements must be carefully managed. % Using \gls{gpr}, we estimate the correlation lengths of the Fe and Ni datasets to be $\sim$\SIlist{8.3;7.4}{\degree}, respectively, compared with a traditionally accepted value of $\sim$\SI{10}{\degree}. % (\SI{57.6}{\percent} vs. \SI{56.4}{\percent}).
+    The noise and non-uniform sampling in the Fe dataset make it difficult to resolve low \gls{gbe} (i.e. cusps) and to validate the model. %Interpolation on a small, low-noise \gls{ms} Ni simulation dataset is similar to interpolation results previously reported, and
+    We resolve the Ni dataset cusps with high accuracy, but uncertainty may be high in regions far from the input data. The trade-offs between noise, dataset size, sampling scheme, and repeat measurements must be carefully managed. % Using \gls{gpr}, we estimate the correlation lengths of the Fe and Ni datasets to be $\sim$\SIlist{8.3;7.4}{\degree}, respectively, compared with a traditionally accepted value of $\sim$\SI{10}{\degree}. % (\SI{57.6}{\percent} vs. \SI{56.4}{\percent}).
     %Finally
     We provide a vectorized, parallelized, MATLAB interpolation function (\matlab{interp5DOF.m}) and related routines %in our \vfzorepo{} 
-    (\url{github.com/sgbaird-5dof/interp}) which can be applied to future datasets for a variety of \gls{gb} properties We comment on future work involving the application of the \gls{vfz} framework as a tool for better understanding of \gls{gb} properties within a \gls{5dof} \gls{fz}. % which has potential for the creation of advanced \gls{gb} structure-property models for alloys and cubic/non-cubic crystallographic point groups. %The \gls{vfz} framework offers advantages for computing distances between \glspl{gb}, estimating property values for arbitrary \glspl{gb}, and modeling surrogates of computationally expensive \gls{5dof} functions and simulations.
+    (\url{github.com/sgbaird-5dof/interp}) which can be applied to future datasets for a variety of \gls{gb} properties and to better understand \gls{5dof} \glspl{fz}. For example, we find that the maximum dimension of an $O_h$ \gls{vfz} is $\sim$\SI{66.5}{\degree}. % which has potential for the creation of advanced \gls{gb} structure-property models for alloys and cubic/non-cubic crystallographic point groups. %The \gls{vfz} framework offers advantages for computing distances between \glspl{gb}, estimating property values for arbitrary \glspl{gb}, and modeling surrogates of computationally expensive \gls{5dof} functions and simulations.
 \end{abstract}
 
 % Some of the less-emphasized fundamental contributions to understanding (that maybe I should incorporate into the abstract/emphasize more) are:
@@ -172,7 +171,8 @@ As described above in the 3D analogy, with a reference \gls{gbo} chosen ($o_{\te
 \label{sec:methods:framework:vfz-dist}
 
 %Do I leave the 60 degree max dimension in the CMS paper?
-Euclidean distances are an accurate approximation of arc length distances in a \gls{vfz} as shown in \cref{fig:dist-parity}. %because the difference between the two metrics for the maximum pairwise distance ($pd_{max} \simeq \SI{60}{\degree}$) in a \gls{vfz} is small as shown in \cref{fig:dist-parity}.
+Euclidean distances are an accurate approximation of arc length distances in a \gls{vfz} as shown in \cref{fig:dist-parity}. This also demonstrates that the maximum dimension of an $O_h$ \gls{vfz} is $\sim$\SI{66.5}{\degree}. %because the difference between the two metrics for the maximum pairwise distance ($pd_{max} \simeq \SI{60}{\degree}$) in a \gls{vfz} is small as shown in \cref{fig:dist-parity}.
+
 However, when compared with the traditional \gls{gbo} distance \cite{francisGeodesicOctonionMetric2019}, due to the presence of low-symmetry \glspl{gb} near the exterior of a \gls{vfz}, some \gls{gb} pairs will exhibit larger Euclidean or arc length distances than is truly representative (see e.g. \cref{fig:dist-ensemble-k1-2-10-20}a). In other words, moving "past" the low-symmetry border of a \gls{vfz} will result in an instantaneous relocation to a possibly distant point in the \gls{vfz} that in reality is highly correlated.
 \begin{figure*}[!ht]
     \centering
@@ -219,25 +219,8 @@ Rotation Convention & Passive & Active \\
 \end{table*}
 
 The construction of the \gls{vfz} dramatically reduces the computational burden of pairwise distance calculations. We illustrate the mechanism by which this reduction is achieved with an example in \cref{sec:computational-complexity}.
-
-\subsection{Generating Random \glsentrytitlecase{vfzgbo}{long}s}
-\label{sec:methods:rand}
-In addition to the 3 core operations of the \gls{vfz} framework described in \cref{sec:methods:framework}, it will be necessary for our tests, and useful for other applications, to generate random \glspl{gbo} from \gls{5dof} representations. We briefly explain here our process for accomplishing this. 
-
-First, random \glspl{gbo} are formed by taking random misorientation quaternion (\matlab{qm}) and \gls{bp} normal (\matlab{nA}) pairs. Random misorientation quaternions are obtained via cubochoric sampling \cite{singhOrientationSamplingDictionarybased2016} (\matlab{get\_cubo.m}) and random \gls{bp} vectors are sampled from a multivariate Gaussian distribution ($\mu=0$, $\sigma=1$) in $\mathbb{R}^3$ and normalized\footnote{Several methods for uniform sampling of points on a sphere, including the one mentioned here, are described in \url{https://mathworld.wolfram.com/SpherePointPicking.html}.}. After this, they are converted to \glspl{gbo} via \vfzorepo{} function \matlab{five2oct.m}. The \vfzorepo{} function \matlab{get\_five.m} returns the result of these several operations. These (\matlab{qm},\matlab{nA}) pairs are then converted to an \gls{gbo} representation, \matlab{o}, using \vfzorepo{} function \matlab{o=five2oct(qm,nA)} (see also \vfzorepo{} function \matlab{get\_ocubo.m} for generating random \glspl{gbo} directly).
-%}a modified version \cite{bairdFiveDegreeofFreedom5DOF2020} of the original \matlab{GBfive2oct.m} function \cite{chesserGBOctonionCode2019} via
-
-The \glspl{gbo} are then symmetrized (i.e. they become \glspl{vfzgbo}) via \matlab{osym=get\_octpairs(o)}. A default reference \gls{gbo}\footnote{This is generated by \matlab{get\_ocubo.m} using a random number generator seed of 10. We expect that \matlab{five2oct.m} combined with \matlab{get\_five.m} will generate near identical statistical properties to \matlab{get\_ocubo.m} which is supported by a visual comparison of pairwise distance histograms (not shown in this work), and indirectly by an assertion in Section 5.3 of \citet{morawiecDistancesGrainInterfaces2019}. } is used for these calculations, unless specified by the user. We use the active convention for \matlab{qm}, \matlab{nA}, and \matlab{o} (see \cref{sec:app:convention} for further details of conventions).
-
-For the present work we use this procedure to randomly generate \gls{vfzgbo} sets containing between \num{100} to \num{50000} \glspl{vfzgbo} where each trial run has its own unique set of \glspl{gb}. We use these to perform the validation and performance evaluation tests described later. %For reference, we note that the average \gls{nn} distance (over approximately 70 trials) of such sets ranges between \SI{10.7175 \pm 0.3684}{\degree} and \SI{2.6479 \pm 0.2254}{\degree}, respectively. 
-%\begin{figure}
-%    \centering
-%    \includegraphics[scale=1]{nndist-vs-setsize.png}
-%    \caption{\Gls{nn} \gls{vfzgbo} ($\omega_{\text{NN}}$) distances ($^{\circ}$) versus \gls{vfzgbo} set size out of 70-80 random \gls{vfzgbo} sets per set size and a fit to $ax-\mathrm{log}(x)b+c$ where $a=2.5025\times10^{-5}$, $b=1.27396$, $c=15.4499$, $x$ represents set size, and $388 \leq x \leq 50000$.}
-%    \label{fig:nndist-vs-setsize}
-%\end{figure}
 %
-%\Cref{fig:nndist-vs-setsize} illustrates how the \gls{vfzgbo} average \gls{nn} distance varies with the cardinality of the set (i.e. number of random \glspl{vfzgbo} in the set). Additionally, a fitted model is given. For a specific \num{50000} \gls{vfzgbo} set, the \gls{nn} \gls{gbo} distance is \SI{\nnomega{}}{\degree} (\cref{fig:nnhist-knn-50000}a) while the average 100-th \gls{nn} distance is within \SI{10}{\degree} (\cref{fig:nnhist-knn-50000}b). This indicates that, on average, \outpt{} \glspl{vfzgbo} fall within a typical \gls{gb} correlation length (\SI{10}{\degree} \cite{olmstedSurveyComputedGrain2009}) of \inpt{} \glspl{vfzgbo} in large set sizes.
+%moved "generating random VFZOs" to supp
 %
 \subsection{Interpolation in the \glsentrytitlecase{vfz}{long} Framework}
 \label{sec:methods:interp}
@@ -269,20 +252,7 @@ Barycentric coordinates are a coordinate system that locates a point within a si
 
 \subsection{Literature Datasets}
 \label{sec:methods:litdata}
-In addition to performing validation tests of the \gls{vfz} framework, we also describe results in which we apply it to actual \gls{gb} property data available from literature sources. Here we briefly mention details related to the retrieval and processing of two \gls{ms} simulation datasets from the literature. We describe \gls{gpr} applied to Fe (\cref{sec:methods:gprsim}) and Ni (\cref{sec:methods:gprsim-Ni}) simulations, as well as a specialized \gls{gprm} model applied to Fe to address non-uniformity and noise concerns (\cref{sec:methods:gprmix}).
-
-\subsubsection{\glsentrytitlecase{gpr}{long} for Fe Simulation Dataset}
-\label{sec:methods:gprsim}
-The Fe simulation data is obtained from \cite{kimPhasefieldModeling3D2014} rather than \cite{kimIdentificationSchemeGrain2011} due to a mistake in the earlier dataset file\footnote{We were informed of the error during an email discussion with the corresponding author of \cite{kimPhasefieldModeling3D2014}.}. \Glspl{gb} with a \gls{gbe} less than \SI{0.01}{\joule\per\square\meter} are removed to get rid of "no-boundary" \glspl{gb}. Repeated \glspl{gb} are then identified and removed by converting all \glspl{gb} into a \gls{vfzgbo} set (see \matlab{Kim2oct.m}) and sorting the repeated \glspl{gb} into "degenerate sets"\footnote{A degenerate "set" is distinct from a \glspl{vfzgbo} "set", the former of which is discussed in greater detail in Supplementary Information \cref{sec:supp:kim-interp:quality}. This sorting occurs via \matlab{avgrepeats.m} with \matlab{avgfn='min'}.}, and only the average \gls{gbe} (and a single \gls{gb}) within each degenerate set was retained. We estimate the intrinsic \gls{rmse} and \gls{mae} of the Fe simulation dataset to be \SIlist{0.06529;0.06190}{\joule\per\square\meter}, respectively. Minimum and maximum error was \SIlist{-0.2625;0.2625}{\joule\per\square\meter}, respectively. See \cref{sec:supp:kim-interp:quality} for further details on methods used to estimate intrinsic error of the Fe simulation dataset.
-
-\subsubsection{\glsentrytitlecase{gpr}{long} for Ni Simulation Dataset}
-\label{sec:methods:gprsim-Ni}
-
-We use the \gls{gbo} representations\footnote{Contained in \matlab{'olm_octonion_list.txt'} from \citet{chesserGBOctonionCode2019}. } \cite{chesserLearningGrainBoundary2020} of \glspl{gb} from \cite{olmstedSurveyComputedGrain2009}, importing and converting them to the active sense by taking the quaternion inverse of each of the \glspl{gbo}' quaternions. We take \gls{gbe} values\footnote{Contained in first column of \matlab{'olm_properties.txt'} from  \citet{chesserGBOctonionCode2019}. }, and use a \gls{gpr} model (\cref{sec:methods:interp:gpr}).
-
-\subsubsection{\glsentrytitlecase{gprm}{long} for Fe Simulation Dataset}
-\label{sec:methods:gprmix}
-Separate from the four main methods analyzed in this work, a \gls{gprm} model is developed to better predict low \gls{gbe} using the non-uniformly distributed, noisy, Fe simulation dataset described in \cref{sec:methods:gprsim}. An exponential rather than a squared exponential kernel was used for the subset \gls{gpr} model (\cref{sec:supp:kim-interp}) to accommodate sharper transitions to better approximate low \glspl{gbe}.  Further details of the \gls{gprm} model are given in Supplementary Information (\cref{sec:supp:kim-interp}).
+In addition to performing validation tests of the \gls{vfz} framework, we also describe results in which we apply it to actual \gls{gb} property data available from literature sources \cite{olmstedSurveyComputedGrain2009,kimPhasefieldModeling3D2014}. We describe details related to the retrieval and processing of two \gls{ms} simulation datasets from the literature. We describe \gls{gpr} applied to Fe (\cref{sec:methods:gprsim}) and Ni (\cref{sec:methods:gprsim-Ni}) simulations, as well as a specialized \gls{gprm} model applied to Fe to address non-uniformity and noise concerns (\cref{sec:methods:gprmix}).
 
 \section{Results and Discussion} \label{sec:results}
 
@@ -312,7 +282,7 @@ All of the methods permit successful interpolation, and the highest density regi
 % \usepackage{booktabs}
 \begin{table*}[!ht]
 \centering
-\caption{Comparison of average interpolation \gls{rmse} (approximately 10 trial runs) for each interpolation method in the present work, using \num{50000} points in the definition of the \gls{vfz} and \glspl{gbe} obtained by evaluating the \gls{brk} validation function (\cite{bulatovGrainBoundaryEnergy2014}) at these points. A constant model (Cst, Avg \gls{rmse}), whose value was chosen to be the mean of the \inpt{} \gls{gbe} was used as a control. The last two columns represent the reduction ($\downarrow$) in \gls{rmse} in absolute units of \SI{}{\J\per\square\meter} and \% relative to the control model, respectively.}
+\caption{Comparison of average interpolation \gls{rmse} (approximately 10 trial runs) for each interpolation method in the present work, using \num{50000} points in the definition of the \gls{vfz} and \glspl{gbe} obtained by evaluating the \gls{brk} validation function by \citet{bulatovGrainBoundaryEnergy2014} at these points. A constant model (Cst, Avg \gls{rmse}), whose value was chosen to be the mean of the \inpt{} \gls{gbe} was used as a control. The last two columns represent the reduction ($\downarrow$) in \gls{rmse} in absolute units of \SI{}{\J\per\square\meter} and \% relative to the control model, respectively.}
 \label{tab:rmse-error-comparison}
 \begin{tabular}{@{}llllllll@{}}
 \toprule
@@ -377,19 +347,7 @@ It is worthwhile to note that both \gls{gpr} and \gls{idw} are kernel-based in t
 
 By contrast, barycentric interpolation automatically adjusts its effective region of influence because the size of the simplices in the mesh decreases as the number of vertices increases. More uniformly distributed meshes (such as obtained via constrained optimization \cite{dolanBenchmarkingOptimizationSoftware2004,ConstrainedElectrostaticNonlinear2020}) will likely result in lower, more uniform interpolation error, especially for this simplex-based approach which can exhibit high-aspect ratio facets and non-intersections outside the bounds of the mesh \cite{bairdBarycentricInterpolation7SphereUnderReview}.  %(\cref{fig:high-aspect-non-int}).
 While the barycentric interpolation error is always higher than \gls{gpr} for the considered set sizes, at \num{50000} \glspl{vfzgbo}, the errors of \gls{gpr} and barycentric interpolation are nearly identical.
-% Please add the following required packages to your document preamble:
-% \usepackage{booktabs}
-\begin{table*}[]
-\centering
-\caption{Approximate coordinates of \glspl{vfzgbo} A and B used for the interpolation in \cref{fig:tunnel-50000}. Individual quaternions of each \gls{gbo} are given in the active sense and in the laboratory reference frame with an assumed \gls{gb} normal pointing in the +z direction, also in the laboratory reference frame.}
-\label{tab:tunnel-AB}
-\begin{tabular}{@{}lllllllll@{}}
-\toprule
-Octonion & o(1)   & o(2)    & o(3)    & o(4)    & o(5)    & o(6)   & o(7)    & o(8)   \\ \midrule
-A        & 0.8658 & -0.4269 & -0.1270 & 0.2280  & 0.2810  & 0.8390 & -0.3852 & 0.2622 \\
-B        & 0.4684 & -0.7657 & -0.4100 & -0.1617 & -0.1483 & 0.8204 & -0.3588 & 0.4198 \\ \bottomrule
-\end{tabular}
-\end{table*}
+
 \begin{figure}[!ht]
     \centering
     \includegraphics{figures/tunnel-50000.png}
@@ -463,9 +421,8 @@ The significant speed up of the \gls{vfz} framework stems from the fact that \gl
 and that \glspl{seo} only need to be considered once in a \gls{gb} pair, $O(N_p^2)$, rather than for every combination between the two \glspl{gb}, $O(N_p^4)$. The \gls{seo} computation complexity is thus $O(N_p^2L)$, a significant improvement compared with the original \gls{seo} complexity of $O(N_p^4L^2)$ \cite{chesserLearningGrainBoundary2020}, where $N_p$ is the number of proper rotations of the crystallographic point group ($N_p=24$ for $m\Bar{3}m$ \gls{fcc} point group) and $L$ is the number of \glspl{gb}.
 
 Empirically, to compute a pairwise-distance matrix for $L$ = \num{50000} \glspl{gb} using the \vfzorepo{} \cite{bairdFiveDegreeofFreedom5DOF2020}, the full $O(N_p^2L)$ symmetrization operations take about \SI{\symtime{}}{seconds} $\times\ 6$ cores $= \SI{456}{seconds}$ of CPU time, whereas the subsequent pairwise-distance computation is $O_{\text{pd}}(L^2)$ and takes approximately \SI{10}{seconds} for a \num{50000} $\times$ \num{50000} matrix. Even though $O(N_p^2L) \ll O_{\text{pd}}(L^2)$, the symmetrization step takes far more time than the pairwise distance calculation (even for large $L$) because of the cost of generating \glspl{seo}. Because Euclidean distances---which can be computed faster than trigonometric inverse functions---are employed, and built-in, vectorized MATLAB functions are utilized, there is a further speed enhancement in the \gls{vfzgbo} approach. % $O(N^2L)$ (this work) vs. $O(N^4L^2$ (\gls{gbo} paper)
-
-\subsection{Interpolation Along a 1D Arc}
-\label{sec:results:vis:arc}
+%
+\subsection{Interpolation Along a 1D Arc} \label{sec:results:vis:arc}
 %We present interpolation results plotted in a 1D arc in the full \gls{5dof} \gls{gb} space (\cref{sec:results:vis:arc}).
 %
 To provide a visual illustration of the property predictions, \cref{fig:tunnel-50000} shows the predicted \gls{gbe} for each of the four interpolation methods as a function of distance along a 1D arc ($\overline{AB}$) between two \glspl{vfzgbo}, $A$ and $B$. Approximate coordinates for $A$ and $B$ are given in \cref{tab:tunnel-AB}, and each intermediate point between $A$ and $B$ resides on the surface of a hypersphere. The \num{150} intermediate points were obtained using \gls{oslerp} \cite{francisGeodesicOctonionMetric2019}. Each model used its own set of \num{50000} random \inpt{} \glspl{vfzgbo} with \gls{gbe} sampled via the \gls{brk} validation function. The two \glspl{vfzgbo} were chosen by taking the furthest apart pair out of \num{20000} \glspl{vfzgbo} which thus approximates the largest dimension of the \gls{vfz} where each endpoint is close to the true \gls{vfz} exterior.
@@ -632,18 +589,6 @@ In addition to \gls{gpr}, a \gls{gprm} model (\cref{fig:kim-interp-teach}) based
     \label{fig:kim-interp}
 \end{figure*}
 %
-\begin{table*}
-\centering
-\caption{Approximate coordinates of \glspl{vfzgbo} $A$ and $B$ used for the \gls{ms} Fe simulation dataset interpolation in \cref{fig:kim-interp}. Individual quaternions of each \gls{gbo} are given in the laboratory reference frame with an assumed \gls{gb} normal pointing in the +z direction, also in the laboratory reference frame.}
-\label{tab:tunnel-AB2}
-\begin{tabular}{lllllllll}
-\hline
-Octonion & o(1)   & o(2)    & o(3)    & o(4)    & o(5)    & o(6)   & o(7)    & o(8)   \\ \hline
-A        & 0.8716 & -0.4124 & -0.1857 & 0.1893  & 0.3146  & 0.8359 & -0.3815 & 0.2382 \\
-B        & 0.4391 & -0.7856 & -0.4142 & -0.1360 & -0.1376 & 0.8082 & -0.3705 & 0.4366 \\ \hline
-\end{tabular}
-\end{table*}
-%
 %First, because only a single metastable state was used for each \gls{gbe} simulation, both the training and validation data are subject to noise, consistent with a wide lateral spread of predictions in both \cref{fig:kim-interp} and the intrinsic error estimation (\cref{fig:kim-interp-degeneracy-results}). The Fe simulation dataset \gls{gprm} model gives lower \gls{rmse} (\SI{0.055035}{\joule\per\square\meter}) and \gls{mae} (\SI{0.039185}{\joule\per\square\meter}) than the intrinsic error estimates. This indicates that the intrinsic error itself is somewhat overestimated\footnote{The \outpt{} error of a model typically cannot be less than the noise of the \outpt{} data of a model even if the model is estimating the true \outpt{} values with better accuracy than the noise (which is very possible and even expected with \gls{gpr} models when the noise in the \inpt{} data is approximately Gaussian).}. The fact that both model and intrinsic error metrics are relatively close and the prediction and intrinsic error parity plots (\cref{fig:kim-interp} and \cref{fig:kim-interp-degeneracy-results}b, respectively) are similar suggests that the model is performing well. It also suggests that further improvements in the model relative to the "true" values will be "hidden", i.e. they will probably not manifest as lower \gls{rmse} or \gls{mae} nor as more tightly distributed parity plots, etc.
 %
 %Next, given the theoretical existence of a true minimum \gls{gbe} for a given \gls{gb}, the predictions which were based on metastable \glspl{gbe} can be assumed to have an overprediction bias relative to the true minimum. On average, we expect this overprediction bias relative to the true minimum \gls{gbe} (rather than the most likely metastable state) may be on the order of a few hundred \SI{}{\milli\J\per\square\meter} and may vary as a function of true minimum \gls{gbe}. In other words, the model obtained is probably an estimate of the most likely metastable \gls{gbe} rather than the true minimum \gls{gbe}. This is akin to saying that we obtain from this data a model that approximates the non-equilibrium, Stillinger quenched red curve of Figure 4(c1) in \cite{hanGrainboundaryMetastabilityIts2016}, not the minimum \gls{gbe} blue curve of the same chart. See \cite{hanGrainboundaryMetastabilityIts2016} for an in-depth treatment of equilibrium and metastable \gls{gbe}.
@@ -665,6 +610,16 @@ Of the interpolation methods that we present in this work, \Gls{gpr} provided th
 We recommend the \gls{gpr} interpolation method for the \gls{vfz} framework for most applications because it provides the best combination of accuracy and speed, handles \inpt{} noise, and has built-in uncertainty quantification; however, the other methods can meet niche needs. For example, barycentric interpolation enables rapid and accurate predictions when the function to be evaluated changes, but the \inpt{} and \outpt{} \glspl{gb} remain fixed.
 
 We anticipate that the \gls{vfz} framework and corresponding implementation will benefit numerous applications related to \gls{gb} structure and properties, including facilitating \gls{gb} structure-property model development, enabling efficient surrogate modeling of \gls{gb} properties, and larger scale iterative simulations that require repetitive evaluation of computationally expensive structure-property models.
+
+In addition to its potential for surrogate models, we believe it will be instructive to probe properties for a \gls{5dof} \gls{fz}. For example, we found that the maximum dimension of an $O_h$ \gls{vfz} is $\sim$\SI{66.5}{\degree}. Other topics of interest are:
+\begin{itemize}
+    \item correlation lengths for various \gls{gb} properties and crystallographic symmetries within a \gls{fz}
+    \item upper and lower bounds for metastable properties
+    \item paths through \gls{5dof} space w.r.t. low-Sigma \glspl{gb} of interest
+    \item \gls{fz} shapes
+    \item analytical definitions of a \gls{5dof} \gls{fz}
+\end{itemize}
+We plan to explore such properties of a \gls{5dof} \gls{fz} in future work.
 
 \section*{Acknowledgement} %\label{sec:acknowledgement}
 
@@ -825,6 +780,9 @@ In this work, we use the convention that $P=1$ throughout the various operations
 \printglossaries
 % \printabbreviations
 %need to manually clear cached files & logs in overleaf to get new abbreviations to appear
+
+\section*{Data Availability}
+The raw data required to reproduce these findings are available to download from \url{https://doi.org/10.1088/0965-0393/22/3/034004}, \url{https://github.com/ichesser/GB_octonion_code}, and \url{https://github.com/sgbaird-5DOF/interp}. The processed data required to reproduce these findings are available to download from \url{https://figshare.com/articles/dataset/14405924}.
 
 % \newpage
 \bibliographystyle{elsarticle-num-names}
