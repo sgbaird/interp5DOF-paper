@@ -363,10 +363,10 @@
 	
 	\begin{table}[!htb]
 	    \centering
+    	    \caption{Dimension of \gls{svd} transformed coordinates (Dimension) and \gls{gbo} dimension size ($\omega$) for a set of \num{50000} \glspl{vfzgbo}. These are the diagonal entries of the "S" matrix in the \gls{svd} decomposition. }
+    	    \label{tab:svd-size}
         	\csvautobooktabular[
         	table head={\toprule Dimension & $\omega$ (\SI{}{\degree}) \\\midrule}]{tables/svd-size.csv}
-	    \caption{Dimension of \gls{svd} transformed coordinates (Dimension) and \gls{gbo} dimension size ($\omega$) for a set of \num{50000} \glspl{vfzgbo}. These are the diagonal entries of the "S" matrix in the \gls{svd} decomposition. }
-	    \label{tab:svd-size}
 	\end{table}
 	
 	We also find that the largest minimum (i.e. symmetrized) distance between any two \glspl{gb} in a set of \num{50000} \glspl{gb} is \minsymdist{}.
@@ -376,10 +376,10 @@
 	
 	\begin{table}[]
 	\centering
-	\caption{Fitted parameters for two \gls{gpr} models fitted to the 388 simulated Ni \glspl{gbe} by \citet{olmstedSurveyComputedGrain2009a}. The first model allows $\sigma$ to vary, whereas the second constrains $\sigma$ to be fixed. $\sigma_L$, $\sigma_F$, $\beta$, and $\sigma$ are the kernel length scale ($^\circ{}$), signal standard deviation ($J m^{-2}$), constant basis function ($J m^{-2}$), and input property standard deviation ($J m^{-2}$), respectively. Also, fitted parameters for a \gls{gpr} model trained on 80\% of the Fe simulation data [NEED TO ADD] and a \gls{gpr} model trained on \num{50000} \gls{brk} model \glspl{gbe} are shown [NEED TO ADD].
+	\caption{Fitted parameters for two \gls{gpr} models fitted to the 388 simulated Ni \glspl{gbe} by \citet{olmstedSurveyComputedGrain2009a}. The first model allows $\sigma$ to vary, whereas the second constrains $\sigma$ to be fixed. Mat., $\sigma_L$, $\sigma_F$, $\beta$, and $\sigma$ are the material (i.e. element), kernel length scale ($^\circ{}$), signal standard deviation ($J m^{-2}$), constant basis function ($J m^{-2}$), and input property standard deviation ($J m^{-2}$), respectively. Also, fitted parameters for a \gls{gpr} model trained on 80\% of the Fe simulation data. %and a \gls{gpr} model trained on \num{50000} \gls{brk} model \glspl{gbe} are shown [NEED TO ADD].
 	}
 	\label{tab:resubloss-ni-pars}
-	\csvautobooktabular[table head={\toprule  Fix $\sigma$ & $\sigma_L$ ($^\circ{}$) & $\sigma_F$ & $\beta$ & $\sigma$ \\\midrule}]{tables/resubloss-ni-pars.csv}
+	\csvautobooktabular[table head={\toprule Mat. & Fix $\sigma$ & $\sigma_L$ ($^\circ{}$) & $\sigma_F$ & $\beta$ & $\sigma$ \\\midrule}]{tables/resubloss-ni-pars.csv}
     \end{table}
     
     By contrast, if a \gls{gpr} model is trained on a large set of \num{50000} \glspl{gb} sampled from the \gls{brk} model, the analytic correlation length is \SI{10.5}{\degree}.
