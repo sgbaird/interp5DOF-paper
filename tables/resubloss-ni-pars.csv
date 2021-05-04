@@ -1,4 +1,4 @@
-element,num-GBs,constant-sigma (yes/no),sigma-L (deg),sigma-F (J m^-2),beta (J m^-2),sigma (J m^-2)
-Ni,388,no,7.3995,0.2049,1.0913,0.0321
-Ni,388,yes,1.9354,0.201,1.1044,0.0001
-Fe,46883,no,8.3073,0.0716,1.2192,0.0562
+element,constant-sigma (yes/no),sigma-L (deg),sigma-F (J m^-2),beta (J m^-2),sigma (J m^-2)
+Ni,no,7.3995,0.2049,1.0913,0.0321
+Ni,yes,1.9354,0.201,1.1044,0.0001
+Fe,no,8.3073,0.0716,1.2192,0.0562
