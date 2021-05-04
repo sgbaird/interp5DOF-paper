@@ -32,7 +32,7 @@
 	\begin{frontmatter}
 		
 		%\title{Grain Boundary Octonion Meshing and Interpolation}
-		\title{N-Sphere Barycentric Interpolation: A 7-Sphere with 2D Visualizations}
+		\title{N-Sphere Barycentric Interpolation: A 7-Sphere and 2-Sphere Visualizations}
 		
 		\input{authors.tex}
 		
@@ -61,7 +61,7 @@ Barycentric coordinates are a type of homogeneous coordinate system that referen
 
 Creation of a simplicial mesh is necessary to perform barycentric interpolation. Due to the difficulty of visualizing a high-dimensional n-sphere, we provide visual illustrations of the process as applied to lower-dimensional analogues. The triangulation process occurs by:
 \begin{enumerate}%[nolistsep]
-	\item[1.1] applying a \gls{svd} transformation to remove any degeneracies\footnote{e.g. U(1)-symmetry degeneracy for \glspl{gbo} \cite{francisGeodesicOctonionMetric2019}) inherent in the coordinates} (\cref{sec:app:bary:tri:svd1}
+	\item[1.1] applying a \gls{svd} transformation to remove any degeneracies\footnote{e.g. U(1)-symmetry degeneracy for \glspl{gbo} \cite{francisGeodesicOctonionMetric2019}) inherent in the coordinates} (\cref{sec:app:bary:tri:svd1})
 	\item[1.2] linearly projecting points onto a hyperplane that is tangent to the vector between the origin and the mean of the \inpt{} points\footnote{This applies when the data resides on less than a hemisphere and is to reduce computational burden of the triangulation. } (\cref{sec:app:bary:tri:project})
 	\item[1.3] performing a second \gls{svd} transformation (\cref{sec:app:bary:tri:svd2})
 	\item[1.4] computing the triangulation according to the quickhull algorithm \cite{barberQuickhullAlgorithmConvex1996}
