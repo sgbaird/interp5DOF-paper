@@ -26,7 +26,7 @@
 		\begin{abstract}
 			We apply the \gls{vfz} framework towards gaining insights about the nature of a \gls{5dof} \gls{fz} for cubic $O_h$ \glspl{gb}. The \gls{vfz} framework offers an advantage over other \gls{5dof} based property interpolation methods because it is defined via continuous, Euclidean coordinates and results in rapid distance calculations. %it is constructed as a point set in a manifold. This means that
 %			directly computed Euclidean distances approximate the original \gls{gbo} distance with significantly reduced runtime ($\sim$7 CPU minutes vs. 153 CPU days for a $\num{50000}\times\num{50000}$ pairwise-distance matrix). %this is where some fundamental insights probably need to be addressed before losing certain readers' attention
-			Aided by the increased computational efficiency, we find that the largest dimension of an $O_h$ \gls{vfz} is $\sim$\SI{66.5}{\degree} after applying a \gls{svd} transformation and that \gls{nn} distances for cubochorically sampled \glspl{gb} are normally distributed. \percExplained{} is explained by the first 5 transformed coordinates of the $O_h$ \glspl{vfzgbo}, indicating that despite being originally defined by 8D Cartesian coordinates, 5D Cartesian coordinates may be sufficient to describe \glspl{gb} w.r.t. crystallographic distances. The 5th transformed dimension is about \percFiveVsOne{} the size of the 1st dimension, giving a rough indication of the shape of a \gls{5dof} \gls{fz}. % with a mean (\SI{}{\degree}) of approximately $2.5025\times10^{-5} x-1.27396 \log (x)+15.4499, x\in \{388,50000\}$ where $x$ is the number of \glspl{gb}.
+			Aided by the increased computational efficiency, we find that the largest dimension of an $O_h$ \gls{vfz} is \dimOne{} after applying a \gls{svd} transformation and that \gls{nn} distances for cubochorically sampled \glspl{gb} are normally distributed. \percExplained{} is explained by the first 5 transformed coordinates of the $O_h$ \glspl{vfzgbo}, indicating that despite being originally defined by 8D Cartesian coordinates, 5D Cartesian coordinates may be sufficient to describe \glspl{gb} w.r.t. crystallographic distances. The 5th transformed dimension is about \percFiveVsOne{} the size of the 1st dimension, giving a rough indication of the shape of a \gls{5dof} \gls{fz}. % with a mean (\SI{}{\degree}) of approximately $2.5025\times10^{-5} x-1.27396 \log (x)+15.4499, x\in \{388,50000\}$ where $x$ is the number of \glspl{gb}.
 			%This increased efficiency facilitates lower interpolation error through the use of significantly more input data.
 			%We perform \gls{gbe} interpolation for a non-smooth validation function on sets of up to \num{50000} \glspl{gb} using four interpolation methods: barycentric interpolation, \gls{gpr} or Kriging, \gls{idw}, and \gls{nn} interpolation. % These are evaluated for \num{50000} random \inpt{} \glspl{gb} and \num{10000} random \outpt{} \glspl{gb}.
 			%The best performance was achieved with \gls{gpr}. %, which results in a reduction of the \gls{rmse} by \calcnum{(\avgrmse-\gprrmse)/\avgrmse*100}\%. % relative to \gls{rmse} of a constant, average model.
@@ -337,9 +337,6 @@
 	
 	%followed by discussion of potential to use numerical derivatives and identify local minima (\cref{sec:results:vis:apps}).
 	
-	\subsection{Intrinsic Error of Noisy \glsentrytitlecase{ms}{long} Simulations} \label{sec:results:error}
-	We estimate the intrinsic error of an Fe \SI{0}{\kelvin} \gls{ms} simulation dataset to be \SIlist{0.06529;0.06190}{\joule\per\square\meter} depending on whether \gls{rmse} or \gls{mae} estimates are used, respectively. Minimum and maximum error was \SIlist{-0.2625;0.2625}{\joule\per\square\meter}, respectively. 
-	
 	\subsection{Density and Distribution of Points} \label{sec:results:density}
 	
 	\Cref{fig:nndist-vs-setsize} illustrates how the \gls{vfzgbo} average \gls{nn} distance varies with the cardinality of the set (i.e. number of random \glspl{vfzgbo} in the set). The average \gls{nn} distance (over approximately 70 trials) of set sizes between \num{388} and \num{50000} between \SI{10.7175 \pm 0.3684}{\degree} and \SI{2.6479 \pm 0.2254}{\degree}, respectively. Additionally, a line fit is given. For a specific \num{50000} \gls{vfzgbo} set, the \gls{nn} \gls{gbo} distance is \SI{\nnomega{}}{\degree} (\cref{fig:nnhist-knn-50000}a) while the average 100-th \gls{nn} distance is within \SI{10}{\degree} (\cref{fig:nnhist-knn-50000}b).
@@ -362,16 +359,17 @@
 	
 	\subsection{Dimensions of a \glsentrytitlecase{vfz}{short}} \label{sec:results:dimensions}
 	
-	The maximum dimension of an $O_h$ cubic \gls{vfz} is $\sim$\SI{66.5}{\degree}. The sizes for this first and the remaining 7 dimensions are given in \cref{tab:svd-size}. We also find that the largest minimum (i.e. symmetrized) distance between any two \glspl{gb} in a set of \num{50000} \glspl{gb} is \minsymdist{}.
+	The maximum dimension of a particular \gls{svd} transformed $O_h$ cubic \gls{vfz} is \dimOne{}. The sizes for this first and the remaining 7 dimensions are given in \cref{tab:svd-size}.
 	
 	\begin{table}[!htb]
 	    \centering
-        	\csvautobooktabular[]{tables/svd-size.csv}
-        	%\csvautobooktabular[
-        	%table head={\toprule Dimension & Distance (\SI{}{\degree}) \\\midrule}]{tables/svd-size.csv}
-	    \caption{Caption}
+        	\csvautobooktabular[
+        	table head={\toprule Dimension & $\omega$ (\SI{}{\degree}) \\\midrule}]{tables/svd-size.csv}
+	    \caption{Dimension of \gls{svd} transformed coordinates (Dimension) and \gls{gbo} dimension size ($\omega$) for a set of \num{50000} \glspl{vfzgbo}. These are the diagonal entries of the "S" matrix in the \gls{svd} decomposition. }
 	    \label{tab:svd-size}
 	\end{table}
+	
+	We also find that the largest minimum (i.e. symmetrized) distance between any two \glspl{gb} in a set of \num{50000} \glspl{gb} is \minsymdist{}.
 	
 	\subsection{Correlation Lengths} \label{sec:results:correlation}
 	\Gls{gpr} facilitates analytically solving for correlation lengths, which are determined to be $\sim$\SIlist{7.4;8.3}{\degree} for the Ni and Fe datasets, respectively. If low noise is assumed for Ni, the correlation length drops to $\sim$2 degrees. See \cref{tab:resubloss-ni-pars} for \gls{gpr} parameters for each dataset.
@@ -386,6 +384,10 @@
     
     By contrast, if a \gls{gpr} model is trained on a large set of \num{50000} \glspl{gb} sampled from the \gls{brk} model, the analytic correlation length is \SI{10.5}{\degree}.
 %	
+
+	\subsection{Intrinsic Error of Noisy \glsentrytitlecase{ms}{long} Simulations} \label{sec:results:error}
+	We estimate the intrinsic error of an Fe \SI{0}{\kelvin} \gls{ms} simulation dataset to be \SIlist{0.06529;0.06190}{\joule\per\square\meter} depending on whether \gls{rmse} or \gls{mae} estimates are used, respectively. Minimum and maximum error was \SIlist{-0.2625;0.2625}{\joule\per\square\meter}, respectively.
+
 	\subsection{\glsentrytitlecase{5dof}{short} Paths and \glsentrytitlecase{gb}{short} Behavior} \label{sec:results:paths}
 %	
 	%
@@ -640,10 +642,7 @@
 	\end{itemize}
 	%
 	It is possible that the correlation length will increase with the size of the \glspl{vfz}, and we expect that the correlation length will depend on the property of interest.
-    \subsection{\glsentrytitlecase{5dof}{short} Paths} \label{sec:discuss:path}
-	 We observe that $\Sigma3$ and $\Sigma7$ are connected (i.e. no activation energy barrier) while the direct paths between $\Sigma3$ and $\Sigma5$, $\Sigma9$, $\Sigma11$ are separated by energy barriers. This indicates that for grain growth systems governed by \gls{gbe}, $\Sigma7$ \glspl{gb} will spontaneously transform into $\Sigma3$ \gls{ct} \glspl{gb}, whereas if $\Sigma5$, $\Sigma9$, $\Sigma11$ transform into $\Sigma3$ \glspl{ct}, this will need to occur either by overcoming the activation energy or via paths through \gls{5dof} space other than the ones shown.
-	 %
-	 
+
 	 \subsection{Potential for Numerical Derivatives}
 	\label{sec:discuss:deriv}
 	
@@ -785,13 +784,16 @@ We analyze implications of results for a \gls{gprm} model developed for a noisy,
 	\subsubsection{Improving on Existing Datasets} \label{sec:discuss:lit:improve}
 	Finally, datasets where multiple metastable \glspl{gbe} (e.g. 3-10 repeats) are provided for each \gls{gb} will likely greatly improve the performance of the \gls{gpr} model in predicting either the most likely metastable \gls{gbe} (when all \glspl{gbe} are considered) or the true minimum \gls{gbe} (when only the minimum \gls{gbe} is considered for each \gls{gb}) and may even negate the need for a \gls{gprm} approach. Thus, it is suggested that, where feasible, future large-scale \gls{gb} bicrystal simulation studies report all property data for repeated trial runs rather than a single trial run or a single value from a set of trial runs. Ideally, data for the three additional microscopic \glspl{dof} for \glspl{gb} (which falls into the category of epistemic uncertainty in this work) would also be included. We believe it is likely that minimum energy paths (i.e. paths of steepest descent) in the \gls{gbe} landscape depend on both macroscopic and microscopic \glspl{dof} (in total, 8DOF) and could offer a more holistic view of \gls{gb} behavior that better mimics and explains experimental grain growth observations. Indeed, it has been experimentally observed that at least some \gls{gb} migration mechanisms involve structural transformations between equilibrium \glspl{gb} via metastable states \cite{weiDirectImagingAtomistic2021}.
 	 
+    \subsection{\glsentrytitlecase{5dof}{short} Paths} \label{sec:discuss:path}
+     We observe that $\Sigma3$ and $\Sigma7$ are connected (i.e. no activation energy barrier) while the direct paths between $\Sigma3$ and $\Sigma5$, $\Sigma9$, $\Sigma11$ are separated by energy barriers. This indicates that for grain growth systems governed by \gls{gbe}, $\Sigma7$ \glspl{gb} will spontaneously transform into $\Sigma3$ \gls{ct} \glspl{gb}, whereas if $\Sigma5$, $\Sigma9$, $\Sigma11$ transform into $\Sigma3$ \glspl{ct}, this will need to occur either by overcoming the activation energy or via paths through \gls{5dof} space other than the ones shown.
+	 %
 	\section{Conclusion} \label{sec:conclusion}
 	We applied the \gls{vfz} framework to learning more about the nature of a \gls{5dof} \gls{fz}.
 	%In this work, we presented the \gls{vfz} framework for (i) computing distances between GBs and (ii) predicting the properties of GBs from existing measurements. We found that distance calculations in the \gls{vfz} framework are dramatically more computationally efficient %($O(N_p^2L)$)
 	%than traditional methods %($O(N_p^4L^2)$)
 	%at the expense of infrequent, large distance overestimation which can be addressed through ensemble techniques at a small computational cost as discussed in \cref{sec:methods:framework:vfz-dist}.
 	%
-	The increase of distance computation throughput and the development of a \gls{5dof} \gls{vfz} with continuous coordinates enabled us to explore the nature of a \gls{5dof} \gls{fz}. We found that symmetrized \gls{nn} distances are Gaussian and plotted these as a function of set size. We determined the maximum dimension of an $O_h$ \gls{vfz} to be $\sim$\SI{66.5}{\degree}, respectively.
+	The increase of distance computation throughput and the development of a \gls{5dof} \gls{vfz} with continuous coordinates enabled us to explore the nature of a \gls{5dof} \gls{fz}. We found that symmetrized \gls{nn} distances are Gaussian and plotted these as a function of set size. We determined the maximum dimension of a particular $O_h$ \gls{vfz} to be \dimOne{}.
 	
 	Other point groups (in particular those which are noncentrosymmetric) may give rise to differently shaped/larger VFZs and for which the Euclidean approximation may need to be removed. It will be interesting to see the \gls{vfz} framework applied for other distance metrics (see \citet{morawiecDistancesGrainInterfaces2019} for a comprehensive summary of metrics).
 	%
