@@ -26,7 +26,7 @@
 		\begin{abstract}
 			We apply the \gls{vfz} framework towards gaining insights about the nature of a \gls{5dof} \gls{fz} for cubic $O_h$ \glspl{gb}. The \gls{vfz} framework offers an advantage over other \gls{5dof} based property interpolation methods because it is defined via continuous, Euclidean coordinates and results in rapid distance calculations. %it is constructed as a point set in a manifold. This means that
 %			directly computed Euclidean distances approximate the original \gls{gbo} distance with significantly reduced runtime ($\sim$7 CPU minutes vs. 153 CPU days for a $\num{50000}\times\num{50000}$ pairwise-distance matrix). %this is where some fundamental insights probably need to be addressed before losing certain readers' attention
-			Aided by the increased computational efficiency, we find that the largest dimension of an $O_h$ \gls{vfz} is \dimOne{} after applying a \gls{svd} transformation and that \gls{nn} distances for cubochorically sampled \glspl{gb} are normally distributed. \percExplained{} of the variance is explained by the first 5 transformed coordinates of the $O_h$ \glspl{vfzgbo}, indicating that despite being originally defined by 8D Cartesian coordinates, 5D Cartesian coordinates may be sufficient to describe \glspl{gb} w.r.t. crystallographic distances. The 5th transformed dimension is \percFiveVsOne{} the size of the 1st dimension, giving a rough indication of the shape of a \gls{5dof} \gls{fz}. % with a mean (\SI{}{\degree}) of approximately $2.5025\times10^{-5} x-1.27396 \log (x)+15.4499, x\in \{388,50000\}$ where $x$ is the number of \glspl{gb}.
+			Aided by the increased computational efficiency, we determine the dimensions of a large $O_h$ \gls{vfz} point set, for which the maximum dimension is \dimOne{} after applying a \gls{svd} transformation. We also find that \gls{nn} distances for cubochorically sampled \glspl{gb} are normally distributed. \percExplained{} of the variance is explained by the first 5 transformed coordinates of the $O_h$ \glspl{vfzgbo}, indicating that despite being originally defined by 8D Cartesian coordinates, 5D Cartesian coordinates may be sufficient to describe \glspl{gb} w.r.t. crystallographic distances. The 5th transformed dimension is \percFiveVsOne{} the size of the 1st dimension, giving a rough indication of the shape of a \gls{5dof} \gls{fz}. % with a mean (\SI{}{\degree}) of approximately $2.5025\times10^{-5} x-1.27396 \log (x)+15.4499, x\in \{388,50000\}$ where $x$ is the number of \glspl{gb}.
 			%This increased efficiency facilitates lower interpolation error through the use of significantly more input data.
 			%We perform \gls{gbe} interpolation for a non-smooth validation function on sets of up to \num{50000} \glspl{gb} using four interpolation methods: barycentric interpolation, \gls{gpr} or Kriging, \gls{idw}, and \gls{nn} interpolation. % These are evaluated for \num{50000} random \inpt{} \glspl{gb} and \num{10000} random \outpt{} \glspl{gb}.
 			%The best performance was achieved with \gls{gpr}. %, which results in a reduction of the \gls{rmse} by \calcnum{(\avgrmse-\gprrmse)/\avgrmse*100}\%. % relative to \gls{rmse} of a constant, average model.
@@ -78,7 +78,7 @@
 	
 	Until recently, models for GB energy that depend on their full 5D crystallographic character were unavailable. The first such model was developed by Bulatov, Reed, and Kumar (BRK) \cite{bulatovGrainBoundaryEnergy2014} by fitting a closed-form function to GB energies from a database \cite{olmstedSurveyComputedGrain2009a} of 388 GBs in several materials. This function has been employed in a variety of applications to study mesoscale microstructure phenomena like X [REF], Y [REF], and Z [REF]. We recently developed a general approach, called the Voronoi fundamental zone (VFZ) framework, for inferring GB structure-property models from GB structure-property databases [REF]. 
 	
-	In this work we present 5D GB structure-property models for FCC Ni and BCC Fe developed using the VFZ framework. Using these models we investigate general paths through the GB energy landscape and show qualitatively distinct types of relationships between important types of GBs. We also study correlations in GB energy as a function of crystallographic distance. The VFZ framework allows us to give context to GB property correlation lengths, and shows that previous estimates are likely too high.
+	In this work we present 5D GB structure-property models for FCC Ni and BCC Fe developed using the VFZ framework. We also study correlations in GB energy as a function of crystallographic distance. We use the VFZ framework to give context to GB property correlation lengths and shows that previous estimates are likely too high. We investigate general paths through the GB energy landscape and show qualitatively distinct types of relationships between important types of GBs.
 	
 % 	Maybe consider choosing terminal GBs for the paths to investigate this-> research shows that grain rotation only occurs for misorientations that are pure-tilt in character (ones with general tilt-twist character do not show grain rotation). We could test or show why this is the case (my guess is there would be grain rotation for some general GBs-> those for which there is a strictly downhill path). Maybe look at a sigma 5, which is a minimum in the symmetric tilt space so it likely would not rotate, but maybe it has another downhil path that leaves the symmetric tilt space? Or maybe we could find a general GB that we think would show grain rotation because it has a downhill path.
 	
@@ -302,7 +302,9 @@
     Retrieval of covariance matrices, conversion to correlation matrices, and processing of the data. %1-2 paragraphs
     
 	\subsection{Visualizing \glsentrytitlecase{5dof}{short} Paths} \label{sec:methods:path}
-	A modified version of \gls{oslerp} is used to probe a direct path between two \glspl{gb} in a \gls{vfz}. While the direct path in a \gls{vfz} is not always the minimum distance path (which may cross the borders of a \gls{vfz}), it is instructive to observe these paths as the minimum distance path in \gls{5dof} space is not necessarily the path a \gls{gb} will take during grain growth.
+	An approach similar to \gls{oslerp} is used to probe a direct path between two \glspl{gb} in a \gls{vfz}. The direct path in a \gls{vfz} is not always the minimum distance path (which may cross the borders of a \gls{vfz}). However, it is instructive to observe these paths because the minimum distance path in \gls{5dof} space is not necessarily the path a \gls{gb} will take during grain growth.
+	
+	A "tunnel"\footnote{Similar to traveling through a 1D tunnel but also looking at nearby points in the region close to the line in all directions. } plot is formed by calculating up to the 6th \glspl{nn} of the \inpt{} data relative to the direct path formed between two \glspl{gb}. The distances of the \glspl{nn} relative to the arc are used to both color and size the markers on the plot; \gls{nn} which are closer to the arc are large, blue circles, whereas \gls{nn} which are further from arc are small, red circles. Additionally, the 1st \gls{nn} path is plotted as a dashed line.
 	
 	\subsection{Literature Datasets}
 	\label{sec:methods:litdata}
@@ -381,10 +383,10 @@
 	
 	\begin{table}[!htb]
 	    \centering
-    	    \caption{Dimension of \gls{pca} transformed coordinates (Dimension) and percent variance explained for a set of \num{50000} \glspl{vfzgbo}. The first 5 dimensions cumulatively explain \percExplained{} of the variance. }
+    	    \caption{Dimension of \gls{pca} transformed coordinates (Dimension) and percent variance explained ($\rho$) for a set of \num{50000} \glspl{vfzgbo}. The first 5 dimensions cumulatively explain \percExplained{} of the variance. }
     	    \label{tab:pca-explained}
         	\csvautobooktabular[
-        	table head={\toprule Dimension & Explained Variance (\SI{}{\percent}) \\\midrule}]{tables/pca-explained.csv}
+        	table head={\toprule Dimension & $\rho$ (\SI{}{\percent}) \\\midrule}]{tables/pca-explained.csv}
 	\end{table}	
 	
 	\subsection{Correlation Lengths} \label{sec:results:correlation}
@@ -600,7 +602,7 @@
 %	
 %	We believe this is the first\footnote{\Gls{oslerp} results from \citet{francisGeodesicOctonionMetric2019} plots \gls{gb} \emph{structure} continuously between two \glspl{gb}, \citet{chesserLearningGrainBoundary2020} performs cross-validation on the simulated Olmsted Ni \glspl{gb}, and \cite{morawiecDistancesGrainInterfaces2019} plots distances between \glspl{gb} on a geodesic with another \gls{gb}. The results in these works are distinct from what is presented here: a plot of continuously interpolated \glspl{gbe} between two arbitrary \glspl{gb}.} plot of a \gls{gb} property continuously interpolated between two arbitrary \glspl{gb} (i.e. neither residing entirely in a single \gls{mfz} nor a single \gls{bpfz}). Such visualizations can naturally be extended to 2D and 3D by plotting colored points in a triangle or tetrahedron, respectively, all of which (1D, 2D, and 3D) represent small "slices" of the \gls{gbc} space.
 % 	\subsubsection{Low Sigma \glsfmtshortpl{gb} }
-	We analyze direct connections between low Sigma \glspl{gb} of interest to the materials science community. Using the set of 388 \glspl{gb} defined by \citet{olmstedSurveyComputedGrain2009}, we choose the $\Sigma5$, $\Sigma7$, $\Sigma9$, and $\Sigma11$ \glspl{gb} with the lowest \gls{gbe} and visualize direct paths in a \gls{vfz} between each of these and the global minimum $\Sigma3$ \gls{ct} \gls{gb} (\cref{fig:sigma-paths-olmsted}). This is performed for both the \gls{brk} and \gls{vfz}-\gls{gpr} models.
+	We analyze direct connections between low Sigma \glspl{gb} of interest to the materials science community. Using the set of 388 \glspl{gb} defined by \citet{olmstedSurveyComputedGrain2009}, we choose the $\Sigma5$, $\Sigma7$, $\Sigma9$, and $\Sigma11$ \glspl{gb} with the lowest \gls{gbe} out of the \citet{olmstedSurveyComputedGrain2009} Ni dataset\footnote{The IDs that correspond to each of the low-$Sigma$ used for path visualization for the \citet{olmstedSurveyComputedGrain2009} and \citet{kimPhasefieldModeling3D2014} datasets are given in \cref{tab:sigma-key-olmsted} and \cref{tab:sigma-key-kim}, respectively. }; we then visualize direct paths in a \gls{vfz} between each of these and the global minimum $\Sigma3$ \gls{ct} \gls{gb} (\cref{fig:sigma-tunnels-olmsted}). This is performed for both the \gls{brk} and \gls{vfz}-\gls{gpr} models.
 	
 % 	\begin{figure*}[!htb]
 % 		\centering
@@ -660,7 +662,7 @@
 		\label{fig:sigma-tunnels-olmsted}
 	\end{figure*}
 	
-	Likewise, we perform \gls{gpr} for the Fe simulation dataset.
+	Likewise, we perform \gls{gpr} for the Fe simulation dataset for \glspl{gb} of interest and visualize these using tunnel plots (\cref{fig:sigma-tunnels-kim}).
 	
 	\begin{figure*}[!htb]
 		\centering
@@ -727,12 +729,12 @@
 	We discuss \gls{vfz} dimensions (\cref{sec:discuss:dimensions}), correlation lengths (\cref{sec:discuss:correlation}), crystallographic paths (\cref{sec:discuss:path}), the potential to differentiate w.r.t. \gls{5dof} \gls{gbc} (\cref{sec:discuss:deriv}), and issues related to the literature datasets that were used (\cref{sec:discuss:lit}).
 	
 	\subsection{Dimensions of a \glsentrytitlecase{vfz}{short}} \label{sec:discuss:dimensions}
-	What does it mean that the largest dimension is much larger than the smallest dimension? (assuming this is true)
+	What does it mean that the 5th dimension is \percFiveVsOne{} the size of the 1st dimension? This gives an indication of the shape of the \gls{vfz}. The information-dense dimension sizes are approximately isotropic, indicating a space that is not a perfect hypersphere or hypercube, but somewhat hyper-elliptical or hyper-rectangular.
 	
 	Could correlation lengths be treated separately by rotating a \gls{vfz} such that misorientation and \gls{bp} normals each align with certain dimensions?
 	
 	\subsection{Correlation Lengths} \label{sec:discuss:correlation}
-    We discuss global (\cref{sec:discuss:correlation:global}) and local (\cref{sec:discuss:correlation:local}) correlations, and discuss these in the context of Brandon's criteria \cite{REF}.
+    We discuss global (\cref{sec:discuss:correlation:global}) and pairwise (\cref{sec:discuss:correlation:pairwise}) correlations, and discuss these in the context of Brandon's criteria \cite{REF}.
 
 	\subsubsection{Global Correlation Length} \label{sec:discuss:correlation:global}
 	The two simulation datasets have distinct differences from each other, as summarized in \cref{tab:sim-compare}.
@@ -765,7 +767,9 @@
 	 \subsection{Potential for Numerical Derivatives}
 	\label{sec:discuss:deriv}
 	
-	Additionally, these visualizations suggest the ability to estimate numerical derivatives or gradients of \gls{gb} properties without being restricted to a \gls{gb} subspace (e.g. \gls{mfz} or \gls{bpfz}) which can be a useful mathematical construct for the \gls{gb} community. For example, steepest descent paths and all local \gls{gbe} minima can be estimated and used in grain growth simulations. In such contexts, use of ensembled \gls{vfzgbo} interpolation or data augmentation may be necessary to mitigate discontinuity artifacts when crossing the exterior of a \gls{vfz} as discussed in \cref{sec:methods:framework:vfz-dist}. We plan to explore this in future work.
+	Additionally, these visualizations suggest the ability to estimate numerical derivatives or gradients of \gls{gb} properties without being restricted to a \gls{gb} subspace (e.g. \gls{mfz} or \gls{bpfz}) which can be a useful mathematical construct for the \gls{gb} community. For example, steepest descent paths and all local \gls{gbe} minima can be estimated and used in grain growth simulations.
+	
+	Because distance overestimation exist in the \gls{vfz} framework, use of ensembled \gls{vfzgbo} interpolation or data augmentation may be necessary to mitigate discontinuity artifacts when crossing the exterior of a \gls{vfz} as discussed in \cref{sec:methods:framework:vfz-dist}. Alternatively, the "excess" points in a gridded sampling can act as a type of data augmentation and help to address this issue. We plan to explore these topics in future work. \Cref{sec:supp:grid} contains further discussion of a gridded sampling approach.
 	
 	\subsection{Literature Datasets}
 	\label{sec:discuss:lit}
@@ -921,7 +925,7 @@ We analyze implications of results for a \gls{gprm} model developed for a noisy,
 	%Of the interpolation methods that we present in this work, \Gls{gpr} provided the highest accuracy predictions. It also provided higher accuracy predictions than any of the methods in the literature.
 	%The \gls{gpr} interpolation errors (\num{50000} \glspl{vfzgbo}) for the \gls{brk} validation model are about \num{2.4} times the intrinsic error that would be expected from reconstruction of noise-free, experimental polycrystalline data via \gls{lobpcg} \cite{shenDeterminingGrainBoundary2019} (\num{180000} \glspl{gb}) with their simpler validation model. Moreover, 
 	The interpolation errors for a Fe simulation dataset are on par with the intrinsic errors of the dataset itself (\cref{sec:supp:kim-interp:quality}). %While \gls{idw} and \gls{nn} interpolation have the fastest computation times, they also have higher interpolation error. Consequently,
-	Analysis of the \gls{gpr} fitting results indicates that the Ni and Fe simulation datasets have correlation lengths of \SIlist{8.3;7.4}{\degree}, respectively, but that when the Ni dataset is constrained to have low noise, the analytical correlation length drops to $\sim$\SI{1.9}{\degree}.% We recommend the \gls{gpr} interpolation method for the \gls{vfz} framework for most applications because it provides the best combination of accuracy and speed, handles \inpt{} noise, and has built-in uncertainty quantification; however, the other methods can meet niche needs. For example, barycentric interpolation enables rapid and accurate predictions when the function to be evaluated changes, but the \inpt{} and \outpt{} \glspl{gb} remain fixed.
+	Analysis of the \gls{gpr} fitting results indicates that the Ni and Fe simulation datasets have correlation lengths of \SIlist{8.3;7.4}{\degree}, respectively, but that when the Ni dataset is constrained to have low noise, the analytical correlation length drops to $\sim$\SI{1.9}{\degree}. % We recommend the \gls{gpr} interpolation method for the \gls{vfz} framework for most applications because it provides the best combination of accuracy and speed, handles \inpt{} noise, and has built-in uncertainty quantification; however, the other methods can meet niche needs. For example, barycentric interpolation enables rapid and accurate predictions when the function to be evaluated changes, but the \inpt{} and \outpt{} \glspl{gb} remain fixed.
 	%
 	%DISCUSS pairwise correlations & BRANDON'S CRITERIA, 2-4 sentences
 	%
