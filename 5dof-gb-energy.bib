@@ -226,6 +226,16 @@
   journal = {Nicotine \& Tobacco Research}
 }
 
+@article{baird2021degreeoffreedom,
+  title = {Five Degree-of-Freedom Property Interpolation of Arbitrary Grain Boundaries via Voronoi Fundamental Zone Octonion Framework},
+  author = {Baird, Sterling G. and Homer, Eric R. and Fullwood, David T. and Johnson, Oliver K.},
+  year = {2021},
+  archiveprefix = {arXiv},
+  eprint = {2104.06575},
+  eprinttype = {arxiv},
+  primaryclass = {cond-mat.mtrl-sci}
+}
+
 @article{bairdBarycentricInterpolation7SphereUnderReview,
   title = {Barycentric {{Interpolation}} on the 7-{{Sphere}}},
   author = {Baird, Sterling G and Homer, Eric R and Fullwood, David T and Johnson, Oliver K},
@@ -245,9 +255,10 @@
   abstract = {Code related to meshing and interpolation of grain boundaries by representing 5DOF of grain boundaries as octonions and forming a closed mesh.}
 }
 
-@article{bairdFiveDegreeofFreedomPropertya,
+@article{bairdFiveDegreeofFreedomPropertyUnderReview,
   title = {Five {{Degree}}-of-{{Freedom Property Interpolation}} of {{Arbitrary Grain Boundaries}} via {{Voronoi}} Fundamental Zone {{Framework}}},
   author = {Baird, Sterling G and Homer, Eric R and Fullwood, David T and Johnson, Oliver K},
+  year = {Under Review},
   pages = {26},
   abstract = {We introduce the Voronoi fundamental zone (VFZ) framework which is useful for grain boundary (GB) structure-property models and gaining insights about the nature of a five degree-of-freedom (5DOF) fundamental zone (FZ) for both cubic and non-cubic symmetries and potentially alloys. We cover the methods associated with the VFZ framework. The VFZ framework offers an advantage over other 5DOF based property interpolation methods because directly computed Euclidean distances approximate the original grain boundary octonion (GBO) distance with significantly reduced runtime ({$\sim$}7 CPU minutes vs. 153 CPU days for a 50 000 \texttimes{} 50 000 pairwise-distance matrix). We perform grain boundary energy (GBE) interpolation for a non-smooth validation function on sets of up to 50 000 GBs using four interpolation methods: barycentric interpolation, Gaussian process regression (GPR) or Kriging, inverse-distance weighting (IDW), and nearest neighbor (NN) interpolation. These are evaluated for 50 000 random input GBs and 10 000 random prediction GBs. The best performance was achieved with GPR which results in a reduction of the root mean square error (RMSE) by 83.0\% relative to RMSE of a constant, average model. We then use GPR to interpolate simulated bi-crystal datasets for Fe and Ni and demonstrate better than and similar performance to prior work, respectively. Interpolation on a large, noisy, molecular statics (MS) Fe simulation dataset improves performance by 34.4 \% compared to 21.2 \% in prior work. We find that the noise and non-uniform sampling make it difficult to resolve low GBE (i.e. cusps) and to validate the model. For the small, low-noise Ni simulation data, we resolve cusps with high accuracy, but uncertainty may be high in regions far from the input data. The trade-offs between noise, dataset size, sampling scheme, and repeat measurements must be carefully managed. We provide a vectorized, parallelized, MATLAB interpolation function (interp5DOF.m) and related routines (github.com/sgbaird-5dof/interp) which can be applied to future datasets for a variety of GB properties We comment on future work involving the application of the VFZ framework as a tool for better understanding of GB properties within a 5DOF FZ.},
   file = {C\:\\Users\\sterg\\Zotero\\storage\\SXQDPVJB\\Baird et al. - Five Degree-of-Freedom Property Interpolation of A.pdf},
