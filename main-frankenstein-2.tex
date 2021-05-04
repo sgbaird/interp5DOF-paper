@@ -295,6 +295,8 @@
 
     \subsection{Dimensionality Reduction}
     A \gls{svd} transformation is used to remove degenerate dimensions and rotate/align the \gls{vfzgbo} point clouds such that the 1st, 2nd, 3rd, etc. dimensions are progressively smaller.
+    
+    Additionally, \gls{pca} is applied and the variance explained by each dimension is extracted.
 
     \subsection{Correlation Matrices} \label{sec:methods:correlation}
     Retrieval of covariance matrices, conversion to correlation matrices, and processing of the data. %1-2 paragraphs
@@ -374,6 +376,16 @@
 	\end{table}
 	
 	We also find that the largest minimum (i.e. symmetrized) distance (with a \gls{vfz} ensemble set size of 20 \cite{bairdFiveDegreeofFreedomPropertyUnderReview}) between any two \glspl{gb} in a set of \num{20000} \glspl{gb} is \minsymdist{}.
+	
+	By performing \gls{pca}, we find that \percExplained{} of the variance is explained by the first 5 transformed coordinates of an $O_h$ \gls{vfz} as shown in \cref{tab:pca-explained}.
+	
+	\begin{table}[!htb]
+	    \centering
+    	    \caption{Dimension of \gls{pca} transformed coordinates (Dimension) and percent variance explained for a set of \num{50000} \glspl{vfzgbo}. The first 5 dimensions cumulatively explain \percExplained{} of the variance. }
+    	    \label{tab:pca-explained}
+        	\csvautobooktabular[
+        	table head={\toprule Dimension & Explained Variance (\SI{}{\percent}) \\\midrule}]{tables/pca-explained.csv}
+	\end{table}	
 	
 	\subsection{Correlation Lengths} \label{sec:results:correlation}
 	
@@ -590,33 +602,62 @@
 % 	\subsubsection{Low Sigma \glsfmtshortpl{gb} }
 	We analyze direct connections between low Sigma \glspl{gb} of interest to the materials science community. Using the set of 388 \glspl{gb} defined by \citet{olmstedSurveyComputedGrain2009}, we choose the $\Sigma5$, $\Sigma7$, $\Sigma9$, and $\Sigma11$ \glspl{gb} with the lowest \gls{gbe} and visualize direct paths in a \gls{vfz} between each of these and the global minimum $\Sigma3$ \gls{ct} \gls{gb} (\cref{fig:sigma-paths-olmsted}). This is performed for both the \gls{brk} and \gls{vfz}-\gls{gpr} models.
 	
+% 	\begin{figure*}[!htb]
+% 		\centering
+% 		\begin{subfigure}[b]{0.48\textwidth}
+% 			\includegraphics[width=\textwidth]{figures/path-3-5-olmsted.png}
+% 			\caption{}
+% 			\label{fig:path-3-5-olmsted}
+% 		\end{subfigure}
+% 		\hfill
+% 		\begin{subfigure}[b]{0.48\textwidth}
+% 			\includegraphics[width=\textwidth]{figures/path-3-7-olmsted.png}
+% 			\caption{}
+% 			\label{fig:path-3-7-olmsted}
+% 		\end{subfigure}
+		
+% 		\begin{subfigure}[b]{0.48\textwidth}
+% 			\includegraphics[width=\textwidth]{figures/path-3-9-olmsted.png}
+% 			\caption{}
+% 			\label{fig:path-3-9-olmsted}
+% 		\end{subfigure}
+% 		\hfill
+% 		\begin{subfigure}[b]{0.48\textwidth}
+% 			\includegraphics[width=\textwidth]{figures/path-3-11-olmsted.png}
+% 			\caption{}
+% 			\label{fig:path-3-11-olmsted}
+% 		\end{subfigure}
+% 		\caption{\Glspl{gbe} along direct paths in a \gls{vfz} between the $\Sigma3$ \gls{ct} boundary and minimum \gls{gbe} (\subref*{fig:path-3-5-olmsted}) $\Sigma5$, (\subref*{fig:path-3-7-olmsted}) $\Sigma7$, (\subref*{fig:path-3-9-olmsted}) $\Sigma9$, and (\subref*{fig:path-3-11-olmsted}) $\Sigma11$ \glspl{gb} within the Ni \citet{olmstedSurveyComputedGrain2009} dataset. \Gls{gbe} values are plotted for the \gls{brk} and \gls{gpr} models which both used \citet{olmstedSurveyComputedGrain2009} as \inpt{} data. }
+% 		\label{fig:sigma-paths-olmsted}
+% 	\end{figure*}
+
 	\begin{figure*}[!htb]
 		\centering
 		\begin{subfigure}[b]{0.48\textwidth}
-			\includegraphics[width=\textwidth]{figures/path-3-5-olmsted.png}
+			\includegraphics[width=\textwidth]{figures/tunnel-3-5-olmsted.png}
 			\caption{}
-			\label{fig:path-3-5-olmsted}
+			\label{fig:tunnel-3-5-olmsted}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.48\textwidth}
-			\includegraphics[width=\textwidth]{figures/path-3-7-olmsted.png}
+			\includegraphics[width=\textwidth]{figures/tunnel-3-7-olmsted.png}
 			\caption{}
-			\label{fig:path-3-7-olmsted}
+			\label{fig:tunnel-3-7-olmsted}
 		\end{subfigure}
 		
 		\begin{subfigure}[b]{0.48\textwidth}
-			\includegraphics[width=\textwidth]{figures/path-3-9-olmsted.png}
+			\includegraphics[width=\textwidth]{figures/tunnel-3-9-olmsted.png}
 			\caption{}
-			\label{fig:path-3-9-olmsted}
+			\label{fig:tunnel-3-9-olmsted}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.48\textwidth}
-			\includegraphics[width=\textwidth]{figures/path-3-11-olmsted.png}
+			\includegraphics[width=\textwidth]{figures/tunnel-3-11-olmsted.png}
 			\caption{}
-			\label{fig:path-3-11-olmsted}
+			\label{fig:tunnel-3-11-olmsted}
 		\end{subfigure}
-		\caption{\Glspl{gbe} along direct paths in a \gls{vfz} between the $\Sigma3$ \gls{ct} boundary and minimum \gls{gbe} (\subref*{fig:path-3-5-olmsted}) $\Sigma5$, (\subref*{fig:path-3-7-olmsted}) $\Sigma7$, (\subref*{fig:path-3-9-olmsted}) $\Sigma9$, and (\subref*{fig:path-3-11-olmsted}) $\Sigma11$ \glspl{gb} within the Ni \citet{olmstedSurveyComputedGrain2009} dataset. \Gls{gbe} values are plotted for the \gls{brk} and \gls{gpr} models which both used \citet{olmstedSurveyComputedGrain2009} as \inpt{} data. }
-		\label{fig:sigma-paths-olmsted}
+		\caption{\Glspl{gbe} along direct paths in a \gls{vfz} between the $\Sigma3$ \gls{ct} boundary and minimum \gls{gbe} (\subref*{fig:tunnel-3-5-olmsted}) $\Sigma5$, (\subref*{fig:tunnel-3-7-olmsted}) $\Sigma7$, (\subref*{fig:tunnel-3-9-olmsted}) $\Sigma9$, and (\subref*{fig:tunnel-3-11-olmsted}) $\Sigma11$ \glspl{gb} within the Ni \citet{olmstedSurveyComputedGrain2009} dataset. \Gls{gbe} values are plotted for the \gls{brk} and \gls{gpr} models which both used \citet{olmstedSurveyComputedGrain2009} as \inpt{} data. }
+		\label{fig:sigma-tunnels-olmsted}
 	\end{figure*}
 	
 	Likewise, we perform \gls{gpr} for the Fe simulation dataset.
@@ -624,31 +665,62 @@
 	\begin{figure*}[!htb]
 		\centering
 		\begin{subfigure}[b]{0.48\textwidth}
-			\includegraphics[width=\textwidth]{figures/path-3-5-kim.png}
+			\includegraphics[width=\textwidth]{figures/tunnel-3-5-kim.png}
 			\caption{}
-			\label{fig:path-3-5-kim}
+			\label{fig:tunnel-3-5-kim}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.48\textwidth}
-			\includegraphics[width=\textwidth]{figures/path-3-7-kim.png}
+			\includegraphics[width=\textwidth]{figures/tunnel-3-7-kim.png}
 			\caption{}
-			\label{fig:path-3-7-kim}
+			\label{fig:tunnel-3-7-kim}
 		\end{subfigure}
 		
 		\begin{subfigure}[b]{0.48\textwidth}
-			\includegraphics[width=\textwidth]{figures/path-3-9-kim.png}
+			\includegraphics[width=\textwidth]{figures/tunnel-3-9-kim.png}
 			\caption{}
-			\label{fig:path-3-9-kim}
+			\label{fig:tunnel-3-9-kim}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[b]{0.48\textwidth}
-			\includegraphics[width=\textwidth]{figures/path-3-11-kim.png}
+			\includegraphics[width=\textwidth]{figures/tunnel-3-11-kim.png}
 			\caption{}
-			\label{fig:path-3-11-kim}
+			\label{fig:tunnel-3-11-kim}
 		\end{subfigure}
-		\caption{\Glspl{gbe} along direct paths in a \gls{vfz} between the $\Sigma3$ \gls{ct} boundary and minimum \gls{gbe} (\subref*{fig:path-3-5-kim}) $\Sigma5$, (\subref*{fig:path-3-7-kim}) $\Sigma7$, (\subref*{fig:path-3-9-kim}) $\Sigma9$, and (\subref*{fig:path-3-11-kim}) $\Sigma11$ \glspl{gb} for the Ni \citet{olmstedSurveyComputedGrain2009} dataset, but sampled from a \gls{gpr} model trained on \num{46883} Fe \citet{kimPhasefieldModeling3D2014} simulation datapoints. }
-		\label{fig:sigma-paths-olmsted}
+		\caption{\Glspl{gbe} along direct paths in a \gls{vfz} between the $\Sigma3$ \gls{ct} boundary and minimum \gls{gbe} (\subref*{fig:tunnel-3-5-kim}) $\Sigma5$, (\subref*{fig:tunnel-3-7-kim}) $\Sigma7$, (\subref*{fig:tunnel-3-9-kim}) $\Sigma9$, and (\subref*{fig:tunnel-3-11-kim}) $\Sigma11$ \glspl{gb} for the Ni \citet{olmstedSurveyComputedGrain2009} dataset, but sampled from a \gls{gpr} model trained on \num{46883} Fe \citet{kimPhasefieldModeling3D2014} simulation datapoints. }
+		\label{fig:sigma-tunnels-kim}
 	\end{figure*}
+%	
+% 	Likewise, we perform \gls{gpr} for the Fe simulation dataset.
+%	
+% 	\begin{figure*}[!htb]
+% 		\centering
+% 		\begin{subfigure}[b]{0.48\textwidth}
+% 			\includegraphics[width=\textwidth]{figures/path-3-5-kim.png}
+% 			\caption{}
+% 			\label{fig:path-3-5-kim}
+% 		\end{subfigure}
+% 		\hfill
+% 		\begin{subfigure}[b]{0.48\textwidth}
+% 			\includegraphics[width=\textwidth]{figures/path-3-7-kim.png}
+% 			\caption{}
+% 			\label{fig:path-3-7-kim}
+% 		\end{subfigure}
+		
+% 		\begin{subfigure}[b]{0.48\textwidth}
+% 			\includegraphics[width=\textwidth]{figures/path-3-9-kim.png}
+% 			\caption{}
+% 			\label{fig:path-3-9-kim}
+% 		\end{subfigure}
+% 		\hfill
+% 		\begin{subfigure}[b]{0.48\textwidth}
+% 			\includegraphics[width=\textwidth]{figures/path-3-11-kim.png}
+% 			\caption{}
+% 			\label{fig:path-3-11-kim}
+% 		\end{subfigure}
+% 		\caption{\Glspl{gbe} along direct paths in a \gls{vfz} between the $\Sigma3$ \gls{ct} boundary and minimum \gls{gbe} (\subref*{fig:path-3-5-kim}) $\Sigma5$, (\subref*{fig:path-3-7-kim}) $\Sigma7$, (\subref*{fig:path-3-9-kim}) $\Sigma9$, and (\subref*{fig:path-3-11-kim}) $\Sigma11$ \glspl{gb} for the Ni \citet{olmstedSurveyComputedGrain2009} dataset, but sampled from a \gls{gpr} model trained on \num{46883} Fe \citet{kimPhasefieldModeling3D2014} simulation datapoints. }
+% 		\label{fig:sigma-paths-kim}
+% 	\end{figure*}
 	
 	\section{Discussion} \label{sec:discuss}
 	
