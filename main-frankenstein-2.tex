@@ -24,20 +24,20 @@
 		\input{authors.tex}
 		
 		\begin{abstract}
-			We apply the \gls{vfz} framework towards gaining insights about the nature of a \gls{5dof} \gls{fz} for cubic $O_h$ \glspl{gb}. The \gls{vfz} framework offers an advantage over other \gls{5dof} based property interpolation methods because it is defined via continuous, Euclidean coordinates and results in rapid distance calculations. %it is constructed as a point set in a manifold. This means that
+			We apply the \gls{vfz} framework towards gaining insights about the nature of a \gls{5dof} \gls{fz} for cubic $O_h$ \glspl{gb}. %The \gls{vfz} framework offers an advantage over other \gls{5dof} based property interpolation methods because it is defined via continuous, Euclidean coordinates and results in rapid distance calculations. %it is constructed as a point set in a manifold. This means that
 %			directly computed Euclidean distances approximate the original \gls{gbo} distance with significantly reduced runtime ($\sim$7 CPU minutes vs. 153 CPU days for a $\num{50000}\times\num{50000}$ pairwise-distance matrix). %this is where some fundamental insights probably need to be addressed before losing certain readers' attention
-			Aided by the increased computational efficiency, we determine the dimensions of a large $O_h$ \gls{vfz} point set, for which the maximum dimension is \dimOne{} after applying a \gls{svd} transformation. We also find that \gls{nn} distances for cubochorically sampled \glspl{gb} are normally distributed. \percExplained{} of the variance is explained by the first 5 transformed coordinates of the $O_h$ \glspl{vfzgbo}, indicating that despite being originally defined by 8D Cartesian coordinates, 5D Cartesian coordinates may be sufficient to describe \glspl{gb} w.r.t. crystallographic distances. The 5th transformed dimension is \percFiveVsOne{} the size of the 1st dimension, giving a rough indication of the shape of a \gls{5dof} \gls{fz}. % with a mean (\SI{}{\degree}) of approximately $2.5025\times10^{-5} x-1.27396 \log (x)+15.4499, x\in \{388,50000\}$ where $x$ is the number of \glspl{gb}.
+			%Aided by the increased computational efficiency of the \gls{vfz} framework,
+			We determine the dimensions of a large $O_h$ \gls{vfz} point set, for which the maximum dimension is \dimOne{} after applying a \gls{svd} transformation. We also find that \gls{nn} distances for cubochorically sampled \glspl{gb} are normally distributed. \percExplained{} of the variance is explained by the first 5 transformed coordinates of the $O_h$ \glspl{vfzgbo}, indicating that despite being originally defined by 8D Cartesian coordinates, 5D Cartesian coordinates may be sufficient to describe \glspl{gb} w.r.t. crystallographic distances. This is in contrast to the classical definition of \gls{5dof} coordinates via inharmonious combination of two very different mathematical objects: a rotation (misorientation) and a vector (plane normal). The 5th transformed dimension is \percFiveVsOne{} the size of the 1st dimension, giving a rough indication of the shape of a \gls{5dof} \gls{fz} (i.e. low-aspect ratio). % with a mean (\SI{}{\degree}) of approximately $2.5025\times10^{-5} x-1.27396 \log (x)+15.4499, x\in \{388,50000\}$ where $x$ is the number of \glspl{gb}.
 			%This increased efficiency facilitates lower interpolation error through the use of significantly more input data.
 			%We perform \gls{gbe} interpolation for a non-smooth validation function on sets of up to \num{50000} \glspl{gb} using four interpolation methods: barycentric interpolation, \gls{gpr} or Kriging, \gls{idw}, and \gls{nn} interpolation. % These are evaluated for \num{50000} random \inpt{} \glspl{gb} and \num{10000} random \outpt{} \glspl{gb}.
 			%The best performance was achieved with \gls{gpr}. %, which results in a reduction of the \gls{rmse} by \calcnum{(\avgrmse-\gprrmse)/\avgrmse*100}\%. % relative to \gls{rmse} of a constant, average model.
 			%We then use \gls{gpr} to interpolate simulated bi-crystal datasets for Fe and Ni and demonstrate better than and similar performance to prior work, respectively. % Interpolation on a large, noisy, \gls{ms} Fe simulation dataset improves performance by \SI{34.4}{\percent} compared to \SI{21.2}{\percent} in prior work, and we discover that
-			The \gls{vfz} framework allows us to easily identify repeated \glspl{gb} which in turn enables us to estimate the intrinsic error of the large Fe simulation dataset (\SI{0.065}{\J\per\square\m}).
+			We identify repeated \glspl{gb} in a large Fe simulation dataset which in turn enables us to estimate the intrinsic uncertainty in the context of experimental measurements and metastable \gls{gb} states. % (\SI{0.065}{\J\per\square\m}).
 			%We find that the noise and non-uniform sampling make it difficult to resolve low \gls{gbe} (i.e. cusps) and to validate the model. %Interpolation on a small, low-noise \gls{ms} Ni simulation dataset is similar to interpolation results previously reported, and
 			%For the small, low-noise Ni simulation data, we resolve cusps with high accuracy, but uncertainty may be high in regions far from the input data. The trade-offs between noise, dataset size, sampling scheme, and repeat measurements must be carefully managed.
-			Using \gls{gpr}, we estimate the correlation lengths of the Ni and Fe datasets to be $\sim$\SIlist{7.4;8.3}{\degree}, respectively, compared with a traditionally accepted value of $\sim$\SI{10}{\degree}. % (\SI{57.6}{\percent} vs. \SI{56.4}{\percent}).
+			\Gls{gpr} allows us to estimate the correlation lengths of the Ni and Fe datasets to be $\sim$\SIlist{7.4;8.3}{\degree}, respectively, compared with a traditionally accepted value of $\sim$\SI{10}{\degree}. That is, the energy of both FCC and BCC \glspl{gb} are typically correlated within $\sim$\SI{11}{\percent} to \SI{18}{\percent} of the dimensions of the \gls{5dof} \gls{fz}. % (\SI{57.6}{\percent} vs. \SI{56.4}{\percent}).
 			% BRANDON'S CRITERIA
-			Finally, we analyze structure-property paths between the $\Sigma3$ \gls{ct} \gls{gb} and other low-Sigma \glspl{gb} of interest. The methods are based on functions and scripts from %Finally, we provide a vectorized, parallelized, MATLAB interpolation function (\matlab{interp5DOF.m}) and related routines %in our \vfzorepo{} 
-			(\url{github.com/sgbaird-5dof/interp}). Future work involves probing other cubic and non-cubic symmetries and potentially alloys. % which can be applied to future datasets for a variety of \gls{gb} properties. % which has potential for the creation of advanced \gls{gb} structure-property models for alloys and cubic/non-cubic crystallographic point groups. %The \gls{vfz} framework offers advantages for computing distances between \glspl{gb}, estimating property values for arbitrary \glspl{gb}, and modeling surrogates of computationally expensive \gls{5dof} functions and simulations.
+			We analyze structure-property paths between the $\Sigma3$ \gls{ct} \gls{gb} and other low-Sigma \glspl{gb} of interest. The \gls{5dof} path between the FCC-Ni \gls{ct} $\Sigma3$ cusp and a $\Sigma7$ cusp are connected (i.e. a direct path exists without an energy barrier), suggesting that the $\Sigma7$ cusp will spontaneously transform into the global minimum \gls{ct} $\Sigma3$ cusp (i.e. the transformation is thermodynamically favorable w.r.t. energy minimization). Future work involves probing other cubic and non-cubic symmetries, alloys, and properties such as mobility. % which can be applied to future datasets for a variety of \gls{gb} properties. % which has potential for the creation of advanced \gls{gb} structure-property models for alloys and cubic/non-cubic crystallographic point groups. %The \gls{vfz} framework offers advantages for computing distances between \glspl{gb}, estimating property values for arbitrary \glspl{gb}, and modeling surrogates of computationally expensive \gls{5dof} functions and simulations.
 		\end{abstract}
 		
 		% Some of the less-emphasized fundamental contributions to understanding (that maybe I should incorporate into the abstract/emphasize more) are:
@@ -126,7 +126,7 @@
 	\subsection{The \glsentrytitlecase{vfz}{long} Framework}
 	\label{sec:methods:framework}
 
-    We describe the definition of a \gls{vfz} (\cref{sec:methods:framework:vfz}), mapping \glspl{gbo} into the \gls{vfz} (\cref{sec:methods:framework:proj}), distance calculations (\cref{sec:methods:framework:vfz-dist}), and provide a brief comparison with the traditional \gls{gbo} metric (\cref{sec:methods:framework:compare}).
+    We describe the definition of a \gls{vfz} (\cref{sec:methods:framework:vfz}), mapping \glspl{gbo} into the \gls{vfz} (\cref{sec:methods:framework:proj}), distance calculations (\cref{sec:methods:framework:vfz-dist}), and provide a brief comparison with the traditional \gls{gbo} metric (\cref{sec:methods:framework:compare}). The methods are based on functions and scripts from (\url{github.com/sgbaird-5dof/interp}).
 %
 % 	The core operations of the \gls{vfz} framework are:
 % 	\begin{enumerate}
@@ -299,6 +299,10 @@
     Additionally, \gls{pca} is applied and the variance explained by each dimension is extracted.
 
     \subsection{Correlation Matrices} \label{sec:methods:correlation}
+    A squared exponential kernel is used as the covariance function:
+    \begin{equation}
+        \sigma _f^2 e^{-\frac{\left(x_i-x_j\right) \left(x_i-x_j\right){}^T}{2 \sigma _l^2}}
+    \end{equation}
     Retrieval of covariance matrices, conversion to correlation matrices, and processing of the data. %1-2 paragraphs
     
 	\subsection{Visualizing \glsentrytitlecase{5dof}{short} Paths} \label{sec:methods:path}
@@ -308,13 +312,13 @@
 	
 	\subsection{Literature Datasets}
 	\label{sec:methods:litdata}
-	Ni \cite{olmstedSurveyComputedGrain2009} and Fe \cite{kimPhasefieldModeling3D2014} \gls{gbe} datasets from the literature are used. Intrinsic error for the Fe simulation data is estimated by the following steps:
+	Ni \cite{olmstedSurveyComputedGrain2009} and Fe \cite{kimPhasefieldModeling3D2014} \gls{gbe} datasets from the literature are used. Intrinsic uncertainty for the Fe simulation data is estimated by the following steps:
 	\begin{enumerate}
 	    \item Sort \glspl{gb} into degenerate sets
 	    \item Determine the average \gls{gbe} for each degenerate set
 	    \item Compare each of the degenerate \glspl{gb} to the set-wise average \gls{gbe} (\gls{rmse} or \gls{mae})
 	\end{enumerate}
-	See \cref{sec:supp:kim-interp:quality} for further details on methods used to estimate intrinsic error of the Fe simulation dataset.
+	See \cref{sec:supp:kim-interp:quality} for further details on methods used to estimate intrinsic uncertainty of the Fe simulation dataset.
 	
 %	In addition to performing validation tests of the \gls{vfz} framework, we also describe results in which we apply it to actual \gls{gb} property data available from literature sources. Here we briefly mention details related to the retrieval and processing of two \gls{ms} simulation datasets from the literature. We describe \gls{gpr} applied to Fe (\cref{sec:methods:gprsim}) and Ni (\cref{sec:methods:gprsim-Ni}) simulations, as well as a specialized \gls{gprm} model applied to Fe to address non-uniformity and noise concerns (\cref{sec:methods:gprmix}).
 %	
@@ -336,7 +340,7 @@
 	
 	We use the \gls{vfz} framework to explore properties of a \gls{5dof} \gls{fz}. We address the following questions:
 	\begin{itemize}
-		\item What is the intrinsic error of non-globally-optimized \gls{ms} simulations relative to the global minimum \gls{gbe}? (\cref{sec:results:error})
+		\item What is the intrinsic uncertainty of non-globally-optimized \gls{ms} simulations relative to the global minimum \gls{gbe}? (\cref{sec:results:error})
 		\item When working with randomly generated, symmetrized \gls{vfzgbo}, how does the number of \glspl{gb} affect the density and distribution of points? (\cref{sec:results:density})
 		\item What are the dimensions of a \gls{5dof} fundamental zone? (\cref{sec:results:dimensions})
 		\item How correlated are nearby \glspl{gb} w.r.t. crystallography and \gls{gbe}? (\cref{sec:results:correlation})
@@ -409,8 +413,8 @@
     \subsubsection{Pairwise Correlations} \label{sec:results:correlation:pairwise}
     %JOHNSON
 %	
-	\subsection{Intrinsic Error of Noisy \glsentrytitlecase{ms}{long} Simulations} \label{sec:results:error}
-	We estimate the intrinsic error of an Fe \SI{0}{\kelvin} \gls{ms} simulation dataset to be \SIlist{0.06529;0.06190}{\joule\per\square\meter} depending on whether \gls{rmse} or \gls{mae} estimates are used, respectively. Minimum and maximum error was \SIlist{-0.2625;0.2625}{\joule\per\square\meter}, respectively.
+	\subsection{Intrinsic Uncertainty of Noisy \glsentrytitlecase{ms}{long} Simulations} \label{sec:results:error}
+	We estimate the intrinsic uncertainty of an Fe \SI{0}{\kelvin} \gls{ms} simulation dataset to be \SIlist{0.06529;0.06190}{\joule\per\square\meter} depending on whether \gls{rmse} or \gls{mae} estimates are used, respectively. Minimum and maximum error was \SIlist{-0.2625;0.2625}{\joule\per\square\meter}, respectively.
 
 	\subsection{\glsentrytitlecase{5dof}{short} Paths and \glsentrytitlecase{gb}{short} Behavior} \label{sec:results:paths}
 %	
@@ -602,7 +606,7 @@
 %	
 %	We believe this is the first\footnote{\Gls{oslerp} results from \citet{francisGeodesicOctonionMetric2019} plots \gls{gb} \emph{structure} continuously between two \glspl{gb}, \citet{chesserLearningGrainBoundary2020} performs cross-validation on the simulated Olmsted Ni \glspl{gb}, and \cite{morawiecDistancesGrainInterfaces2019} plots distances between \glspl{gb} on a geodesic with another \gls{gb}. The results in these works are distinct from what is presented here: a plot of continuously interpolated \glspl{gbe} between two arbitrary \glspl{gb}.} plot of a \gls{gb} property continuously interpolated between two arbitrary \glspl{gb} (i.e. neither residing entirely in a single \gls{mfz} nor a single \gls{bpfz}). Such visualizations can naturally be extended to 2D and 3D by plotting colored points in a triangle or tetrahedron, respectively, all of which (1D, 2D, and 3D) represent small "slices" of the \gls{gbc} space.
 % 	\subsubsection{Low Sigma \glsfmtshortpl{gb} }
-	We analyze direct connections between low Sigma \glspl{gb} of interest to the materials science community. Using the set of 388 \glspl{gb} defined by \citet{olmstedSurveyComputedGrain2009}, we choose the $\Sigma5$, $\Sigma7$, $\Sigma9$, and $\Sigma11$ \glspl{gb} with the lowest \gls{gbe} out of the \citet{olmstedSurveyComputedGrain2009} Ni dataset\footnote{The IDs that correspond to each of the low-$Sigma$ used for path visualization for the \citet{olmstedSurveyComputedGrain2009} and \citet{kimPhasefieldModeling3D2014} datasets are given in \cref{tab:sigma-key-olmsted} and \cref{tab:sigma-key-kim}, respectively. }; we then visualize direct paths in a \gls{vfz} between each of these and the global minimum $\Sigma3$ \gls{ct} \gls{gb} (\cref{fig:sigma-tunnels-olmsted}). This is performed for both the \gls{brk} and \gls{vfz}-\gls{gpr} models.
+	We analyze direct connections between low Sigma \glspl{gb} of interest to the materials science community. Using the set of 388 \glspl{gb} defined by \citet{olmstedSurveyComputedGrain2009}, we choose the $\Sigma5$, $\Sigma7$, $\Sigma9$, and $\Sigma11$ \glspl{gb} with the lowest \gls{gbe} out of the \citet{olmstedSurveyComputedGrain2009} Ni dataset\footnote{The IDs that correspond to each of the low-$\Sigma$ \glspl{gb} used for path visualization for the \citet{olmstedSurveyComputedGrain2009} and \citet{kimPhasefieldModeling3D2014} datasets are given in \cref{tab:sigma-key-olmsted} and \cref{tab:sigma-key-kim}, respectively. }; we then visualize direct paths in a \gls{vfz} between each of these and the global minimum $\Sigma3$ \gls{ct} \gls{gb} (\cref{fig:sigma-tunnels-olmsted}). This is performed for both the \gls{brk} and \gls{vfz}-\gls{gpr} models.
 	
 % 	\begin{figure*}[!htb]
 % 		\centering
@@ -734,7 +738,7 @@
 	Could correlation lengths be treated separately by rotating a \gls{vfz} such that misorientation and \gls{bp} normals each align with certain dimensions?
 	
 	\subsection{Correlation Lengths} \label{sec:discuss:correlation}
-    We discuss global (\cref{sec:discuss:correlation:global}) and pairwise (\cref{sec:discuss:correlation:pairwise}) correlations, and discuss these in the context of Brandon's criteria \cite{REF}.
+    We discuss global (\cref{sec:discuss:correlation:global}) and pairwise (\cref{sec:discuss:correlation:pairwise}) correlations. We also discuss the latter in the context of Brandon's criteria \cite{REF}.
 
 	\subsubsection{Global Correlation Length} \label{sec:discuss:correlation:global}
 	The two simulation datasets have distinct differences from each other, as summarized in \cref{tab:sim-compare}.
@@ -767,7 +771,7 @@
 	 \subsection{Potential for Numerical Derivatives}
 	\label{sec:discuss:deriv}
 	
-	Additionally, these visualizations suggest the ability to estimate numerical derivatives or gradients of \gls{gb} properties without being restricted to a \gls{gb} subspace (e.g. \gls{mfz} or \gls{bpfz}) which can be a useful mathematical construct for the \gls{gb} community. For example, steepest descent paths and all local \gls{gbe} minima can be estimated and used in grain growth simulations.
+	 \Gls{gb} path visualizations in the \gls{vfz} framework suggest the ability to estimate numerical derivatives or gradients of \gls{gb} properties without being restricted to a \gls{gb} subspace (e.g. \gls{mfz} or \gls{bpfz}) which can be a useful mathematical construct for the \gls{gb} community. For example, steepest descent paths and all local \gls{gbe} minima can be estimated and used in grain growth simulations.
 	
 	Because distance overestimation exist in the \gls{vfz} framework, use of ensembled \gls{vfzgbo} interpolation or data augmentation may be necessary to mitigate discontinuity artifacts when crossing the exterior of a \gls{vfz} as discussed in \cref{sec:methods:framework:vfz-dist}. Alternatively, the "excess" points in a gridded sampling can act as a type of data augmentation and help to address this issue. We plan to explore these topics in future work. \Cref{sec:supp:grid} contains further discussion of a gridded sampling approach.
 	
@@ -873,7 +877,7 @@
 We analyze implications of results for a \gls{gprm} model developed for a noisy, Fe \gls{ms} simulation dataset.
 	We find that:
 	\begin{itemize}
-		\item the model error is on par with the intrinsic error of the data (\cref{sec:discuss:lit:error})
+		\item the model error is on par with the intrinsic uncertainty of the data (\cref{sec:discuss:lit:error})
 		\item the predictions likely exhibit overprediction bias relative to the true minimum for a given \gls{gb} (\cref{sec:discuss:lit:overprediction})
 		\item future availability of multiple metastable state \glspl{gbe} is anticipated to greatly improve the model performance (\cref{sec:discuss:lit:improve})
 	\end{itemize}
@@ -898,8 +902,8 @@ We analyze implications of results for a \gls{gprm} model developed for a noisy,
 %		\end{tabular}
 %	\end{table*}
 %	
-    \subsubsection{Intrinsic Error} \label{sec:discuss:lit:error}
-	First, because only a single metastable state was used for each \gls{gbe} simulation, both the training and validation data are subject to noise, consistent with a wide lateral spread of predictions and the intrinsic error estimation (\cref{fig:kim-interp-degeneracy-results}). The Fe simulation dataset \gls{gprm} model gives lower \gls{rmse} (\SI{0.055035}{\joule\per\square\meter}) and \gls{mae} (\SI{0.039185}{\joule\per\square\meter}) than the intrinsic error estimates. This indicates that the intrinsic error itself is somewhat overestimated\footnote{The \outpt{} error of a model typically cannot be less than the noise of the \outpt{} data of a model even if the model is estimating the true \outpt{} values with better accuracy than the noise (which is very possible and even expected with \gls{gpr} models when the noise in the \inpt{} data is approximately Gaussian).}. The fact that both model and intrinsic error metrics are relatively close and the prediction \cite{bairdFiveDegreeofFreedomPropertyUnderReview} and intrinsic error parity plots (\cref{fig:kim-interp-degeneracy-results}b) are similar suggests that the model is performing well. It also suggests that further improvements in the model relative to the "true" values will be "hidden", i.e. they will probably not manifest as lower \gls{rmse} or \gls{mae} nor as more tightly distributed parity plots, etc.
+    \subsubsection{Intrinsic Uncertainty} \label{sec:discuss:lit:error}
+	First, because only a single metastable state was used for each \gls{gbe} simulation, both the training and validation data are subject to noise, consistent with a wide lateral spread of predictions and the intrinsic uncertainty estimation (\cref{fig:kim-interp-degeneracy-results}). The Fe simulation dataset \gls{gprm} model gives lower \gls{rmse} (\SI{0.055035}{\joule\per\square\meter}) and \gls{mae} (\SI{0.039185}{\joule\per\square\meter}) than the uncertainty estimates. This indicates that the uncertainty itself is somewhat overestimated\footnote{The \outpt{} error of a model typically cannot be less than the noise of the \outpt{} data of a model even if the model is estimating the true \outpt{} values with better accuracy than the noise (which is very possible and even expected with \gls{gpr} models when the noise in the \inpt{} data is approximately Gaussian).}. The fact that both model and uncertainty metrics are relatively close and the prediction \cite{bairdFiveDegreeofFreedomPropertyUnderReview} and uncertainty parity plots (\cref{fig:kim-interp-degeneracy-results}b) are similar suggests that the model is performing well. It also suggests that further improvements in the model relative to the "true" values will be "hidden", i.e. they will probably not manifest as lower \gls{rmse} or \gls{mae} nor as more tightly distributed parity plots, etc.
 	
 	\subsubsection{Overprediction Bias} \label{sec:discuss:lit:overprediction}
 	Next, given the theoretical existence of a true minimum \gls{gbe} for a given \gls{gb}, the predictions which were based on metastable \glspl{gbe} can be assumed to have an overprediction bias relative to the true minimum. On average, we expect this overprediction bias relative to the true minimum \gls{gbe} (rather than the most likely metastable state) may be on the order of a few hundred \SI{}{\milli\J\per\square\m} and may vary as a function of true minimum \gls{gbe}. In other words, the model obtained is probably an estimate of the most likely metastable \gls{gbe} rather than the true minimum \gls{gbe}. This is akin to saying that we obtain from this data a model that approximates the non-equilibrium, Stillinger quenched red curve of Figure 4(c1) in \cite{hanGrainboundaryMetastabilityIts2016}, not the minimum \gls{gbe} blue curve of the same chart. See \cite{hanGrainboundaryMetastabilityIts2016} for an in-depth treatment of equilibrium and metastable \gls{gbe}.
@@ -908,7 +912,9 @@ We analyze implications of results for a \gls{gprm} model developed for a noisy,
 	Finally, datasets where multiple metastable \glspl{gbe} (e.g. 3-10 repeats) are provided for each \gls{gb} will likely greatly improve the performance of the \gls{gpr} model in predicting either the most likely metastable \gls{gbe} (when all \glspl{gbe} are considered) or the true minimum \gls{gbe} (when only the minimum \gls{gbe} is considered for each \gls{gb}) and may even negate the need for a \gls{gprm} approach. Thus, it is suggested that, where feasible, future large-scale \gls{gb} bicrystal simulation studies report all property data for repeated trial runs rather than a single trial run or a single value from a set of trial runs. Ideally, data for the three additional microscopic \glspl{dof} for \glspl{gb} (which falls into the category of epistemic uncertainty in this work) would also be included. We believe it is likely that minimum energy paths (i.e. paths of steepest descent) in the \gls{gbe} landscape depend on both macroscopic and microscopic \glspl{dof} (in total, 8DOF) and could offer a more holistic view of \gls{gb} behavior that better mimics and explains experimental grain growth observations. Indeed, it has been experimentally observed that at least some \gls{gb} migration mechanisms involve structural transformations between equilibrium \glspl{gb} via metastable states \cite{weiDirectImagingAtomistic2021}.
 	 
     \subsection{\glsentrytitlecase{5dof}{short} Paths} \label{sec:discuss:path}
-     We observe that $\Sigma3$ and $\Sigma7$ are connected (i.e. no activation energy barrier) while the direct paths between $\Sigma3$ and $\Sigma5$, $\Sigma9$, $\Sigma11$ are separated by energy barriers. This indicates that for grain growth systems governed by \gls{gbe}, $\Sigma7$ \glspl{gb} will spontaneously transform into $\Sigma3$ \gls{ct} \glspl{gb}, whereas if $\Sigma5$, $\Sigma9$, $\Sigma11$ transform into $\Sigma3$ \glspl{ct}, this will need to occur either by overcoming the activation energy or via paths through \gls{5dof} space other than the ones shown.
+     For the \gls{gpr} model trained on the Ni \citet{olmstedSurveyComputedGrain2009} dataset, we observe that $\Sigma3$ and $\Sigma7$ are connected (i.e. no activation energy barrier) while the direct paths between $\Sigma3$ and $\Sigma5$, $\Sigma9$, $\Sigma11$ are separated by energy barriers. This indicates that for grain growth systems governed by \gls{gbe}, $\Sigma7$ \glspl{gb} will spontaneously transform into $\Sigma3$ \gls{ct} \glspl{gb}, whereas if $\Sigma5$, $\Sigma9$, $\Sigma11$ transform into $\Sigma3$ \glspl{ct}, this will need to occur either by overcoming the activation energy or via paths through \gls{5dof} space other than the ones shown.
+     
+     For the \gls{gpr} model trained on the Fe \citet{kimPhasefieldModeling3D2014} dataset, the 1st \gls{nn} path and the \gls{gpr} path have substantial deviation from each other for the paths from $\Sigma3$ to $\Sigma9$ and $\Sigma3$ to $\Sigma11$. While the \gls{gpr} model suggests that $\Sigma3$ and $\Sigma11$ are connected, the \gls{nn} path suggests that there are local minima that are overestimated due to the large noise associated with the Fe dataset.
 	 %
 	\section{Conclusion} \label{sec:conclusion}
 	We applied the \gls{vfz} framework to learning more about the nature of a \gls{5dof} \gls{fz}.
@@ -924,14 +930,14 @@ We analyze implications of results for a \gls{gprm} model developed for a noisy,
 	%
 	%Of the interpolation methods that we present in this work, \Gls{gpr} provided the highest accuracy predictions. It also provided higher accuracy predictions than any of the methods in the literature.
 	%The \gls{gpr} interpolation errors (\num{50000} \glspl{vfzgbo}) for the \gls{brk} validation model are about \num{2.4} times the intrinsic error that would be expected from reconstruction of noise-free, experimental polycrystalline data via \gls{lobpcg} \cite{shenDeterminingGrainBoundary2019} (\num{180000} \glspl{gb}) with their simpler validation model. Moreover, 
-	The interpolation errors for a Fe simulation dataset are on par with the intrinsic errors of the dataset itself (\cref{sec:supp:kim-interp:quality}). %While \gls{idw} and \gls{nn} interpolation have the fastest computation times, they also have higher interpolation error. Consequently,
+	The interpolation errors for a Fe simulation dataset are on par with the intrinsic uncertainty of the dataset itself (\cref{sec:supp:kim-interp:quality}). %While \gls{idw} and \gls{nn} interpolation have the fastest computation times, they also have higher interpolation error. Consequently,
 	Analysis of the \gls{gpr} fitting results indicates that the Ni and Fe simulation datasets have correlation lengths of \SIlist{8.3;7.4}{\degree}, respectively, but that when the Ni dataset is constrained to have low noise, the analytical correlation length drops to $\sim$\SI{1.9}{\degree}. % We recommend the \gls{gpr} interpolation method for the \gls{vfz} framework for most applications because it provides the best combination of accuracy and speed, handles \inpt{} noise, and has built-in uncertainty quantification; however, the other methods can meet niche needs. For example, barycentric interpolation enables rapid and accurate predictions when the function to be evaluated changes, but the \inpt{} and \outpt{} \glspl{gb} remain fixed.
 	%
 	%DISCUSS pairwise correlations & BRANDON'S CRITERIA, 2-4 sentences
 	%
 	Plotting of direct paths between low-Sigma \glspl{gb} of interest reveal that a $\Sigma$7 cusp has a monotonically decreasing path towards the \gls{ct} $\Sigma3$ cusp, whereas a $\Sigma5$, $\Sigma9$, and $\Sigma11$ cusps do not necessarily share this same type of monotonically decreasing path within a \gls{vfz}. We demonstrated that two cusps can be connected in \gls{5dof} space.
 	
-	We anticipate that in addition to \gls{gb} property interpolation, the \gls{vfz} framework will continue to reveal important aspects of a \gls{5dof} \gls{fz} and inform us about material behavior especially w.r.t. grain growth and other large scale time-dependent or iterative processes.
+	In addition to its previous implementation for \gls{gb} property interpolation \cite{bairdFiveDegreeofFreedomPropertyUnderReview}, we anticipate the \gls{vfz} framework will continue to reveal important aspects of a \gls{5dof} \gls{fz} and inform us about material behavior especially w.r.t. grain growth and other large scale time-dependent or iterative processes.
 %	We anticipate that the \gls{vfz} framework and corresponding implementation will benefit numerous applications related to \gls{gb} structure and properties, including facilitating \gls{gb} structure-property model development, enabling efficient surrogate modeling of \gls{gb} properties, and larger scale iterative simulations that require repetitive evaluation of computationally expensive structure-property models.
 	\section*{Acknowledgement}
 	\label{sec:acknowledgement}
