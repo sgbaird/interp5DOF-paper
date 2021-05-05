@@ -128,6 +128,25 @@
 % 		\label{fig:sigma-tunnels-kim}
 % 	\end{figure*}
 
+\section{Gridded Sampling for Numerical Differentation} \label{sec:supp:grid}
+Related to \cref{sec:discuss:dimensions}, an isotropically sized \gls{fz} may be easier to uniformly discretize than a high aspect-ratio space (i.e. a fixed discretization length can be used across all dimensions). What this doesn't describe, however, is curvature. In order to create a gridded array, which is important for numerical differentiation, a hypercube with each primary axis oriented with Euclidean dimensions is to be preferred. As curvature or misalignment is introduced as may be expected with a \gls{vfz} point cloud, \glspl{gb} outside of the \gls{vfz} will necessarily be sampled; this phenomena will be exaggerated in high dimensions\footnote{For perspective, a discretization into 9 segments (10 points) along each dimension will have a spacing of $\sim$\SI{7}{\degree} and require \num{1e5} grid points. In order to achieve a more reasonable grid spacing of $\sim$\SI{2}{\degree}, a minimum of $\sim$\num{24} discretizations (25 points) along each dimension is necessary and will produce $\sim$\num{1e7} grid points. }. Fortunately, most of the information is contained in the first five dimensions after \gls{svd} transformation (\cref{sec:results:dimensions}). Thus, the latter three dimensions can likely be ignored without substantially affecting e.g. an interpolation or numerical differentiation scheme.
+
+\section{\glsentrypl{gb}{short} Used for Path Visualization} \label{sec:supp:sigma-key}
+
+\begin{table}[!htb]
+    \centering
+    \caption{Minimum $\Sigma$ (Sigma) \glspl{gb} and corresponding IDs used for path visualization within the original \citet{olmstedSurveyComputedGrain2009} dataset. }
+    \label{tab:sigma-key-olmsted}
+    \csvautobooktabular{tables/sigma-key-olmsted.csv}
+\end{table}
+
+% \begin{table}[!htb]
+%     \centering
+%     \caption{Caption}
+%     \label{tab:sigma-key-kim}
+%     \csvautobooktabular{tables/sigma-key-olmsted.csv}
+% \end{table}
+
 \clearpage
 \bibliographystyle{elsarticle-num-names}
 \bibliography{5dof-gb-energy.bib}
