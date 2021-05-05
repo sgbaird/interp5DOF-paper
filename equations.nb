@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     13884,        336]
-NotebookOptionsPosition[     11823,        295]
-NotebookOutlinePosition[     12264,        312]
-CellTagsIndexPosition[     12221,        309]
+NotebookDataLength[     14164,        342]
+NotebookOptionsPosition[     12102,        301]
+NotebookOutlinePosition[     12543,        318]
+CellTagsIndexPosition[     12500,        315]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -266,31 +266,37 @@ Cell[BoxData[
        {"\"\<\!\(\*SubscriptBox[\(\[Sigma]\), \(f\)]\)\>\"", 
         "\"\<signal standard deviation\>\""},
        {"\"\<\!\(\*SubscriptBox[\(\[Sigma]\), \(l\)]\)\>\"", 
-        "\"\<length scale or correlation length\>\""},
+        "\"\<length scale (i.e. correlation length)\>\""},
        {"\[Theta]", 
-        "\"\<unconstrained parameterization of \
-\!\(\*SubscriptBox[\(\[Sigma]\), \(f\)]\) and \
-\!\(\*SubscriptBox[\(\[Sigma]\), \(l\)]\)\>\""},
+        RowBox[{"\"\<unconstrained parameterization of \>\"", "<>", 
+         RowBox[{
+         "MathText", "@", 
+          "\"\<\!\(\*SubscriptBox[\(\[Sigma]\), \(f\)]\)\>\""}], " ", "<>", 
+         "\"\< and \>\"", "<>", 
+         RowBox[{
+         "MathText", "@", 
+          "\"\<\!\(\*SubscriptBox[\(\[Sigma]\), \(l\)]\)\>\""}]}]},
        {"x", "\"\<\\gls{vfz} coordinates\>\""}
       }], ")"}], "\[Transpose]"}]}], "]"}]], "Input",
  CellChangeTimes->{{3.829238547036787*^9, 3.8292385960806603`*^9}, {
   3.8292386339080563`*^9, 3.829238692949456*^9}, {3.8292387399252534`*^9, 
-  3.829238826867215*^9}, {3.8292388733677387`*^9, 3.8292388860217257`*^9}},
- CellLabel->"In[12]:=",ExpressionUUID->"7722a470-3949-4bb0-b88b-bcb7e7c5ed96"],
+  3.829238826867215*^9}, {3.8292388733677387`*^9, 3.8292389060215826`*^9}, {
+  3.8292390099717464`*^9, 3.829239027302472*^9}, {3.8292390588049335`*^9, 
+  3.8292390650066214`*^9}},
+ CellLabel->"In[18]:=",ExpressionUUID->"7722a470-3949-4bb0-b88b-bcb7e7c5ed96"],
 
 Cell[BoxData["\<\"\\\\begin{equation} \\\\label{eq:squared-exponential}\\n\\t\
 \\\\left.\\\\text{k[}x_i,x_j\\\\text{$|\\\\theta $]=}\\\\sigma \
 _f{}^2\\\\text{Exp[-}\\\\frac{1}{2}\\\\frac{\\\\left(x_i-x_j\\\\right)\\\\\
 mathsf{T}\\\\left(x_i-x_j\\\\right)}{\\\\sigma \
 _l{}^2}\\\\right]\\n\\\\end{equation}\\nwhere $\\\\sigma _f$, $\\\\sigma _l$, \
-$\\\\theta$, and $x$ represent signal standard deviation, length scale or \
-correlation length, unconstrained parameterization of \
-\\!\\(\\*SubscriptBox[\\(\[Sigma]\\), \\(f\\)]\\) and \
-\\!\\(\\*SubscriptBox[\\(\[Sigma]\\), \\(l\\)]\\), and \\\\gls{vfz} \
-coordinates, respectively.\"\>"], "Output",
+$\\\\theta$, and $x$ represent signal standard deviation, length scale (i.e. \
+correlation length), unconstrained parameterization of $\\\\sigma _f$ and $\\\
+\\sigma _l$, and \\\\gls{vfz} coordinates, respectively.\"\>"], "Output",
  CellChangeTimes->{
-  3.829238635642194*^9, {3.829238852158099*^9, 3.8292388929626217`*^9}},
- CellLabel->"Out[12]=",ExpressionUUID->"d8d41b16-920d-40dc-a6c2-fd75da81bb25"]
+  3.829238635642194*^9, {3.829238852158099*^9, 3.829238914462509*^9}, 
+   3.8292390301046352`*^9, 3.8292390742881565`*^9},
+ CellLabel->"Out[18]=",ExpressionUUID->"93a18e94-3f4d-4361-b995-aa5110ddf0cf"]
 }, Open  ]]
 },
 WindowSize->{1152., 585.6},
@@ -335,8 +341,8 @@ Cell[8209, 207, 1115, 32, 53, "Input",ExpressionUUID->"a1f4e4e0-89c9-4ed2-b84f-4
 Cell[9327, 241, 253, 6, 45, "Output",ExpressionUUID->"a9db8abe-58c1-4993-be8d-f643e5de7144"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[9617, 252, 1365, 26, 78, "Input",ExpressionUUID->"7722a470-3949-4bb0-b88b-bcb7e7c5ed96"],
-Cell[10985, 280, 822, 12, 131, "Output",ExpressionUUID->"d8d41b16-920d-40dc-a6c2-fd75da81bb25"]
+Cell[9617, 252, 1664, 33, 126, "Input",ExpressionUUID->"7722a470-3949-4bb0-b88b-bcb7e7c5ed96"],
+Cell[11284, 287, 802, 11, 155, "Output",ExpressionUUID->"93a18e94-3f4d-4361-b995-aa5110ddf0cf"]
 }, Open  ]]
 }
 ]
