@@ -32,7 +32,7 @@
 
 \tableofcontents
 
-\subsection{Use of Interpolation Function}
+\section{Use of Interpolation Function}
 \label{sec:methods:repofn}
 To facilitate easy application of the presented methods, a vectorized, parallelized, MATLAB implementation, \matlab{interp5DOF.m}, is made available in the \vfzorepo{} \cite{bairdFiveDegreeofFreedom5DOF2020} with similar input/output structure to that of built-in MATLAB interpolation functions (e.g. \matlab{scatteredInterpolant()}, \matlab{griddatan()}). A typical function call is as follows: \matlab{ypred = interp5DOF(qm,nA,y,qm2,nA2,method)}. The argument \matlab{y} is a vector of known property values corresponding to the GBs defined by (\matlab{qm},\matlab{nA}), which respectively denote pairs of GB misorientation quaternions and \gls{bp} normals. The result, \matlab{ypred}, is a vector of predicted/interpolated property values corresponding to the \outpt{} \glspl{gb} defined by (\matlab{qm2},\matlab{nA2}). % and can be compared with the true \gls{brk} values (\matlab{ytrue}) via e.g. \matlab{get\_errmetrics.m} and \matlab{parityplot.m}.
 
@@ -40,7 +40,7 @@ Internally, these are converted to \glspl{gbo} and interpolation is performed us
 
 %Additionally, the \gls{gprm} model can be probed at new \glspl{gb} via \matlab{gprmix.m}, which provides both predicted \gls{gbe} and uncertainty standard deviation.
 
-\subsection{Generating Random \glsentrytitlecase{vfzgbo}{long}s} %move to supp?
+\section{Generating Random \glsentrytitlecase{vfzgbo}{long}s} %move to supp?
 \label{sec:methods:rand}
 In addition to the 3 core operations of the \gls{vfz} framework described in \cref{sec:methods:framework}, it will be necessary for our tests, and useful for other applications, to generate random \glspl{gbo} from \gls{5dof} representations. We briefly explain here our process for accomplishing this. 
 
@@ -59,6 +59,42 @@ For the present work we use this procedure to randomly generate \gls{vfzgbo} set
 %
 %\Cref{fig:nndist-vs-setsize} illustrates how the \gls{vfzgbo} average \gls{nn} distance varies with the cardinality of the set (i.e. number of random \glspl{vfzgbo} in the set). Additionally, a fitted model is given. For a specific \num{50000} \gls{vfzgbo} set, the \gls{nn} \gls{gbo} distance is \SI{\nnomega{}}{\degree} (\cref{fig:nnhist-knn-50000}a) while the average 100-th \gls{nn} distance is within \SI{10}{\degree} (\cref{fig:nnhist-knn-50000}b). This indicates that, on average, \outpt{} \glspl{vfzgbo} fall within a typical \gls{gb} correlation length (\SI{10}{\degree} \cite{olmstedSurveyComputedGrain2009}) of \inpt{} \glspl{vfzgbo} in large set sizes.
 %
+
+\section{Choice of Reference \glsxtrshort{gbo} }
+In \cref{sec:methods:framework:vfz}, we describe how $o_{\text{ref}}$ must be chosen such that it does not coincide with a symmetry operator. In other words, it must be chosen such that symmetry operators do not produce identical coordinates. Randomly generating \glspl{vfzgbo} as in \cref{sec:methods:rand} ensures that with infinite precision, \glspl{gb} will not fall \emph{exactly} on a high-symmetry border. In practice with finite precision and pseudo-random number generation, a \gls{vfzgbo} will rarely be situated (within numerical tolerance) on one of these high-symmetry borders. Indeed, the $o_{\text{ref}}$ typically used in this work is randomly generated\footnote{via \matlab{get_ocubo(1,'random',[],10)}, where \matlab{10} is the random number generator seed. } with \gls{gbo} and \gls{5dof} coordinates given in \cref{tab:oref,tab:oref-qm-nA}, respectively.
+
+The existence of degenerate \glspl{vfzgbo} when performing calculations is checked for within the codebase using tolerance comparisons within \matlab{GBdist4.m}, and warnings of degeneracy are output by \matlab{get_octpairs.m}.
+
+A comparison of distances between  $o_{\text{ref}}$ and each of its symmetric images further reveals that there is a single minimum (0 distance) \gls{seo} (which is itself), and that the next closest \gls{seo} has a non-negligible distance of \SI{62.8}{\degree} in the original \gls{gbo} sense. This justifies our usual choice of $o_{\text{ref}}$ as being an appropriate low-symmetry \gls{vfzgbo}.
+
+\begin{figure}
+    \centering
+    \includegraphics{}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{table}
+\centering
+\caption{Approximate \gls{gbo} coordinates for a typical $o_\text{ref}$. }
+\label{tab:oref}
+\begin{tabular}{@{}llllllll@{}}
+\toprule
+o(1)   & o(2)    & o(3)    & o(4)   & o(5)   & o(6)   & o(7)    & o(8)   \\ \midrule
+0.7319 & -0.6330 & -0.2523 & 0.0025 & 0.0939 & 0.8641 & -0.3277 & 0.3704
+\end{tabular}
+\end{table}
+
+\begin{table}
+\centering
+\caption{Approximate misorientation quaternion (qm) and boundary plane normal (nA) coordinates for a typical $o_\text{ref}$. }
+\label{tab:oref-qm-nA}
+\begin{tabular}{@{}lllllll@{}}
+\toprule
+qm(1)   & qm(2)  & qm(3)   & qm(4)   & nA(1)  & nA(2)   & nA(3)  \\ \midrule
+-0.3946 & 0.7845 & -0.4527 & -0.1546 & 0.3661 & -0.9278 & 0.0713
+\end{tabular}
+\end{table}
 
 \section{Euclidean and Arc Length Distances}
 \label{sec:supp:dist-parity}
@@ -114,7 +150,7 @@ Interpolation results for \num{388} and \num{10000} \glspl{gb} are given in \cre
 \end{figure}
 
 \subsection{Octonions used for 1D Arcs}
-The octonions used in \cref{fig:tunnel-50000,fig:kim-interp} are given in \cref{tab:tunnel-AB,tab:tunnel-AB2}, respectively.
+The octonions used in \cref{fig:tunnel-50000,fig:kim-interp} are given in \cref{tab:tunnel-AB,tab:tunnel-AB2}, respectively. The misorientation quaternions and \gls{bp} normal pairs are likewise given in \cref{tab:tunnel-AB-qm-nA,tab:tunnel-AB2-qm-nA}, respectively.
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
 \begin{table*}[]
@@ -129,6 +165,18 @@ B        & 0.4684 & -0.7657 & -0.4100 & -0.1617 & -0.1483 & 0.8204 & -0.3588 & 0
 \end{tabular}
 \end{table*}
 
+\begin{table*}[]
+\centering
+\caption{Approximate misorientation quaternion (qm) and boundary plane normal (nA) coordinates of \glspl{vfzgbo} A and B for the interpolation in \cref{fig:tunnel-50000}. }
+\label{tab:tunnel-AB-qm-nA}
+\begin{tabular}{@{}llllllll@{}}
+\toprule
+Octonion & qm(1) & qm(2) & qm(3) & qm(4) & nA(1) & nA(2) & nA(3) \\ \midrule
+A & -0.0062 & 0.7918 & -0.6011 & -0.1081 & 0.0252 & -0.7972 & 0.6032 \\
+B & -0.6184 & 0.5009 & -0.4177 & -0.4385 & 0.6318 & -0.5847 & -0.5089 \\ \bottomrule
+\end{tabular}
+\end{table*}
+
 \begin{table*}
 \centering
 \caption{Approximate coordinates of \glspl{vfzgbo} $A$ and $B$ used for the \gls{ms} Fe simulation dataset interpolation in \cref{fig:kim-interp}. Individual quaternions of each \gls{gbo} are given in the laboratory reference frame with an assumed \gls{gb} normal pointing in the +z direction, also in the laboratory reference frame.}
@@ -140,6 +188,19 @@ A        & 0.8716 & -0.4124 & -0.1857 & 0.1893  & 0.3146  & 0.8359 & -0.3815 & 0
 B        & 0.4391 & -0.7856 & -0.4142 & -0.1360 & -0.1376 & 0.8082 & -0.3705 & 0.4366 \\ \hline
 \end{tabular}
 \end{table*}
+
+\begin{table*}[]
+\centering
+\caption{Approximate misorientation quaternion (qm) and boundary plane normal (nA) coordinates of \glspl{vfzgbo} A and B for the \gls{ms} Fe simulation dataset interpolation in \cref{fig:kim-interp}. }
+\label{tab:tunnel-AB2-qm-nA}
+\begin{tabular}{@{}llllllll@{}}
+\toprule
+Octonion & qm(1) & qm(2) & qm(3) & qm(4) & nA(1) & nA(2) & nA(3) \\ \midrule
+A & 0.0454 & 0.8303 & -0.5305 & -0.1645 & 0.1676 & -0.7891 & 0.5909 \\
+B & -0.6012 & 0.4780 & -0.4528 & -0.4528 & 0.5774 & -0.5774 & -0.5774 \\ \bottomrule
+\end{tabular}
+\end{table*}
+
 %
 %The corresponding \gls{5dof} coordinates are:
 \section{Mitigating Distance Overestimation} \label{sec:overestimation}
@@ -297,7 +358,7 @@ As illustrated in \cref{fig:olmsted-Ni-loocv}, \gls{loocv} interpolation results
 
 \newpage
 \clearpage %make sure figures don't go past glossaries, bibliography, etc.
-\printglossaries
+\printglossary[title={Abbreviations}]
 %need to manually clear cached files & logs in overleaf to get updated abbreviations to appear
 
 \newpage
