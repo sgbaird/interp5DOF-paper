@@ -113,7 +113,7 @@ The core operations of the \gls{vfz} framework are:
 \Gls{3dof} \glspl{fz} have typically been defined using linear inequalities (e.g. the orientation \cite{heinzRepresentationOrientationDisorientation1991} and misorientation \cite{grimmerUniqueDescriptionRelative1980,heinzRepresentationOrientationDisorientation1991} \glspl{fz}). Instead of using linear inequalities\footnote{If desired, linear inequalities can be obtained for a \gls{vfz} by determining a Voronoi tessellation's junction points (similar to what is shown in \cref{fig:voronoi} by e.g. \matlab{voronoin()}), transforming to 6D Cartesian coordinates via a \gls{svd} transformation %(\cref{sec:app:bary})
 and defining the bounded region by e.g. MATLAB FEX function \matlab{vert2lcon.m}.}, we take a numerical approach to define what we will call a \gls{vfz}.
 
-To define a \gls{vfz}, a random, fixed, low-symmetry reference \gls{gbo} is chosen ($o_{\text{ref}}$) and for our use of \glspl{gbo}, the \gls{vfz} is defined as the region of $\mathbb{S}^7$ (the unit 7-sphere in 8 dimensions) closer to $o_{\text{ref}}$ than any of its symmetric images\footnote{We also refer to lower-dimensional representations of the 8D Cartesian \gls{vfz} as \glspl{vfz} (described in \cref{sec:methods:framework:proj}) and describe which dimensionality we are referring to as appropriate. }. It is important to note that $o_{\text{ref}}$ cannot coincide with symmetry operators, otherwise there will be degenerate representations of each \gls{gbo}. Conveniently, use of the \gls{vfz} does not require its explicit construction. Rather, practical calculations require only the selection of the single point $o_{\text{ref}}$ (which completes the definition of the \gls{vfz}), followed by mapping of query points into the \gls{vfz} by comparison of their \glspl{seo} with $o_{\text{ref}}$.
+To define a \gls{vfz}, a random, fixed, low-symmetry reference \gls{gbo} is chosen ($o_{\text{ref}}$) and for our use of \glspl{gbo}, the \gls{vfz} is defined as the region of $\mathbb{S}^7$ (the unit 7-sphere in 8 dimensions) closer to $o_{\text{ref}}$ than any of its symmetric images\footnote{We also refer to lower-dimensional representations of the 8D Cartesian \gls{vfz} as \glspl{vfz} (described in \cref{sec:methods:framework:proj}) and describe which dimensionality we are referring to as appropriate. }. It is important to note that $o_{\text{ref}}$ cannot coincide with symmetry operators, otherwise there will be degenerate representations of each \gls{gbo}. Conveniently, use of the \gls{vfz} does not require its explicit construction. Rather, practical calculations require only the selection of the single point $o_{\text{ref}}$ (which completes the definition of the \gls{vfz}), followed by mapping of query points into the \gls{vfz} by comparison of their \glspl{seo} with $o_{\text{ref}}$. \Gls{gbo} and \gls{5dof} coordinates for the typical $o_{\text{ref}}$ used in this work are given in \cref{tab:oref,tab:oref-qm-nA}, respectively. See \cref{sec:oref} for further discussion on choice of reference \gls{vfzgbo}.
 
 %maybe this portion could be cut or moved to supp without significant loss of information? The figure does a pretty good job by itself I think. Or maybe some others portions. Just a lot to process perhaps.
 To illustrate the process of mapping points into the \gls{vfz}, we describe a 3D Cartesian analogue (\cref{fig:voronoi}) to a 7D Cartesian non-degenerate (i.e. U(1) degeneracy removed) representation of a \gls{vfz}, which produces the \gls{sst} \cite{patalaSymmetriesRepresentationGrain2013} for the $O_h$ point group. A set of \num{500} points ($p_i, i\in[1,500]$) randomly scattered on the surface of the 2-sphere comprise the data (\startpt{} in \cref{fig:voronoi}a). A random point, $p_{\text{ref}}$, also on the surface of the 2-sphere, is chosen as the reference point (\refpt{}). In this illustration, $O_h$ or $m\bar{3}m$ point group rotations are used as symmetry operators, $S_j,\ j\in[1,N_p]$, where $N_p$ is the twice the number of proper rotations due to inversion symmetry and $N_p = 48$ for the $O_h$  point group. For each data point, \num{48} symmetrically equivalent representations ($p^{\text{sym}}_{i,j} = S_j(p_i),\ j\in[1,24]$) are produced by applying each of the relevant symmetry operators. After calculating the Euclidean distance between $p_{\text{ref}}$ and $p^{\text{sym}}_{i,j}$, the point ($p^{*}_i$) closest to $p_{\text{ref}}$ is chosen and retained as the unique representative of $p^{\text{sym}}_{i,j}$. As illustrated in \cref{fig:voronoi}a, the projected points $p^{*}_i$ (dark blue points) all fall in the \gls{vfz} without ever having to construct or define it analytically. We call this group of projected points a \textit{\gls{vfz} point set}. Note also that there is only one $p^{*}_i$ in the \gls{vfz} for each $p^{\text{sym}}_{i,j}$ (see \cref{fig:voronoi}b).
@@ -213,7 +213,7 @@ Dimensionality & 8D Cartesian & 6*/7*/8D Cartesian \\
 Bounded by \gls{fz} & No & Yes \\
 % Euclidean Approximation Valid & No & Yes \\
 Pairwise Distance Complexity & $O(N_p^2L^2)$ & $O(N_p^2L)$ \\
-Rotation Convention & Passive & Active \\
+Misorientation Convention & $q_m = q_A{q_B}^{-1}$ & $q_m = {q_A}^{-1}q_B$ \\
 \bottomrule
 \end{tabular}
 \label{tab:closed-mesh-comparison}
@@ -279,6 +279,7 @@ Accuracy of \gls{gpr}, barycentric, \gls{nn}, and \gls{idw} interpolation method
 
 All of the methods permit successful interpolation, and the highest density region in all cases falls squarely on the parity line. The \gls{gpr} and barycentric results show a slight asymmetry such that low energy values are overpredicted more often than they are underpredicted. The width of the point clouds provides a qualitative indication of the dispersion in the prediction errors, and the logarithmically scaled color indicates the frequency of errors of a given magnitude. As can be seen, the vast majority of errors are very small (the highest density---yellow region---is concentrated on the line of parity). Quantitative measures of the overall accuracy are presented for \gls{rmse} (\cref{tab:rmse-error-comparison}) and \gls{mae} (\cref{tab:mae-error-comparison}), and will be discussed in detail below (see \matlab{get\_errmetrics.m}).
 
+%update in excel first or replace with pgfmath commands
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
 \begin{table*}[!ht]
@@ -425,7 +426,11 @@ and that \glspl{seo} only need to be considered once in a \gls{gb} pair, $O(N_p^
 
 Empirically, to compute a pairwise-distance matrix for $L$ = \num{50000} \glspl{gb} using the \vfzorepo{} \cite{bairdFiveDegreeofFreedom5DOF2020}, the full $O(N_p^2L)$ symmetrization operations take about \SI{\symtime{}}{seconds} $\times\ 6$ cores $= \SI{456}{seconds}$ of CPU time, whereas the subsequent pairwise-distance computation is $O_{\text{pd}}(L^2)$ and takes approximately \SI{10}{seconds} for a \num{50000} $\times$ \num{50000} matrix. Even though $O(N_p^2L) \ll O_{\text{pd}}(L^2)$, the symmetrization step takes far more time than the pairwise distance calculation (even for large $L$) because of the cost of generating \glspl{seo}. Because Euclidean distances---which can be computed faster than trigonometric inverse functions---are employed, and built-in, vectorized MATLAB functions are utilized, there is a further speed enhancement in the \gls{vfzgbo} approach. % $O(N^2L)$ (this work) vs. $O(N^4L^2$ (\gls{gbo} paper)
 %
-\subsection{Interpolation Along a 1D Arc} \label{sec:results:vis:arc}
+\subsection{Visualizations}
+\label{sec:results:vis}
+Visual illustrations of property predictions along a 1D arc and within a fixed low-\gls{gbe}/low-$\Sigma$ misorientation (varying \gls{bp} normal) are given in \cref{sec:results:vis:arc,sec:results:vis:mis}, respectively.
+
+\subsubsection{Interpolation Along a 1D Arc} \label{sec:results:vis:arc}
 %We present interpolation results plotted in a 1D arc in the full \gls{5dof} \gls{gb} space (\cref{sec:results:vis:arc}).
 %
 To provide a visual illustration of the property predictions, \cref{fig:tunnel-50000} shows the predicted \gls{gbe} for each of the four interpolation methods as a function of distance along a 1D arc ($\overline{AB}$) between two \glspl{vfzgbo}, $A$ and $B$. Approximate \gls{gbo} coordinates for $A$ and $B$ are given in \cref{tab:tunnel-AB}, and each intermediate point between $A$ and $B$ resides on the surface of a hypersphere. Additionally, the misorientation quaternion and \gls{bp} normal pairs are given in \cref{tab:tunnel-AB-qm-nA}. The \num{150} intermediate points were obtained using \gls{oslerp} \cite{francisGeodesicOctonionMetric2019}. Each model used its own set of \num{50000} random \inpt{} \glspl{vfzgbo} with \gls{gbe} sampled via the \gls{brk} validation function. The two \glspl{vfzgbo} were chosen by taking the furthest apart pair out of \num{20000} \glspl{vfzgbo} which thus approximates the largest dimension of the \gls{vfz} where each endpoint is close to the true \gls{vfz} exterior.
@@ -472,6 +477,17 @@ We believe this is the first\footnote{\Gls{oslerp} results from \citet{francisGe
 %
 %Additionally, such visualizations suggest the ability to estimate numerical derivatives or gradients of \gls{gb} properties without being restricted to a \gls{gb} subspace (e.g. \gls{mfz} or \gls{bpfz}) which can be a useful mathematical construct for the \gls{gb} community. For example, steepest descent paths and all local \gls{gbe} minima can be estimated and used in grain growth simulations. In such contexts, use of ensembled \gls{vfzgbo} interpolation or data augmentation may be necessary to mitigate discontinuity artifacts when crossing the exterior of a \gls{vfz} as discussed in \cref{sec:methods:framework:vfz-dist}. We plan to explore this in future work.
 %
+
+\subsubsection{Low-$\Sigma$/Low-\glsxtrshort{gbe} Fixed Misorientation}
+The misorientation is fixed using the minimum \gls{ct} $\Sigma$3 \gls{gb} while the \gls{bp} normal is varied across the unit-sphere, for which \gls{gbe} is sampled via a \gls{gpr} model trained on \num{50000} \inpt{} points. \Glspl{gbe} sampled directly from the \gls{brk} validation function are also provided.
+
+\begin{figure}
+    \centering
+    \includegraphics{}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
 \subsection{Literature Datasets}
 \label{sec:results:simulation}
 
@@ -598,6 +614,7 @@ In addition to \gls{gpr}, a \gls{gprm} model (\cref{fig:kim-interp-teach}) based
 %
 %Finally, datasets where multiple metastable \glspl{gbe} (e.g. 3-10 repeats) are provided for each \gls{gb} will likely greatly improve the performance of the \gls{gpr} model in predicting either the most likely metastable \gls{gbe} (when all \glspl{gbe} are considered) or the true minimum \gls{gbe} (when only the minimum \gls{gbe} is considered for each \gls{gb}) and may even negate the need for a \gls{gprm} approach. Thus, it is suggested that, where feasible, future large-scale \gls{gb} bicrystal simulation studies will report all property data for repeated trial runs rather than a single trial run or a single value from a set of trial runs. Ideally, data for the three additional microscopic \glspl{dof} for \glspl{gb} (which falls into the category of epistemic uncertainty in this work) would also be included. We believe it is likely that minimum energy paths (i.e. paths of steepest descent) in the \gls{gbe} landscape depend on both macroscopic and microscopic \glspl{dof} (in total, 8DOF) and could offer a more holistic view of \gls{gb} behavior that better mimics and explains experimental grain growth observations. Indeed, it has been experimentally observed that at least some \gls{gb} migration mechanisms involve structural transformations between equilibrium \glspl{gb} via metastable states \cite{weiDirectImagingAtomistic2021}.
 %
+
 \section{Conclusion} \label{sec:conclusion}
 In this work, we presented the \gls{vfz} framework for (i) computing distances between \glspl{gb} and (ii) predicting the properties of \glspl{gb} from existing measurements.
 We found that distance calculations in the \gls{vfz} framework are dramatically more computationally efficient %($O(N_p^2L)$)
@@ -618,7 +635,7 @@ In future work, we believe it will be instructive to probe properties of a \gls{
 We anticipate that the \gls{vfz} framework and corresponding implementation will benefit numerous applications related to \gls{gb} structure and properties, including facilitating and understanding \gls{gb} structure-property models, enabling efficient surrogate modeling of \gls{gb} properties, and larger scale iterative simulations that require repetitive evaluation of computationally expensive structure-property models.
 
 % \newpage
-\printglossary[title={Abbreviations}]
+\printglossary[title={List of Acronyms}]
 %\printabbreviations
 %need to manually clear cached files & logs in overleaf to get new abbreviations to appear
 
@@ -638,19 +655,19 @@ The authors thank Ian Chesser, Toby Francis, Victoria Baird, Brandon Snow, and J
 \crefalias{subsection}{appsec}
 \crefalias{subsubsection}{appsec}
 
-\section{Active vs. Passive Convention}
+\section{Misorientation Convention}
 \label{sec:app:convention}
-Misorientation quaternions are represented in the active sense\footnote{The passive convention is used in \cite{francisGeodesicOctonionMetric2019}}:
+Misorientation quaternions are given by\footnote{The inverse of this convention is used in \cite{francisGeodesicOctonionMetric2019}}:
 \begin{equation}
     q_m = {q_A}^{-1}q_B
 \end{equation}
-where $q_m$, $q_A$, and $q_B$ represent the misorientation quaternion, orientation quaternion of grain A in the sample frame, and orientation quaternion of grain B in the sample frame, respectively. The $^{-1}$ operator denotes a unit quaternion inverse (identical to conjugation of a unit quaternion). Quaternion multiplication is given by equation 23 of \cite{rowenhorstConsistentRepresentationsConversions2015}
+where $q_m$, $q_A$, and $q_B$ represent the misorientation quaternion, orientation quaternion of grain A in the sample frame, and orientation quaternion of grain B in the sample frame, respectively. The $^{-1}$ operator denotes a unit quaternion inverse (identical to conjugation of a unit quaternion). Quaternion multiplication is given by equation 23 of \cite{rowenhorstConsistentRepresentationsConversions2015}:
 \begin{equation}
 p q \equiv\left(p_{0} q_{0}-\mathbf{p} \cdot \mathbf{q}, q_{0} \mathbf{p}+p_{0} \mathbf{q}+P \mathbf{p} \times \mathbf{q}\right)
 \end{equation}
 where $q_0$ and $p_0$ are scalar components of the quaternions, and $\mathbf{q}$ and $\mathbf{p}$ are the vector components.
 
-In this work, we use the convention that $P=1$ throughout the various operations in the \vfzorepo{} ($P \equiv $ \matlab{epsijk}) and highly encourage interested readers to refer to \citet{rowenhorstConsistentRepresentationsConversions2015} to understand the redefined versions of quaternion multiplication, quaternion rotation, nuances associated with use of active vs. passive conventions, etc. \Gls{bp} unit normals are expressed pointing away from grain A and in the reference frame of grain A (i.e. the outward-pointing normal convention).
+In this work, we use the convention that $P=1$ throughout the various operations in the \vfzorepo{} ($P \equiv $ \matlab{epsijk}) and highly encourage interested readers to refer to \citet{rowenhorstConsistentRepresentationsConversions2015} to understand the redefined versions of quaternion multiplication, quaternion rotation, etc. \Gls{bp} unit normals are expressed pointing away from grain A and in the reference frame of grain A (i.e. the outward-pointing normal convention).
 
 % \section{Detailed Barycentric Interpolation Method}
 % \label{sec:app:bary}
