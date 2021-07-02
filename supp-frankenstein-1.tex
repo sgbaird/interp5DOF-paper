@@ -61,17 +61,18 @@ For the present work we use this procedure to randomly generate \gls{vfzgbo} set
 %
 
 \section{Choice of Reference \glsxtrshort{gbo} }
+\label{sec:oref}
 In \cref{sec:methods:framework:vfz}, we describe how $o_{\text{ref}}$ must be chosen such that it does not coincide with a symmetry operator. In other words, it must be chosen such that symmetry operators do not produce identical coordinates. Randomly generating \glspl{vfzgbo} as in \cref{sec:methods:rand} ensures that with infinite precision, \glspl{gb} will not fall \emph{exactly} on a high-symmetry border. In practice with finite precision and pseudo-random number generation, a \gls{vfzgbo} will rarely be situated (within numerical tolerance) on one of these high-symmetry borders. Indeed, the $o_{\text{ref}}$ typically used in this work is randomly generated\footnote{via \matlab{get_ocubo(1,'random',[],10)}, where \matlab{10} is the random number generator seed. } with \gls{gbo} and \gls{5dof} coordinates given in \cref{tab:oref,tab:oref-qm-nA}, respectively.
 
 The existence of degenerate \glspl{vfzgbo} when performing calculations is checked for within the codebase using tolerance comparisons within \matlab{GBdist4.m}, and warnings of degeneracy are output by \matlab{get_octpairs.m}.
 
-A comparison of distances between  $o_{\text{ref}}$ and each of its symmetric images further reveals that there is a single minimum (0 distance) \gls{seo} (which is itself), and that the next closest \gls{seo} has a non-negligible distance of \SI{62.8}{\degree} in the original \gls{gbo} sense. This justifies our usual choice of $o_{\text{ref}}$ as being an appropriate low-symmetry \gls{vfzgbo}.
+A comparison of distances between  $o_{\text{ref}}$ and each of its symmetric images further reveals that there is a single minimum (0 distance) \gls{seo} (the identity operator), and that the next closest \gls{seo} has a non-negligible distance of \SI{62.8}{\degree} in the original \gls{gbo} sense \cref{fig:oref-seo-dist}. This justifies our usual choice of $o_{\text{ref}}$ as being an appropriate low-symmetry \gls{vfzgbo} to define a \gls{vfz}.
 
 \begin{figure}
     \centering
-    \includegraphics{}
-    \caption{Caption}
-    \label{fig:my_label}
+    \includegraphics{figures/oref-seo-dist.png}
+    \caption{ Histogram of \gls{gbo} distances for all \glspl{seo} for the typical reference octonion ($o_\text{ref}$) used in this work (with coordinates given in \cref{tab:oref}) relative to $o_\text{ref}$. A single minimum distance \gls{seo} (the identity symmetry operator) is found, with a non-negligible next largest distance, justifying this \gls{gb} as an appropriate choice of reference. }
+    \label{fig:oref-seo-dist}
 \end{figure}
 
 \begin{table}
@@ -358,7 +359,7 @@ As illustrated in \cref{fig:olmsted-Ni-loocv}, \gls{loocv} interpolation results
 
 \newpage
 \clearpage %make sure figures don't go past glossaries, bibliography, etc.
-\printglossary[title={Abbreviations}]
+\printglossary[title={List of Acronyms}]
 %need to manually clear cached files & logs in overleaf to get updated abbreviations to appear
 
 \newpage
