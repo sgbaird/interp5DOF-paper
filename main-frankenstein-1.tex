@@ -182,7 +182,7 @@ However, when compared with the traditional \gls{gbo} distance \cite{francisGeod
     \label{fig:dist-ensemble-k1-2-10-20}
 \end{figure*}
 
-This is a limitation of the \gls{vfz} framework, which generates a \gls{vfz} with low-symmetry \glspl{gb} at the borders in contrast to typical \glspl{fz} \cite{patalaSymmetriesRepresentationGrain2013,homerGrainBoundaryPlane2015}. While defining a \gls{fz} with high-symmetry \glspl{gb} at the borders (especially mirror-symmetry \glspl{gb}) will certainly increase interpolation accuracy, the favorable interpolation results presented in this work are obtained because overestimation is infrequent within a small correlation length (e.g. \SI{10}{\degree} \cite{olmstedSurveyComputedGrain2009}. %, which many \glspl{nn} fall within for a \num{50000} \gls{vfzgbo} set, see \cref{fig:nnhist-knn-50000}b), and underestimation is non-existent within numerical precision.
+This is a limitation of the \gls{vfz} framework, which generates a \gls{vfz} with low-symmetry \glspl{gb} at the borders in contrast to typical \glspl{fz} \cite{patalaSymmetriesRepresentationGrain2013,homerGrainBoundaryPlane2015}. While defining a \gls{fz} with high-symmetry \glspl{gb} at the borders (especially mirror-symmetry \glspl{gb}) will certainly increase interpolation accuracy, the favorable interpolation results presented in this work are obtained because overestimation is infrequent within a small correlation length (e.g. \SI{10}{\degree} \cite{olmstedSurveyComputedGrain2009,olmstedNewClassMetrics2009}. %, which many \glspl{nn} fall within for a \num{50000} \gls{vfzgbo} set, see \cref{fig:nnhist-knn-50000}b), and underestimation is non-existent within numerical precision.
 We expect that smaller datasets will exhibit more frequent overestimation than larger datasets.
 % the rest of this section may be more appropriate for supp
 See \cref{sec:overestimation} for details on how overestimation imposes erroneous "sparseness" and how this limitation can be overcome through ensemble or data augmentation methods.
@@ -257,7 +257,7 @@ In addition to performing validation tests of the \gls{vfz} framework, we also d
 
 \section{Results and Discussion} \label{sec:results}
 
-To illustrate the utility of the \gls{vfz} framework for one application, namely interpolation, we compare the (i) accuracy (\cref{sec:results:accuracy}), and (ii) efficiency (\cref{sec:results:efficiency}) of the four previously described interpolation methods implemented over the \gls{vfz} with each other and with existing methods from the literature (see \cref{sec:intro}). For these tests, we use the \gls{5dof} \gls{gb} energy function by \citet{bulatovGrainBoundaryEnergy2014} (trained on Ni bicrystal simulation data \cite{olmstedSurveyComputedGrain2009}) as a validation function which we refer to as the \gls{brk} function. 
+To illustrate the utility of the \gls{vfz} framework for one application, namely interpolation, we compare the (i) accuracy (\cref{sec:results:accuracy}), and (ii) efficiency (\cref{sec:results:efficiency}) of the four previously described interpolation methods implemented over the \gls{vfz} with each other and with existing methods from the literature (see \cref{sec:intro}). For these tests, we use the \gls{5dof} \gls{gb} energy function by \citet{bulatovGrainBoundaryEnergy2014} (trained on Ni bicrystal simulation data \cite{olmstedSurveyComputedGrain2009}) as a validation function which we refer to as the \gls{brk} function and provide visualizations in 1D and 2D subspaces of \gls{5dof} \gls{gbc} (\cref{sec:results:vis}).
 
 Following this validation study, we also demonstrate \gls{vfzgbo} \gls{gpr} interpolation applied to a large, noisy, \gls{ms} Fe bicrystal simulation dataset \cite{kimPhasefieldModeling3D2014} and a small, low-noise, \gls{ms} Ni bicrystal simulation dataset \cite{olmstedSurveyComputedGrain2009} (\cref{sec:results:simulation:compare}), to evaluate performance on real \gls{gb} property data.
 
@@ -479,14 +479,15 @@ We believe this is the first\footnote{\Gls{oslerp} results from \citet{francisGe
 %
 
 \subsubsection{Low-$\Sigma$/Low-\glsxtrshort{gbe} Fixed Misorientation}
-The misorientation is fixed using the minimum \gls{ct} $\Sigma$3 \gls{gb} while the \gls{bp} normal is varied across the unit-sphere, for which \gls{gbe} is sampled via a \gls{gpr} model trained on \num{50000} \inpt{} points. \Glspl{gbe} sampled directly from the \gls{brk} validation function are also provided.
+\label{sec:results:vis:mis}
+The misorientation is fixed to the misorientation of the minimum \gls{gbe} \gls{ct} $\Sigma3$ [111] \gls{gb} from the Olmsted Ni dataset while the \gls{bp} normal is varied across the unit-sphere. \Gls{gbe} is sampled via a \gls{gpr} model trained on \num{50000} \inpt{} points (\cref{fig:ni-gpr-brk}a), and \glspl{gbe} sampled directly from the \gls{brk} validation function are also provided (\cref{fig:ni-gpr-brk}b). Some artifacts can be seen in the \gls{gpr} model which are likely due to distance overestimation (\cref{sec:methods:framework:vfz-dist}) and can be addressed via e.g. ensemble methods. For the \num{20000} points plotted in \cref{fig:ni-gpr-brk}, the \gls{rmse} is \SI{\nigprbrkrmse{}}{\J\per\square\m} which is larger than the overall model performance of \SI{\gprrmse{}}{\J\per\square\m} (\cref{tab:rmse-error-comparison}). This is consistent with an overall expectation that model performance worsens near sharp features or discontinuities in the model. Similarly, overestimation of the $\Sigma3$ cusp is present, consistent with poorer low \gls{gbe} predictions in \cref{fig:brkparity50000}.
 
-\begin{figure}
+\begin{figure*}
     \centering
-    \includegraphics{}
-    \caption{Caption}
-    \label{fig:my_label}
-\end{figure}
+    \includegraphics{figures/ni-gpr-brk.png}
+    \caption{\Gls{gbe} for various \gls{bp} normals using the fixed misorientation of the minimum \gls{gbe} \gls{ct} $\Sigma3$ [111] \gls{gb} for Ni are sampled (a) from a \gls{gpr} model trained on \num{50000} \gls{brk} \inpt{} points and (b) directly from the \gls{brk} validation function. }
+    \label{fig:ni-gpr-brk}
+\end{figure*}
 
 \subsection{Literature Datasets}
 \label{sec:results:simulation}
@@ -604,7 +605,7 @@ In addition to \gls{gpr}, a \gls{gprm} model (\cref{fig:kim-interp-teach}) based
 \begin{figure*}
     \centering
     \includegraphics{kim-interp.png}
-    \caption{Interpolation results for a large Fe simulation database \cite{kimPhasefieldModeling3D2014} using \num{46883} \inpt{} \glspl{gb} and \num{11721} \outpt{} \glspl{gb} in an 80\%/20\% split and a \gls{gprm} model to better approximate low \glspl{gbe}. Use of a \gls{gprm} model predicts low \gls{gbe} better than the standard \gls{gpr} model (compare with \cref{fig:kim-interp-teach}d). (a) Hexagonally binned parity plot of the \gls{gpr} mixing model with \gls{rmse} and \gls{mae} of \SIlist{0.055035;0.039185}{\J\per\square\meter}, respectively, relative to typical, constant average models of \SIlist{0.0854;0.0617}{\joule\per\square\meter}, respectively. (b) Predictions of \gls{gprm} model (blue circles) as a function of distance along a 1D arc ($\overline{AB}$) between two \glspl{vfzgbo} ($A$ and $B$). }
+    \caption{Interpolation results for a large Fe simulation database \cite{kimPhasefieldModeling3D2014} using \num{46883} \inpt{} \glspl{gb} and \num{11721} \outpt{} \glspl{gb} in an 80\%/20\% split and a \gls{gprm} model to better approximate low \glspl{gbe}. Use of a \gls{gprm} model predicts low \gls{gbe} better than the standard \gls{gpr} model (compare with \cref{fig:kim-interp-teach}d). (a) Hexagonally binned parity plot of the \gls{gpr} mixing model with \gls{rmse} and \gls{mae} of \SIlist{0.054085;0.038599}{\J\per\square\meter}, respectively, relative to typical, constant average models of \SIlist{0.0854;0.0617}{\joule\per\square\meter}, respectively. (b) Predictions of \gls{gprm} model (blue circles) as a function of distance along a 1D arc ($\overline{AB}$) between two \glspl{vfzgbo} ($A$ and $B$). }
     \label{fig:kim-interp}
 \end{figure*}
 %
@@ -619,7 +620,7 @@ In addition to \gls{gpr}, a \gls{gprm} model (\cref{fig:kim-interp-teach}) based
 In this work, we presented the \gls{vfz} framework for (i) computing distances between \glspl{gb} and (ii) predicting the properties of \glspl{gb} from existing measurements.
 We found that distance calculations in the \gls{vfz} framework are dramatically more computationally efficient %($O(N_p^2L)$)
 than traditional methods %($O(N_p^4L^2)$)
-at the expense of infrequent, large distance overestimation which can be addressed through ensemble techniques at a small computational cost as discussed in \cref{sec:methods:framework:vfz-dist}.
+at the expense of infrequent, large distance overestimation which can be addressed through ensemble techniques at a small computational cost.
 
 %The increase of throughput of distance computations and the development of a \gls{5dof} \gls{vfz} with continuous coordinates enabled us to explore the nature of a \gls{5dof} \gls{fz}. We found that symmetrized \gls{nn} distances are Gaussian and plotted these as a function of set size. We determined the maximum dimension of an $O_h$ \gls{vfz} to be $\sim$\SI{60}{\degree}.
 %
@@ -655,19 +656,19 @@ The authors thank Ian Chesser, Toby Francis, Victoria Baird, Brandon Snow, and J
 \crefalias{subsection}{appsec}
 \crefalias{subsubsection}{appsec}
 
-\section{Misorientation Convention}
+\section{Rotation Conventions}
 \label{sec:app:convention}
-Misorientation quaternions are given by\footnote{The inverse of this convention is used in \cite{francisGeodesicOctonionMetric2019}}:
-\begin{equation}
+Misorientation quaternions are given by\footnote{The inverse of this convention, $q_m = q_A{q_B}^{-1}$ is used in \cite{francisGeodesicOctonionMetric2019}}:
+\begin{equation} \label{eq:mis-convention}
     q_m = {q_A}^{-1}q_B
 \end{equation}
 where $q_m$, $q_A$, and $q_B$ represent the misorientation quaternion, orientation quaternion of grain A in the sample frame, and orientation quaternion of grain B in the sample frame, respectively. The $^{-1}$ operator denotes a unit quaternion inverse (identical to conjugation of a unit quaternion). Quaternion multiplication is given by equation 23 of \cite{rowenhorstConsistentRepresentationsConversions2015}:
-\begin{equation}
+\begin{equation} \label{eq:quat-mult}
 p q \equiv\left(p_{0} q_{0}-\mathbf{p} \cdot \mathbf{q}, q_{0} \mathbf{p}+p_{0} \mathbf{q}+P \mathbf{p} \times \mathbf{q}\right)
 \end{equation}
 where $q_0$ and $p_0$ are scalar components of the quaternions, and $\mathbf{q}$ and $\mathbf{p}$ are the vector components.
 
-In this work, we use the convention that $P=1$ throughout the various operations in the \vfzorepo{} ($P \equiv $ \matlab{epsijk}) and highly encourage interested readers to refer to \citet{rowenhorstConsistentRepresentationsConversions2015} to understand the redefined versions of quaternion multiplication, quaternion rotation, etc. \Gls{bp} unit normals are expressed pointing away from grain A and in the reference frame of grain A (i.e. the outward-pointing normal convention).
+In this work, we use the convention that $P=1$ throughout the various operations in the \vfzorepo{} ($P \equiv $ \matlab{epsijk}). Setting $P=-1$ changes the choice of reference frame. We encourage interested readers to refer to \citet{rowenhorstConsistentRepresentationsConversions2015} to understand the redefined versions of quaternion multiplication, quaternion rotation, etc. \Gls{bp} unit normals are expressed pointing away from grain A and in the reference frame of grain A (i.e. the outward-pointing normal convention).
 
 % \section{Detailed Barycentric Interpolation Method}
 % \label{sec:app:bary}
