@@ -296,10 +296,10 @@ Method &
   \thead{Cst, Avg \gls{rmse} \\   (\SI{}{\J\per\square\meter})} &
   \thead{\gls{rmse} $\downarrow$ \\   (\SI{}{\J\per\square\meter})} &
   \thead{\gls{rmse}   $\downarrow$ \\ (\%)} \\ \midrule
-\gls{gpr}   & \glsxtrshort{vfz} & \glsxtrshort{brk} & \num{50000} & \num{0.0218} & \num{0.1283} & \num{0.1065} & \num{83}   \\
-Barycentric & \glsxtrshort{vfz} & \glsxtrshort{brk} & \num{50000} & \num{0.0238} & \num{0.1283} & \num{0.1045} & \num{81.4} \\
-\gls{idw}   & \glsxtrshort{vfz} & \glsxtrshort{brk} & \num{50000} & \num{0.0356} & \num{0.1283} & \num{0.0927} & \num{72.3} \\
-\gls{nn}    & \glsxtrshort{vfz} & \glsxtrshort{brk} & \num{50000} & \num{0.0445} & \num{0.1283} & \num{0.0838} & \num{65.3} \\ \bottomrule
+\gls{gpr}   & \glsxtrshort{vfz} & \glsxtrshort{brk} & \num{50000} & \num{\gprrmse{}} & \num{\avgrmse{}} & \absReduction{\gprrmse}{\avgrmse} & \percReduction{\gprrmse}{\avgrmse}   \\
+Barycentric & \glsxtrshort{vfz} & \glsxtrshort{brk} & \num{50000} & \num{\baryrmse{}} & \num{\avgrmse{}} & \absReduction{\baryrmse}{\avgrmse} & \percReduction{\baryrmse}{\avgrmse} \\
+\gls{idw}   & \glsxtrshort{vfz} & \glsxtrshort{brk} & \num{50000} & \num{\idwrmse{}} & \num{\avgrmse{}} & \absReduction{\idwrmse}{\avgrmse} & \percReduction{\idwrmse}{\avgrmse} \\
+\gls{nn}    & \glsxtrshort{vfz} & \glsxtrshort{brk} & \num{50000} & \num{\nnrmse{}} & \num{\avgrmse{}} & \absReduction{\nnrmse}{\avgrmse} & \percReduction{\nnrmse}{\avgrmse} \\ \bottomrule
 \end{tabular}
 \end{table*}
 
@@ -319,10 +319,10 @@ Method &
   \thead{Cst, Avg \gls{mae} \\   (\SI{}{\J\per\square\meter})} &
   \thead{\gls{mae} $\downarrow$ \\   (\SI{}{\J\per\square\meter})} &
   \thead{\gls{mae}   $\downarrow$ \\ (\%)} \\ \midrule
-\gls{gpr}   & \glsxtrshort{vfz} & \glsxtrshort{brk} & \num{50000} & \num{0.0145} & \num{0.0955} & \num{0.081}  & \num{84.8} \\
-Barycentric & \glsxtrshort{vfz} & \glsxtrshort{brk} & \num{50000} & \num{0.0145} & \num{0.0955} & \num{0.081}  & \num{84.8} \\
-\gls{idw}   & \glsxtrshort{vfz} & \glsxtrshort{brk} & \num{50000} & \num{0.0225} & \num{0.0955} & \num{0.073}  & \num{76.4} \\
-\gls{nn}    & \glsxtrshort{vfz} & \glsxtrshort{brk} & \num{50000} & \num{0.0307} & \num{0.0955} & \num{0.0648} & \num{67.9} \\ \bottomrule
+\gls{gpr}   & \glsxtrshort{vfz} & \glsxtrshort{brk} & \num{50000} & \num{\gprmae{}} & \num{\avgmae{}} & \absReduction{\gprmae}{\avgmae}  & \percReduction{\gprmae}{\avgmae} \\
+Barycentric & \glsxtrshort{vfz} & \glsxtrshort{brk} & \num{50000} & \num{\barymae{}} & \num{\avgmae{}} & \absReduction{\barymae}{\avgmae}  & \percReduction{\barymae}{\avgmae} \\
+\gls{idw}   & \glsxtrshort{vfz} & \glsxtrshort{brk} & \num{50000} & \num{\idwmae{}} & \num{\avgmae{}} & \absReduction{\idwmae}{\avgmae}  & \percReduction{\idwmae}{\avgmae} \\
+\gls{nn}    & \glsxtrshort{vfz} & \glsxtrshort{brk} & \num{50000} & \num{\nnmae{}} & \num{\avgmae{}} & \absReduction{\nnmae}{\avgmae} & \percReduction{\nnmae}{\avgmae} \\ \bottomrule
 \end{tabular}
 \end{table*}
 
@@ -353,7 +353,7 @@ While the barycentric interpolation error is always higher than \gls{gpr} for th
 \begin{figure}[!ht]
     \centering
     \includegraphics{figures/tunnel-50000.png}
-    \caption{Predictions of \gls{gpr} (blue circles), barycentric (red circles), \gls{nn} (magenta circles), and \gls{idw} (green circles) as a function of distance along a 1D arc ($\overline{AB}$) between two \glspl{vfzgbo} ($A$ and $B$). The true, underlying \gls{brk} function is also shown (black line). \num{50000} random \inpt{} \glspl{vfzgbo} were generated and used for each of the models. \num{150} equally spaced points between $A$ and $B$ obtained via \gls{oslerp} \cite{francisGeodesicOctonionMetric2019} were used as \outpt{} points. \gls{gpr} uncertainty standard deviation is plotted as shaded error band.}
+    \caption{Predictions of \gls{gpr} (blue circles), barycentric (red circles), \gls{nn} (magenta circles), and \gls{idw} (green circles) as a function of distance along a 1D arc ($\overline{AB}$) between two \glspl{vfzgbo} ($A$ and $B$). The true, underlying \gls{brk} function is also shown (black line). \num{50000} random \inpt{} \glspl{vfzgbo} were generated and used for each of the models. \num{150} equally spaced points between $A$ and $B$ obtained via \gls{oslerp} \cite{francisGeodesicOctonionMetric2019} were used as \outpt{} points. \gls{gpr} \SI{95}{\percent} confidence interval is plotted as a shaded error band.}
     \label{fig:tunnel-50000}
 \end{figure}
 
@@ -435,7 +435,7 @@ Visual illustrations of property predictions along a 1D arc and within a fixed l
 %
 To provide a visual illustration of the property predictions, \cref{fig:tunnel-50000} shows the predicted \gls{gbe} for each of the four interpolation methods as a function of distance along a 1D arc ($\overline{AB}$) between two \glspl{vfzgbo}, $A$ and $B$. Approximate \gls{gbo} coordinates for $A$ and $B$ are given in \cref{tab:tunnel-AB}, and each intermediate point between $A$ and $B$ resides on the surface of a hypersphere. Additionally, the misorientation quaternion and \gls{bp} normal pairs are given in \cref{tab:tunnel-AB-qm-nA}. The \num{150} intermediate points were obtained using \gls{oslerp} \cite{francisGeodesicOctonionMetric2019}. Each model used its own set of \num{50000} random \inpt{} \glspl{vfzgbo} with \gls{gbe} sampled via the \gls{brk} validation function. The two \glspl{vfzgbo} were chosen by taking the furthest apart pair out of \num{20000} \glspl{vfzgbo} which thus approximates the largest dimension of the \gls{vfz} where each endpoint is close to the true \gls{vfz} exterior.
 
-Comparison of the predictions from the four interpolation methods with the true values of the \gls{brk} validation function along this 1D path shows that all methods yield reasonable agreement with the true model. The \gls{gpr} and barycentric methods appear to agree most with the true model, followed by \gls{idw} and \gls{nn}. The \gls{nn} method shows the piecewise-constant (stair-step) artifact typical of \gls{nn} methods. We also note that while the fidelity of the predictions is quite good for all methods in the interior of the \gls{vfz}, the performance does degrade at the extreme limits of the \gls{vfz} (note the deviations at the left and right limits of \cref{fig:tunnel-50000}). This effect seems to be particularly pronounced for the barycentric method, and much less so for the \gls{gpr} method.
+Comparison of the predictions from the four interpolation methods with the true values of the \gls{brk} validation function along this 1D path shows that all methods yield reasonable agreement with the true model. The \gls{gpr} and barycentric methods appear to agree most with the true model, followed by \gls{idw} and \gls{nn}. The \gls{nn} method shows the piecewise-constant (stair-step) artifact typical of \gls{nn} methods. We also note that while the fidelity of the predictions is quite good for all methods in the interior of the \gls{vfz}, the performance does degrade at the extreme limits of the \gls{vfz} (note the deviations at the left and right limits of \cref{fig:tunnel-50000}). %This effect seems to be particularly pronounced for the barycentric method, and much less so for the \gls{gpr} method.
 
 We believe this is the first\footnote{\Gls{oslerp} results from \citet{francisGeodesicOctonionMetric2019} plots \gls{gb} \emph{structure} continuously between two \glspl{gb}, \citet{chesserLearningGrainBoundary2020} performs cross-validation on the simulated Olmsted Ni \glspl{gb}, and \cite{morawiecDistancesGrainInterfaces2019} plots distances between \glspl{gb} on a geodesic with another \gls{gb}. The results in these works are distinct from what is presented here: a plot of continuously interpolated \glspl{gbe} between two arbitrary \glspl{gb}.} plot of a \gls{gb} property continuously interpolated between two arbitrary \glspl{gb} (i.e. neither residing entirely in a single \gls{mfz} nor a single \gls{bpfz}). Such visualizations can naturally be extended to 2D and 3D by plotting colored points in a triangle or tetrahedron, respectively, all of which (1D, 2D, and 3D) represent small "slices" of the \gls{gbc} space.
 
@@ -480,7 +480,7 @@ We believe this is the first\footnote{\Gls{oslerp} results from \citet{francisGe
 
 \subsubsection{Low-$\Sigma$/Low-\glsxtrshort{gbe} Fixed Misorientation}
 \label{sec:results:vis:mis}
-The misorientation is fixed to the misorientation of the minimum \gls{gbe} \gls{ct} $\Sigma3$ [111] \gls{gb} from the Olmsted Ni dataset while the \gls{bp} normal is varied across the unit-sphere. \Gls{gbe} is sampled via a \gls{gpr} model trained on \num{50000} \inpt{} points (\cref{fig:ni-gpr-brk}a), and \glspl{gbe} sampled directly from the \gls{brk} validation function are also provided (\cref{fig:ni-gpr-brk}b). Some artifacts can be seen in the \gls{gpr} model which are likely due to distance overestimation (\cref{sec:methods:framework:vfz-dist}) and can be addressed via e.g. ensemble methods. For the \num{20000} points plotted in \cref{fig:ni-gpr-brk}, the \gls{rmse} is \SI{\nigprbrkrmse{}}{\J\per\square\m} which is larger than the overall model performance of \SI{\gprrmse{}}{\J\per\square\m} (\cref{tab:rmse-error-comparison}). This is consistent with an overall expectation that model performance worsens near sharp features or discontinuities in the model. Similarly, overestimation of the $\Sigma3$ cusp is present, consistent with poorer low \gls{gbe} predictions in \cref{fig:brkparity50000}.
+The misorientation is fixed to the misorientation of the minimum \gls{gbe} \gls{ct} $\Sigma3$ [111] \gls{gb} from the Olmsted Ni dataset while the \gls{bp} normal is varied across the unit-sphere. \Gls{gbe} is sampled via a \gls{gpr} model trained on \num{50000} \inpt{} points (\cref{fig:ni-gpr-brk}a), and \glspl{gbe} sampled directly from the \gls{brk} validation function are also provided (\cref{fig:ni-gpr-brk}b). Some artifacts can be seen in the \gls{gpr} model which are likely due to distance overestimation (\cref{sec:methods:framework:vfz-dist}) and can be addressed via e.g. ensemble methods. For the \num{20000} points plotted in \cref{fig:ni-gpr-brk}, the \gls{rmse} is \SI{\nigprbrkrmse{}}{\J\per\square\m} which is larger than the overall model performance of \SI{\gprrmse{}}{\J\per\square\m} (\cref{tab:rmse-error-comparison}). This is consistent with an overall expectation that model performance worsens near sharp features or discontinuities in the model. Similarly, overestimation of the $\Sigma3$ cusp is present, consistent with poorer low \gls{gbe} predictions in \cref{fig:brkparity50000}. The overestimation also suggests that nearby values (outside of the 2D subspace shown) are large enough to shift the \gls{gpr} model in that region.
 
 \begin{figure*}
     \centering
