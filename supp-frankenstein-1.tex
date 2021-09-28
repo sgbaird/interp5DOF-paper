@@ -151,7 +151,7 @@ Interpolation results for \num{388} and \num{10000} \glspl{gb} are given in \cre
 \end{figure}
 
 \subsection{Octonions used for 1D Arcs}
-The octonions used in \cref{fig:tunnel-50000,fig:kim-interp} are given in \cref{tab:tunnel-AB,tab:tunnel-AB2}, respectively. The misorientation quaternions and \gls{bp} normal pairs are likewise given in \cref{tab:tunnel-AB-qm-nA,tab:tunnel-AB2-qm-nA}, respectively.
+The octonions used in \cref{fig:tunnel-50000,fig:kim-interp} are given in \cref{tab:tunnel-AB,tab:tunnel-AB2}, respectively. The misorientation quaternions and \gls{bp} normal pairs are likewise given in \cref{tab:tunnel-AB-qm-nA,tab:tunnel-AB2-qm-nA}, respectively. Disorientations are likewise plotted in Rodrigues space (see \cite{patalaSymmetriesRepresentationGrain2013})\footnote{Note that octonions A and B in this work have no correspondence with points A and B described in \cite{patalaSymmetriesRepresentationGrain2013}. } in \cref{fig:ABrod,fig:ABrod-kim}, respectively. Conversion of \gls{bp} normals that maintains consistency during conversion from misorientation to disorientation has not been implemented; therefore, visualizations of \gls{bp} normal are not provided and \gls{bp} normal is only reported alongside its misorientation as $qm$/$nA$ pairs.
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
 \begin{table*}[]
@@ -177,6 +177,13 @@ A & -0.6573 & 0.5072 & -0.4044 & -0.3836 & 0.6200 & -0.6227 & -0.4774 \\
 B & 0.0622 & 0.8599 & -0.5002 & -0.0805 & 0.1628 & -0.7609 & 0.6281 \\ \bottomrule
 \end{tabular}
 \end{table*}
+
+\begin{figure}
+    \centering
+    \includegraphics{figures/ABrod.png}
+    \caption{Disorientations for octonions A and B (from \cref{fig:tunnel-50000}) plotted in Rodrigues space. }
+    \label{fig:ABrod}
+\end{figure}
 
 \begin{table*}
 \centering
@@ -204,9 +211,9 @@ B & -0.6012 & 0.4780 & -0.4528 & -0.4528 & 0.5774 & -0.5774 & -0.5774 \\ \bottom
 
 \begin{figure}
     \centering
-    \includegraphics{}
-    \caption{Caption}
-    \label{fig:my_label}
+    \includegraphics{figures/ABrod-kim.png}
+    \caption{Disorientations for octonions A and B (\gls{ms} Fe simulation dataset interpolation in \cref{fig:kim-interp}) plotted in Rodrigues space. }
+    \label{fig:ABrod-kim}
 \end{figure}
 
 %
