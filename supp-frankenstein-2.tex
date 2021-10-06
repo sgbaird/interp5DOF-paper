@@ -33,169 +33,102 @@
 
 \section{Brief Summary of \glsxtrshort{vfz} Methods}
 
-We summarize the following aspects of the \gls{vfz} framework:
-\begin{itemize}
-    \item Creation and definition of a \gls{vfz}
-    \item Mapping \glspl{gb} to the \gls{vfz}
-    \item Distance calculations
-    \item Interpolation
-    \item Comparison with traditional \gls{gbo} metric
-\end{itemize}
-Each of these is described in greater detail in \citet{bairdFiveDegreeofFreedomPropertyUnderReview}.
-%
-% 	\subsection{Defining the \glsentrytitlecase{vfz}{long}} \label{sec:methods:framework:vfz}
-	%
-	%\Gls{3dof} \glspl{fz} have typically been defined using linear inequalities (e.g. the orientation \cite{heinzRepresentationOrientationDisorientation1991} and misorientation \cite{grimmerUniqueDescriptionRelative1980,heinzRepresentationOrientationDisorientation1991} \glspl{fz}). Instead of using linear inequalities\footnote{If desired, linear inequalities can be obtained for a \gls{vfz} by determining a Voronoi tessellation's junction points (similar to what is shown in \cref{fig:voronoi} by e.g. \matlab{voronoin()}), transforming to 6D Cartesian coordinates via a \gls{svd} transformation (\cref{sec:app:bary}) and defining the bounded region by e.g. MATLAB FEX function \matlab{vert2lcon.m}.}, we take a numerical approach to define what we will call a \gls{vfz}.
-	%
-	To define a \gls{vfz}, an arbitrary, fixed, low-symmetry reference \gls{gbo} is chosen ($o_{\text{ref}}$) and for our use of \glspl{gbo}, the \gls{vfz} is defined as the region of $\mathbb{S}^7$ (the unit 7-sphere in 8 dimensions) closer to $o_{\text{ref}}$ than any of its symmetric images. %\footnote{We also refer to lower-dimensional representations of the 8D Cartesian \gls{vfz} as \glspl{vfz} (described in \cref{sec:methods:framework:proj}) and describe which dimensionality we are referring to as appropriate. }. However, use of the \gls{vfz} does not require its explicit construction. Rather, practical calculations require only the selection of the single point $o_{\text{ref}}$ (which completes the definition of the \gls{vfz}), followed by mapping of query points into the \gls{vfz} by comparison of their \glspl{seo} with $o_{\text{ref}}$.
-	If a low-symmetry \gls{gb} is chosen, the point within a \gls{vfz} will be unique within numerical tolerance (and hence it is a true \gls{fz}). Additionally, we use a Euclidean approximation to the true geodesic distance.
-	%To illustrate the process of mapping points into the \gls{vfz}, we describe a 3D Cartesian analogue (\cref{fig:voronoi}) to a 7D Cartesian non-degenerate (i.e. U(1) degeneracy removed) representation of a \gls{vfz}, which produces the \gls{sst} \cite{patalaSymmetriesRepresentationGrain2013} for the $O_h$ point group. A set of \num{500} points ($p_i, i\in[1,500]$) randomly scattered on the surface of the 2-sphere comprise the data (\startpt{} in \cref{fig:voronoi}a). A random point, $p_{\text{ref}}$, also on the surface of the 2-sphere, is chosen as the reference point (\refpt{}). In this illustration, $O_h$ or $m\bar{3}m$ point group rotations are used as symmetry operators, $S_j,\ j\in[1,N_p]$, where $N_p$ is the twice the number of proper rotations due to inversion symmetry and $N_p = 48$ for the $O_h$  point group. For each data point, \num{48} symmetrically equivalent representations ($p^{\text{sym}}_{i,j} = S_j(p_i),\ j\in[1,24]$) are produced by applying each of the relevant symmetry operators. After calculating the Euclidean distance between $p_{\text{ref}}$ and $p^{\text{sym}}_{i,j}$, the point ($p^{*}_i$) closest to $p_{\text{ref}}$ is chosen and retained as the unique representative of $p^{\text{sym}}_{i,j}$. As illustrated in \cref{fig:voronoi}a, the projected points $p^{*}_i$ (dark blue points) all fall in the \gls{vfz} without ever having to construct or define it explicitly. We call this group of projected points a \textit{\gls{vfz} point set}. Note also that there is only one $p^{*}_i$ in the \gls{vfz} for each $p^{\text{sym}}_{i,j}$ (see \cref{fig:voronoi}b).
+    We summarize the following aspects of the \gls{vfz} framework:
+    \begin{itemize}
+        \item Creation and definition of a \gls{vfz}
+        \item Mapping \glspl{gb} to the \gls{vfz}
+        \item Distance calculations
+        \item Interpolation
+        \item Comparison with traditional \gls{gbo} metric
+    \end{itemize}
+    Each of these is described in greater detail in \citet{bairdFiveDegreeofFreedomPropertyUnderReview}.
+    
+    To define a \gls{vfz}, an arbitrary, fixed, low-symmetry reference \gls{gbo} is chosen ($o_{\text{ref}}$) and for our use of \glspl{gbo}, the \gls{vfz} is defined as the region of $\mathbb{S}^7$ (the unit 7-sphere in 8 dimensions) closer to $o_{\text{ref}}$ than any of its symmetric images. If a low-symmetry \gls{gb} is chosen, the point within a \gls{vfz} will be unique within numerical tolerance (and hence it is a true \gls{fz}). Additionally, we use a Euclidean approximation to the true geodesic distance.
+    
+    
+    A \gls{gbo} is composed of two quaternions, with the \gls{bp} normal in the $+z$ direction \cite{francisGeodesicOctonionMetric2019}. A \gls{gbo} is mapped into a \gls{vfz} by calculating the pairwise distances between the reference \gls{gbo} and each of the \glspl{seo}\footnote{Contrary to \citet{francisGeodesicOctonionMetric2019} which uses the passive convention for misorientation, we employ the active convention \cite{bairdFiveDegreeofFreedomPropertyUnderReview}. } and taking the \gls{seo} closest to the reference \gls{gbo}.
+    
+    Once a \gls{gbo} has been mapped into a \gls{vfz}, distance calculations proceed without further consideration of \glspl{seo}. The \gls{vfz} framework suffers from occasional, large distance overestimation which imposes a local sparseness of data and lead to poorer interpolation near the borders of a \gls{vfz}. However, this can be mitigated through ensemble or data augmentation techniques.
+    
+    Note that in the original definition of the \gls{vfz}, the authors examined different interpolation techniques \cite{bairdFiveDegreeofFreedomPropertyUnderReview}. In the present work, we focus on \gls{gpr} which in our case imposes the assumption that crystallographically similar \glspl{gb} share similar \glspl{gbe} within some correlation length. \Gls{gpr} has the added benefit of built-in uncertainty quantification.
+    
+    The primary differences between the \gls{vfz} framework and traditional \gls{gbo} distance metric are that the \gls{vfz} framework is defined by a continuous set of points, exhibits occasional distance overestimation, uses a Euclidean approximation, and has a lower computational complexity.
+
+% \section{Nearest Neighbor Distances within a Large Point Set}
+
+%     \Cref{fig:nnhist-knn-50000}a and b show a histogram of \num{50000} first \gls{nn} distances and the average distance for the k-th \gls{nn}.
+    
+% 	\begin{figure*}
+% 		\centering
+% 		\includegraphics[scale=1]{nnhist-knn-50000.png}
+% 		\caption{(a) Histogram of \gls{nn} \gls{gbo} distances ($\omega$) in a \gls{vfzgbo} set of \num{50000} points. The average \gls{nn} distance was \SI{\nnomega}{\degree}. (b) The average k-th nearest neighbor distances demonstrate that \glspl{nn} up to the $\sim$\num{10}-th \gls{nn} fall within a tolerance of $\sim$\SI{5}{\degree}. Standard deviation uncertainty bars using approximately 10 trial runs are also shown. }
+% 		\label{fig:nnhist-knn-50000}
+% 	\end{figure*}
+
+
+\section{Semivariograms for Estimating Global and Local Correlation Lengths} \label{sec:supp:semivariogram}
+
+    \subsection{Semivariogram Method}
+
+    First, we provide some background to put correlation lengths in context. The construction of \gls{gpr} models involves the combination of a prior distribution over the model space, with some set of observations and their quantified uncertainty. The result is a posterior distribution that provides the probability (density) of any particular model in light of the observed data and priors. In \gls{gpr}, as the name suggests, the priors are assumed to be Gaussian and therefore of the form
+    \begin{equation}
+        f\!\left(\mathbf{m}\right) \propto \exp{\left(-\frac{1}{2} {\left(\mathbf{m}-\mathbf{m}_0\right)}^{\mathsf{T}} \mathbf{C}_{\mathbf{m}_0}^{-1} {\left(\mathbf{m}-\mathbf{m}_0\right)}\right)}
+    \end{equation}
+    where $f\!\left(\mathbf{m}\right)$ is the probability density of an arbitrary model, $\mathbf{m} = \mathbf{m}\!\left(x\right)$, and $\mathbf{m}_0 = \mathbf{m}_0\!\left(x\right)$ is the prior model (i.e. a guess as to what the true model ought to look like). The quantity $\mathbf{C}_{\mathbf{m}_0} = \mathbf{C}_{\mathbf{m}_0}\!\left(x_i,x_j\right)$ is the "kernel" or covariance function of the prior and it describes the prior (assumed) covariance between the values $\mathbf{m}\!\left(x_i\right)$ and $\mathbf{m}\!\left(x_j\right)$.
+    
+    It is possible to use a wide variety of kernel types, depending on the prior information one may have about the physical phenomenon one is attempting to model, e.g. continuity, differentiability, anisotropy, stationarity, and length-scales of correlation. One of the most common kernels employed is the Gaussian (sometimes called the squared exponential) kernel:
+    \input{equations/squared-exponential}
+    
+    % estimate $\sigma$ and $l$ from the data.
+    The values of $\sigma$ and $l$ are typically estimated from the data. One approach, employed by the \texttt{fitrgp()} routine in MATLAB involves numerical optimization via gradient descent which maximizes the likelihood as a function of these parameters \cite{ExactGPRMethod}.
+    
+    % or estimate using empirical semivariograms with a stationary Gaussian kernel.
+    An alternative approach, adapted from geostatistical applications, involves calculation of the empirical semivariogram [REF], in which one bins the space of pairwise distances between all GBs and then calculates half the average pairwise variance of the corresponding property values in each bin:
+    \begin{equation}
+        \label{eq:semivariogram}
+        \kappa\!\left(d_k\right) = \frac{1}{2N_k} \sum_{\substack{d_\Omega\left(x_i,x_j\right) \in \\ \left[d_k^-,d_k^+\right]}} {\left| E\!\left(x_i\right) - E\!\left(x_j\right)\right|}^2
+    \end{equation}
+    where $x_i$ and $x_j$ are the crystallographic coordinates of GBs $i$ and $j$, $d_\Omega\left(x_i,x_j\right)$ is the distance between them, and $E\!\left(x_i\right)$ and $E\!\left(x_i\right)$ are their respective energies. $d_k$ is the location (distance) of the $k$-th bin center having left- and right-hand limits $d_k^-$ and $d_k^+$, and $N_k$ is the number of measurement pairs whose distance falls in the $k$-th bin. Due to limited sampling of large distances and the fact that the most informative part of the semivariogram is the region near $d_k = 0$, it is customary to limit the semivariogram to half of the maximum distance [REF]. The empirical semivariogram is then fit with an analytical model to obtain the parameters of the kernel (covariance) function taking advantage of the relationship
+    \begin{equation}
+        \label{eq:analyticalsemivariogrammodel}
+        \kappa\!\left(d\right) = \sigma_f^2 - \mathbf{C}_{\mathbf{m}_0}\!\left(d\right)
+    \end{equation}
+    where we have made explicit the stationarity of the Gaussian kernel (i.e. that it depends only the distance between two points, not on their respective locations).
+    
+    % choice of correlation strength
+    Having obtained a value for the length scale kernel parameter $l$, one can define a correlation length for the data. If the distance between two points is equal to $l$ the kernel function indicates that their correlation will be equal to $\rho = \exp{\left(-1/2\right)} \approx 0.61$. However, one might reasonably want to know the length scale over which GB properties are correlated by a different amount. In general for a specified correlation strength, $\rho$, the corresponding correlation length is given by
+    \begin{equation}
+        \label{eq:generalizedcorrelationlength}
+        l'\!\left(\rho\right) = l \sqrt{-2 \ln{\rho}}
+    \end{equation}
+    We will refer to the parameter $l$ as \emph{the} correlation length, but one can use \cref{eq:generalizedcorrelationlength} to determine the length scale corresponding to any specified correlation strength. %1-2 paragraphs
+
+    \subsection{Global Correlation Lengths} \label{sec:supp:semivariogram:global}
+	One of the most fundamental observations comes from the shape of the empirical semivariograms. As mentioned in \cref{sec:methods:correlation}, there are a wide variety of kernels that could be candidates for modeling correlations in different systems. Different kernels are used to capture different types of correlations, and each has a characteristic signature that can be observed in the semivariogram. For example, when a system exhibits exponential-type correlations, the semivariogram manifests this in the form of an exponential convergence towards an asymptotic constant value at long-distances. Linear and power-type correlations manifest an absence of a long-distance plateau. In the present system, there is a clear change in concavity in the semivariogram, this is a signature of correlations that are Gaussian in nature. Thus, we find that GB energy correlations in these systems are Gaussian, and should therefore be modeled using Gaussian kernels.
+	\begin{figure*}
+	    \centering
+	    \includegraphics[scale=0.75]{figures/GlobalCorrelationLengthVariograms.png}
+	    \caption{Empirical semivariograms (markers) for the (a) Ni and (b) Fe datasets. Solid lines show the fits of the analytical semivariogram models (\cref{eq:analyticalsemivariogrammodel}).}
+	    \label{fig:globalvariogramfits}
+	\end{figure*}
 	
-%	\begin{figure*}
-%		\centering
-%		\includegraphics[scale=1]{voronoi.png}
-%		\caption{(a) 3D Cartesian analogue to a non-degenerate 7D Cartesian representation of U(1)-symmetrized \glspl{gbo} and \glspl{vfzgbo} (\glspl{vfzgbo} are inherently U(1)-symmetrized) which demonstrates the symmetrization of many points relative to a fixed reference point (\refpt{}). This produces a 3D Cartesian \gls{vfz} point set (\sympt{}). (b) To further illustrate, a single input point (\singlept{}) is symmetrized (\singlesympt{}) relative to a fixed reference point (\refpt{}), demonstrating that only one symmetrized point is found within the borders (\vbordercolor{}) of each of the Voronoi cells (\vcellcolor{}). The Voronoi tessellation is defined by the symmetric images of the reference point, and the spherical Voronoi diagram for this illustration is constructed using a modified version of \cite{luongVoronoiSphere2020}.}
-%		\label{fig:voronoi}
-%	\end{figure*}
-%
-%	To calculate the distance between a given \gls{gbo}, and the reference \gls{gbo}, we employ the standard 8D Euclidean distance
-%	\begin{equation}
-%		\label{eq:8Deuclidean_dist}
-%		d_{\text{E}}\!\left(o_{A},o_{B}\right) = {\left(\sum_{k=1}^{8} {\left(o_{A,k} - o_{B,k}\right)}^2 \right)}^{1/2}
-%		%why not just
-%		%\lVert o_A-o_B \rVert
-%	\end{equation}
-%	where $o_{A,k}$ and $o_{B,k}$ represent the $k$-the element of normalized \glspl{gbo} $o_A$, and $o_B$, respectively. 
-%
-%	Euclidean distance is an approximation to the true geodesic arc length on $\mathbb{S}^7$, which is given by
-%	\begin{equation}
-%		\label{eq:7sphere_arc_length}
-%		d_{\text{S}}\!\left(o_{A},o_{B}\right)=\cos ^{-1}\left(o_A\cdot o_B\right)
-%	\end{equation}
-%	where $\cdot$ is the dot product, $\cos ^{-1}$ is the inverse cosine operator, and $o_A$ and $o_B$ are each normalized and $d_{\text{S}}\simeq d_{\text{E}}$ (\cref{fig:dist-parity}). In \cite{francisGeodesicOctonionMetric2019}, the original \gls{gbo} distance metric was defined by
-%	\begin{equation}
-%		\label{eq:omega}
-%		d_\Omega\!\left(o_{A},o_{B}\right) = 2\cos ^{-1}\left(o_A\cdot o_B\right)
-%	\end{equation}
-%	where $o_A$ and $o_B$ are each normalized and $d_\Omega$ can be seen to be simply twice the geodesic arc length: $d_\Omega = 2 d_{\text{S}}$. Thus,
-%	$d_\text{E}\simeq \frac{1}{2}d_\Omega$.
-%	
-%	The definition of $d_\Omega$ has certain aesthetic benefits in that it mirrors the definition of a misorientation angle, $\omega_{AB}$, between two crystal orientations in the quaternion parameterization: $\omega_{AB} = 2 \cos^{-1}{\left(q_A \cdot q_B\right)}$.
-%	
-%	Our choice to use $d_{\text{E}}$ instead of $d_{\text{S}}$ or $d_\Omega$ is motivated by the fact that it enables the use of standard algorithms, for a variety of operations, that require or assume Euclidean distances. In addition to enabling us to leverage the machinery of efficient and established algorithms, this choice can be justified by the following observations:
-%	\begin{itemize}
-%		\item The minimum Euclidean distance \gls{seo} will be the same as the minimum arc length distance \gls{seo} because $d_{\text{S}}$ is a monotonically increasing function of $d_{\text{E}}$, for $d_{\text{S}}\!\left(d_{\text{E}}\right)\in[0,\pi]$ (\cref{fig:dist-parity}). 
-%		\item For the FCC point group symmetry ($m\bar{3}m$) the portion of $\mathbb{S}^7$ subtended by the \gls{vfz} is sufficiently small that the approximation $d_{\text{E}} \simeq d_{\text{S}}$ holds to very high accuracy\footnote{This is true for a specific pair of \glspl{gbo} within a \gls{vfz}. When calculating the \emph{minimum} distance between \glspl{seo} of two points, there are additional considerations that must be attended to as discussed in detail in \cref{sec:methods:framework:vfz-dist}.} as shown in \cref{fig:dist-parity}. 
-%		\item Calculation of $d_{\text{E}}$ does not require the use of any inverse trigonometric functions and is about \SI{23}{\percent} faster than calculation of $d_{\text{S}}$ or $d_\Omega$.
-%	\end{itemize}
-%	
-	%For applications other than interpolation which require precise quantification of high-dimensional volume, a mapping between Euclidean-approximated volumes and true volumes may be necessary\footnote{We have not tested to what extent a Euclidean-approximated volume will differ from the true volume; however, Euclidean-approximated volumes can be obtained by using the triangulation methods discussed in \cref{sec:app:bary:tri} (i.e. \matlab{convhulln()}).} or the Euclidean approximation may be removed altogether\footnote{i.e. by setting the \matlab{dtype} argument of \matlab{GBdist4.m} to \matlab{'omega'} rather than \matlab{'norm'}.}. The latter combined with removal of the renormalization of \gls{gbo} allows for the (non-ensembled) \gls{vfzgbo} metric to be intrinsic (see \citet{morawiecDistancesGrainInterfaces2019} for an in-depth treatment of intrinsicality).
-%	
-	%The expectation that a single, unique \gls{seo} will be found (within numerical tolerance and given a low-symmetry reference \gls{gbo}\footnote{The probability that a randomly generated \gls{gbo} will fall exactly on a high-symmetry boundary vanishes in the limit of infinite precision. }) is verified by several manual tests and internally within the symmetrization sub-routine \matlab{get\_octpairs.m} \cite{bairdFiveDegreeofFreedom5DOF2020} that is part of the \matlab{interp5DOF.m} package. Similar numerical tests reveal that inappropriately selecting a high-symmetry reference \gls{gbo} to (attempt to) define a \gls{vfz} results in many degenerate minimum distance \glspl{seo}, with the identity ($\{1,0,0,0,0,0,0,0\}\in\mathbb{R}^8$) \cite{francisGeodesicOctonionMetric2019} giving the highest degeneracy.
-%	
-% 	\subsection{Mapping \glsfmtshortpl{gb} to the \glsentrytitlecase{vfz}{long}} \label{sec:methods:framework:proj}
-%	
-	A \gls{gbo} is composed of two quaternions, with the \gls{bp} normal in the $+z$ direction \cite{francisGeodesicOctonionMetric2019}. A \gls{gbo} is mapped into a \gls{vfz} by calculating the pairwise distances between the reference \gls{gbo} and each of the \glspl{seo}\footnote{Contrary to \citet{francisGeodesicOctonionMetric2019} which uses the passive convention for misorientation, we employ the active convention \cite{bairdFiveDegreeofFreedomPropertyUnderReview}. } and taking the \gls{seo} closest to the reference \gls{gbo}.
-%	As described above in the 3D analogy, with a reference \gls{gbo} chosen ($o_{\text{ref}}$), and consequently the \gls{vfz} defined (\cref{sec:methods:framework:vfz}), a \gls{gbo} is mapped into the \gls{vfz} by finding among its \glspl{seo} the one that is closest to $o_{\text{ref}}$ according to $d_{\text{E}}$ (\cref{eq:8Deuclidean_dist}). This is performed for all \inpt{} and \outpt{} points with respect to $o_{\text{ref}}$, and the result is a \gls{vfz} point set.
-%	
-% 	\subsection{Distance Calculations in the \glsentrytitlecase{vfz}{long}} \label{sec:methods:framework:vfz-dist}
-%	
-	Once a \gls{gbo} has been mapped into a \gls{vfz}, distance calculations proceed without further consideration of \glspl{seo}. The \gls{vfz} framework suffers from occasional, large distance overestimation which imposes a local sparseness of data and lead to poorer interpolation near the borders of a \gls{vfz}. However, this can be mitigated through ensemble or data augmentation techniques.
-	%Euclidean distances are an accurate approximation of arc length distances in a \gls{vfz} because the difference between the two metrics for the maximum pairwise distance ($pd_{max} \simeq \SI{60}{\degree}$) in a \gls{vfz} is small as shown in \cref{fig:dist-parity}. However, when compared with the traditional \gls{gbo} distance \cite{francisGeodesicOctonionMetric2019}, due to the presence of low-symmetry \glspl{gb} near the exterior of a \gls{vfz}, some \gls{gb} pairs will exhibit larger Euclidean or arc length distances than is truly representative (see e.g. \cref{fig:dist-ensemble-k1-2-10-20}a). In other words, moving "past" the low-symmetry border of a \gls{vfz} will result in an instantaneous relocation to a possibly distant point in the \gls{vfz} that in reality is highly correlated.
-%	\begin{figure*}[!ht]
-%		\centering
-%		\includegraphics[scale=1]{figures/dist-ensemble-k1-2-10-20.png}
-%		\caption{Hexagonally binned parity plots of pairwise distances of 388 Ni bicrystals \cite{olmstedSurveyComputedGrain2009a}. Euclidean distance approximation is converted to \glspl{gbo} ($x_{i,j,k}=2\left(\frac{180}{\pi}\right)|\hat{o}_{i,k}^{\text{sym}}-\hat{o}_{j,k}^{\text{sym}}|$) for comparison with the traditional \gls{gbo} metric \cite{chesserLearningGrainBoundary2020}. The minimum distance among an ensemble of \gls{vfzgbo} sets ($\min_{\forall k \in [1,k_{max}]}x_{i,j,k}$) is used for (a) 1, (b) 2, (c) 10, and (d) 20 \gls{vfzgbo} sets. As the number of \gls{vfzgbo} sets increases, the correlation between the Euclidean distance and the traditional \gls{gbo} distance improves.}
-%		\label{fig:dist-ensemble-k1-2-10-20}
-%	\end{figure*}
-	
-	%This is a limitation of the \gls{vfz} framework, which generates a \gls{vfz} with low-symmetry \glspl{gb} at the borders in contrast to typical \glspl{fz} \cite{patalaSymmetriesRepresentationGrain2013,homerGrainBoundaryPlane2015}. While defining a \gls{fz} with high-symmetry \glspl{gb} at the borders (especially mirror-symmetry \glspl{gb}) will certainly increase interpolation accuracy, the favorable interpolation results presented in this work are obtained because overestimation is infrequent within a small correlation length (e.g. \SI{10}{\degree} \cite{olmstedSurveyComputedGrain2009}, which many \glspl{nn} fall within for a \num{50000} \gls{vfzgbo} set, see \cref{fig:nnhist-knn-50000}b), and underestimation is non-existent within numerical precision. Naturally, smaller dataset pairwise distance matrices will exhibit more frequent distance overestimation.
-	
-	%Overestimation imposes a "sparseness" of data within a local region of influence common to the interpolation methods in this work, whereas underestimation would give erroneous high correlations between uncorrelated \glspl{gb}. Because only overestimation relative to traditional \gls{gbo} distances exist in this work (as shown in \cref{fig:dist-ensemble-k1-2-10-20}), we expect that large errors will occur infrequently (\cref{sec:results:accuracy}). 
-	
-	%While distance calculations are subject to these infrequent overestimates, they are largely immaterial for interpolation. This is because all interpolation methods in this work involve a region of influence that is small, so that if the distance to a \gls{nn} is overestimated it simply does not contribute to the interpolation (the "sparseness" referred to earlier). Consequently the accuracy of the interpolation is not significantly impacted by infrequent distance overestimates, and excellent results can be achieved without addressing this limitation. However, if even greater accuracy is desired it can be obtained for a relatively minor cost by considering multiple \glspl{vfz}.
-	
-	%We find that taking the minimum distance among several \gls{vfzgbo} sets defined by separate reference \glspl{gbo} leads to better correlation between the Euclidean approximation and the traditional \gls{gbo} metric as shown in \cref{fig:dist-ensemble-k1-2-10-20}. Additionally, \cref{fig:dist-ensemble-rmse-mae} shows that the error between scaled Euclidean distance and the traditional \gls{gbo} metric decreases rapidly as the number of ensemble \gls{vfzgbo} components increases. This confirms that employing a small ensemble of \gls{vfzgbo} sets results in significant improvement to the Euclidean distance approximation (\cref{fig:dist-ensemble-k1-2-10-20,fig:dist-ensemble-rmse-mae}) of the traditional \gls{gbo} metric. However, as already mentioned, improvements to interpolation results are expected to be less significant since they are already robust to occasional distance overestimates. In terms of computational runtime, use of an ensemble of 10 \glspl{vfz} will increase runtime by a factor of $\sim$10 via a loop-based implementation. For a symmetrized $\num{50000}\times\num{50000}$ pairwise distance matrix, this results in a runtime of approximately 1~CPU~hour instead of $\sim$7 CPU minutes for a single \gls{vfz}. However, this is still much faster than the original \gls{gbo} approach used in \cite{chesserLearningGrainBoundary2020}, which would take an estimated 6.6 CPU years using the original implementation (or 153 CPU days if one \gls{gb} in the \gls{gb} pair is fixed according to the assumption in \citet{morawiecDistancesGrainInterfaces2019}). Additionally, it may be worthwhile to make the distance calculations GPU-compatible for further speed-up. %might be worth making a note here about how many function calls you might expect during a single grain growth simulation. Then we can translate these times into expected minimum CPU time for a 3D grain growth simulation for X number of grains. Maybe Jose has an estimate for this. I think I included something later
-%	
-%	\begin{figure}[ht]
-%		\centering
-%		\includegraphics[scale=1]{figures/dist-ensemble-rmse-mae.png}
-%		\caption{\Gls{rmse} and \gls{mae} of pairwise distance errors for 388 Ni bicrystals \cite{olmstedSurveyComputedGrain2009} of scaled Euclidean distance approximation relative to the traditional \gls{gbo} metric \cite{chesserLearningGrainBoundary2020} (compare with \cref{fig:dist-ensemble-k1-2-10-20}). The minimum distance among an ensemble of \gls{vfzgbo} sets ($\min_{\forall k \in [1,k_{max}]}x_{i,j,k}$, where $x_{i,j,k}$ is the scaled Euclidean distance) is taken, iteratively adding consecutive sets up to $k_{max} = 20$. As the number of \gls{vfzgbo} sets increases, \gls{rmse} and \gls{mae} between the scaled Euclidean distance approximation and the traditional \gls{gbo} distance decreases.}
-%		\label{fig:dist-ensemble-rmse-mae}
-%	\end{figure}
-	%
-	%\Gls{vfzgbo} Euclidean, hyperspherical arc length, and \gls{gbo} distances are computed via \vfzorepo{} function \matlab{GBdist4.m} which is used in the symmetrization function \matlab{get\_octpairs.m} and an example of ensemble \gls{vfzgbo} distance calculations is given in \matlab{plotting.m}.
-	%
-	%In addition to their use for distance calculations alone, ensembles of \gls{vfzgbo} sets can be employed with interpolation methods to increase overall interpolation accuracy, but there is a computational cost (e.g. approximately 10$\times$ using an ensemble of 10 \gls{vfzgbo} sets). For \num{50000} \inpt{} points, use of an ensemble with 10 \gls{vfzgbo} sets decreases \gls{rmse} and \gls{mae} from \SIlist{0.0241;0.0160}{\J\per\square\m} to \SIlist{0.0187;0.0116}{\J\per\square\m}, respectively (single trial run). We expect these overall accuracy improvements occur because \gls{gbe} predictions near the exterior of the \gls{vfz} where data may be sparse are improved. Ensemble interpolation results as a function of ensemble size and parity plots for mean, median, minimum, and maximum functions applied to the ensemble are shown in \cref{fig:ensemble-interp-rmse-mae} and \cref{fig:ensemble-interp}, respectively. Further details of ensemble interpolation are given in \cref{sec:ensemble-interp}.
-	%
-% 	\subsection{Interpolation in the \glsentrytitlecase{vfz}{long} Framework} \label{sec:methods:framework:interp}
-%	
-	Note that in the original definition of the \gls{vfz}, the authors examined different interpolation techniques \cite{bairdFiveDegreeofFreedomPropertyUnderReview}. In the present work, we focus on \gls{gpr} which in our case imposes the assumption that crystallographically similar \glspl{gb} share similar \glspl{gbe} within some correlation length. \Gls{gpr} has the added benefit of built-in uncertainty quantification.
-	%With the \gls{vfz} framework established, it is possible to define interpolation schemes over the \gls{vfz} to predict the properties of new \glspl{gb} from the known properties of other \glspl{gb}. For one application of interest to us, it is necessary to evaluate multiple different functions over a fixed set of \inpt{} and \outpt{} \glspl{gbo}. In this section we first present a barycentric interpolation method that we have developed to efficiently accomplish this specialized task by pre-computing the interpolation weights (which remain fixed when only the function being evaluated changes). We then present adaptations of three other interpolation methods---\gls{gpr} (\cref{sec:methods:interp:gpr}), \gls{idw} (\cref{sec:methods:interp:idw}), \gls{nn} (\cref{sec:methods:interp:nn})---that are useful for general applications (an additional interpolation method---\gls{gprm}---which we developed specifically for a non-uniformly distributed, noisy, simulation dataset is described in \cref{sec:methods:gprmix}). %We recommend the \gls{gpr} interpolation method for the \gls{vfz} framework for most applications because it provides the best combination of accuracy and speed (\cref{sec:results}).
-	%Usage instructions for the \gls{vfzgbo} repository can be found at the GitHub page (\url{github.com/sgbaird-5dof/interp}) and in \cref{sec:methods:repofn}.
-%	
-%	
-%	\subsubsection{Barycentric Interpolation}
-%	\label{sec:methods:interp:bary}
-%	
-%	Barycentric coordinates are a type of homogeneous coordinate system that reference a \outpt{} point within a simplex \cite{langerSphericalBarycentricCoordinates2006} or convex polytope \cite{floaterGeneralizedBarycentricCoordinates2015,meyerGeneralizedBarycentricCoordinates2002,langerSphericalBarycentricCoordinates2006} based on "masses" or weights at the vertices, which can be negative. The \outpt{} point is assumed to be the barycenter (center of mass) of the simplex or convex polytope, and weights at the vertices necessary to make this assumption true are determined. We utilize rigid \gls{svd} transformations and a standard triangulation algorithm (quickhull \cite{barberQuickhullAlgorithmConvex1996} via \matlab{delaunayn()} in \vfzorepo{} function \matlab{sphconvhulln.m}) to define a simplicial mesh (\cref{sec:app:bary:tri}). We then use barycentric weights (i.e. coordinates) for computing intersections of a point within a simplicial facet (\cref{sec:app:bary:int}) and for interpolation (\cref{sec:app:bary-interp}) \cite{langerSphericalBarycentricCoordinates2006}. A detailed explanation of the process is provided in \cref{sec:app:bary}. %The barycentric interpolation method is invoked in \matlab{interp5DOF.m} by setting the \matlab{method} argument to \matlab{'pbary'}.
-%	
-%	\subsubsection{\glsentrytitlecase{gpr}{long}}
-%	\label{sec:methods:interp:gpr}
-%	
-%	\Gls{gpr} or Kriging uses the notion of similarity between points to fit Gaussian processes (random variables) to data based on prior information and provides uncertainty information in addition to interpolated or inferred values. For a general treatment of \gls{gpr}, see \citet{rasmussenGaussianProcessesMachine2006}. We use MATLAB's built-in function, \matlab{fitrgp()}, with all default parameters\footnote{MATLAB R2020b was used for the Fe simulation dataset, all other results employed MATLAB R2019b, the latest installed version on our computing cluster.} except that a \gls{fic} approximation is used (\matlab{PredictMethod = 'fic'}) regardless of the number of \inpt{} points. We assume a Euclidean approximation of the \gls{vfz} (see \cref{sec:methods:framework:vfz-dist} and \cref{fig:dist-parity}). A slower, more accurate, and more memory-intensive prediction method that doesn't use sparse approximation (\matlab{PredictMethod = 'exact'}) is also available (\cref{sec:results:efficiency}). %The \gls{gpr} interpolation method is invoked in \matlab{interp5DOF.m} by setting the \matlab{method} argument to \matlab{'gpr'}.
-%	
-%	\subsubsection{\glsentrytitlecase{idw}{long} Interpolation}
-%	\label{sec:methods:interp:idw}
-%	
-%	\Gls{idw} interpolation applies a weighted average to points within a neighborhood of a query point to obtain an interpolated value. \matlab{interp5DOF.m} implements a simple \gls{idw} approach based on \cite{tovarInverseDistanceWeight2020}. A default radius of influence of $r=\sqrt{2} \mu$ is used, where $\mu$ represents the mean \gls{nn} distance, and where \gls{gbo} distance is approximated by the Euclidean distance or 2-norm (see \cref{sec:methods:framework:vfz-dist}, and \cref{fig:dist-parity}). \gls{nn} interpolation (\cref{sec:methods:interp:nn}) is used for a given query point when there are no \inpt{} points in the radius of influence. %The \gls{idw} interpolation method is invoked in \matlab{interp5DOF.m} by setting the \matlab{method} argument to \matlab{'idw'}.
-%	
-%	\subsubsection{\glsentrytitlecase{nn}{long} Interpolation}
-%	\label{sec:methods:interp:nn}
-%	
-%	\Gls{nn} interpolation takes the nearest \inpt{} point relative to a query point and assigns the value of the \gls{nn} \inpt{} point to the query point. This is implemented via the built-in MATLAB function \matlab{dsearchn()} using a Euclidean approximation of \gls{gbo} distance (see \cref{sec:methods:framework:vfz-dist}, and \cref{fig:dist-parity}). %The \gls{nn} interpolation method is invoked in \matlab{interp5DOF.m} by setting the \matlab{method} argument to \matlab{'nn'}.
-%	
-%	
-% 	\subsection{Comparison with Traditional \glsentrytitlecase{gbo}{short} Framework} \label{sec:methods:framework:compare}
-%
-	The primary differences between the \gls{vfz} framework and traditional \gls{gbo} distance metric are that the \gls{vfz} framework is defined by a continuous set of points, exhibits occasional distance overestimation, uses a Euclidean approximation, and has a lower computational complexity.
-%	We compare the \gls{vfz} framework with the traditional \gls{gbo} metric (\cref{tab:closed-mesh-comparison}) and give examples that illustrate the computational complexity of each approach.
-	
-%	\begin{table*}
-%		\caption{Comparison between \glsxtrlong{vfzgbo} and traditional \gls{gbo} frameworks. *6D Cartesian representation used only for mesh triangulation efficiency in barycentric interpolation and *7D Cartesian representation only required for barycentric interpolation. 7D Cartesian representation is also implemented (though not required) for \gls{gpr}, \gls{nn}, and \gls{idw}. For pairwise distance complexity, $N_p$ is the number of proper rotations ($N_p=24$ for $m\Bar{3}m$ \gls{fcc} point group) and $L$ is the number of \glspl{gb}.}
-%		\centering
-%		\begin{tabular}{ccc}
-%			\toprule
-%			Property & Traditional & This Work \\
-%			\midrule
-%			Symmetrizing Distance & \gls{gbo} & \gls{vfz} Euclidean \\
-%			% Considered \glspl{seo} & Subset & All \\
-%			Dimensionality & 8D Cartesian & 6*/7*/8D Cartesian \\
-%			Bounded by \gls{fz} & No & Yes \\
-%			% Euclidean Approximation Valid & No & Yes \\
-%			Pairwise Distance Complexity & $O(N_p^2L^2)$ & $O(N_p^2L)$ \\
-%			Rotation Convention & Passive & Active \\
-%			\bottomrule
-%		\end{tabular}
-%		\label{tab:closed-mesh-comparison}
-%	\end{table*}
-	
-	%The construction of the \gls{vfz} dramatically reduces the computational burden of pairwise distance calculations. The mechanism by which this reduction is achieved can be illustrated with an example. Let $o_1$ and $o_2$ denote two \glspl{gb} represented in \gls{gbo} coordinates. 
-	%To perform a traditional symmetrized \gls{gbo} distance calculation according to \citet{francisGeodesicOctonionMetric2019}, we compare all \glspl{seo} of $o_1$ to all of the \glspl{seo} of $o_2$ and take the smallest distance. If $N_p$ is the number of proper rotations of the crystallographic point group, this single minimum distance calculation requires a total of $4N_p^4$ \glspl{seo} to be considered (Sections 4.3 and 4.5 of \citet{francisGeodesicOctonionMetric2019}). Thus, the total number of \gls{seo} computations will be $4N_p^4L^2$. However, it is possible to fix a single \gls{gb} in the \gls{gb} pair and still obtain accurate\footnote{Compared with the pairwise distance matrix of the 388 Olmsted \glspl{gb}, we obtained a \gls{rmse} of \SI{1.6566E-7}{\degree} for this computation which completed in \SI{133}{\s} using 6 cores (see \matlab{get_pd_fix.m})} due to isometry equivalence (see Section 7 of \cite{morawiecDistancesGrainInterfaces2019} and \cref{fig:pd-fix}).
-%	
-%	In contrast, for a single distance calculation using the \gls{vfz} framework, $o_1$ and $o_2$ are first mapped into the \gls{vfz}, and then only a single distance calculation is required between them. Mapping $o_1$ into the \gls{vfz} requires comparison of $8N_p^2$ \glspl{seo}\footnote{This is 8 instead of 4 because the simplifying assumption that only two of the four double cover cases need to be considered \cite{francisGeodesicOctonionMetric2019} does not apply in the \gls{vfz} framework. This is confirmed by applying \matlab{uniquetol()} on a set of $4608$ \glspl{gbo} which has a final set size of $4608$, where $4608=8\times N_p^2$ and $N_p=24$ (see \matlab{osymset.m}).} of $o_1$ with a fixed reference \gls{gb} in the interior of the \gls{vfz}; and likewise for $o_2$. Consequently, a single distance calculation between $o_1$ and $o_2$ under the \gls{vfz} framework requires $O(N_p^2)$ \gls{seo} computations. If one desires to compute a pairwise distance matrix between $L$ \glspl{gb}, the total computational cost\footnote{See \cref{sec:results:efficiency:symruntime} for a detailed explanation of why this is \emph{not} $O(N_p^2L^2)$.} will be $O(N_p^2L)$, which represents a dramatic reduction compared to the traditional approach. A summary of the differences between the two approaches is provided in \cref{tab:closed-mesh-comparison}.
-	
-% 	\subsection{Generating Random \glsentrytitlecase{vfzgbo}{long}s}
-% 	\label{sec:methods:rand}
-% 	We generate a random \gls{gbo} by sampling a misorientation via a cubochoric approach \cite{singhOrientationSamplingDictionarybased2016}, sampling \gls{bp} normal from the 2-sphere, and converting to these \gls{5dof} coordinates to \gls{gbo} coordinates. %: we pair two cubochorically sampled \glspl{gb} to form a \gls{gbo}.
-%	In addition to the 3 core operations of the \gls{vfz} framework described in \cref{sec:methods:framework}, it will be necessary for our tests, and useful for other applications, to be able to generate random \glspl{gbo} from \gls{5dof} representations. We briefly explain here our process for accomplishing this. 
-%	
-%	First, random \glspl{gbo} are formed by taking random misorientation quaternion (\matlab{qm}) and \gls{bp} normal (\matlab{nA}) pairs. Random misorientation quaternions are obtained via cubochoric sampling \cite{singhOrientationSamplingDictionarybased2016} (\matlab{get\_cubo.m}) and random \gls{bp} vectors are sampled from a multivariate Gaussian distribution ($\mu=0$, $\sigma=1$) in $\mathbb{R}^3$ and normalized\footnote{Several methods for uniform sampling of points on a sphere, including the one mentioned here, are described in \url{https://mathworld.wolfram.com/SpherePointPicking.html}.}. After this, they are converted to \glspl{gbo} via \vfzorepo{} function \matlab{five2oct.m}. The \vfzorepo{} function \matlab{get\_five.m} returns the result of these several operations. These (\matlab{qm},\matlab{nA}) pairs are then converted to an \gls{gbo} representation, \matlab{o}, using \vfzorepo{} function \matlab{o=five2oct(qm,nA)} (see also \vfzorepo{} function \matlab{get\_ocubo.m} for generating random \glspl{gbo} directly).
-	%}a modified version \cite{bairdFiveDegreeofFreedom5DOF2020} of the original \matlab{GBfive2oct.m} function \cite{chesserGBOctonionCode2019} via
-%	
-%	The \glspl{gbo} are then symmetrized (i.e. they become \glspl{vfzgbo}) via \matlab{osym=get\_octpairs(o)}. A default reference \gls{gbo}\footnote{This is generated by \matlab{get\_ocubo.m} using a random number generator seed of 10. We expect that \matlab{five2oct.m} combined with \matlab{get\_five.m} will generate near identical statistical properties to \matlab{get\_ocubo.m} which is supported by a visual comparison of pairwise distance histograms (not shown in this work), and indirectly by an assertion in Section 5.3 of \citet{morawiecDistancesGrainInterfaces2019}. } is used for these calculations, unless specified by the user. We use the active convention for \matlab{qm}, \matlab{nA}, and \matlab{o} (see \cref{sec:app:convention} for further details of conventions).
-%	
-%	For the present work we use this procedure to randomly generate \gls{vfzgbo} sets containing between \num{100} to \num{50000} \glspl{vfzgbo} where each trial run has its own unique set of \glspl{gb}. We use these to perform the validation and performance evaluation tests described later. For reference, we note that the average \gls{nn} distance (over approximately 70 trials) of such sets ranges between \SI{10.7175 \pm 0.3684}{\degree} and \SI{2.6479 \pm 0.2254}{\degree}, respectively. 
+	\subsection{Local Correlation Lengths} \label{sec:supp:semivariogram:local}
+
+    \begin{figure*}
+        \centering
+        \includegraphics[scale=1]{figures/LocalCorrelationLengthVariogramsOlmsted.png}
+        \caption{Local empirical semivariograms (markers), respectively centered at various low-$\Sigma$ GBs for the Ni dataset. Solid lines show the fits of the analytical semivariogram models. In (d) the one point marked with an $\times$ was considered an outlier and was excluded from the fit.}
+        \label{fig:localvariogramsolmsted}
+    \end{figure*}
+    \begin{figure*}
+        \centering
+        \includegraphics[scale=1]{figures/LocalCorrelationLengthVariogramsKim.png}
+        \caption{Local empirical semivariograms (markers), respectively centered at various low-$\Sigma$ GBs for the Fe dataset. Keys for which \glspl{gb} each of these correspond to in the original papers are given for Fe and Ni in \cref{tab:sigma-key-olmsted,tab:sigma-key-kim}, respectively. Solid lines show the fits of the analytical semivariogram models.}
+        \label{fig:localvariogramskim}
+    \end{figure*}
+    The local empirical semivariograms are noisier than the global empirical semivariograms, likely due to considering fewer GB pairs. Nevertheless, reasonable fits were obtained for most of the GBs with the exception of the $\Sigma 5$ GB in the Ni dataset. In many of the local semivariograms we again see the signature change in concavity suggesting that the local correlations in the vicinity of these GBs are also Gaussian in nature. However, there are some exceptions where the nature of the correlations is more ambiguous. We anticipate that this ambiguity could be resolved with datasets that are either larger (compared to the Ni dataset) or having less noise (compared to the Fe dataset) than those considered here. However, the local empirical semivariograms seem to be generally consistent with Gaussian-type correlations.
+    
+    The traditional Gaussian kernel exhibits the property of stationarity, meaning that the covariance depends only on the distance between two points, not on their respective locations (i.e. $\mathbf{C}_{\mathbf{m}_0}\!\left(x_i,x_j\right) = \mathbf{C}_{\mathbf{m}_0}\!\left(d\left(x_i,x_j\right)\right)$). The use of a stationary kernel implies a prior assumption that there is a single global correlation length that applies everywhere. The fact that we observe significant variation in correlation length across the \gls{gb} character space suggests that it would be better to employ non-stationary kernels (this is why, when referring to the global correlation length results presented earlier, we were careful to say that the global correlation lengths hold "on average" across the space). In particular, due to the fact that the local semivariograms do seem to be generally consistent with Gaussian-type correlations, we suggest that the non-stationary version of the Gaussian kernel [REF] may be a reasonable choice. One additional potential benefit of employing non-stationary kernels might be improved resolution of cusps in the \gls{gb} energy landscape.
 
 \section{Fe Input Data Quality}
 	\label{sec:supp:kim-interp:quality}
@@ -218,81 +151,6 @@ Each of these is described in greater detail in \citet{bairdFiveDegreeofFreedomP
 		\caption{Degenerate \glspl{gb} sets are split into those with a degeneracy of fewer than 5 and greater than or equal to 5 and plotted as ( (a) and (c), respectively) error histograms and ( (b) and (d), respectively) hexagonally-binned parity plots. Large degenerate sets tend to have very low error, whereas small degenerate sets tend to have higher error. In other words, \glspl{gb} that are more likely to be repeated many times based on the sampling scheme in \cite{kimPhasefieldModeling3D2014} tend to give similar results, whereas \glspl{gb} that are less likely to be repeated often have larger variability in the simulation output. We do not know if this has physical meaning or is an artifact of the simulation setup.}
 		\label{fig:kim-interp-degeneracy-results}
 	\end{figure}
-	
-	% \subsection{Uncertainty Quantification and the Posterior Distribution of \glsentrytitlecase{gprm}{long} }
-	% The use of \gls{gpr} in the \gls{gprm} model facilitates uncertainty quantification which we discuss in more detail. We find that use of \cref{eq:gprmix-sigma} on two models with differing amounts of data leads to a model with typically higher uncertainty for low \glspl{gbe} than high \glspl{gbe} (\cref{fig:kim-interp-posterior}a). By observing the \glspl{nn} relative to an arc $\overline{AB}$, we find that there is a large scatter of \glspl{gbe} for \glspl{gb} that are within a radius of $\sim$\SI{6}{\degree} (\cref{fig:kim-interp-posterior}b). By sampling from the posterior distribution, we find that 
-	
-	% Uncertainty results, as well as posterior samples of the \gls{gprm} distribution of models are shown in \cref{fig:kim-interp-posterior}.
-	
-	% \begin{figure}
-	%     \centering
-	%     \includegraphics[scale=1]{figures/kim-interp-posterior.png}
-	%     \caption{Interpolation results for a large Fe simulation database \cite{kimPhasefieldModeling3D2014} using \num{46883} \inpt{} \glspl{gb} and \num{11721} \outpt{} \glspl{gb} in an 80\%/20\% split and a \gls{gpr} mixture model to better approximate low \glspl{gbe}. (a) Parity plot colored by uncertainty standard deviation. (b) Prediction (black) and uncertainty standard deviation (grey band) of \gls{gpr} mixture model as a function of distance along a 1D arc ($\overline{AB}$) between two \glspl{vfzgbo} ($A$ and $B$). The first \inpt{} \gls{nn} is shown as a black, dashed line. The \inpt{} point \glspl{knn} ($k\in[1,2,3,4,5,6]$) relative to $\overline{AB}$ are colored and sized according to the distance to $\overline{AB}$ (\inpt{} points far from the line are small, dark red circles and \inpt{} points close to the line are large, dark blue circles). In other words, this shows the data in a small region of influence around $\overline{AB}$ that contributed to the model predictions where close data is emphasized (larger) than far-away data (smaller). (c)
-	%     Five models sampled from the posterior distribution of the \gls{gpr} mixture model. (d) Fe \gls{gpr} mixture model results and uncertainty standard deviation (grey band) overlaid with the Ni \gls{brk} model along the arc $\overline{AB}$. Coordinates for $A$ and $B$ are given in \cref{tab:tunnel-AB2} of the main paper and 300 equally spaced points are plotted for (b), (c), and (d).}
-	%     \label{fig:kim-interp-posterior}
-	% \end{figure}
-
-% \section{Tunnel Plots} \label{sec:supp:tunnel}
-
-% 	\begin{figure*}[!htb]
-% 		\centering
-% 		\begin{subfigure}[b]{0.48\textwidth}
-% 			\includegraphics[width=\textwidth]{figures/tunnel-3-5-olmsted.png}
-% 			\caption{}
-% 			\label{fig:tunnel-3-5-olmsted}
-% 		\end{subfigure}
-% 		\hfill
-% 		\begin{subfigure}[b]{0.48\textwidth}
-% 			\includegraphics[width=\textwidth]{figures/tunnel-3-7-olmsted.png}
-% 			\caption{}
-% 			\label{fig:tunnel-3-7-olmsted}
-% 		\end{subfigure}
-		
-% 		\begin{subfigure}[b]{0.48\textwidth}
-% 			\includegraphics[width=\textwidth]{figures/tunnel-3-9-olmsted.png}
-% 			\caption{}
-% 			\label{fig:tunnel-3-9-olmsted}
-% 		\end{subfigure}
-% 		\hfill
-% 		\begin{subfigure}[b]{0.48\textwidth}
-% 			\includegraphics[width=\textwidth]{figures/tunnel-3-11-olmsted.png}
-% 			\caption{}
-% 			\label{fig:tunnel-3-11-olmsted}
-% 		\end{subfigure}
-% 		\caption{\Glspl{gbe} along direct paths in a \gls{vfz} between the $\Sigma3$ \gls{ct} boundary and minimum \gls{gbe} (\subref*{fig:tunnel-3-5-olmsted}) $\Sigma5$, (\subref*{fig:tunnel-3-7-olmsted}) $\Sigma7$, (\subref*{fig:tunnel-3-9-olmsted}) $\Sigma9$, and (\subref*{fig:tunnel-3-11-olmsted}) $\Sigma11$ \glspl{gb} within the Ni \citet{olmstedSurveyComputedGrain2009} dataset. \Gls{gbe} values are plotted for the \gls{brk} and \gls{gpr} models which both used \citet{olmstedSurveyComputedGrain2009} as \inpt{} data. }
-% 		\label{fig:sigma-tunnels-olmsted}
-% 	\end{figure*}
-	
-% 	Likewise, we perform \gls{gpr} for the Fe simulation dataset.
-	
-% 	\begin{figure*}[!htb]
-% 		\centering
-% 		\begin{subfigure}[b]{0.48\textwidth}
-% 			\includegraphics[width=\textwidth]{figures/tunnel-3-5-kim.png}
-% 			\caption{}
-% 			\label{fig:tunnel-3-5-kim}
-% 		\end{subfigure}
-% 		\hfill
-% 		\begin{subfigure}[b]{0.48\textwidth}
-% 			\includegraphics[width=\textwidth]{figures/tunnel-3-7-kim.png}
-% 			\caption{}
-% 			\label{fig:tunnel-3-7-kim}
-% 		\end{subfigure}
-		
-% 		\begin{subfigure}[b]{0.48\textwidth}
-% 			\includegraphics[width=\textwidth]{figures/tunnel-3-9-kim.png}
-% 			\caption{}
-% 			\label{fig:tunnel-3-9-kim}
-% 		\end{subfigure}
-% 		\hfill
-% 		\begin{subfigure}[b]{0.48\textwidth}
-% 			\includegraphics[width=\textwidth]{figures/tunnel-3-11-kim.png}
-% 			\caption{}
-% 			\label{fig:tunnel-3-11-kim}
-% 		\end{subfigure}
-% 		\caption{\Glspl{gbe} along direct paths in a \gls{vfz} between the $\Sigma3$ \gls{ct} boundary and minimum \gls{gbe} (\subref*{fig:tunnel-3-5-kim}) $\Sigma5$, (\subref*{fig:tunnel-3-7-kim}) $\Sigma7$, (\subref*{fig:tunnel-3-9-kim}) $\Sigma9$, and (\subref*{fig:tunnel-3-11-kim}) $\Sigma11$ \glspl{gb} for the Ni \citet{olmstedSurveyComputedGrain2009} dataset, but sampled from a \gls{gpr} model trained on \num{46883} Fe \citet{kimPhasefieldModeling3D2014} simulation datapoints. }
-% 		\label{fig:sigma-tunnels-kim}
-% 	\end{figure*}
 
 \section{Gridded Sampling for Numerical Differentation} \label{sec:supp:grid}
 An isotropically sized \gls{fz} may be easier to uniformly discretize than a high aspect-ratio space (i.e. a fixed discretization length can be used across all dimensions). What this doesn't describe, however, is curvature. In order to create a gridded array, which is important for numerical differentiation, a hypercube with each primary axis oriented with Euclidean dimensions is to be preferred. As curvature or misalignment is introduced as may be expected with a \gls{vfz} point cloud, \glspl{gb} outside of the \gls{vfz} will necessarily be sampled; this phenomena will be exaggerated in high dimensions\footnote{For perspective, a discretization into 9 segments (10 points) along each dimension will have a spacing of $\sim$\SI{7}{\degree} and require \num{1e5} grid points. In order to achieve a more reasonable grid spacing of $\sim$\SI{2}{\degree}, a minimum of $\sim$\num{24} discretizations (25 points) along each dimension is necessary and will produce $\sim$\num{1e7} grid points. }. Fortunately, most of the information is contained in the first five dimensions after \gls{svd} transformation (\cref{sec:results:dimensions}). Thus, the latter three dimensions can likely be ignored without substantially affecting e.g. an interpolation or numerical differentiation scheme.
